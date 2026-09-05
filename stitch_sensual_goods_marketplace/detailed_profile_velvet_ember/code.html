@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Midnight Bloom - Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-dim": "#121414",
+                "surface-container": "#1e2020",
+                "primary-fixed-dim": "#ffb2bc",
+                "tertiary-container": "#649d75",
+                "surface-container-low": "#1a1c1c",
+                "matte-black": "#1A1A1A",
+                "tertiary-fixed-dim": "#98d4a8",
+                "on-error": "#690005",
+                "on-tertiary": "#00391d",
+                "tertiary-fixed": "#b4f1c3",
+                "surface-container-high": "#282a2b",
+                "inverse-on-surface": "#2f3131",
+                "on-primary-container": "#4c1722",
+                "on-secondary-container": "#b7b5b4",
+                "on-primary": "#551e29",
+                "tertiary": "#98d4a8",
+                "secondary-container": "#474746",
+                "inverse-primary": "#8c4b55",
+                "primary-container": "#c77b86",
+                "surface-variant": "#333535",
+                "secondary-fixed": "#e5e2e1",
+                "background": "#121414",
+                "outline-variant": "#524345",
+                "on-secondary": "#313030",
+                "rose-gold": "#B76E79",
+                "on-tertiary-container": "#003118",
+                "secondary-fixed-dim": "#c8c6c5",
+                "primary": "#ffb2bc",
+                "on-surface-variant": "#d7c1c3",
+                "on-secondary-fixed-variant": "#474746",
+                "on-tertiary-fixed-variant": "#16512f",
+                "secondary": "#c8c6c5",
+                "inverse-surface": "#e2e2e2",
+                "surface-container-highest": "#333535",
+                "outline": "#9f8c8e",
+                "surface": "#121414",
+                "error-container": "#93000a",
+                "surface-tint": "#ffb2bc",
+                "on-background": "#e2e2e2",
+                "on-tertiary-fixed": "#00210e",
+                "on-primary-fixed": "#3a0915",
+                "on-surface": "#e2e2e2",
+                "obsidian-container": "#121212",
+                "surface-bright": "#37393a",
+                "onyx-surface": "#242424",
+                "surface-container-lowest": "#0c0f0f",
+                "on-primary-fixed-variant": "#70343e",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#1c1b1b",
+                "primary-fixed": "#ffd9dd",
+                "on-error-container": "#ffdad6",
+                "muted-gold": "#8E565E"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin-desktop": "80px",
+                "base": "8px",
+                "margin-mobile": "20px",
+                "section-gap": "160px",
+                "gutter": "24px",
+                "container-max": "1440px"
+        },
+        "fontFamily": {
+                "label-sm": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Playfair Display"
+                ],
+                "headline-sm": [
+                        "Playfair Display"
+                ],
+                "display-lg": [
+                        "Playfair Display"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "display-lg-mobile": [
+                        "Playfair Display"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Playfair Display"
+                ]
+        },
+        "fontSize": {
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "64px",
+                        {
+                                "lineHeight": "72px",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: #1A1A1A; /* Updated to matte black */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Subtle radial gradient for profile background */
+        .profile-bg-gradient {
+            background: radial-gradient(circle at top, rgba(183,110,121,0.15) 0%, #1A1A1A 70%); /* Updated gradient for rose gold and matte black */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-matte-black text-on-background antialiased md:hidden pb-24 profile-bg-gradient min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-matte-black/80 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16">
+<button class="text-rose-gold hover:text-rose-gold transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="font-headline-md text-headline-md tracking-tighter text-rose-gold">Midnight Bloom</span>
+<button class="text-rose-gold hover:text-rose-gold transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</header>
+<main class="pt-24 px-margin-mobile flex flex-col gap-8">
+<!-- Profile Header -->
+<section class="flex flex-col items-center justify-center pt-8 pb-4">
+<div class="relative w-32 h-32 mb-4">
+<img class="w-full h-full rounded-full object-cover border-2 border-rose-gold/20 shadow-[0_0_20px_rgba(183,110,121,0.1)]" data-alt="A sophisticated, high-end editorial portrait of a person in moody, low-light settings. Deep plum shadows with a soft rim light highlighting their profile. The aesthetic is luxurious, discreet, and deeply intimate, matching a premium wellness brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxrZ7mwNUFP_84Lbw2YH7OOINe-QKpk2dfsedPW-xVTs5iyx202WNgCxgbU4ekvmcoSOK2DTsEtlse98LFr1v_UsFHBVapBG8nQUvIm_n5LtY2s757drrfsEtWRihBxI8M-mM9JPICErkbe5JEKIWKZAhGxqjDmYLV-ObhQtsyBFF_paJlVJ1MjkPzN5B3OdWJjDNJgwcFdiCySBAQUP6arT-g4p-Ig_4tfqf6T2IiKThB6YzepeA"/>
+<button class="absolute bottom-0 right-0 bg-surface-container p-2 rounded-full border border-rose-gold/20 text-rose-gold shadow-[0_0_15px_rgba(183,110,121,0.2)]">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+</button>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-on-background mb-1">Evelyn Reed</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">evelyn.r@example.com</p>
+</section><section class="bg-surface-container p-6 rounded-xl border border-rose-gold/20 shadow-[0_0_20px_rgba(183,110,121,0.1)] mb-4">
+<div class="flex justify-between items-center mb-4">
+<div>
+<p class="text-label-sm text-rose-gold uppercase tracking-widest mb-1">Membership Status</p>
+<h2 class="font-headline-sm text-headline-sm text-on-background">Gold Member</h2>
+</div>
+<span class="material-symbols-outlined text-rose-gold text-3xl icon-fill">workspace_premium</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-label-sm text-on-surface-variant mb-2">
+<span>Progress to Platinum</span>
+<span>850 / 1000 pts</span>
+</div>
+<div class="w-full bg-matte-black h-1.5 rounded-full overflow-hidden">
+<div class="bg-rose-gold h-full w-[85%]"></div>
+</div>
+</div>
+<ul class="flex flex-col gap-2">
+<li class="flex items-center gap-2 text-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-rose-gold">check_circle</span>
+<span>Free Express Shipping</span>
+</li>
+<li class="flex items-center gap-2 text-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-rose-gold">check_circle</span>
+<span>Early Access to New Collections</span>
+</li>
+</ul>
+</section>
+<!-- Menu List -->
+<section class="flex flex-col gap-3">
+<a class="bg-surface-container flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high transition-colors group border border-transparent hover:border-rose-gold/20" href="#">
+<div class="flex items-center gap-4">
+<div class="bg-matte-black p-2 rounded-lg text-on-surface-variant group-hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">My Orders</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-rose-gold transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="bg-surface-container flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high transition-colors group border border-transparent hover:border-rose-gold/20" href="#">
+<div class="flex items-center gap-4">
+<div class="bg-matte-black p-2 rounded-lg text-on-surface-variant group-hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Saved Items</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-rose-gold transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="bg-surface-container flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high transition-colors group border border-transparent hover:border-rose-gold/20" href="#">
+<div class="flex items-center gap-4">
+<div class="bg-matte-black p-2 rounded-lg text-on-surface-variant group-hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Shipping Address</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-rose-gold transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="bg-surface-container flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high transition-colors group border border-transparent hover:border-rose-gold/20" href="#"><div class="flex items-center gap-4">
+<div class="bg-matte-black p-2 rounded-lg text-on-surface-variant group-hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Payment Methods</span>
+<span class="text-label-sm text-on-surface-variant">Visa ending in 1234</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-rose-gold transition-colors" data-icon="chevron_right">chevron_right</span></a>
+<a class="bg-surface-container flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-high transition-colors group border border-transparent hover:border-rose-gold/20" href="#">
+<div class="flex items-center gap-4">
+<div class="bg-matte-black p-2 rounded-lg text-on-surface-variant group-hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Privacy Settings</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-rose-gold transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+</section>
+<!-- Logout Action -->
+<section class="flex flex-col gap-4">
+<h3 class="font-headline-sm text-headline-sm text-on-background px-1">Recent Orders</h3>
+<div class="flex flex-col gap-3">
+<div class="bg-surface-container p-4 rounded-xl border border-transparent hover:border-rose-gold/10 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="font-body-md text-on-surface">Midnight Jasmine Elixir</span>
+<span class="text-label-sm text-rose-gold bg-rose-gold/10 px-2 py-0.5 rounded-full">Delivered</span>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span>Ordered: Oct 24, 2023</span>
+<span>$85.00</span>
+</div>
+</div>
+<div class="bg-surface-container p-4 rounded-xl border border-transparent hover:border-rose-gold/10 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="font-body-md text-on-surface">Velvet Ember Candle</span>
+<span class="text-label-sm text-rose-gold bg-rose-gold/10 px-2 py-0.5 rounded-full">Delivered</span>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span>Ordered: Oct 12, 2023</span>
+<span>$42.00</span>
+</div>
+</div>
+</div>
+</section><section class="mt-4 mb-8">
+<button class="w-full py-4 rounded-full bg-surface-container text-rose-gold border border-rose-gold/20 hover:bg-rose-gold/10 transition-colors font-label-md text-label-md shadow-[0_0_20px_rgba(183,110,121,0.05)] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="logout">logout</span>
+                Logout
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-matte-black dark:bg-matte-black fixed bottom-0 w-full z-50 rounded-t-xl bg-matte-black/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.5)] flex justify-around items-center h-20 px-4 pb-2 border-t border-surface-container">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-md text-label-md text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md text-[10px]">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-rose-gold font-bold hover:bg-surface-container rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1 icon-fill" data-icon="person">person</span>
+<span class="font-label-md text-label-md text-[10px]">Profile</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-md text-label-md text-[10px]">Cart</span>
+</a>
+</nav>
+</body></html>

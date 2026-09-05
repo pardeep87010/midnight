@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Velvet &amp; Ember - Register</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#551e29",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-variant": "#333535",
+                        "primary-fixed": "#ffd9dd",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#d7c1c3",
+                        "obsidian-container": "#121212",
+                        "primary-fixed-dim": "#ffb2bc",
+                        "tertiary-fixed": "#b4f1c3",
+                        "tertiary-container": "#649d75",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-container-high": "#282a2b",
+                        "surface-bright": "#37393a",
+                        "inverse-primary": "#8c4b55",
+                        "surface-dim": "#121414",
+                        "inverse-on-surface": "#2f3131",
+                        "on-primary-container": "#4c1722",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#474746",
+                        "onyx-surface": "#242424",
+                        "outline": "#9f8c8e",
+                        "on-tertiary-container": "#003118",
+                        "rose-gold": "#B76E79",
+                        "primary-container": "#c77b86",
+                        "secondary": "#c8c6c5",
+                        "on-primary-fixed": "#3a0915",
+                        "on-tertiary-fixed-variant": "#16512f",
+                        "background": "#121414",
+                        "surface-container-highest": "#333535",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#ffb2bc",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "muted-gold": "#8E565E",
+                        "on-secondary": "#313030",
+                        "on-primary-fixed-variant": "#70343e",
+                        "surface-container-lowest": "#0c0f0f",
+                        "on-surface": "#e2e2e2",
+                        "surface-container": "#1e2020",
+                        "on-secondary-container": "#b7b5b4",
+                        "secondary-fixed": "#e5e2e1",
+                        "matte-black": "#1A1A1A",
+                        "surface": "#121414",
+                        "outline-variant": "#524345",
+                        "on-tertiary": "#00391d",
+                        "tertiary": "#98d4a8",
+                        "on-tertiary-fixed": "#00210e",
+                        "primary": "#ffb2bc",
+                        "tertiary-fixed-dim": "#98d4a8",
+                        "error-container": "#93000a",
+                        "on-background": "#e2e2e2",
+                        "secondary-container": "#474746"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-desktop": "80px",
+                        "section-gap": "160px",
+                        "container-max": "1440px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "headline-sm": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-matte-black text-on-surface min-h-screen flex flex-col justify-center items-center py-12 px-margin-mobile md:px-margin-desktop antialiased relative">
+<div class="fixed inset-0 z-0 pointer-events-none" id="shader-container"></div>
+<main class="w-full max-w-md bg-onyx-surface/80 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-surface-variant relative overflow-hidden z-10">
+<div class="absolute inset-0 pointer-events-none opacity-20" data-alt="A very subtle, abstract background texture resembling fine satin fabric catching dim, warm rose-gold lighting in a dark room. The mood is luxurious, intimate, and highly sophisticated, using deep black and muted rose gold tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCm_O2ZNjQPPaoWhbnEZGwxjezmxu7gdEEgjZlXXSCLqpLfhzfJHbEvZMg2FNk06DEgsF2eoj6vf8n1gVLQz8KlTPfRMEdlEvQX1TnAtzh6DLUn4yNHSxza0z9qG9VIK2PAUDHw7MBN_MPxI40YA_GSTS6BzMr3hWVogBv12A_zeqoUFBGgiW1gntPkVkwBCvhyX_p5BkjxGUFQ9x7U3NO3MmvSQkX8UglA1iVqRcA42EF33F6qCt8')"></div>
+<div class="relative z-10">
+<div class="text-center mb-10">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-inverse-surface mb-2 tracking-tight">Velvet &amp; Ember</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Create your exclusive account.</p>
+</div>
+<form class="space-y-6">
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b border-surface-variant focus:border-rose-gold focus:ring-0 text-inverse-surface font-body-md text-body-md px-0 py-2 placeholder-transparent transition-colors duration-300" id="fullName" placeholder="Full Name" type="text"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-rose-gold cursor-text" for="fullName">Full Name</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b border-surface-variant focus:border-rose-gold focus:ring-0 text-inverse-surface font-body-md text-body-md px-0 py-2 placeholder-transparent transition-colors duration-300" id="email" placeholder="Email Address" type="email"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-rose-gold cursor-text" for="email">Email Address</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b border-surface-variant focus:border-rose-gold focus:ring-0 text-inverse-surface font-body-md text-body-md px-0 py-2 placeholder-transparent transition-colors duration-300" id="password" placeholder="Password" type="password"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-rose-gold cursor-text" for="password">Password</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b border-surface-variant focus:border-rose-gold focus:ring-0 text-inverse-surface font-body-md text-body-md px-0 py-2 placeholder-transparent transition-colors duration-300" id="confirmPassword" placeholder="Confirm Password" type="password"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-rose-gold cursor-text" for="confirmPassword">Confirm Password</label>
+</div>
+<div class="space-y-4 pt-2">
+<label class="flex items-start gap-3 cursor-pointer group">
+<div class="relative flex items-center mt-0.5">
+<input class="peer appearance-none w-5 h-5 border border-surface-variant rounded-sm bg-transparent checked:bg-rose-gold checked:border-rose-gold focus:ring-0 focus:ring-offset-0 transition-colors cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-matte-black absolute inset-0 flex items-center justify-center opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none text-[16px] font-bold" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-inverse-surface transition-colors">
+                            I agree to the <a class="text-rose-gold hover:underline" href="#">Terms &amp; Conditions</a>
+</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<div class="relative flex items-center mt-0.5">
+<input class="peer appearance-none w-5 h-5 border border-surface-variant rounded-sm bg-transparent checked:bg-rose-gold checked:border-rose-gold focus:ring-0 focus:ring-offset-0 transition-colors cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-matte-black absolute inset-0 flex items-center justify-center opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none text-[16px] font-bold" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-inverse-surface transition-colors">
+                            Subscribe to the exclusive newsletter
+                        </span>
+</label>
+</div>
+<div class="pt-6">
+<button class="w-full bg-rose-gold text-matte-black font-label-md text-label-md py-4 rounded-full hover:bg-opacity-90 active:scale-[0.98] transition-all duration-300 uppercase tracking-widest shadow-[0_0_30px_rgba(183,110,121,0.15)] hover:shadow-[0_0_40px_rgba(183,110,121,0.25)]" type="submit">
+                        Create Account
+                    </button>
+</div>
+</form>
+<div class="mt-8 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Already have an account? <a class="text-inverse-surface hover:text-rose-gold border-b border-transparent hover:border-rose-gold pb-0.5 transition-all" href="#">Login</a>
+</p>
+</div>
+</div>
+</main>
+<script>
+    const vertexShader = `
+        varying vec2 v_texCoord;
+        void main() {
+            v_texCoord = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    `;
+
+    const fragmentShader = `
+precision highp float;
+
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+varying vec2 v_texCoord;
+
+// Simple noise function
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Create organic movement
+    float n = noise(uv * 3.0 + u_time * 0.1);
+    n += noise(uv * 6.0 - u_time * 0.15) * 0.5;
+    
+    // Matte Black base (#1A1A1A)
+    vec3 black = vec3(0.1, 0.1, 0.1);
+    // Rose Gold accent (#B76E79)
+    vec3 roseGold = vec3(0.718, 0.431, 0.475);
+    
+    // Create a flowing "liquid silk" or "velvet" mask
+    float mask = smoothstep(0.3, 0.7, n);
+    
+    // Add some depth and subtle highlights
+    float highlight = pow(n, 4.0) * 0.3;
+    
+    // Blend colors
+    vec3 finalColor = mix(black, roseGold * 0.2, mask);
+    finalColor += roseGold * highlight * 0.5;
+    
+    // Vignette for focus
+    float dist = distance(uv, vec2(0.5));
+    finalColor *= smoothstep(0.8, 0.2, dist);
+    
+    gl_FragColor = vec4(finalColor, 1.0);
+}
+    `;
+
+    const container = document.getElementById('shader-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    const uniforms = {
+        u_time: { value: 0.0 },
+        u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        u_mouse: { value: new THREE.Vector2(0, 0) }
+    };
+
+    const geometry = new THREE.PlaneGeometry(2, 2);
+    const material = new THREE.ShaderMaterial({
+        vertexShader,
+        fragmentShader,
+        uniforms
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        uniforms.u_mouse.value.set(e.clientX, window.innerHeight - e.clientY);
+    });
+
+    const clock = new THREE.Clock();
+    function animate() {
+        requestAnimationFrame(animate);
+        uniforms.u_time.value = clock.getElapsedTime();
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
+</body></html>

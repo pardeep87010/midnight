@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Midnight Bloom - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "error-container": "#93000a",
+                "outline": "#9f8c8e",
+                "inverse-on-surface": "#2f3131",
+                "primary-container": "#c77b86",
+                "on-primary-container": "#4c1722",
+                "surface-tint": "#ffb2bc",
+                "on-error": "#690005",
+                "on-secondary": "#313030",
+                "surface-container": "#1e2020",
+                "on-surface-variant": "#d7c1c3",
+                "outline-variant": "#524345",
+                "on-tertiary-fixed": "#00210e",
+                "primary-fixed-dim": "#ffb2bc",
+                "on-background": "#e2e2e2",
+                "onyx-surface": "#242424",
+                "primary-fixed": "#ffd9dd",
+                "surface": "#121414",
+                "secondary": "#c8c6c5",
+                "on-error-container": "#ffdad6",
+                "surface-bright": "#37393a",
+                "surface-container-high": "#282a2b",
+                "inverse-primary": "#8c4b55",
+                "on-surface": "#e2e2e2",
+                "on-primary-fixed": "#3a0915",
+                "on-primary": "#551e29",
+                "secondary-fixed-dim": "#c8c6c5",
+                "secondary-fixed": "#e5e2e1",
+                "on-secondary-fixed-variant": "#474746",
+                "on-tertiary-container": "#003118",
+                "matte-black": "#1A1A1A",
+                "inverse-surface": "#e2e2e2",
+                "background": "#121414",
+                "surface-container-low": "#1a1c1c",
+                "tertiary-fixed": "#b4f1c3",
+                "secondary-container": "#474746",
+                "surface-container-highest": "#333535",
+                "on-tertiary-fixed-variant": "#16512f",
+                "on-secondary-fixed": "#1c1b1b",
+                "tertiary-container": "#649d75",
+                "on-tertiary": "#00391d",
+                "error": "#ffb4ab",
+                "surface-dim": "#121414",
+                "surface-variant": "#333535",
+                "tertiary-fixed-dim": "#98d4a8",
+                "surface-container-lowest": "#0c0f0f",
+                "rose-gold": "#B76E79",
+                "primary": "#ffb2bc",
+                "on-secondary-container": "#b7b5b4",
+                "obsidian-container": "#121212",
+                "on-primary-fixed-variant": "#70343e",
+                "muted-gold": "#8E565E",
+                "tertiary": "#98d4a8"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin-mobile": "20px",
+                "base": "8px",
+                "section-gap": "160px",
+                "margin-desktop": "80px",
+                "gutter": "24px",
+                "container-max": "1440px"
+        },
+        "fontFamily": {
+                "body-lg": [
+                        "Inter"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-sm": [
+                        "Playfair Display"
+                ],
+                "headline-lg": [
+                        "Playfair Display"
+                ],
+                "display-lg": [
+                        "Playfair Display"
+                ],
+                "display-lg-mobile": [
+                        "Playfair Display"
+                ],
+                "headline-md": [
+                        "Playfair Display"
+                ],
+                "label-sm": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-sm": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "64px",
+                        {
+                                "lineHeight": "72px",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-md": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: theme('colors.matte-black');
+            color: theme('colors.on-background');
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .ambient-shadow {
+            box-shadow: 0 10px 30px -10px rgba(183, 110, 121, 0.2);
+        }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(183, 110, 121, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="antialiased pb-[96px] md:pb-0 font-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-matte-black/80 backdrop-blur-md border-b border-rose-gold/10 h-16 flex justify-between items-center px-margin-mobile">
+<button class="text-rose-gold hover:text-rose-gold/80 transition-colors active:scale-95 duration-200 p-2">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-sm tracking-tighter text-rose-gold">Midnight Bloom</h1>
+<button class="text-rose-gold hover:text-rose-gold/80 transition-colors active:scale-95 duration-200 p-2">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</header>
+<main class="pt-16"><div class="px-margin-mobile py-4 bg-matte-black border-b border-rose-gold/10">
+<div class="relative max-w-container-max mx-auto">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-rose-gold opacity-80">search</span>
+<input class="w-full bg-matte-black border border-rose-gold/40 text-on-surface font-body-md py-3 pl-12 pr-4 rounded-full focus:outline-none focus:border-rose-gold transition-colors placeholder:text-on-surface-variant/50" placeholder="Search products..." type="text"/>
+</div>
+</div>
+<!-- Hero Section -->
+<section class="relative min-h-[85vh] w-full flex flex-col justify-end p-margin-mobile pb-24 md:pb-32">
+<div class="absolute inset-0 z-0">
+<img alt="Midnight Bloom Hero" class="w-full h-full object-cover object-center" data-alt="A highly stylized, artistic photograph of a sleek, dark plum-colored wellness device resting on a bed of dark, velvety rose petals. The lighting is moody and cinematic, with soft, ambient highlights emphasizing the smooth curves of the object. The background fades into a deep, atmospheric shadow, conveying a sense of luxury, discretion, and intimate self-care. The overall palette is dominated by deep purples, charcoals, and subtle touches of soft blush." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg8XcCjquXJhhQTy5YtEDZ6K-famG1Fy3CgnAgivR1i1iricvsA6eSPcUsYNAVJ9R_iwFF5TmvNccLonJrkXG_iqPe9X_Ve8BJIDcPP5ZTdWVvs3dXqEGCfMOxNZj43eP__I7-xWX03o_z6_Kjz-has7T1H4ktPntQdOrI4pRIZa9sNsdHqZTMeh4KuJGmcfk3z55SFXxLynFGpd6pBOI9Xo12YbHboDtllySALXqSWTihIicAmfU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-matte-black via-matte-black/70 to-matte-black/30"></div>
+</div>
+<div class="relative z-10 max-w-2xl mx-auto text-center">
+<span class="font-label-sm text-label-sm text-rose-gold uppercase tracking-[0.2em] mb-4 block opacity-90">Embrace Your Desires</span>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-6 leading-tight">Elevate Your Intimate Ritual.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl mx-auto opacity-90">Discover a curated collection of premium intimate wellness essentials designed for uncompromising discretion, elegant design, and profound delight.</p>
+<button class="w-full sm:w-auto bg-rose-gold text-matte-black font-label-md text-label-md px-10 py-5 rounded-full ambient-shadow hover:bg-rose-gold/90 transition-all active:scale-95 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]">
+                    Explore the Collection
+                </button>
+</div>
+</section>
+<!-- Brand Story -->
+<section class="py-20 px-margin-mobile bg-matte-black border-y border-rose-gold/10">
+<div class="max-w-3xl mx-auto text-center">
+<span class="material-symbols-outlined text-rose-gold mb-6 text-4xl" style="font-variation-settings: 'wght' 200;">self_improvement</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">The Art of Intimacy</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-8 opacity-80">
+    At Midnight Bloom, we believe that intimate wellness is an essential pillar of self-care. We thoughtfully curate our selection to ensure every piece embodies exceptional design, body-safe materials, and whisper-quiet performance. Our mission is to dissolve stigma and elevate your personal rituals into moments of profound luxury and connection.
+</p>
+<a class="inline-flex items-center text-rose-gold font-label-md text-label-md hover:opacity-80 transition-opacity" href="#">
+    Discover Our Philosophy <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Featured Categories -->
+<section class="py-20 px-margin-mobile bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-12">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Curated Collections</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Find the perfect addition to your sanctuary.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Category 1 -->
+<a class="group relative h-80 rounded-2xl overflow-hidden block shadow-lg" href="#">
+<img alt="For Couples" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" data-alt="Two elegant, intertwined abstract shapes carved from smooth, dark stone, resting against a deeply textured charcoal background. The composition suggests connection and intimacy without literal representation. A soft, warm light highlights the curves, creating a sophisticated, high-end editorial feel suitable for a luxury adult wellness brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6vOTPHnWaKImg7uX5T90Xh4AA1QyIYhgWRbhoZhfM92APKvLZy9YmRARhpzx6CSwxJAhputs6hxUliyaqtpXEmaXZlcIt7mwSNMo1GNZgz99O8079EcH-FQmrKcpkfM421Q3BNAcnvKZbnujg56Y19-YBWaynoN5YNZFxfKsyla3LmxCRMfcbxL00q4tzYUl80aRqWC5w--MCI3fQrPU3besivnxNXj75Iw3j0jbsCJrsVIzn6Dw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-matte-black/90 via-matte-black/30 to-transparent group-hover:via-matte-black/50 transition-colors duration-500"></div>
+<div class="absolute inset-x-4 bottom-4 glass-panel p-6 rounded-xl flex flex-col items-center justify-center transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+<span class="font-headline-sm text-headline-sm text-white tracking-wide mb-2">For Couples</span>
+<span class="font-label-sm text-label-sm text-rose-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Explore Connection</span>
+</div>
+</a>
+<!-- Category 2 -->
+<a class="group relative h-80 rounded-2xl overflow-hidden block shadow-lg" href="#">
+<img alt="Solo Play" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" data-alt="A single, beautifully sculpted personal massager in a soft blush tone, displayed on a minimalist, dark slate pedestal. The lighting is focused and dramatic, casting a soft shadow that emphasizes the product's sleek, ergonomic design. The mood is calm, empowering, and deeply personal, reflecting a high-end approach to solo wellness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdOx03PpuXd9lHKiKD3bjQiaQ1lbM6brzJeHAEsoH7y0t0TwGw_3plx7Gi992OGihTHnBOyUd9By4FE-iFuzoGhNVD5uCypOm4mBZ84oSl4eOOcwhuD2ljtaWy2j0mmlw0MKzgLMUAJHPYnaY1GwhXYf-MjhLMNiPO72V2JKaReAW1T7th-87drTVQx_zOtaLUzX75OBNdmK6EzkjsFU6AOW7oxbd_v_A1B7XJmev59a8bEraam4o"/>
+<div class="absolute inset-0 bg-gradient-to-t from-matte-black/90 via-matte-black/30 to-transparent group-hover:via-matte-black/50 transition-colors duration-500"></div>
+<div class="absolute inset-x-4 bottom-4 glass-panel p-6 rounded-xl flex flex-col items-center justify-center transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+<span class="font-headline-sm text-headline-sm text-white tracking-wide mb-2">Solo Play</span>
+<span class="font-label-sm text-label-sm text-rose-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Discover Yourself</span>
+</div>
+</a>
+<!-- Category 3 -->
+<a class="group relative h-80 rounded-2xl overflow-hidden block shadow-lg" href="#">
+<img alt="Wellness &amp; Care" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" data-alt="A minimalist composition featuring a premium glass bottle of massage oil and a sleek candle, placed on a dark marble surface. Gentle, warm candlelight illuminates the textures, creating a serene, spa-like atmosphere. The styling is impeccable, evoking a sense of luxurious self-care and holistic wellness in a sophisticated, moody setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvPkytmdJ0POZeQ5cXbG7LxvB5sb2SgE_f6nOEW70WmwQnH5Y1y5RKQ11abxV9S7HVgQOP0VUL2_P4B_MA86_PIL-4A36Gv7fJm68G6_d4erWb6HbkkDChgOfYks4QPUZufmFHTDDtzzzy5dz8mRt-OKqA5T2CQA1Ikx8nGtLErnwXdZMeGWG4YL4OqPJnkrLnPqT-AuzdlHUgRZewgqjE0H785g4lY-tYIRCP2HNZyG5S8UVwOJ4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-matte-black/90 via-matte-black/30 to-transparent group-hover:via-matte-black/50 transition-colors duration-500"></div>
+<div class="absolute inset-x-4 bottom-4 glass-panel p-6 rounded-xl flex flex-col items-center justify-center transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+<span class="font-headline-sm text-headline-sm text-white tracking-wide mb-2">Wellness &amp; Care</span>
+<span class="font-label-sm text-label-sm text-rose-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Nurture the Body</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- New Arrivals (Horizontal Scroll) -->
+<section class="py-20 bg-matte-black border-y border-rose-gold/10">
+<div class="max-w-container-max mx-auto">
+<div class="px-margin-mobile flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">New Arrivals</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The latest in premium pleasure.</p>
+</div>
+<a class="font-label-md text-label-md text-rose-gold hover:opacity-80 inline-flex items-center transition-opacity" href="#">
+    View All Collection <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="flex overflow-x-auto hide-scrollbar px-margin-mobile gap-6 pb-8 snap-x">
+<!-- Product Card 1 -->
+<div class="snap-start shrink-0 w-[280px] glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+<div class="h-[320px] w-full relative overflow-hidden">
+<span class="absolute top-4 left-4 z-10 bg-rose-gold text-matte-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Bestseller</span>
+<img alt="Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A close-up, high-fashion style macro shot of a small, elegantly designed bullet vibe in a deep plum color. It rests on dark silk fabric that drapes sensually around it. The lighting is stark and dramatic, highlighting the smooth, premium silicone finish. The aesthetic is extremely sophisticated, mirroring luxury cosmetic photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz_6g-7VrcrAt_ns1F69wn7qBqzVcp-vTIDObcRDyu-6WFNRBhIC4RgxSVIYVCXL4XZTRwPGf2-VPJKq9g58gPtO24yUbewtXxMNpnrVnYfHQsNa9jCGdrI9WGI0pnPrpMLVffcMDHjZxlsx4PtGwIjM-u2E9bftMyy_RAnjm3z1Dt8g2hCeXS_LE_mHHuXnXruOIjBBp2fshN3rJL1xdoLmekBeExju4U3mqFmlZ1hQB-5jNKQ9E"/>
+<button class="absolute bottom-4 right-4 bg-matte-black/80 backdrop-blur text-rose-gold w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rose-gold hover:text-matte-black">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-sm text-xl text-on-surface mb-1">The Aura</h4>
+<p class="font-label-md text-label-md text-rose-gold">$120</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4 opacity-80">Deep Plum • Precision Point</p>
+<p class="font-body-md text-sm text-on-surface-variant/70 line-clamp-2">Whisper-quiet, powerful pinpoint stimulation encased in premium, velvety silicone.</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="snap-start shrink-0 w-[280px] glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+<div class="h-[320px] w-full relative overflow-hidden">
+<span class="absolute top-4 left-4 z-10 bg-surface-container-high text-on-surface text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-rose-gold/20">New</span>
+<img alt="Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="An artistically styled bottle of intimate massage serum. The bottle is frosted dark glass with a minimalist soft blush label. It is placed next to a single dark orchid flower on a sleek black slate surface. The lighting is soft and ambient, creating a serene, high-end apothecary vibe that fits a premium wellness brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdvOloKqC5DIPsu8q8UfvpU73BeXZEdWH-z7Luy7E8jCPkM4pKIWfwMDAmtNAQ5ATDdA03S4P2EeRlGV_Y76ctSe1O9oi2MzU1q6G_swvGbDKCT79llxTFmAhdtl-NU9uY_54CJn3PYv5sD68z8yJhcZ_sSslsLJhwHsG3MSLYAF5sdeDQN2NBenWgb8UYYgSDhkvev9rDu4TszILxUfA3_uuVnGcJQm315MxnM-UNtucKYpfe-Vc"/>
+<button class="absolute bottom-4 right-4 bg-matte-black/80 backdrop-blur text-rose-gold w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rose-gold hover:text-matte-black">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-sm text-xl text-on-surface mb-1">Velvet Serum</h4>
+<p class="font-label-md text-label-md text-rose-gold">$45</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4 opacity-80">50ml / 1.7oz • Aloe Based</p>
+<p class="font-body-md text-sm text-on-surface-variant/70 line-clamp-2">A deeply hydrating, natural glide serum enriched with botanical extracts.</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="snap-start shrink-0 w-[280px] glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+<div class="h-[320px] w-full relative overflow-hidden">
+<img alt="Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A beautifully designed couples ring massager, constructed from matte black silicone with subtle rose gold accents. It sits on a dark, textured charcoal background, illuminated by a soft, directional light that highlights its premium build quality. The image is clean, discreet, and highly editorial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUAUFHl-A7PIudPu_gE8oARxJXUgT7-aShW7HfBVxpnTiVn1jkZDvem8beGvesrIzK4EGq_3NUYsv7jT_fFeuw_VhEnTl3dSyiFmNiqlGHQZq3ES41oKdEh_9u3pxXzEocdGTLhAjYWgx8zEqnGY6wrAji-LhNFEhajhxbEnT8Hc9p2iRfclCUZD5urpY_G6x9pqLwF_79IRB70aP_jIl2dT-dGjZ62KZgInBXJwJ70QhGf87PkHo"/>
+<button class="absolute bottom-4 right-4 bg-matte-black/80 backdrop-blur text-rose-gold w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rose-gold hover:text-matte-black">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-sm text-xl text-on-surface mb-1">Eclipse Ring</h4>
+<p class="font-label-md text-label-md text-rose-gold">$85</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4 opacity-80">Charcoal &amp; Blush • For Two</p>
+<p class="font-body-md text-sm text-on-surface-variant/70 line-clamp-2">Enhance mutual pleasure with ergonomic design and targeted rumbly vibrations.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Markers -->
+<section class="py-24 px-margin-mobile bg-surface-container-lowest">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center max-w-container-max mx-auto">
+<div class="flex flex-col items-center glass-panel p-8 rounded-2xl">
+<div class="w-16 h-16 rounded-full border border-rose-gold/30 flex items-center justify-center mb-6 text-rose-gold bg-matte-black">
+<span class="material-symbols-outlined text-3xl" data-icon="local_shipping" style="font-variation-settings: 'wght' 200;">local_shipping</span>
+</div>
+<h4 class="font-headline-sm text-xl text-on-surface mb-3">Discreet Shipping</h4>
+<p class="font-body-md text-on-surface-variant opacity-80 leading-relaxed">Arrives in completely plain, unbranded packaging. Your privacy is our utmost priority, from cart to doorstep.</p>
+</div>
+<div class="flex flex-col items-center glass-panel p-8 rounded-2xl">
+<div class="w-16 h-16 rounded-full border border-rose-gold/30 flex items-center justify-center mb-6 text-rose-gold bg-matte-black">
+<span class="material-symbols-outlined text-3xl" data-icon="lock" style="font-variation-settings: 'wght' 200;">lock</span>
+</div>
+<h4 class="font-headline-sm text-xl text-on-surface mb-3">Secure Payments</h4>
+<p class="font-body-md text-on-surface-variant opacity-80 leading-relaxed">Shop with confidence. All transactions are fully encrypted and will appear discreetly on your billing statement.</p>
+</div>
+<div class="flex flex-col items-center glass-panel p-8 rounded-2xl">
+<div class="w-16 h-16 rounded-full border border-rose-gold/30 flex items-center justify-center mb-6 text-rose-gold bg-matte-black">
+<span class="material-symbols-outlined text-3xl" data-icon="diamond" style="font-variation-settings: 'wght' 200;">diamond</span>
+</div>
+<h4 class="font-headline-sm text-xl text-on-surface mb-3">Expertly Curated</h4>
+<p class="font-body-md text-on-surface-variant opacity-80 leading-relaxed">We select only the finest body-safe materials and elegant designs, ensuring a premium, uncompromising experience.</p>
+</div>
+</div>
+</section>
+<!-- Newsletter / Join the Club -->
+<section class="py-24 px-margin-mobile bg-matte-black border-t border-rose-gold/10 relative overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+<div class="absolute top-[-20%] left-[-10%] w-[50%] h-[150%] bg-rose-gold/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-20%] right-[-10%] w-[40%] h-[120%] bg-rose-gold/5 blur-[100px] rounded-full"></div>
+</div>
+<div class="relative z-10 max-w-2xl mx-auto text-center glass-panel p-10 rounded-3xl border border-rose-gold/20">
+<span class="material-symbols-outlined text-rose-gold mb-4 text-3xl" style="font-variation-settings: 'wght' 200;">mail</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Join the Inner Circle</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 opacity-90">
+        Subscribe to receive early access to new collections, exclusive editorial content, and <strong class="text-rose-gold font-semibold">10% off your first ritual</strong>.
+    </p>
+<form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+<input class="flex-1 bg-matte-black border border-rose-gold/30 text-on-surface font-body-md py-3 px-6 rounded-full focus:outline-none focus:border-rose-gold focus:ring-1 focus:ring-rose-gold transition-colors placeholder:text-on-surface-variant/50" placeholder="Your email address" required="" type="email"/>
+<button class="bg-rose-gold text-matte-black font-label-md px-8 py-3 rounded-full hover:bg-rose-gold/90 transition-colors whitespace-nowrap font-semibold shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]" type="submit">
+            Subscribe
+        </button>
+</form>
+<p class="text-[11px] text-on-surface-variant/50 mt-4">By subscribing, you agree to our Privacy Policy and Terms of Service.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full bg-matte-black dark:bg-matte-black flex flex-col items-center gap-base pt-16 pb-32 px-margin-mobile border-t border-rose-gold/10">
+<h2 class="font-headline-sm text-headline-sm text-rose-gold mb-6 tracking-wide">Midnight Bloom</h2>
+<div class="flex flex-wrap justify-center gap-8 mb-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-rose-gold transition-colors opacity-80 hover:opacity-100 uppercase tracking-wider" href="#">Privacy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-rose-gold transition-colors opacity-80 hover:opacity-100 uppercase tracking-wider" href="#">Terms</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-rose-gold transition-colors opacity-80 hover:opacity-100 uppercase tracking-wider" href="#">Shipping</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-rose-gold transition-colors opacity-80 hover:opacity-100 uppercase tracking-wider" href="#">Contact</a>
+</div>
+<div class="flex gap-4 mb-8">
+<a class="w-10 h-10 rounded-full border border-rose-gold/20 flex items-center justify-center text-rose-gold hover:bg-rose-gold/10 transition-colors" href="#"><span class="material-symbols-outlined text-sm">camera_alt</span></a>
+<a class="w-10 h-10 rounded-full border border-rose-gold/20 flex items-center justify-center text-rose-gold hover:bg-rose-gold/10 transition-colors" href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant opacity-60">© 2024 Midnight Bloom. All rights reserved.</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl glass-panel shadow-[0_-8px_30px_rgba(0,0,0,0.5)] flex justify-around items-center h-20 px-4 pb-2 md:hidden border-t border-rose-gold/20">
+<!-- Active Tab: Home -->
+<a class="flex flex-col items-center justify-center text-rose-gold font-bold active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md text-[10px] leading-tight tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-rose-gold transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md text-[10px] leading-tight tracking-wider">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-rose-gold transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-md text-label-md text-[10px] leading-tight tracking-wider">Profile</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-rose-gold transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-md text-label-md text-[10px] leading-tight tracking-wider">Cart</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Contact Us - Velvet &amp; Ember</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#121414",
+                        "surface-container-highest": "#333535",
+                        "on-primary-container": "#4c1722",
+                        "on-background": "#e2e2e2",
+                        "primary-fixed-dim": "#ffb2bc",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-secondary": "#313030",
+                        "on-primary-fixed-variant": "#70343e",
+                        "error-container": "#93000a",
+                        "primary": "#ffb2bc",
+                        "tertiary-fixed-dim": "#98d4a8",
+                        "surface-tint": "#ffb2bc",
+                        "outline-variant": "#524345",
+                        "tertiary": "#98d4a8",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#c8c6c5",
+                        "on-tertiary-container": "#003118",
+                        "on-surface": "#e2e2e2",
+                        "obsidian-container": "#121212",
+                        "surface-variant": "#333535",
+                        "tertiary-fixed": "#b4f1c3",
+                        "surface": "#121414",
+                        "tertiary-container": "#649d75",
+                        "on-error": "#690005",
+                        "on-primary": "#551e29",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "onyx-surface": "#242424",
+                        "inverse-primary": "#8c4b55",
+                        "muted-gold": "#8E565E",
+                        "surface-container": "#1e2020",
+                        "outline": "#9f8c8e",
+                        "inverse-surface": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#16512f",
+                        "primary-fixed": "#ffd9dd",
+                        "on-tertiary-fixed": "#00210e",
+                        "on-tertiary": "#00391d",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-dim": "#121414",
+                        "matte-black": "#1A1A1A",
+                        "surface-bright": "#37393a",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-primary-fixed": "#3a0915",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0c0f0f",
+                        "on-secondary-container": "#b7b5b4",
+                        "primary-container": "#c77b86",
+                        "rose-gold": "#B76E79",
+                        "secondary-container": "#474746",
+                        "surface-container-high": "#282a2b",
+                        "on-surface-variant": "#d7c1c3",
+                        "surface-container-low": "#1a1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "section-gap": "160px",
+                        "container-max": "1440px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Playfair Display"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.03em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #1A1A1A; /* Matte Black from Style Guidance */
+            color: #e2e2e2;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom Scrollbar for a premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121414;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333535;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B76E79;
+        }
+
+        .input-luxury {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333333;
+            color: #e2e2e2;
+            padding: 12px 0;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        .input-luxury:focus {
+            outline: none;
+            border-bottom: 1px solid #B76E79;
+            box-shadow: none;
+        }
+        .input-luxury::placeholder {
+            color: #524345;
+        }
+
+        .btn-primary {
+            background-color: #B76E79;
+            color: #1A1A1A;
+            padding: 16px 32px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(183, 110, 121, 0.15); /* Rose Gold outer glow */
+            opacity: 0.9;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #242424;
+            padding: 24px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            border-bottom-color: #B76E79;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            color: #b7b5b4;
+            margin-top: 0;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Arbitrary large height */
+            margin-top: 16px;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: #B76E79;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative pb-24 md:pb-0">
+<!-- TopAppBar (Hidden on Mobile, Visible on Desktop) -->
+<header class="md:flex fixed top-0 w-full z-50 bg-background/90 backdrop-blur-xl border-b border-surface-variant/30 flex items-center justify-between px-gutter h-16 pt-safe">
+<div class="flex items-center gap-4">
+<button aria-label="Back" class="text-on-background hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center"><span class="material-symbols-outlined">chevron_left</span></button>
+</div>
+<div class="font-headline-md text-headline-md text-primary text-center flex-1" data-stitch-orig-opacity="1">Contact Us</div>
+<div class="flex items-center gap-4">
+<button aria-label="Shopping Bag" class="text-on-background hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-8 md:pt-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Header Section -->
+<section class="text-center md:text-left mb-32">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-6">Contact Us</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl md:mx-0 mx-auto">
+                We are dedicated to providing an exceptional experience. Please reach out with any inquiries regarding our collections, orders, or private consultations.
+            </p>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+<!-- Contact Form Area -->
+<div class="lg:col-span-7">
+<div class="bg-onyx-surface p-8 md:p-12 rounded-sm border border-surface-variant/20 relative overflow-hidden">
+<!-- Subtle decorative glow -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-rose-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-8">Send a Message</h2>
+<form action="#" class="relative z-10 space-y-12" method="POST">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<input class="input-luxury font-body-md text-body-md" id="firstName" name="firstName" placeholder="First Name" required="" type="text">
+</div>
+<div>
+<input class="input-luxury font-body-md text-body-md" id="lastName" name="lastName" placeholder="Last Name" required="" type="text">
+</div>
+</div>
+<div>
+<input class="input-luxury font-body-md text-body-md" id="email" name="email" placeholder="Email Address" required="" type="email">
+</div>
+<div>
+<select class="input-luxury font-body-md text-body-md bg-transparent appearance-none" id="subject" name="subject">
+<option class="bg-matte-black text-outline-variant" disabled="" selected="" value="">Select Subject</option>
+<option class="bg-matte-black text-on-surface" value="order">Order Inquiry</option>
+<option class="bg-matte-black text-on-surface" value="product">Product Information</option>
+<option class="bg-matte-black text-on-surface" value="consultation">Private Consultation</option>
+<option class="bg-matte-black text-on-surface" value="other">Other</option>
+</select>
+</div>
+<div>
+<textarea class="input-luxury font-body-md text-body-md resize-none" id="message" name="message" placeholder="Your Message" required="" rows="4"></textarea>
+</div>
+<div class="pt-4">
+<button class="btn-primary font-label-md text-label-md w-full md:w-auto" type="submit">
+                                Submit Inquiry
+                            </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Contact Details & FAQ Area -->
+<div class="lg:col-span-5 flex flex-col gap-16">
+<!-- Direct Contact Info -->
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-6">Direct Contact</h3>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-rose-gold mt-1" data-icon="mail">mail</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface mb-1">Email</p>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-rose-gold transition-colors" href="mailto:concierge@velvetandember.com">concierge@velvetandember.com</a>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-rose-gold mt-1" data-icon="call">call</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface mb-1">Phone</p>
+<p class="font-body-md text-body-md text-on-surface-variant">+1 (800) 555-0199</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">Mon-Fri, 10am - 6pm EST</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-rose-gold mt-1" data-icon="location_on">location_on</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface mb-1">Boutique</p>
+<p class="font-body-md text-body-md text-on-surface-variant">124 Luxury Avenue, Suite 400<br>New York, NY 10012</p>
+</div>
+</div>
+</div>
+</div>
+<!-- FAQ Snippet -->
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Frequently Asked</h3>
+<div class="faq-container">
+<div class="faq-item" onclick="this.classList.toggle('active')">
+<div class="faq-question">
+<span class="font-body-md text-body-md text-on-surface">International Shipping</span>
+<span class="material-symbols-outlined faq-icon" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+<div class="faq-answer font-body-md text-body-md">
+                                We offer complimentary expedited shipping globally for all orders exceeding $1,000. For specific regional inquiries, please consult our shipping policies.
+                            </div>
+</div>
+<div class="faq-item" onclick="this.classList.toggle('active')">
+<div class="faq-question">
+<span class="font-body-md text-body-md text-on-surface">Returns &amp; Exchanges</span>
+<span class="material-symbols-outlined faq-icon" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+<div class="faq-answer font-body-md text-body-md">
+                                Unworn items in their original packaging may be returned within 14 days of delivery. Bespoke and customized items are final sale.
+                            </div>
+</div>
+<div class="faq-item" onclick="this.classList.toggle('active')">
+<div class="faq-question">
+<span class="font-body-md text-body-md text-on-surface">Private Viewing</span>
+<span class="material-symbols-outlined faq-icon" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+<div class="faq-answer font-body-md text-body-md">
+                                Private viewings can be arranged at our New York boutique or virtually. Please contact our concierge to schedule an appointment.
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-section-gap mb-16">
+<!-- Decorative image element to add luxury feel -->
+
+</div>
+</main>
+<!-- BottomNavBar (Visible on Mobile, Hidden on Desktop) -->
+<!-- The prompt implies "Support" tab is active as this is Contact Us -->
+
+<script>
+        // Simple script to ensure only one FAQ is open at a time (Accordion behavior)
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Close others
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+
+</body></html>

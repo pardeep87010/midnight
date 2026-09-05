@@ -1,0 +1,19 @@
+﻿# Dependencies
+node_modules/
+dist/
+build/
+
+# Secrets & Environment
+.env
+.env.*
+!.env.example
+
+# SQLite DB Temp Files
+database/*.db-wal
+database/*.db-shm
+
+# Binaries & Logs
+*.exe
+*.log
+.DS_Store
+Thumbs.db

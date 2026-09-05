@@ -1,0 +1,353 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Cart - Midnight Bloom</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-dim": "#121414",
+                "surface-container": "#1e2020",
+                "primary-fixed-dim": "#ffb2bc",
+                "tertiary-container": "#649d75",
+                "surface-container-low": "#1a1c1c",
+                "matte-black": "#1A1A1A",
+                "tertiary-fixed-dim": "#98d4a8",
+                "on-error": "#690005",
+                "on-tertiary": "#00391d",
+                "tertiary-fixed": "#b4f1c3",
+                "surface-container-high": "#282a2b",
+                "inverse-on-surface": "#2f3131",
+                "on-primary-container": "#4c1722",
+                "on-secondary-container": "#b7b5b4",
+                "on-primary": "#551e29",
+                "tertiary": "#98d4a8",
+                "secondary-container": "#474746",
+                "inverse-primary": "#8c4b55",
+                "primary-container": "#c77b86",
+                "surface-variant": "#333535",
+                "secondary-fixed": "#e5e2e1",
+                "background": "#121414",
+                "outline-variant": "#524345",
+                "on-secondary": "#313030",
+                "rose-gold": "#B76E79",
+                "on-tertiary-container": "#003118",
+                "secondary-fixed-dim": "#c8c6c5",
+                "primary": "#ffb2bc",
+                "on-surface-variant": "#d7c1c3",
+                "on-secondary-fixed-variant": "#474746",
+                "on-tertiary-fixed-variant": "#16512f",
+                "secondary": "#c8c6c5",
+                "inverse-surface": "#e2e2e2",
+                "surface-container-highest": "#333535",
+                "outline": "#9f8c8e",
+                "surface": "#121414",
+                "error-container": "#93000a",
+                "surface-tint": "#ffb2bc",
+                "on-background": "#e2e2e2",
+                "on-tertiary-fixed": "#00210e",
+                "on-primary-fixed": "#3a0915",
+                "on-surface": "#e2e2e2",
+                "obsidian-container": "#121212",
+                "surface-bright": "#37393a",
+                "onyx-surface": "#242424",
+                "surface-container-lowest": "#0c0f0f",
+                "on-primary-fixed-variant": "#70343e",
+                "error": "#ffb4ab",
+                "on-secondary-fixed": "#1c1b1b",
+                "primary-fixed": "#ffd9dd",
+                "on-error-container": "#ffdad6",
+                "muted-gold": "#8E565E"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin-desktop": "80px",
+                "base": "8px",
+                "margin-mobile": "20px",
+                "section-gap": "160px",
+                "gutter": "24px",
+                "container-max": "1440px"
+        },
+        "fontFamily": {
+                "label-sm": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Playfair Display"
+                ],
+                "headline-sm": [
+                        "Playfair Display"
+                ],
+                "display-lg": [
+                        "Playfair Display"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "display-lg-mobile": [
+                        "Playfair Display"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Playfair Display"
+                ]
+        },
+        "fontSize": {
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "64px",
+                        {
+                                "lineHeight": "72px",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .glow-effect {
+            box-shadow: inset 0 0 0 1px rgba(183, 110, 121, 0.3), 0 0 20px rgba(183, 110, 121, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-matte-black text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-matte-black/80 backdrop-blur-md hidden md:flex justify-between items-center px-margin-desktop h-20 shadow-sm border-b border-surface-container-high/50">
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+</div>
+<div class="font-headline-md text-headline-md tracking-tighter text-rose-gold">
+            Midnight Bloom
+        </div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+</button>
+<button class="text-rose-gold hover:text-rose-gold transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</button>
+</div>
+</header>
+<!-- Mobile Header (Standalone Cart Header) -->
+<header class="md:hidden fixed top-0 w-full z-50 bg-matte-black/90 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16 border-b border-surface-container-high/30">
+<button class="text-on-surface-variant p-2 -ml-2 hover:text-rose-gold">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-on-background">Your Cart</h1>
+<div class="w-10"></div> <!-- Spacer -->
+</header>
+<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-10">
+<div class="md:grid md:grid-cols-12 md:gap-gutter">
+<!-- Cart Items -->
+<div class="md:col-span-8 flex flex-col gap-6">
+<!-- Item 1 -->
+<div class="bg-surface-container-high rounded-xl p-4 flex gap-4 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-tr from-rose-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="w-24 h-24 rounded-lg overflow-hidden shrink-0 bg-surface-container-lowest border border-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A moody, high-end product photograph of a sleek, abstract personal massager in deep charcoal against a dark plum background, softly lit to highlight its smooth, silicone texture and curved organic form. The composition is intimate and luxurious, resembling a premium cosmetics ad." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqaAlqWqX0WtlJ186czx9iHlipj-mqtIXXfL9IGjXFUCtTZlK_1I0khrr4dkW_9b1Ruq72IA262Qy570MbIYDK3HtSRX7G4jTl86LDPN3WDIyjZDP6v5JlzE7_c4ZuxcWuEJSPsoUGwnpgG_QCuVntXBbBUznPGPLhUTxDC-v1AB636jftJf8E93LdRl3Y2wzKzxo1DDpTDHV_7sBfGiJigA5JJBRM5ZbdSGaigjs0oc8fFmWtRvU">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-headline-sm text-[18px] font-semibold text-on-surface">The Silhouette</h3>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1 -mt-1 -mr-1">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-label-sm text-[12px] text-on-surface-variant mt-1">Color: Midnight Black</p><div class="flex items-center gap-2 mt-2"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="text-label-sm text-tertiary">In Stock</span></div><p class="text-label-sm text-on-surface-variant mt-1">Estimated Delivery: Oct 25 - Oct 27</p>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="font-body-md text-on-surface">$145.00</div>
+<div class="flex items-center bg-surface-container-lowest rounded-full border border-surface-container-highest">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<span class="font-label-md text-label-md px-2 w-8 text-center text-on-surface">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-high rounded-xl p-4 flex gap-4 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-tr from-rose-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="w-24 h-24 rounded-lg overflow-hidden shrink-0 bg-surface-container-lowest border border-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A softly lit, close-up shot of a small, elegant bottle of massage oil or serum on a dark, reflective surface. The bottle has a minimalist label and a dropper, evoking a high-end apothecary or premium skincare brand. Ambient purple and blush lighting creates a calming, intimate mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6_t_nj9QUUD4H2Ca6IIf0zu8oZ_gbirSWxJcp7EHTjxC6d7c_o_N-pUBV1W-v7tzE42yjJY--7foqWb5-nNpP1swGsHlJyuJkN8pEmn_YaZQFKpUJAwZnm-08949cB8LtVOOVLXaUntcEdcVYQEKUn1-MFMs2G1cfm1njoo5YOAMCO1Km4jajz3ruIlZ6ON4Vo_DkoR4q-Oz8GyjzkShugrPWknMAmCkYoL0llqae7B6gvfeSsc0">
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-headline-sm text-[18px] font-semibold text-on-surface">Botanical Glide</h3>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1 -mt-1 -mr-1">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-label-sm text-[12px] text-on-surface-variant mt-1">Size: 100ml</p><div class="flex items-center gap-2 mt-2"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="text-label-sm text-tertiary">In Stock</span></div><p class="text-label-sm text-on-surface-variant mt-1">Estimated Delivery: Oct 25 - Oct 27</p>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="font-body-md text-on-surface">$38.00</div>
+<div class="flex items-center bg-surface-container-lowest rounded-full border border-surface-container-highest">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<span class="font-label-md text-label-md px-2 w-8 text-center text-on-surface">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-rose-gold transition-colors">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-center md:justify-start"><a href="#" class="flex items-center gap-2 text-rose-gold hover:text-rose-gold/80 transition-colors font-label-md"><span class="material-symbols-outlined text-[18px]">arrow_back</span>Continue Shopping</a></div></div>
+<!-- Order Summary -->
+<div class="md:col-span-4 mt-8 md:mt-0">
+<div class="bg-surface-container-high rounded-xl p-6 sticky top-28">
+<h2 class="font-headline-sm text-headline-sm text-on-background mb-6">Order Summary</h2>
+<!-- Promo Code -->
+<div class="mb-6 flex gap-2">
+<div class="relative flex-1">
+<input class="block w-full rounded-lg bg-surface-container-lowest border-outline-variant text-on-surface focus:border-rose-gold focus:ring-1 focus:ring-rose-gold font-body-md text-body-md py-3 px-4" id="promo" placeholder="Promo code" type="text">
+<label class="absolute -top-2.5 left-3 bg-surface-container-high px-1 text-[10px] uppercase tracking-wider text-on-surface-variant" for="promo">Promo Code</label>
+</div>
+<button class="px-4 rounded-lg bg-surface-container border border-outline-variant text-on-surface hover:text-rose-gold hover:border-rose-gold transition-colors font-label-md text-label-md">Apply</button>
+</div>
+<!-- Totals -->
+<div class="space-y-4 font-body-md text-body-md">
+<div class="flex justify-between text-on-surface-variant">
+<span class="">Subtotal</span>
+<span class="text-on-surface">$221.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="">Shipping</span>
+<span class="text-rose-gold">Free</span>
+</div>
+<div class="h-px bg-surface-container-highest my-4"></div>
+<div class="flex justify-between items-end">
+<span class="font-headline-sm text-[18px] font-semibold text-on-background">Total</span>
+<span class="font-headline-md text-headline-md text-on-background tracking-tighter">$221.00</span>
+</div>
+</div>
+<!-- Checkout Button -->
+<button class="w-full mt-8 py-4 rounded-xl bg-rose-gold text-matte-black font-label-md text-label-md flex items-center justify-center gap-2 glow-effect hover:bg-rose-gold/90 transition-colors active:scale-[0.98] font-bold">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+                        Secure Checkout
+                    </button>
+<!-- Trust Icons -->
+<div class="mt-6 flex justify-center items-center gap-4 text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined text-[24px]">credit_card</span>
+<span class="material-symbols-outlined text-[24px]">payments</span>
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+<span class="text-[10px] tracking-widest uppercase">Encrypted</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-high/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(183,110,121,0.05)] flex justify-around items-center h-20 px-4 pb-2 border-t border-surface-container-highest">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-rose-gold hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-label-sm text-[10px] leading-none">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-rose-gold hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">storefront</span>
+<span class="font-label-sm text-[10px] leading-none">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-rose-gold hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-sm text-[10px] leading-none">Profile</span>
+</a>
+<a class="flex flex-col items-center justify-center text-rose-gold font-bold hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="font-label-sm text-[10px] leading-none">Cart</span>
+</a>
+</nav>
+
+
+</body></html>

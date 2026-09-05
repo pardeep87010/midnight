@@ -1,0 +1,125 @@
+[
+  {
+    "id": "the-royale-pulse-bullet-vibrator",
+    "name": "The Royale Pulse Bullet Vibrator",
+    "category": "vibrators",
+    "subcategory": "Bullet Vibrators",
+    "price": 49,
+    "originalPrice": 65,
+    "discount": "25% OFF",
+    "badge": "Best Seller",
+    "subtitle": "Precision external stimulation",
+    "description": "Sleek luxury bullet vibrator with concentrated pinpoint vibrations and ultra-quiet motor.",
+    "rating": 5,
+    "reviewsCount": 167,
+    "images": [
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80"
+    ],
+    "colors": [
+      {
+        "name": "Rose Gold",
+        "hex": "#C5A880"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "specs": {
+      "sound": "< 29 dB (Whisper Silent)",
+      "material": "100% Medical Liquid Silicone",
+      "battery": "120 min USB",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "10 Speeds"
+    },
+    "inTheBox": [
+      "The Royale Pulse Bullet Vibrator",
+      "Magnetic Fast Charging USB Cable",
+      "Velvet Protective Travel Pouch",
+      "Confidential User Manual & 1-Year Warranty"
+    ]
+  },
+  {
+    "id": "the-apex-heated-stroker-v2",
+    "name": "The Apex Heated Stroker V2",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 199,
+    "originalPrice": 249,
+    "discount": "20% OFF",
+    "badge": "New Release",
+    "subtitle": "Robotic thermal auto stroker",
+    "description": "Hands-free linear motion male stroker with 40°C thermal heating chamber.",
+    "rating": 5,
+    "reviewsCount": 97,
+    "images": [
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"
+    ],
+    "colors": [
+      {
+        "name": "Stealth Black",
+        "hex": "#151515"
+      },
+      {
+        "name": "Titanium Gray",
+        "hex": "#3E4146"
+      }
+    ],
+    "specs": {
+      "sound": "< 29 dB (Whisper Silent)",
+      "material": "RealFeel Soft TPE",
+      "battery": "90 min Fast Charge",
+      "waterproof": "IPX7 Washable Core",
+      "modes": "7 Speeds + Heat"
+    },
+    "inTheBox": [
+      "The Apex Heated Stroker V2",
+      "Magnetic Fast Charging USB Cable",
+      "Velvet Protective Travel Pouch",
+      "Confidential User Manual & 1-Year Warranty"
+    ]
+  },
+  {
+    "id": "the-velvet-lock-dual-cock-ring",
+    "name": "The Velvet Lock Dual Cock Ring",
+    "category": "cock-rings",
+    "subcategory": "Dual Shaft & Ball Rings",
+    "price": 45,
+    "originalPrice": 59,
+    "discount": "23% OFF",
+    "badge": "Popular",
+    "subtitle": "Dual shaft and ball restriction",
+    "description": "Double-loop ergonomic silicone lasso that simultaneously encircles the base of the shaft and testicles.",
+    "rating": 5,
+    "reviewsCount": 211,
+    "images": [
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "colors": [
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      },
+      {
+        "name": "Rose Gold",
+        "hex": "#C5A880"
+      }
+    ],
+    "specs": {
+      "sound": "Silent",
+      "material": "Liquid Platinum Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Waterproof",
+      "modes": "Snug Support"
+    },
+    "inTheBox": [
+      "The Velvet Lock Dual Cock Ring",
+      "Magnetic Fast Charging USB Cable",
+      "Velvet Protective Travel Pouch",
+      "Confidential User Manual & 1-Year Warranty"
+    ]
+  }
+]

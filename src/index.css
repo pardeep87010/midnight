@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-rose-gold: #D98A92;
+    --color-rose-gold-light: #F0B8BE;
+    --color-rose-gold-dark: #8A434E;
+    --color-rose-mauve: #B56571;
+    --color-taupe-muted: #9E8286;
+    --color-obsidian: #121316;
+    --color-card-bg: #18191E;
+    --bg-main: #121316;
+    --text-main: #EAE0E1;
+  }
+
+  .light {
+    --color-rose-gold: #B56571;
+    --color-rose-gold-light: #C26D7A;
+    --color-rose-gold-dark: #6B2932;
+    --color-rose-mauve: #8A434E;
+    --color-taupe-muted: #705B5E;
+    --color-obsidian: #FBF9F7;
+    --color-card-bg: #FFFFFF;
+    --bg-main: #FBF9F7;
+    --text-main: #1A1718;
+  }
+
+  html, body, #root {
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html.dark, body.dark {
+    background-color: #121316;
+    color: #EAE0E1;
+  }
+
+  html.light, body.light {
+    background-color: #FBF9F7;
+    color: #1A1718;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* =========================================================================
+   DARK MODE STYLES (Default Luxury Velvet Obsidian)
+   ========================================================================= */
+.luxury-glass {
+  background: rgba(24, 25, 30, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(217, 138, 146, 0.12);
+}
+
+.luxury-glass-header, .mirror-glass-header {
+  background: linear-gradient(180deg, rgba(26, 27, 33, 0.75) 0%, rgba(18, 19, 22, 0.88) 100%);
+  backdrop-filter: blur(32px) saturate(190%) contrast(108%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%) contrast(108%);
+  border-bottom: 1px solid rgba(217, 138, 146, 0.15);
+  box-shadow: inset 0 1px 0 0 rgba(240, 184, 190, 0.2), inset 0 -1px 0 0 rgba(0, 0, 0, 0.6), 0 20px 40px -10px rgba(0, 0, 0, 0.85);
+}
+
+/* Seamless Mirror Blur Footer Effect (No top line/border) */
+.mirror-glass-footer {
+  position: relative;
+  background: linear-gradient(180deg, rgba(18, 19, 23, 0.65) 0%, rgba(14, 15, 18, 0.88) 100%);
+  backdrop-filter: blur(36px) saturate(200%) contrast(112%);
+  -webkit-backdrop-filter: blur(36px) saturate(200%) contrast(112%);
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+.mirror-glass-card {
+  background: linear-gradient(135deg, rgba(28, 29, 36, 0.78) 0%, rgba(18, 19, 23, 0.88) 100%);
+  backdrop-filter: blur(28px) saturate(180%) contrast(110%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) contrast(110%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    inset 0 0 20px 0 rgba(181, 101, 113, 0.08),
+    0 20px 40px -10px rgba(0, 0, 0, 0.65);
+}
+
+.satin-card {
+  background: #18191E;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.satin-card:hover {
+  border-color: rgba(217, 138, 146, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.75), 0 0 30px -10px rgba(181, 101, 113, 0.25);
+}
+
+.gold-gradient-text, .rose-gradient-text {
+  background: linear-gradient(135deg, #FDE8EA 0%, #D98A92 50%, #B56571 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg, .rose-gradient-bg {
+  background: linear-gradient(135deg, #D98A92 0%, #B56571 50%, #8A434E 100%);
+}
+
+.glow-gold, .glow-rose {
+  box-shadow: 0 0 30px -5px rgba(217, 138, 146, 0.35);
+}
+
+.btn-gold, .btn-rose {
+  background: linear-gradient(135deg, #C26D7A 0%, #B56571 100%);
+  color: #121316;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 28px -5px rgba(181, 101, 113, 0.45);
+}
+
+.btn-gold:hover, .btn-rose:hover {
+  background: linear-gradient(135deg, #D98A92 0%, #C26D7A 100%);
+  box-shadow: 0 15px 35px -5px rgba(217, 138, 146, 0.65);
+  transform: translateY(-1px);
+}
+
+.btn-gold:active, .btn-rose:active {
+  transform: scale(0.98);
+}
+
+/* =========================================================================
+   LIGHT MODE PERFECTION (Silky Cream, Deep Charcoal & Cranberry Rose)
+   ========================================================================= */
+
+.light {
+  background-color: #FBF9F7 !important;
+  color: #1A1718 !important;
+}
+
+/* 1. Header & Glass Elements in Light Mode */
+.light .luxury-glass-header, 
+.light .mirror-glass-header {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(251, 249, 247, 0.96) 100%) !important;
+  border-bottom: 1px solid rgba(181, 101, 113, 0.18) !important;
+  box-shadow: 0 10px 30px -10px rgba(181, 101, 113, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+.light .luxury-glass {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(181, 101, 113, 0.2) !important;
+  box-shadow: 0 15px 35px -10px rgba(181, 101, 113, 0.12) !important;
+}
+
+/* 2. Cards in Light Mode */
+.light .satin-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(181, 101, 113, 0.16) !important;
+  box-shadow: 0 8px 24px -6px rgba(181, 101, 113, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+}
+
+.light .satin-card:hover {
+  border-color: rgba(181, 101, 113, 0.45) !important;
+  box-shadow: 0 20px 40px -12px rgba(181, 101, 113, 0.2) !important;
+}
+
+/* 3. Hero Video Overlay in Light Mode (Crisp readable text over video) */
+.light .hero-video-overlay {
+  background: rgba(251, 249, 247, 0.76) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.light .hero-vignette {
+  background: radial-gradient(circle, rgba(251, 249, 247, 0.15) 0%, rgba(251, 249, 247, 0.75) 60%, rgba(251, 249, 247, 0.98) 100%) !important;
+}
+
+/* 4. Text Contrast Overrides in Light Mode */
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
+  color: #181617 !important;
+}
+
+.light .text-white {
+  color: #181617 !important;
+}
+
+.light .text-neutral-100,
+.light .text-neutral-200, 
+.light .text-neutral-300 {
+  color: #383032 !important;
+}
+
+.light .text-neutral-400, 
+.light .text-neutral-500 {
+  color: #5C4F52 !important;
+}
+
+.light .text-neutral-600 {
+  color: #8A7A7D !important;
+}
+
+/* Punchy Cranberry Rose in Light Mode (High Contrast on White) */
+.light .text-\[\#D98A92\],
+.light .text-rose-gold {
+  color: #A33F4D !important;
+}
+
+.light .gold-gradient-text, 
+.light .rose-gradient-text {
+  background: linear-gradient(135deg, #6B242F 0%, #9C3846 50%, #B56571 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* 5. Buttons & Badges in Light Mode (Keep text CRISP WHITE on solid colored backgrounds) */
+.light .btn-gold, 
+.light .btn-rose {
+  background: linear-gradient(135deg, #B56571 0%, #9C3846 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 10px 25px -4px rgba(181, 101, 113, 0.42) !important;
+}
+
+.light .btn-gold:hover, 
+.light .btn-rose:hover {
+  background: linear-gradient(135deg, #C26D7A 0%, #B56571 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 14px 32px -4px rgba(181, 101, 113, 0.55) !important;
+}
+
+.light .btn-gold *, 
+.light .btn-rose *,
+.light button[class*="bg-[#B56571]"],
+.light button[class*="bg-[#B56571]"] *,
+.light span[class*="bg-[#B56571]"],
+.light span[class*="bg-[#B56571]"] *,
+.light span[class*="bg-emerald"],
+.light span[class*="bg-emerald"] * {
+  color: #FFFFFF !important;
+}
+
+/* 6. Backgrounds in Light Mode */
+.light .bg-\[\#121316\], 
+.light .bg-\[\#090A0E\], 
+.light .bg-\[\#0B0C10\], 
+.light .bg-\[\#0E1015\] {
+  background-color: #FBF9F7 !important;
+}
+
+.light .bg-\[\#141519\], 
+.light .bg-\[\#16171C\] {
+  background-color: #F4EDE8 !important;
+}
+
+.light .bg-\[\#18191E\], 
+.light .bg-\[\#1F2026\], 
+.light .bg-\[\#0D0D11\] {
+  background-color: #FFFFFF !important;
+}
+
+.light .bg-\[\#1E2028\], 
+.light .bg-\[\#20222A\] {
+  background-color: #EFE6E1 !important;
+}
+
+.light .bg-black, 
+.light .bg-black\/40, 
+.light .bg-black\/60, 
+.light .bg-black\/70,
+.light .bg-black\/80 {
+  background-color: rgba(240, 230, 225, 0.9) !important;
+}
+
+.light .bg-black\/40 .text-white,
+.light .bg-black\/60 .text-white,
+.light .bg-black\/70 .text-white,
+.light .bg-black\/80 .text-white {
+  color: #181617 !important;
+}
+
+/* 7. Borders in Light Mode */
+.light .border-white\/10, 
+.light .border-white\/5, 
+.light .border-white\/20,
+.light .border-white\/\[0\.06\], 
+.light .border-white\/\[0\.08\], 
+.light .border-white\/\[0\.15\] {
+  border-color: rgba(181, 101, 113, 0.16) !important;
+}
+
+.light .border-\[\#D98A92\]\/30, 
+.light .border-\[\#D98A92\]\/40,
+.light .border-\[\#D98A92\]\/50 {
+  border-color: rgba(181, 101, 113, 0.35) !important;
+}
+
+.light .bg-\[\#D98A92\]\/10, 
+.light .bg-\[\#D98A92\]\/15, 
+.light .bg-\[\#D98A92\]\/20 {
+  background-color: rgba(181, 101, 113, 0.12) !important;
+}
+
+/* 8. Inputs, Textareas, Selects in Light Mode */
+.light input, 
+.light select, 
+.light textarea {
+  background-color: #FFFFFF !important;
+  color: #181617 !important;
+  border: 1px solid rgba(181, 101, 113, 0.28) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+}
+
+.light input:focus, 
+.light select:focus, 
+.light textarea:focus {
+  border-color: #B56571 !important;
+  box-shadow: 0 0 0 3px rgba(181, 101, 113, 0.15) !important;
+}
+
+.light input::placeholder, 
+.light textarea::placeholder {
+  color: #8C7B7E !important;
+}
+
+/* 9. Top Ribbon in Light Mode */
+.light .top-ribbon {
+  background-color: #F2E8E3 !important;
+  border-bottom-color: rgba(181, 101, 113, 0.18) !important;
+}
+
+/* 10. Drawer Menu in Light Mode */
+.light .mobile-drawer {
+  background-color: rgba(251, 249, 247, 0.98) !important;
+}
+
+/* Custom Scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Velvet &amp; Ember - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#551e29",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-variant": "#333535",
+                        "primary-fixed": "#ffd9dd",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#d7c1c3",
+                        "obsidian-container": "#121212",
+                        "primary-fixed-dim": "#ffb2bc",
+                        "tertiary-fixed": "#b4f1c3",
+                        "tertiary-container": "#649d75",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-container-high": "#282a2b",
+                        "surface-bright": "#37393a",
+                        "inverse-primary": "#8c4b55",
+                        "surface-dim": "#121414",
+                        "inverse-on-surface": "#2f3131",
+                        "on-primary-container": "#4c1722",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#474746",
+                        "onyx-surface": "#242424",
+                        "outline": "#9f8c8e",
+                        "on-tertiary-container": "#003118",
+                        "rose-gold": "#B76E79",
+                        "primary-container": "#c77b86",
+                        "secondary": "#c8c6c5",
+                        "on-primary-fixed": "#3a0915",
+                        "on-tertiary-fixed-variant": "#16512f",
+                        "background": "#121414",
+                        "surface-container-highest": "#333535",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#ffb2bc",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "muted-gold": "#8E565E",
+                        "on-secondary": "#313030",
+                        "on-primary-fixed-variant": "#70343e",
+                        "surface-container-lowest": "#0c0f0f",
+                        "on-surface": "#e2e2e2",
+                        "surface-container": "#1e2020",
+                        "on-secondary-container": "#b7b5b4",
+                        "secondary-fixed": "#e5e2e1",
+                        "matte-black": "#1A1A1A",
+                        "surface": "#121414",
+                        "outline-variant": "#524345",
+                        "on-tertiary": "#00391d",
+                        "tertiary": "#98d4a8",
+                        "on-tertiary-fixed": "#00210e",
+                        "primary": "#ffb2bc",
+                        "tertiary-fixed-dim": "#98d4a8",
+                        "error-container": "#93000a",
+                        "on-background": "#e2e2e2",
+                        "secondary-container": "#474746"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-desktop": "80px",
+                        "section-gap": "160px",
+                        "container-max": "1440px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "headline-sm": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-matte-black text-on-surface font-body-md min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- WebGL Background -->
+<canvas class="fixed inset-0 w-full h-full -z-10" id="glcanvas"></canvas>
+<!-- Login Container -->
+<main class="w-full max-w-[480px] px-margin-mobile md:px-0 z-10 flex flex-col items-center">
+<!-- Brand Header -->
+<header class="mb-12 text-center w-full">
+<h1 class="font-display-lg-mobile md:font-display-lg text-rose-gold mb-2 tracking-tighter">Velvet &amp; Ember</h1>
+<p class="font-body-md text-on-surface-variant">Discreet luxury for the modern soul.</p>
+</header>
+<!-- Login Card -->
+<section class="bg-onyx-surface/90 backdrop-blur-sm w-full p-8 md:p-12 rounded-xl border border-surface-variant/50 shadow-2xl relative overflow-hidden group">
+<!-- Subtle Card Sheen -->
+<div class="absolute inset-0 pointer-events-none rounded-xl border border-rose-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out"></div>
+<h2 class="font-headline-md text-on-surface mb-8 text-center">Welcome Back</h2>
+<form class="flex flex-col gap-6" onsubmit="event.preventDefault();">
+<!-- Email Input -->
+<div class="relative w-full">
+<input class="peer w-full bg-transparent border-0 border-b border-surface-variant focus:border-rose-gold focus:ring-0 px-0 py-3 text-on-surface font-body-md transition-colors placeholder-transparent focus:outline-none" id="email" placeholder="Email Address" required="" type="email"/>
+<label class="absolute left-0 top-3 text-on-surface-variant font-body-md transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-rose-gold peer-focus:font-label-md peer-valid:-top-4 peer-valid:text-xs peer-valid:text-on-surface-variant peer-valid:font-label-md cursor-text pointer-events-none" for="email">Email Address</label>
+</div>
+<!-- Password Input -->
+<div class="relative w-full">
+<input class="peer w-full bg-transparent border-0 border-b border-surface-variant focus:border-rose-gold focus:ring-0 px-0 py-3 text-on-surface font-body-md transition-colors placeholder-transparent focus:outline-none" id="password" placeholder="Password" required="" type="password"/>
+<label class="absolute left-0 top-3 text-on-surface-variant font-body-md transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-rose-gold peer-focus:font-label-md peer-valid:-top-4 peer-valid:text-xs peer-valid:text-on-surface-variant peer-valid:font-label-md cursor-text pointer-events-none" for="password">Password</label>
+<button aria-label="Toggle Password Visibility" class="absolute right-0 top-3 text-on-surface-variant hover:text-rose-gold transition-colors focus:outline-none" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between mt-2">
+<label class="flex items-center gap-2 cursor-pointer group/checkbox">
+<div class="relative flex items-center justify-center w-4 h-4">
+<input class="peer appearance-none w-4 h-4 border border-surface-variant rounded-sm checked:bg-rose-gold checked:border-rose-gold transition-colors focus:ring-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-rose-gold focus-visible:ring-offset-1 focus-visible:ring-offset-matte-black bg-transparent" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-[12px] text-matte-black opacity-0 peer-checked:opacity-100 pointer-events-none" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-sm text-on-surface-variant group-hover/checkbox:text-on-surface transition-colors">Remember me</span>
+</label>
+<a class="font-label-sm text-rose-gold hover:text-primary-fixed-dim transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-primary-fixed-dim hover:after:w-full after:transition-all after:duration-300" href="#">Forgot Password?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full mt-6 bg-rose-gold text-matte-black font-label-md py-4 rounded-full hover:bg-primary-fixed-dim transition-all duration-300 ease-in-out hover:shadow-[0_0_30px_rgba(183,110,121,0.15)] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-matte-black" type="submit">
+                    Enter
+                </button>
+</form>
+<div class="mt-8 text-center">
+<p class="font-body-md text-on-surface-variant text-sm">
+                    New to the collection? 
+                    <a class="font-label-md text-on-surface hover:text-rose-gold transition-colors ml-1 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-px after:bg-rose-gold/50 hover:after:bg-rose-gold after:transition-colors" href="#">Request Access</a>
+</p>
+</div>
+</section>
+<!-- Minimal Footer inside the Login context -->
+<footer class="mt-12 text-center text-on-surface-variant/50 font-label-sm flex gap-4">
+<a class="hover:text-on-surface transition-colors" href="#">Privacy</a>
+<span>•</span>
+<a class="hover:text-on-surface transition-colors" href="#">Terms</a>
+<span>•</span>
+<a class="hover:text-on-surface transition-colors" href="#">Contact</a>
+</footer>
+</main>
+<script>
+        // Simple script to handle password visibility toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.querySelector('button[aria-label="Toggle Password Visibility"]');
+            const passwordInput = document.getElementById('password');
+            const iconSpan = toggleBtn.querySelector('.material-symbols-outlined');
+
+            if (toggleBtn && passwordInput && iconSpan) {
+                toggleBtn.addEventListener('click', () => {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    iconSpan.textContent = type === 'password' ? 'visibility_off' : 'visibility';
+                });
+            }
+        });
+
+        // WebGL Shader setup
+        const canvas = document.getElementById('glcanvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+        if (gl) {
+            const vsSource = `
+                attribute vec2 position;
+                varying vec2 v_texCoord;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                    v_texCoord = position * 0.5 + 0.5;
+                }
+            `;
+            
+            const fsSource = `
+precision highp float;
+
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+varying vec2 v_texCoord;
+
+// Simple noise function
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Create organic movement
+    float n = noise(uv * 3.0 + u_time * 0.1);
+    n += noise(uv * 6.0 - u_time * 0.15) * 0.5;
+    
+    // Matte Black base (#1A1A1A)
+    vec3 black = vec3(0.1, 0.1, 0.1);
+    // Rose Gold accent (#B76E79)
+    vec3 roseGold = vec3(0.718, 0.431, 0.475);
+    
+    // Create a flowing "liquid silk" or "velvet" mask
+    float mask = smoothstep(0.3, 0.7, n);
+    
+    // Add some depth and subtle highlights
+    float highlight = pow(n, 4.0) * 0.3;
+    
+    // Blend colors
+    vec3 finalColor = mix(black, roseGold * 0.2, mask);
+    finalColor += roseGold * highlight * 0.5;
+    
+    // Vignette for focus
+    float dist = distance(uv, vec2(0.5));
+    finalColor *= smoothstep(0.8, 0.2, dist);
+    
+    gl_FragColor = vec4(finalColor, 1.0);
+}
+`;
+            
+            function compileShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+            
+            const vertexShader = compileShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = compileShader(gl, gl.FRAGMENT_SHADER, fsSource);
+            
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error('Program link error:', gl.getProgramInfoLog(program));
+            }
+            
+            gl.useProgram(program);
+            
+            const vertices = new Float32Array([
+                -1.0, -1.0,
+                 1.0, -1.0,
+                -1.0,  1.0,
+                -1.0,  1.0,
+                 1.0, -1.0,
+                 1.0,  1.0
+            ]);
+            
+            const buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+            
+            const positionLocation = gl.getAttribLocation(program, "position");
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+            
+            const timeLocation = gl.getUniformLocation(program, "u_time");
+            const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+            
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+            }
+            
+            window.addEventListener('resize', resize);
+            resize();
+            
+            function render(time) {
+                gl.uniform1f(timeLocation, time * 0.001);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+            
+            requestAnimationFrame(render);
+        }
+    </script>
+</body></html>
