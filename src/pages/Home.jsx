@@ -35,16 +35,32 @@ export const Home = ({ onOpenQuiz }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Autoplay prevented:", error);
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.defaultMuted = true;
+        videoRef.current.muted = true;
+        videoRef.current.play().catch(error => {
+          console.log("Autoplay paused by mobile battery saver:", error);
         });
       }
-    }
+    };
+
+    playVideo();
+
+    // User touch / scroll unlock for mobile low-power mode
+    const handleTouchOrScroll = () => {
+      playVideo();
+      window.removeEventListener('touchstart', handleTouchOrScroll);
+      window.removeEventListener('scroll', handleTouchOrScroll);
+    };
+
+    window.addEventListener('touchstart', handleTouchOrScroll, { passive: true });
+    window.addEventListener('scroll', handleTouchOrScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchOrScroll);
+      window.removeEventListener('scroll', handleTouchOrScroll);
+    };
   }, []);
 
   const handleSearch = (e) => {
@@ -57,19 +73,25 @@ export const Home = ({ onOpenQuiz }) => {
   return (
     <div className="relative w-full max-w-full overflow-x-hidden pt-16 md:pt-[33px] bg-[#FAF7F5] dark:bg-[#121316] font-sans text-[#181617] dark:text-[#EAE0E1] transition-colors">
       
-      {/* 1. Cinematic Hero Section with Video Background and Crystal Clarity */}
+      {/* 1. Cinematic Hero Section with Compressed Mobile & Desktop Video Background */}
       <section className="relative min-h-[96vh] sm:min-h-screen w-full max-w-full flex flex-col justify-between items-center overflow-hidden bg-[#121316]">
         
-        {/* Background Video with Instant Preload (Extends fully from top to bottom) */}
+        {/* Background Video with Mobile Compression & Zero-Lag Poster */}
         <video
           ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          webkit-playsinline="true"
+          x5-playsinline="true"
           preload="auto"
+          poster="/hero-poster.jpg"
+          disablePictureInPicture
+          disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover z-0 opacity-90 scale-105 transition-transform duration-1000 pointer-events-none"
         >
+          <source src="/hero-video-mobile.mp4" media="(max-width: 768px)" type="video/mp4" />
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
 

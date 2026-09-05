@@ -10,11 +10,32 @@ export const Footer = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Footer video autoplay prevented:", error);
-      });
-    }
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.defaultMuted = true;
+        videoRef.current.muted = true;
+        videoRef.current.play().catch(error => {
+          console.log("Footer video autoplay prevented:", error);
+        });
+      }
+    };
+
+    playVideo();
+
+    // User touch / scroll unlock for mobile low-power mode
+    const handleTouchOrScroll = () => {
+      playVideo();
+      window.removeEventListener('touchstart', handleTouchOrScroll);
+      window.removeEventListener('scroll', handleTouchOrScroll);
+    };
+
+    window.addEventListener('touchstart', handleTouchOrScroll, { passive: true });
+    window.addEventListener('scroll', handleTouchOrScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchOrScroll);
+      window.removeEventListener('scroll', handleTouchOrScroll);
+    };
   }, [currentPage]);
 
   const handleKeywordClick = (item) => {
@@ -188,13 +209,19 @@ export const Footer = () => {
         loop
         muted
         playsInline
+        webkit-playsinline="true"
+        x5-playsinline="true"
         preload="metadata"
+        poster="/footer-poster.jpg"
+        disablePictureInPicture
+        disableRemotePlayback
         className="absolute inset-0 w-full h-full object-cover z-0 scale-105 transition-all duration-700 pointer-events-none"
         style={{
           opacity: 0.82,
           filter: 'blur(7px) brightness(0.9) contrast(1.1)'
         }}
       >
+        <source src="/footer-video-mobile.mp4" media="(max-width: 768px)" type="video/mp4" />
         <source src="/footer-video.mp4" type="video/mp4" />
         <source src="/fotter.mp4" type="video/mp4" />
       </video>
