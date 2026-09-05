@@ -1947,15 +1947,16 @@ Sitemap: https://midnightbloom.com/sitemap.xml
 `);
 });
 
-// Serve Frontend Production Build (SPA Fallback)
+// Serve Frontend Production Build (SPA Fallback - Express 5 Compatible)
 const distPath = path.join(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
-  app.get('*', (req, res) => {
-    if (req.path.startsWith('/api')) {
-      return res.status(404).json({ error: 'API endpoint not found' });
+  // Express 5 compatible fallback middleware (avoids path-to-regexp wildcard PathError)
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api')) {
+      return res.sendFile(path.join(distPath, 'index.html'));
     }
-    res.sendFile(path.join(distPath, 'index.html'));
+    next();
   });
 }
 
