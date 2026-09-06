@@ -1383,19 +1383,19 @@ const otpStore = new Map(); // email -> { otp, expiresAt, type }
 // Helper to dispatch email via Resend API
 async function sendEmailViaResend(toEmail, subject, htmlContent) {
   try {
-    const configRow = db.prepare("SELECT value FROM env_configs WHERE key = 'RESEND_API_KEY'").get();
-    const apiKey = configRow?.value || process.env.RESEND_API_KEY || '';
+    const configRow = db.prepare("SELECT value FROM env_configs WHERE key = 'RESEND_API_KEY' OR key = 'RESEND_EMAIL_API_KEY'").get();
+    const apiKey = configRow?.value || process.env.RESEND_API_KEY || process.env.RESEND_EMAIL_API_KEY || '';
 
     if (!apiKey || apiKey.includes('re_mb_live_sec_83910284') || apiKey.includes('xxxxxxxx')) {
       console.warn('⚠️ [RESEND EMAIL NOTICE] No live Resend API key configured in database or .env');
       return { 
         success: false, 
-        error: 'Email service is not configured. Please enter your live RESEND_API_KEY in the Admin Panel (Section 4).' 
+        error: 'Email service is not configured. Please enter your live RESEND_API_KEY in the Admin Panel or Render Environment.' 
       };
     }
 
     const fromRow = db.prepare("SELECT value FROM env_configs WHERE key = 'FROM_EMAIL'").get();
-    const fromEmail = fromRow?.value || 'Midnight Bloom <onboarding@resend.dev>';
+    const fromEmail = fromRow?.value || process.env.FROM_EMAIL || 'Midnight Bloom <onboarding@resend.dev>';
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -1413,7 +1413,7 @@ async function sendEmailViaResend(toEmail, subject, htmlContent) {
 
     const data = await res.json();
     if (res.ok) {
-      console.log(`✉️ [RESEND SUCCESS] Email dispatched to ${toEmail} (ID: ${data.id})`);
+      console.log(`✉️ [RESEND SUCCESS] Email dispatched to ${toEmail} (ID: ${data.id}) via sender ${fromEmail}`);
       return { success: true, id: data.id };
     } else {
       console.error('❌ [RESEND API ERROR]:', data);
@@ -1424,6 +1424,39 @@ async function sendEmailViaResend(toEmail, subject, htmlContent) {
     return { success: false, error: err.message };
   }
 }
+
+// Admin Send Test Email via Resend API
+app.post('/api/admin/send-test-email', requireAdminAuth, async (req, res) => {
+  try {
+    const { toEmail } = req.body;
+    if (!toEmail || !toEmail.includes('@')) {
+      return res.status(400).json({ error: 'Please provide a valid recipient email address.' });
+    }
+
+    const testHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #121316; color: #FAF7F5; padding: 32px; border-radius: 12px; border: 1px solid #333;">
+        <h2 style="color: #D98A92; margin-top: 0; font-size: 24px;">Midnight Bloom • Resend Verification</h2>
+        <p style="font-size: 14px; line-height: 1.6; color: #CCC;">This is a real-time verification test from your <strong>Midnight Bloom Live Backend</strong>.</p>
+        <div style="background: rgba(255,255,255,0.05); padding: 16px; border-radius: 8px; border-left: 4px solid #D98A92; margin: 20px 0;">
+          <p style="margin: 0; font-size: 13px; color: #FFF;"><strong>Status:</strong> Resend API & Domain Connected Successfully! 🚀</p>
+          <p style="margin: 4px 0 0; font-size: 12px; color: #AAA;">Timestamp: ${new Date().toUTCString()}</p>
+        </div>
+        <p style="font-size: 12px; color: #888; margin-top: 24px; border-top: 1px solid #222; padding-top: 12px;">
+          Discreet Luxury Intimate Instruments & Sensual Wellness Across India
+        </p>
+      </div>
+    `;
+
+    const result = await sendEmailViaResend(toEmail.trim(), 'Midnight Bloom - Live Email Verification Test', testHtml);
+    if (!result.success) {
+      return res.status(400).json({ error: result.error });
+    }
+
+    res.json({ success: true, message: `Live test email successfully dispatched to ${toEmail}!`, id: result.id });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // 1. Send OTP (Strict Validation & Cross-Provider Conflict Check)
 app.post('/api/auth/send-otp', async (req, res) => {

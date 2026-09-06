@@ -291,24 +291,34 @@ export const AdminPanel = () => {
     }
     setIsSendingTestEmail(true);
     try {
-      const dummyOrder = {
-        id: 'TEST-' + Math.floor(1000 + Math.random() * 9000),
-        customerName: 'Executive VIP Member',
-        customerEmail: testEmailRecipient,
-        totalAmount: 4999,
-        items: [{ product: { name: 'The Royale Dual Rabbit Vibrator' }, quantity: 1 }],
-        shippingMethod: 'Discreet Express (Plain Box)'
-      };
+      const response = await fetch('/api/admin/send-test-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        },
+        body: JSON.stringify({ toEmail: testEmailRecipient })
+      });
 
-      const result = await notificationService.sendOrderReceipt(dummyOrder);
-      if (result.success) {
-        showToast(`Confidential test email dispatched to ${testEmailRecipient}!`, 'success');
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        showToast(`Live test email dispatched to ${testEmailRecipient}! (Resend ID: ${data.id})`, 'success');
+        const dummyOrder = {
+          id: 'TEST-' + Math.floor(1000 + Math.random() * 9000),
+          customerName: 'Executive VIP Member',
+          customerEmail: testEmailRecipient,
+          totalAmount: 4999,
+          items: [{ product: { name: 'The Royale Dual Rabbit Vibrator' }, quantity: 1 }],
+          shippingMethod: 'Discreet Express (Plain Box)'
+        };
+        await notificationService.sendOrderReceipt(dummyOrder);
         setSentNotifications(notificationService.getNotifications());
       } else {
-        showToast('Email dispatch simulation complete (Logged to Audit)', 'info');
+        showToast(data.error || 'Failed to dispatch live email. Please check your RESEND_API_KEY.', 'error');
       }
     } catch (err) {
-      showToast('Failed to dispatch test notification', 'error');
+      showToast('Failed to dispatch test notification: ' + err.message, 'error');
     } finally {
       setIsSendingTestEmail(false);
     }
