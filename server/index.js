@@ -2254,22 +2254,13 @@ app.post('/api/auth/google', async (req, res) => {
 
     let userObj;
     if (existingUser) {
-      // Strict Cross-Provider Conflict Defense:
-      // If user registered with Email/Password, prevent Google sign-in and give explicit actionable instructions
-      if (existingUser.auth_provider === 'email' && !isAdmin) {
-        return res.status(400).json({
-          success: false,
-          error: 'This email is already registered using Email & Password. Please sign in with your email and password.'
-        });
-      }
-
       // Update avatar and auth provider
       db.prepare('UPDATE users SET avatar = ?, auth_provider = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?')
         .run(userPicture || existingUser.avatar, 'google', cleanEmail);
 
       userObj = {
         id: existingUser.id,
-        name: existingUser.name,
+        name: existingUser.name || formattedName,
         email: existingUser.email,
         phone: existingUser.phone || '', // Empty if not provided
         picture: userPicture || existingUser.avatar || null,
@@ -2316,7 +2307,7 @@ app.post('/api/auth/google', async (req, res) => {
     db.prepare(`
       INSERT INTO event_logs (id, event_type, payload_json, status)
       VALUES (?, 'auth.google_login', ?, 'success')
-    `).run(`evt_g_${Date.now()}`, JSON.stringify({ email: cleanEmail, name: formattedName, isAdmin }));
+    `).run(`evt_g_${Date.now()}`, JSON.stringify({ email: cleanEmail, name: userObj.name, isAdmin }));
 
     res.json({
       success: true,

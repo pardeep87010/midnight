@@ -72,21 +72,26 @@ export const AuthModal = () => {
   const [isConnectingGoogle, setIsConnectingGoogle] = useState(false);
   const videoRef = useRef(null);
 
+  const prevIsOpenRef = useRef(false);
+
   // Sync mode with prop
   useEffect(() => {
     if (isAuthModalOpen) {
-      setActiveTab(authModalMode === 'register' ? 'register' : 'login');
-      setIsForgotPassword(false);
-      setIsGoogleSetupOpen(false);
-      setFormErrors({});
-      setRegStep(1);
-      setResetStep(1);
-      setRegOtp('');
-      setResetOtp('');
-      setRegName('');
-      setRegConfirmPassword('');
-      setShowRegPassword(false);
-      setShowRegConfirmPassword(false);
+      if (!prevIsOpenRef.current) {
+        setActiveTab(authModalMode === 'register' ? 'register' : 'login');
+        setIsForgotPassword(false);
+        setIsGoogleSetupOpen(false);
+        setFormErrors({});
+        setRegStep(1);
+        setResetStep(1);
+        setRegOtp('');
+        setResetOtp('');
+        setRegName('');
+        setRegConfirmPassword('');
+        setShowRegPassword(false);
+        setShowRegConfirmPassword(false);
+      }
+      prevIsOpenRef.current = true;
 
       // Pre-populate stored Google Client ID if available
       try {
@@ -101,6 +106,8 @@ export const AuthModal = () => {
           }
         }
       } catch (e) {}
+    } else {
+      prevIsOpenRef.current = false;
     }
   }, [isAuthModalOpen, authModalMode]);
 
@@ -209,6 +216,7 @@ export const AuthModal = () => {
               setIsLoading(false);
               const errTxt = tokenResponse.error_description || tokenResponse.error;
               showToast(`Google Sign-In notice: ${errTxt}`, 'warning');
+              setFormErrors({ general: `Google notice: ${errTxt}` });
               return;
             }
             if (tokenResponse.access_token) {
@@ -248,9 +256,11 @@ export const AuthModal = () => {
 
       if (!popup) {
         showToast('Google popup was blocked. Please allow popups for this site.', 'warning');
+        setFormErrors({ general: 'Google popup was blocked by your browser. Please allow popups and try again.' });
       }
     } catch (err) {
       showToast('Error opening Google authentication window.', 'error');
+      setFormErrors({ general: 'Error opening Google authentication window. Please check your connection.' });
     } finally {
       setIsLoading(false);
     }

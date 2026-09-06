@@ -29,7 +29,9 @@
               } else if (err) {
                 try { window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_ERROR', error: err }, '*'); } catch (e) {}
               }
-              window.close();
+              setTimeout(function() {
+                try { window.close(); } catch (e) {}
+              }, 200);
             }
           }
         } catch (e) {}

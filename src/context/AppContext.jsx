@@ -137,7 +137,6 @@ export const AppProvider = ({ children }) => {
       } else {
         const errorMsg = data.error || 'Failed to authenticate with Google.';
         showToast(errorMsg, 'error');
-        openAuthModal('login');
         return { success: false, error: errorMsg };
       }
     } catch (err) {
@@ -420,7 +419,9 @@ export const AppProvider = ({ children }) => {
               window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_ERROR', error: err }, window.location.origin);
             }
           } catch (e) {}
-          window.close();
+          setTimeout(() => {
+            try { window.close(); } catch (e) {}
+          }, 200);
           return;
         }
 
