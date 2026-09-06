@@ -132,8 +132,6 @@ export const AuthModal = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isAuthModalOpen, closeAuthModal]);
 
-  if (!isAuthModalOpen) return null;
-
   // Complete Auth Success
   const handleAuthSuccess = (userObj, successMsg) => {
     setUser(userObj);
@@ -568,6 +566,8 @@ export const AuthModal = () => {
       setIsLoading(false);
     }
   };
+
+  if (!isAuthModalOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-8 bg-black/80 backdrop-blur-xl animate-fade-in font-sans">
