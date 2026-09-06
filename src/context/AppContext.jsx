@@ -13,6 +13,139 @@ export const AppProvider = ({ children }) => {
   
   // Permanent Luxury Midnight Obsidian Velvet Dark Mode
   const [theme] = useState('dark');
+  const toggleTheme = () => {};
+
+  // User auth state (Top-level declaration to guarantee availability across all hooks and functions)
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('mb_user');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return {
+      isLoggedIn: false,
+      name: '',
+      email: '',
+      phone: '',
+      isAdmin: false
+    };
+  });
+
+  // Toast notification state & dispatcher
+  const [toast, setToast] = useState({ show: false, message: '', type: 'info' });
+
+  const showToast = (message, type = 'info') => {
+    setToast({ show: true, message, type });
+    setTimeout(() => {
+      setToast({ show: false, message: '', type: 'info' });
+    }, 3500);
+  };
+
+  // Floating Auth Modal State & Controls
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('login'); // 'login' | 'register'
+  const [authModalRedirect, setAuthModalRedirect] = useState(null);
+
+  const openAuthModal = (mode = 'login', redirect = null) => {
+    setAuthModalMode(mode);
+    setAuthModalRedirect(redirect);
+    setIsAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
+
+  // Age verification state
+  const [isAgeVerified, setIsAgeVerified] = useState(() => {
+    return localStorage.getItem('velour_age_verified') === 'true';
+  });
+
+  const verifyAge = (remember = false) => {
+    setIsAgeVerified(true);
+    if (remember) {
+      localStorage.setItem('velour_age_verified', 'true');
+    }
+  };
+
+  const navigateTo = (page, productId = null, category = null) => {
+    if (page === 'login') {
+      openAuthModal('login');
+      return;
+    }
+    if (page === 'register') {
+      openAuthModal('register');
+      return;
+    }
+    setCurrentPage(page);
+    if (productId) setSelectedProductId(productId);
+    if (category) setSelectedCategory(category);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const updateProfile = (profileData) => {
+    setUser(prev => {
+      const updated = { ...prev, ...profileData };
+      try {
+        localStorage.setItem('mb_user', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    showToast('Confidential profile updated successfully.', 'success');
+  };
+
+  const logout = () => {
+    const guestUser = { isLoggedIn: false, name: '', email: '', phone: '', isAdmin: false };
+    setUser(guestUser);
+    setSavedAddresses([]);
+    setOrdersList([]);
+    try {
+      localStorage.removeItem('mb_user');
+      localStorage.removeItem('mb_saved_addresses');
+      localStorage.removeItem('mb_admin_token');
+    } catch (e) {}
+    showToast('Logged out securely.', 'info');
+    navigateTo('home');
+  };
+
+  // Google Authentication Processor
+  const authenticateGoogleToken = async (token) => {
+    if (!token) return { success: false, error: 'No token provided' };
+    showToast('Verifying Google credentials...', 'info');
+    try {
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken: token, credential: token })
+      });
+      const data = await res.json();
+      if (res.ok && data.success && data.user) {
+        setUser(data.user);
+        try {
+          localStorage.setItem('mb_user', JSON.stringify(data.user));
+          if (data.user.isAdmin) {
+            localStorage.setItem('mb_admin_token', 'mb_admin_live_token_2026_sec_bloom');
+          }
+        } catch (e) {}
+        closeAuthModal();
+        showToast(`Google Verified: Welcome, ${data.user.name}!`, 'success');
+        if (authModalRedirect) {
+          navigateTo(authModalRedirect);
+        } else if (data.user.isAdmin) {
+          navigateTo('admin');
+        }
+        return { success: true, user: data.user };
+      } else {
+        const errorMsg = data.error || 'Failed to authenticate with Google.';
+        showToast(errorMsg, 'error');
+        openAuthModal('login');
+        return { success: false, error: errorMsg };
+      }
+    } catch (err) {
+      console.error('Google Auth verification error:', err);
+      showToast('Authentication network error. Please try again.', 'error');
+      return { success: false, error: err.message };
+    }
+  };
 
   useEffect(() => {
     try {
@@ -22,8 +155,6 @@ export const AppProvider = ({ children }) => {
     document.documentElement.classList.remove('light');
     document.documentElement.setAttribute('data-theme', 'dark');
   }, []);
-
-  const toggleTheme = () => {};
 
   // Live Database Products List (Fetched from /api/products)
   const [productsList, setProductsList] = useState(STITCH_PRODUCTS);
@@ -266,138 +397,6 @@ export const AppProvider = ({ children }) => {
       setOrdersList([]);
     }
   }, [user?.email]);
-
-  // Toast notification
-  const [toast, setToast] = useState({ show: false, message: '', type: 'info' });
-
-  const showToast = (message, type = 'info') => {
-    setToast({ show: true, message, type });
-    setTimeout(() => {
-      setToast({ show: false, message: '', type: 'info' });
-    }, 3500);
-  };
-
-  // Floating Auth Modal State
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authModalMode, setAuthModalMode] = useState('login'); // 'login' | 'register'
-  const [authModalRedirect, setAuthModalRedirect] = useState(null);
-
-  const openAuthModal = (mode = 'login', redirect = null) => {
-    setAuthModalMode(mode);
-    setAuthModalRedirect(redirect);
-    setIsAuthModalOpen(true);
-  };
-
-  const closeAuthModal = () => {
-    setIsAuthModalOpen(false);
-  };
-
-  // Age verification state
-  const [isAgeVerified, setIsAgeVerified] = useState(() => {
-    return localStorage.getItem('velour_age_verified') === 'true';
-  });
-
-  const verifyAge = (remember = false) => {
-    setIsAgeVerified(true);
-    if (remember) {
-      localStorage.setItem('velour_age_verified', 'true');
-    }
-  };
-
-  const navigateTo = (page, productId = null, category = null) => {
-    if (page === 'login') {
-      openAuthModal('login');
-      return;
-    }
-    if (page === 'register') {
-      openAuthModal('register');
-      return;
-    }
-    setCurrentPage(page);
-    if (productId) setSelectedProductId(productId);
-    if (category) setSelectedCategory(category);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  // User auth state (Defaults to unauthenticated guest)
-  const [user, setUser] = useState(() => {
-    try {
-      const saved = localStorage.getItem('mb_user');
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return {
-      isLoggedIn: false,
-      name: '',
-      email: '',
-      phone: '',
-      isAdmin: false
-    };
-  });
-
-  const updateProfile = (profileData) => {
-    setUser(prev => {
-      const updated = { ...prev, ...profileData };
-      try {
-        localStorage.setItem('mb_user', JSON.stringify(updated));
-      } catch (e) {}
-      return updated;
-    });
-    showToast('Confidential profile updated successfully.', 'success');
-  };
-
-  const logout = () => {
-    const guestUser = { isLoggedIn: false, name: '', email: '', phone: '', isAdmin: false };
-    setUser(guestUser);
-    setSavedAddresses([]);
-    setOrdersList([]);
-    try {
-      localStorage.removeItem('mb_user');
-      localStorage.removeItem('mb_saved_addresses');
-      localStorage.removeItem('mb_admin_token');
-    } catch (e) {}
-    showToast('Logged out securely.', 'info');
-    navigateTo('home');
-  };
-
-  // Google Authentication Processor
-  const authenticateGoogleToken = async (token) => {
-    if (!token) return { success: false, error: 'No token provided' };
-    showToast('Verifying Google credentials...', 'info');
-    try {
-      const res = await fetch('/api/auth/google', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: token, credential: token })
-      });
-      const data = await res.json();
-      if (res.ok && data.success && data.user) {
-        setUser(data.user);
-        try {
-          localStorage.setItem('mb_user', JSON.stringify(data.user));
-          if (data.user.isAdmin) {
-            localStorage.setItem('mb_admin_token', 'mb_admin_live_token_2026_sec_bloom');
-          }
-        } catch (e) {}
-        closeAuthModal();
-        showToast(`Google Verified: Welcome, ${data.user.name}!`, 'success');
-        if (authModalRedirect) {
-          navigateTo(authModalRedirect);
-        } else if (data.user.isAdmin) {
-          navigateTo('admin');
-        }
-        return { success: true, user: data.user };
-      } else {
-        const errorMsg = data.error || 'Failed to authenticate with Google.';
-        showToast(errorMsg, 'error');
-        openAuthModal('login');
-        return { success: false, error: errorMsg };
-      }
-    } catch (err) {
-      console.error('Google Auth verification error:', err);
-      showToast('Authentication network error. Please try again.', 'error');
-      return { success: false, error: err.message };
-    }
-  };
 
   // Google OAuth URL Hash & Cross-Window Messenger Listener
   useEffect(() => {
