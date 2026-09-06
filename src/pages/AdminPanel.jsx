@@ -259,8 +259,161 @@ export const AdminPanel = () => {
     };
   });
 
-  const [testEmailRecipient, setTestEmailRecipient] = useState('customer@example.com');
+  const [testEmailRecipient, setTestEmailRecipient] = useState('20092003pardeep@gmail.com');
   const [isSendingTestEmail, setIsSendingTestEmail] = useState(false);
+
+  // ==========================================
+  // EMAIL TEMPLATES & MARKETING CAMPAIGNS STATE
+  // ==========================================
+  const [selectedEmailTemplate, setSelectedEmailTemplate] = useState('new_product');
+  const [emailPreviewHtml, setEmailPreviewHtml] = useState('');
+  const [emailPreviewSubject, setEmailPreviewSubject] = useState('');
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+  const [previewDeviceMode, setPreviewDeviceMode] = useState('desktop'); // 'desktop' | 'mobile'
+  const [emailCampaignRecipient, setEmailCampaignRecipient] = useState('20092003pardeep@gmail.com');
+  const [emailCustomMessage, setEmailCustomMessage] = useState('Engineered with 100% medical-grade velvet liquid silicone, WhisperQuiet™ acoustic dampening (<35dB), and IPX8 submersible waterproofing.');
+  const [emailDiscountCode, setEmailDiscountCode] = useState('VIPDROP15');
+  const [emailSelectedProduct, setEmailSelectedProduct] = useState('');
+  const [isSendingTemplateEmail, setIsSendingTemplateEmail] = useState(false);
+  const [isBroadcasting, setIsBroadcasting] = useState(false);
+
+  const fetchEmailPreview = async (templateType = selectedEmailTemplate) => {
+    setIsLoadingPreview(true);
+    try {
+      const activeProd = productsList.find(p => p.id === emailSelectedProduct) || productsList[0] || {
+        name: 'The Royale Dual Rabbit Vibrator',
+        subtitle: 'Whisper-Quiet Dual Motor Luxury Massager',
+        price: 4999,
+        originalPrice: 6499,
+        images: ['https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80']
+      };
+
+      const res = await fetch('/api/admin/preview-template', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        },
+        body: JSON.stringify({
+          templateType,
+          sampleData: {
+            productName: activeProd.name,
+            subtitle: activeProd.subtitle || activeProd.name,
+            price: activeProd.price,
+            originalPrice: activeProd.originalPrice,
+            image: Array.isArray(activeProd.images) && activeProd.images.length > 0 ? activeProd.images[0] : '',
+            customMessage: emailCustomMessage,
+            discountCode: emailDiscountCode
+          }
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setEmailPreviewHtml(data.html);
+        setEmailPreviewSubject(data.subject);
+      }
+    } catch (err) {
+      console.warn('Failed to load email preview:', err);
+    } finally {
+      setIsLoadingPreview(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'email-templates') {
+      fetchEmailPreview(selectedEmailTemplate);
+    }
+  }, [activeTab, selectedEmailTemplate, emailSelectedProduct, emailCustomMessage, emailDiscountCode]);
+
+  const handleSendSampleTemplate = async () => {
+    if (!emailCampaignRecipient || !emailCampaignRecipient.includes('@')) {
+      showToast('Please enter a valid recipient email address', 'warning');
+      return;
+    }
+    setIsSendingTemplateEmail(true);
+    try {
+      const activeProd = productsList.find(p => p.id === emailSelectedProduct) || productsList[0];
+      const res = await fetch('/api/admin/send-template-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        },
+        body: JSON.stringify({
+          templateType: selectedEmailTemplate,
+          recipientEmail: emailCampaignRecipient.trim(),
+          customData: {
+            productName: activeProd?.name,
+            subtitle: activeProd?.subtitle,
+            price: activeProd?.price,
+            image: Array.isArray(activeProd?.images) && activeProd.images.length > 0 ? activeProd.images[0] : '',
+            customMessage: emailCustomMessage,
+            discountCode: emailDiscountCode
+          }
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        showToast(data.message, 'success');
+      } else {
+        showToast(data.error || 'Failed to dispatch sample template email.', 'error');
+      }
+    } catch (err) {
+      showToast('Error sending email: ' + err.message, 'error');
+    } finally {
+      setIsSendingTemplateEmail(false);
+    }
+  };
+
+  const handleBroadcastCampaign = () => {
+    setConfirmModal({
+      isOpen: true,
+      title: 'Broadcast Email Campaign',
+      message: `Are you sure you want to broadcast the "${selectedEmailTemplate}" campaign to all registered members in your database?`,
+      confirmText: 'Broadcast Now',
+      isDanger: false,
+      onConfirm: async () => {
+        setConfirmModal({ ...confirmModal, isOpen: false });
+        setIsBroadcasting(true);
+        try {
+          const activeProd = productsList.find(p => p.id === emailSelectedProduct) || productsList[0];
+          const res = await fetch('/api/admin/broadcast-marketing-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+            },
+            body: JSON.stringify({
+              campaignType: selectedEmailTemplate,
+              product: {
+                name: activeProd?.name,
+                subtitle: activeProd?.subtitle,
+                price: activeProd?.price,
+                originalPrice: activeProd?.originalPrice,
+                image: Array.isArray(activeProd?.images) && activeProd.images.length > 0 ? activeProd.images[0] : ''
+              },
+              customMessage: emailCustomMessage,
+              discountCode: emailDiscountCode,
+              customSubject: emailPreviewSubject
+            })
+          });
+
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast(data.message, 'success');
+          } else {
+            showToast(data.error || 'Failed to execute broadcast.', 'error');
+          }
+        } catch (err) {
+          showToast('Broadcast error: ' + err.message, 'error');
+        } finally {
+          setIsBroadcasting(false);
+        }
+      }
+    });
+  };
 
   const handleSaveEnvConfig = async (e) => {
     e.preventDefault();
@@ -978,6 +1131,19 @@ export const AdminPanel = () => {
           }`}
         >
           Excel / CSV Importer
+        </button>
+
+        <button
+          onClick={() => {
+            setActiveTab('email-templates');
+            fetchEmailPreview(selectedEmailTemplate);
+          }}
+          className={`px-4 py-2 rounded-lg font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center space-x-1.5 ${
+            activeTab === 'email-templates' ? 'bg-[#A33F4D] text-white dark:bg-white dark:text-black shadow-md' : 'text-[#5C4F52] dark:text-neutral-400 hover:text-[#181617] dark:hover:text-white bg-transparent'
+          }`}
+        >
+          <FontAwesomeIcon icon={faEnvelope} />
+          <span>Email Templates & Broadcast</span>
         </button>
 
         <button
@@ -1885,6 +2051,300 @@ export const AdminPanel = () => {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* ========================================================= */}
+      {/* TAB: EMAIL TEMPLATES ENGINE & MARKETING BROADCAST */}
+      {/* ========================================================= */}
+      {activeTab === 'email-templates' && (
+        <div className="space-y-6 animate-fade-in font-sans">
+          
+          {/* Header Action Banner */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D0D11] p-5 rounded-2xl border border-[#B56571]/20 dark:border-neutral-800 shadow-xs">
+            <div className="space-y-1">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 rounded-lg bg-[#B56571]/15 text-[#A33F4D] dark:text-[#D98A92] flex items-center justify-center">
+                  <FontAwesomeIcon icon={faEnvelope} className="text-sm" />
+                </div>
+                <h3 className="text-lg font-bold text-[#181617] dark:text-white">
+                  Transactional Email Engine & Marketing Campaigns
+                </h3>
+              </div>
+              <p className="text-xs text-[#5C4F52] dark:text-neutral-400 font-light">
+                Preview bulletproof luxury email templates, dispatch sample tests to your inbox, or broadcast VIP drops and recovery codes to registered members via Resend.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => fetchEmailPreview(selectedEmailTemplate)}
+                disabled={isLoadingPreview}
+                className="bg-white dark:bg-[#18181B] border border-[#B56571]/25 dark:border-neutral-700 hover:bg-[#FAF3F0] dark:hover:bg-neutral-800 text-[#181617] dark:text-white px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all active:scale-95"
+              >
+                <FontAwesomeIcon icon={faRotateRight} className={isLoadingPreview ? 'animate-spin' : ''} />
+                <span>Refresh Preview</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Template Selector Pills */}
+          <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-1 text-xs font-mono">
+            {[
+              { id: 'new_product', label: '✨ VIP Product Drop', desc: 'Marketing & New Launches' },
+              { id: 'order_confirmation', label: '📦 Order Confirmation', desc: 'Discreet Invoice & Plain Box' },
+              { id: 'shipping_update', label: '🚚 Shipping & Tracking', desc: 'Live AWB Courier Dispatch' },
+              { id: 'otp', label: '🔐 OTP Verification', desc: 'Auth & Password Reset' },
+              { id: 'abandoned_cart', label: '🛒 Abandoned Cart Recovery', desc: '10% OFF Gentle Nudge' },
+              { id: 'welcome_vip', label: '👑 Welcome VIP Member', desc: '200 Reward Points Drop' },
+              { id: 'admin_alert', label: '🚨 Admin Order Alert', desc: 'Instant Admin Notification' }
+            ].map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setSelectedEmailTemplate(t.id)}
+                className={`px-4 py-2.5 rounded-xl font-bold whitespace-nowrap transition-all cursor-pointer flex flex-col items-start ${
+                  selectedEmailTemplate === t.id
+                    ? 'bg-[#A33F4D] text-white dark:bg-white dark:text-black shadow-md'
+                    : 'bg-white dark:bg-[#16171C] text-[#5C4F52] dark:text-neutral-400 border border-[#B56571]/20 dark:border-neutral-800 hover:border-[#B56571]/50'
+                }`}
+              >
+                <span>{t.label}</span>
+                <span className={`text-[10px] font-normal ${selectedEmailTemplate === t.id ? 'text-white/80 dark:text-black/80' : 'text-[#7A696C] dark:text-neutral-500'}`}>
+                  {t.desc}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* 2-Column Split: Controls vs Live Preview */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            {/* Left Column: Template Customization & Dispatch (5 Cols) */}
+            <div className="lg:col-span-5 space-y-5">
+              
+              {/* Customization Form Card */}
+              <div className="bg-white dark:bg-[#0D0D11] border border-[#B56571]/20 dark:border-neutral-800 rounded-2xl p-5 space-y-4 shadow-xs">
+                <div className="border-b border-black/[0.08] dark:border-neutral-800 pb-2.5 flex items-center justify-between">
+                  <h4 className="text-xs font-mono font-bold text-[#181617] dark:text-white uppercase tracking-wider flex items-center space-x-1.5">
+                    <FontAwesomeIcon icon={faSliders} className="text-[#A33F4D] dark:text-[#D98A92]" />
+                    <span>Template Parameters</span>
+                  </h4>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#B56571]/10 text-[#A33F4D] dark:text-[#D98A92] font-bold">
+                    {selectedEmailTemplate.toUpperCase()}
+                  </span>
+                </div>
+
+                {/* Product Selector for New Product Drop */}
+                {selectedEmailTemplate === 'new_product' && (
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 font-mono text-[11px] mb-1">
+                        Select Featured Product
+                      </label>
+                      <select
+                        value={emailSelectedProduct}
+                        onChange={(e) => setEmailSelectedProduct(e.target.value)}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-lg px-3 py-2 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571]"
+                      >
+                        <option value="">Featured: {productsList[0]?.name || 'Select Product'}</option>
+                        {productsList.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name} (₹{p.price})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 font-mono text-[11px] mb-1">
+                        VIP Promo Code
+                      </label>
+                      <input
+                        type="text"
+                        value={emailDiscountCode}
+                        onChange={(e) => setEmailDiscountCode(e.target.value)}
+                        placeholder="VIPDROP15"
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-lg px-3 py-2 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571] font-mono"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 font-mono text-[11px] mb-1">
+                        Marketing Body Copy
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={emailCustomMessage}
+                        onChange={(e) => setEmailCustomMessage(e.target.value)}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-lg px-3 py-2 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571] font-sans"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Abandoned Cart Promo */}
+                {selectedEmailTemplate === 'abandoned_cart' && (
+                  <div>
+                    <label className="block text-[#5C4F52] dark:text-neutral-400 font-mono text-[11px] mb-1">
+                      Cart Recovery Discount Promo Code
+                    </label>
+                    <input
+                      type="text"
+                      value={emailDiscountCode}
+                      onChange={(e) => setEmailDiscountCode(e.target.value)}
+                      placeholder="RECOVER10"
+                      className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-lg px-3 py-2 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571] font-mono"
+                    />
+                  </div>
+                )}
+
+                {/* Readonly info for other templates */}
+                {['order_confirmation', 'shipping_update', 'otp', 'welcome_vip', 'admin_alert'].includes(selectedEmailTemplate) && (
+                  <div className="bg-[#FAF7F5] dark:bg-black/50 p-3.5 rounded-xl border border-black/[0.06] dark:border-neutral-800 space-y-2 text-xs text-[#5C4F52] dark:text-neutral-400 font-light">
+                    <p>
+                      ⚙️ <strong>Automated System Trigger:</strong> This template is dynamically generated by the backend with live customer name, order items, encrypted OTP, or AWB tracking numbers upon event triggers.
+                    </p>
+                    <p className="text-[11px] text-[#7A696C] dark:text-neutral-500 font-mono">
+                      100% Mobile Responsive • Tested on Gmail, Outlook, and Apple Mail.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Single Test Email Dispatcher Card */}
+              <div className="bg-white dark:bg-[#0D0D11] border border-[#B56571]/20 dark:border-neutral-800 rounded-2xl p-5 space-y-3 shadow-xs">
+                <div className="border-b border-black/[0.08] dark:border-neutral-800 pb-2">
+                  <h4 className="text-xs font-mono font-bold text-[#181617] dark:text-white uppercase tracking-wider flex items-center space-x-1.5">
+                    <FontAwesomeIcon icon={faPaperPlane} className="text-[#A33F4D] dark:text-[#D98A92]" />
+                    <span>Send Sample to Inbox</span>
+                  </h4>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-[#5C4F52] dark:text-neutral-400 font-mono text-[11px]">
+                    Recipient Email Address
+                  </label>
+                  <input
+                    type="email"
+                    value={emailCampaignRecipient}
+                    onChange={(e) => setEmailCampaignRecipient(e.target.value)}
+                    placeholder="20092003pardeep@gmail.com"
+                    className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-lg px-3 py-2 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571] font-mono"
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleSendSampleTemplate}
+                  disabled={isSendingTemplateEmail}
+                  className="w-full bg-[#A33F4D] hover:bg-[#8F3340] text-white dark:bg-[#D98A92] dark:hover:bg-[#C97981] dark:text-black py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider flex items-center justify-center space-x-2 cursor-pointer shadow transition-all active:scale-95 disabled:opacity-50"
+                >
+                  <FontAwesomeIcon icon={faPaperPlane} className={isSendingTemplateEmail ? 'animate-bounce' : ''} />
+                  <span>{isSendingTemplateEmail ? 'Dispatching via Resend...' : `Send Test ${selectedEmailTemplate.replace('_', ' ').toUpperCase()}`}</span>
+                </button>
+              </div>
+
+              {/* Bulk Campaign Broadcast Card */}
+              {['new_product', 'abandoned_cart'].includes(selectedEmailTemplate) && (
+                <div className="bg-gradient-to-br from-[#1C1D22] to-[#121316] border border-[#D98A92]/40 rounded-2xl p-5 space-y-3 shadow-lg text-white">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-lg">📢</span>
+                    <div>
+                      <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#D98A92]">
+                        VIP Member Broadcast Campaign
+                      </h4>
+                      <p className="text-[11px] text-neutral-400">
+                        Dispatch this campaign to all registered sanctuary members.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleBroadcastCampaign}
+                    disabled={isBroadcasting}
+                    className="w-full bg-white hover:bg-neutral-200 text-black py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider flex items-center justify-center space-x-2 cursor-pointer shadow-md transition-all active:scale-95 disabled:opacity-50"
+                  >
+                    <span>{isBroadcasting ? 'Broadcasting in Progress...' : 'Broadcast to All Members'}</span>
+                  </button>
+                </div>
+              )}
+
+            </div>
+
+            {/* Right Column: Interactive Live Device Preview (7 Cols) */}
+            <div className="lg:col-span-7 bg-white dark:bg-[#0D0D11] border border-[#B56571]/20 dark:border-neutral-800 rounded-2xl p-5 space-y-4 shadow-xs">
+              
+              {/* Preview Controls Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/[0.08] dark:border-neutral-800 pb-3">
+                <div className="space-y-0.5">
+                  <div className="text-[11px] font-mono text-[#7A696C] dark:text-neutral-400 uppercase tracking-wider">
+                    Subject Line:
+                  </div>
+                  <div className="text-xs font-bold text-[#181617] dark:text-white font-sans truncate max-w-md">
+                    {emailPreviewSubject || 'Confidential Notification - Midnight Bloom'}
+                  </div>
+                </div>
+
+                {/* Device Mode Toggle */}
+                <div className="flex items-center bg-[#FAF7F5] dark:bg-black border border-black/[0.06] dark:border-neutral-800 rounded-lg p-1 text-xs font-mono self-start sm:self-auto">
+                  <button
+                    onClick={() => setPreviewDeviceMode('desktop')}
+                    className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+                      previewDeviceMode === 'desktop'
+                        ? 'bg-[#A33F4D] text-white dark:bg-white dark:text-black font-bold shadow-xs'
+                        : 'text-[#7A696C] dark:text-neutral-400 hover:text-white'
+                    }`}
+                  >
+                    Desktop (600px)
+                  </button>
+                  <button
+                    onClick={() => setPreviewDeviceMode('mobile')}
+                    className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+                      previewDeviceMode === 'mobile'
+                        ? 'bg-[#A33F4D] text-white dark:bg-white dark:text-black font-bold shadow-xs'
+                        : 'text-[#7A696C] dark:text-neutral-400 hover:text-white'
+                    }`}
+                  >
+                    Mobile (380px)
+                  </button>
+                </div>
+              </div>
+
+              {/* Rendered HTML Iframe Container */}
+              <div className="flex justify-center bg-[#050507] p-4 rounded-xl overflow-hidden min-h-[520px] border border-neutral-800">
+                {isLoadingPreview ? (
+                  <div className="flex flex-col items-center justify-center space-y-3 py-20 text-neutral-400 font-mono text-xs">
+                    <FontAwesomeIcon icon={faRotateRight} className="animate-spin text-2xl text-[#D98A92]" />
+                    <span>Rendering Luxury Email Template...</span>
+                  </div>
+                ) : (
+                  <div
+                    className="transition-all duration-300 overflow-hidden shadow-2xl rounded-xl"
+                    style={{
+                      width: previewDeviceMode === 'mobile' ? '380px' : '100%',
+                      maxWidth: previewDeviceMode === 'mobile' ? '380px' : '620px'
+                    }}
+                  >
+                    <iframe
+                      title="Email Live Preview"
+                      srcDoc={emailPreviewHtml}
+                      className="w-full h-[620px] border-0 rounded-xl bg-[#0A0A0C]"
+                      sandbox="allow-same-origin"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] font-mono text-[#7A696C] dark:text-neutral-500 pt-1">
+                <span>Sender: <strong className="text-[#A33F4D] dark:text-[#D98A92]">{envConfig.FROM_EMAIL || 'Midnight Bloom <orders@yourdomain.com>'}</strong></span>
+                <span>Plain Packaging Certified 🔒</span>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
       )}
 

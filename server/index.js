@@ -9,6 +9,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import db, { initDB, hashPassword, verifyPassword } from './db.js';
+import * as emailTemplates from './emailTemplates.js';
 
 dotenv.config();
 
@@ -1028,6 +1029,37 @@ app.post('/api/orders', orderLimiter, (req, res) => {
       idempotencyKey
     );
 
+    // ✉️ 7. AUTOMATED DISPATCH: Order Confirmation to Customer & Instant Alert to Admin
+    const orderEmailPayload = {
+      id: orderId,
+      customerName: sanitizeInput(o.customerName || o.name || 'Valued Client'),
+      customerEmail: sanitizeInput(o.customerEmail || o.email || ''),
+      customerPhone: sanitizeInput(o.customerPhone || o.phone || ''),
+      customerCity: sanitizeInput(o.customerCity || o.city || 'India'),
+      shippingAddress: fullShippingAddress,
+      totalAmount: authoritativeTotal,
+      paymentMode: sanitizeInput(o.paymentMode || 'Cash on Delivery (COD)'),
+      items: verifiedItems
+    };
+
+    if (orderEmailPayload.customerEmail && orderEmailPayload.customerEmail.includes('@')) {
+      sendEmailViaResend(
+        orderEmailPayload.customerEmail,
+        `Order Confirmation #${orderId} - MB Logistics`,
+        emailTemplates.getOrderConfirmationTemplate(orderEmailPayload)
+      ).catch(e => console.warn('Customer order email notice:', e.message));
+    }
+
+    const adminAlertRow = db.prepare("SELECT value FROM env_configs WHERE key = 'ADMIN_ALERT_EMAIL'").get();
+    const adminAlertEmail = adminAlertRow?.value || process.env.ADMIN_ALERT_EMAIL || '20092003pardeep@gmail.com';
+    if (adminAlertEmail && adminAlertEmail.includes('@')) {
+      sendEmailViaResend(
+        adminAlertEmail,
+        `🚨 New Order #${orderId} Alert - Midnight Bloom`,
+        emailTemplates.getAdminOrderAlertTemplate(orderEmailPayload)
+      ).catch(e => console.warn('Admin order alert email notice:', e.message));
+    }
+
     res.status(201).json({
       success: true,
       orderId,
@@ -1040,11 +1072,36 @@ app.post('/api/orders', orderLimiter, (req, res) => {
   }
 });
 
-// PUT /api/orders/:id/status (Admin Protected)
-app.put('/api/orders/:id/status', requireAdminAuth, (req, res) => {
+// PUT /api/orders/:id/status (Admin Protected - Dispatches Shipping Email)
+app.put('/api/orders/:id/status', requireAdminAuth, async (req, res) => {
   try {
-    const { status } = req.body;
+    const { status, trackingNumber, courierName, trackingUrl } = req.body;
     db.prepare('UPDATE orders SET status = ? WHERE id = ?').run(sanitizeInput(status), req.params.id);
+
+    // Dispatch Shipping Update Email if status transitions to dispatched or shipped
+    const updatedOrder = db.prepare('SELECT * FROM orders WHERE id = ?').get(req.params.id);
+    if (updatedOrder && updatedOrder.customer_email && ['dispatched', 'shipped', 'out for delivery', 'delivered'].includes(String(status).toLowerCase())) {
+      let itemsList = [];
+      try { itemsList = JSON.parse(updatedOrder.items_json); } catch (e) {}
+      const shippingData = {
+        id: updatedOrder.id,
+        customerName: updatedOrder.customer_name,
+        status: status,
+        items: itemsList
+      };
+
+      sendEmailViaResend(
+        updatedOrder.customer_email,
+        `Discreet Shipment Update: Order #${updatedOrder.id} is now ${status}`,
+        emailTemplates.getShippingUpdateTemplate(
+          shippingData,
+          trackingNumber || `MB-TRK-${Math.floor(100000 + Math.random() * 900000)}`,
+          courierName || 'BlueDart / Express Logistics',
+          trackingUrl || '#'
+        )
+      ).catch(e => console.warn('Shipping email notice:', e.message));
+    }
+
     res.json({ success: true, message: `Order #${req.params.id} updated to ${status}` });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -1458,6 +1515,219 @@ app.post('/api/admin/send-test-email', requireAdminAuth, async (req, res) => {
   }
 });
 
+// Admin Preview Rendered Email Template
+app.post('/api/admin/preview-template', requireAdminAuth, (req, res) => {
+  try {
+    const { templateType, sampleData = {} } = req.body;
+    let html = '';
+    let subject = '';
+
+    switch (templateType) {
+      case 'otp':
+        subject = 'Your Midnight Bloom Confidential Verification Code';
+        html = emailTemplates.getOtpEmailTemplate(sampleData.otp || '849201', sampleData.purpose || 'registration');
+        break;
+      case 'order_confirmation':
+        subject = 'Order Confirmation #MB-782910 - MB Logistics';
+        html = emailTemplates.getOrderConfirmationTemplate({
+          id: sampleData.id || 'MB-782910',
+          customerName: sampleData.customerName || 'Aarav Sharma',
+          totalAmount: sampleData.totalAmount || 5999,
+          paymentMode: sampleData.paymentMode || 'Cash on Delivery (COD)',
+          shippingAddress: sampleData.shippingAddress || 'Flat 402, Royale Heights, Bandra West, Mumbai, Maharashtra - 400050',
+          items: sampleData.items || [
+            { name: 'The Royale Dual Rabbit Vibrator', quantity: 1, price: 4999, color: 'Obsidian Black' },
+            { name: 'Pure Velvet Organic Water Lubricant', quantity: 1, price: 1000, color: 'Standard' }
+          ]
+        });
+        break;
+      case 'shipping_update':
+        subject = 'Discreet Shipment Update: Order #MB-782910 is Dispatched';
+        html = emailTemplates.getShippingUpdateTemplate(
+          { id: 'MB-782910', customerName: 'Aarav Sharma', status: 'Dispatched' },
+          sampleData.trackingNumber || 'BLRD-984102948',
+          sampleData.courierName || 'BlueDart Air Express',
+          sampleData.trackingUrl || 'https://midnightbloom.in/profile'
+        );
+        break;
+      case 'new_product':
+        subject = `VIP Drop: ${sampleData.productName || 'The Velvet Wand Ultra'} - Midnight Bloom`;
+        html = emailTemplates.getNewProductLaunchTemplate(
+          {
+            name: sampleData.productName || 'The Velvet Wand Ultra',
+            subtitle: sampleData.subtitle || 'Whisper-Quiet Dual Motor Luxury Massager',
+            price: sampleData.price || 4999,
+            originalPrice: sampleData.originalPrice || 6499,
+            image: sampleData.image || 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80',
+            url: sampleData.url || 'https://midnightbloom.in/catalog'
+          },
+          sampleData.customMessage || 'Engineered with 100% medical-grade velvet liquid silicone, WhisperQuiet™ acoustic dampening (<35dB), and IPX8 submersible waterproofing.',
+          sampleData.discountCode || 'VIPDROP15'
+        );
+        break;
+      case 'abandoned_cart':
+        subject = 'Your Reserved Instruments - Midnight Bloom';
+        html = emailTemplates.getAbandonedCartTemplate(
+          sampleData.customerName || 'Aarav Sharma',
+          sampleData.items || [{ name: 'The Royale Dual Rabbit Vibrator', price: 4999 }],
+          sampleData.discountCode || 'RECOVER10'
+        );
+        break;
+      case 'admin_alert':
+        subject = '🚨 New Order #MB-782910 Alert - Midnight Bloom';
+        html = emailTemplates.getAdminOrderAlertTemplate({
+          id: 'MB-782910',
+          customerName: 'Aarav Sharma',
+          customerEmail: 'aarav.sharma@example.com',
+          customerPhone: '+91 98765 43210',
+          totalAmount: 5999,
+          paymentMode: 'Cash on Delivery (COD)',
+          customerCity: 'Mumbai',
+          shippingAddress: 'Flat 402, Royale Heights, Bandra West, Mumbai - 400050',
+          items: [{ name: 'The Royale Dual Rabbit Vibrator', quantity: 1, price: 4999 }]
+        });
+        break;
+      case 'welcome_vip':
+      default:
+        subject = 'Welcome to Midnight Bloom - Confidential Intimate Wellness';
+        html = emailTemplates.getWelcomeVipTemplate(sampleData.customerName || 'Aarav Sharma');
+        break;
+    }
+
+    res.json({ success: true, templateType, subject, html });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Admin Send Template Test Email
+app.post('/api/admin/send-template-email', requireAdminAuth, async (req, res) => {
+  try {
+    const { templateType, recipientEmail, customData = {} } = req.body;
+    if (!recipientEmail || !recipientEmail.includes('@')) {
+      return res.status(400).json({ error: 'Valid recipient email required.' });
+    }
+
+    let html = '';
+    let subject = 'Midnight Bloom - Notification';
+
+    if (templateType === 'otp') {
+      subject = 'Your Midnight Bloom Confidential Verification Code';
+      html = emailTemplates.getOtpEmailTemplate(customData.otp || '928104', 'registration');
+    } else if (templateType === 'order_confirmation') {
+      subject = 'Order Confirmation #MB-918234 - MB Logistics';
+      html = emailTemplates.getOrderConfirmationTemplate({
+        id: customData.orderId || 'MB-918234',
+        customerName: customData.customerName || 'Valued Client',
+        totalAmount: customData.totalAmount || 4999,
+        paymentMode: customData.paymentMode || 'Cash on Delivery (COD)',
+        shippingAddress: customData.shippingAddress || 'Discreet Delivery, India',
+        items: customData.items || [{ name: 'The Royale Dual Rabbit Vibrator', quantity: 1, price: 4999, color: 'Rose Gold' }]
+      });
+    } else if (templateType === 'shipping_update') {
+      subject = 'Discreet Shipment Update: Order #MB-918234 is Dispatched';
+      html = emailTemplates.getShippingUpdateTemplate(
+        { id: 'MB-918234', customerName: customData.customerName || 'Valued Client', status: 'Dispatched' },
+        customData.trackingNumber || 'BLRD-91823481',
+        customData.courierName || 'BlueDart Air Express'
+      );
+    } else if (templateType === 'new_product') {
+      subject = `VIP Drop: ${customData.productName || 'The Velvet Wand Ultra'} - Midnight Bloom`;
+      html = emailTemplates.getNewProductLaunchTemplate(
+        {
+          name: customData.productName || 'The Velvet Wand Ultra',
+          subtitle: customData.subtitle || 'Whisper-Quiet Dual Motor Luxury Massager',
+          price: customData.price || 4999,
+          originalPrice: customData.originalPrice || 6499,
+          image: customData.image || '',
+          url: customData.url || 'https://midnightbloom.in/catalog'
+        },
+        customData.customMessage,
+        customData.discountCode || 'VIPDROP15'
+      );
+    } else if (templateType === 'abandoned_cart') {
+      subject = 'Your Reserved Instruments - Midnight Bloom';
+      html = emailTemplates.getAbandonedCartTemplate(
+        customData.customerName || 'Valued Client',
+        customData.items || [{ name: 'The Royale Dual Rabbit Vibrator', price: 4999 }],
+        customData.discountCode || 'RECOVER10'
+      );
+    } else if (templateType === 'admin_alert') {
+      subject = '🚨 New Order #MB-918234 Alert - Midnight Bloom';
+      html = emailTemplates.getAdminOrderAlertTemplate({
+        id: 'MB-918234',
+        customerName: 'Aarav Sharma',
+        customerEmail: recipientEmail,
+        customerPhone: '+91 98765 43210',
+        totalAmount: 4999,
+        paymentMode: 'Cash on Delivery (COD)',
+        customerCity: 'Mumbai',
+        shippingAddress: 'Bandra West, Mumbai - 400050',
+        items: [{ name: 'The Royale Dual Rabbit Vibrator', quantity: 1, price: 4999 }]
+      });
+    } else {
+      subject = 'Welcome to Midnight Bloom - Confidential Intimate Wellness';
+      html = emailTemplates.getWelcomeVipTemplate(customData.customerName || 'Valued Member');
+    }
+
+    const result = await sendEmailViaResend(recipientEmail.trim(), subject, html);
+    if (!result.success) {
+      return res.status(400).json({ error: result.error });
+    }
+
+    res.json({ success: true, message: `Sample template (${templateType}) dispatched to ${recipientEmail}!`, id: result.id });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Admin Broadcast Marketing Campaign
+app.post('/api/admin/broadcast-marketing-email', requireAdminAuth, async (req, res) => {
+  try {
+    const { campaignType = 'new_product', product = {}, customMessage, discountCode = 'VIPDROP15', customSubject, targetAudience = 'all' } = req.body;
+
+    let recipients = [];
+    if (targetAudience === 'admins') {
+      recipients = [{ email: '20092003pardeep@gmail.com', name: 'Super Admin' }];
+    } else {
+      const users = db.prepare('SELECT email, name FROM users WHERE email IS NOT NULL AND email != ""').all();
+      recipients = users.map(u => ({ email: u.email, name: u.name }));
+    }
+
+    if (recipients.length === 0) {
+      return res.status(400).json({ error: 'No registered recipients found in database.' });
+    }
+
+    let successCount = 0;
+    let failCount = 0;
+
+    for (const r of recipients) {
+      let html = '';
+      let subject = customSubject || `VIP Drop: ${product.name || 'New Sensual Instrument'} - Midnight Bloom`;
+
+      if (campaignType === 'abandoned_cart') {
+        subject = customSubject || 'Your Reserved Instruments - Midnight Bloom';
+        html = emailTemplates.getAbandonedCartTemplate(r.name, [{ name: product.name || 'Curated Instrument', price: product.price || 4999 }], discountCode);
+      } else {
+        html = emailTemplates.getNewProductLaunchTemplate(product, customMessage, discountCode);
+      }
+
+      const dispatch = await sendEmailViaResend(r.email, subject, html);
+      if (dispatch.success) successCount++;
+      else failCount++;
+    }
+
+    res.json({
+      success: true,
+      message: `Broadcast complete! Successfully dispatched to ${successCount} recipients (${failCount} failed).`,
+      dispatchedCount: successCount,
+      failedCount: failCount
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // 1. Send OTP (Strict Validation & Cross-Provider Conflict Check)
 app.post('/api/auth/send-otp', async (req, res) => {
   try {
@@ -1505,44 +1775,12 @@ app.post('/api/auth/send-otp', async (req, res) => {
 
     console.log(`🔑 [SECURE OTP GENERATED] For ${cleanEmail}: ${otp} (Purpose: ${type})`);
 
-    // Luxury HTML Email Template
+    // Luxury HTML Email Template from Engine
     const emailSubject = type === 'register' 
       ? 'Your Midnight Bloom Confidential Verification Code' 
       : 'Your Midnight Bloom Password Reset Code';
 
-    const emailHtml = `
-      <!DOCTYPE html>
-      <html>
-      <body style="margin: 0; padding: 0; background-color: #0B0B0E; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #FFFFFF;">
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 40px auto; background-color: #16171C; border: 1px solid rgba(181, 101, 113, 0.35); border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
-          <tr>
-            <td style="padding: 40px 40px 20px; text-align: center; background: linear-gradient(180deg, rgba(181, 101, 113, 0.15) 0%, rgba(22, 23, 28, 0) 100%);">
-              <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #D98A92; font-family: monospace; font-weight: bold;">PRIVATE & CONFIDENTIAL</span>
-              <h1 style="font-family: Georgia, serif; font-size: 28px; color: #FFFFFF; margin: 10px 0 0; letter-spacing: -0.5px;">Midnight Bloom</h1>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 20px 40px; text-align: center;">
-              <p style="font-size: 14px; color: #A0A0A0; margin-bottom: 24px; line-height: 1.6;">
-                ${type === 'register' ? 'Thank you for entering the sanctuary. Use the confidential 6-digit authorization code below to complete your registration.' : 'A password reset was requested for your sanctuary account. Use this authorization code to set a new password.'}
-              </p>
-              <div style="background-color: #121316; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 24px; margin: 20px 0; text-align: center;">
-                <span style="font-size: 32px; font-family: monospace; font-weight: bold; letter-spacing: 8px; color: #D98A92;">${otp}</span>
-              </div>
-              <p style="font-size: 12px; color: #707070; margin-top: 20px;">
-                This code is valid for <strong>5 minutes</strong>. Never share this code with anyone.
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 20px 40px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: #555555;">
-              Midnight Bloom Sensual Wellness • 100% Discreet & End-to-End Encrypted
-            </td>
-          </tr>
-        </table>
-      </body>
-      </html>
-    `;
+    const emailHtml = emailTemplates.getOtpEmailTemplate(otp, type);
 
     const dispatchResult = await sendEmailViaResend(cleanEmail, emailSubject, emailHtml);
 
@@ -1622,6 +1860,13 @@ app.post('/api/auth/register', (req, res) => {
       INSERT INTO event_logs (id, event_type, payload_json, status)
       VALUES (?, 'auth.registered', ?, 'success')
     `).run(`evt_reg_${Date.now()}`, JSON.stringify({ userId, email: cleanEmail, name: formattedName }));
+
+    // ✉️ Dispatch Welcome VIP Email to new member (Asynchronous)
+    sendEmailViaResend(
+      cleanEmail,
+      'Welcome to Midnight Bloom - Confidential Intimate Wellness',
+      emailTemplates.getWelcomeVipTemplate(formattedName)
+    ).catch(e => console.warn('Welcome email notice:', e.message));
 
     const userObj = {
       id: userId,
