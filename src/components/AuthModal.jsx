@@ -8,15 +8,17 @@ import {
   faLock, 
   faKey, 
   faArrowLeft, 
+  faArrowRight,
   faRotateRight, 
   faShieldHalved,
   faAward,
   faTruck,
   faCircleCheck,
-  faTriangleExclamation
+  faTriangleExclamation,
+  faUser
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
-import { validateEmail, validatePassword, validateOtp } from '../utils/validation';
+import { validateEmail, validatePassword, validateOtp, validateName } from '../utils/validation';
 
 export const AuthModal = () => {
   const { 
@@ -41,11 +43,14 @@ export const AuthModal = () => {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
 
-  // Register State
+  // Register State (Full Name, Email, Password, Confirm Password, OTP)
   const [regStep, setRegStep] = useState(1); // 1: Info, 2: OTP
+  const [regName, setRegName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
+  const [regConfirmPassword, setRegConfirmPassword] = useState('');
   const [showRegPassword, setShowRegPassword] = useState(false);
+  const [showRegConfirmPassword, setShowRegConfirmPassword] = useState(false);
   const [regAgeConsent, setRegAgeConsent] = useState(true);
   const [regOtp, setRegOtp] = useState('');
   const [regTimer, setRegTimer] = useState(60);
@@ -72,10 +77,15 @@ export const AuthModal = () => {
       setActiveTab(authModalMode === 'register' ? 'register' : 'login');
       setIsForgotPassword(false);
       setIsGoogleSetupOpen(false);
+      setFormErrors({});
       setRegStep(1);
       setResetStep(1);
       setRegOtp('');
       setResetOtp('');
+      setRegName('');
+      setRegConfirmPassword('');
+      setShowRegPassword(false);
+      setShowRegConfirmPassword(false);
 
       // Pre-populate stored Google Client ID if available
       try {
@@ -160,6 +170,7 @@ export const AuthModal = () => {
   // Trigger Google Identity Services or OAuth 2.0 Account Picker Popup
   const triggerGoogleOAuth = (clientId) => {
     setIsLoading(true);
+    setFormErrors({});
 
     // 1. If Google Identity Services (GSI) oauth2 token client is available
     if (window.google?.accounts?.oauth2) {
@@ -193,13 +204,21 @@ export const AuthModal = () => {
                   })
                 });
                 const data = await res.json();
-                if (res.ok && data.success) {
+                if (res.ok && data.success && data.user) {
                   handleAuthSuccess(data.user, `Google Verified: Welcome, ${data.user.name}!`);
                 } else {
-                  showToast(data.error || 'Failed to authenticate Google account.', 'error');
+                  const errorMsg = data.error || 'Failed to authenticate with Google.';
+                  setFormErrors({ general: errorMsg });
+                  showToast(errorMsg, 'error');
+                  if (gInfo?.email) {
+                    setLoginEmail(gInfo.email);
+                    setActiveTab('login');
+                  }
                 }
               } catch (err) {
-                showToast('Failed to complete Google account authentication.', 'error');
+                const networkErr = 'Failed to complete Google account authentication. Please check your connection.';
+                setFormErrors({ general: networkErr });
+                showToast(networkErr, 'error');
               } finally {
                 setIsLoading(false);
               }
@@ -242,6 +261,7 @@ export const AuthModal = () => {
 
   // Main Google Auth Initiator
   const handleGoogleAuth = async () => {
+    setFormErrors({});
     let clientId = getValidGoogleClientId();
 
     if (!clientId) {
@@ -312,8 +332,13 @@ export const AuthModal = () => {
   // Clear field errors on input change
   const handleFieldChange = (field, val, setter) => {
     setter(val);
-    if (formErrors[field]) {
-      setFormErrors(prev => ({ ...prev, [field]: null }));
+    if (formErrors[field] || formErrors.general) {
+      setFormErrors(prev => {
+        const copy = { ...prev };
+        delete copy[field];
+        delete copy.general;
+        return copy;
+      });
     }
   };
 
@@ -349,30 +374,42 @@ export const AuthModal = () => {
       if (res.ok && data.success && data.user) {
         handleAuthSuccess(data.user, data.message || `Welcome back, ${data.user.name}.`);
       } else {
-        showToast(data.error || 'Invalid credentials. Please verify your email and password.', 'error');
+        const errorMsg = data.error || 'Invalid credentials. Please verify your email and password.';
+        setFormErrors({ general: errorMsg });
+        showToast(errorMsg, 'error');
       }
     } catch (err) {
-      // Fallback for offline/network error
-      showToast('Network error while signing in. Please verify your connection.', 'error');
+      const errMsg = 'Network error while signing in. Please verify your connection.';
+      setFormErrors({ general: errMsg });
+      showToast(errMsg, 'error');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Register Step 1: Send Real Email OTP via Backend / Resend API
+  // Register Step 1: Validate Full Name, Email, Password, Confirm Password, Age Consent & Send OTP
   const handleRegisterSendOtp = async (e) => {
     e.preventDefault();
+    const nameCheck = validateName(regName, 'Full Name / Alias');
     const emailCheck = validateEmail(regEmail);
     const passCheck = validatePassword(regPassword);
 
     const errors = {};
+    if (!nameCheck.isValid) errors.regName = nameCheck.error;
     if (!emailCheck.isValid) errors.regEmail = emailCheck.error;
     if (!passCheck.isValid) errors.regPassword = passCheck.error;
+    
+    if (!regConfirmPassword) {
+      errors.regConfirmPassword = 'Confirm password is required.';
+    } else if (regPassword !== regConfirmPassword) {
+      errors.regConfirmPassword = 'Passwords do not match. Please ensure both passwords are identical.';
+    }
+
     if (!regAgeConsent) errors.regAgeConsent = 'You must certify you are 18+ to create an account.';
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
-      showToast(errors.regEmail || errors.regPassword || errors.regAgeConsent, 'warning');
+      showToast(errors.regName || errors.regEmail || errors.regPassword || errors.regConfirmPassword || errors.regAgeConsent, 'warning');
       return;
     }
     setFormErrors({});
@@ -391,10 +428,14 @@ export const AuthModal = () => {
         setRegTimer(60);
         showToast(data.message || `Verification code dispatched to ${cleanEmail}.`, 'success');
       } else {
-        showToast(data.error || 'Failed to dispatch verification email.', 'error');
+        const errorMsg = data.error || 'Failed to dispatch verification email.';
+        setFormErrors({ general: errorMsg });
+        showToast(errorMsg, 'error');
       }
     } catch (err) {
-      showToast('Error connecting to email verification service. Please try again.', 'error');
+      const errMsg = 'Error connecting to email verification service. Please try again.';
+      setFormErrors({ general: errMsg });
+      showToast(errMsg, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -418,8 +459,10 @@ export const AuthModal = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
+          name: regName.trim(),
           email: cleanEmail, 
           password: regPassword.trim(),
+          confirmPassword: regConfirmPassword.trim(),
           otp: otpCheck.value 
         })
       });
@@ -427,10 +470,14 @@ export const AuthModal = () => {
       if (res.ok && data.success && data.user) {
         handleAuthSuccess(data.user, data.message || `Account verified! Welcome, ${data.user.name}. 200 VIP Points added!`);
       } else {
-        showToast(data.error || 'Invalid OTP. Please check the 6-digit code and try again.', 'error');
+        const errorMsg = data.error || 'Invalid OTP. Please check the 6-digit code and try again.';
+        setFormErrors({ general: errorMsg, regOtp: errorMsg });
+        showToast(errorMsg, 'error');
       }
     } catch (err) {
-      showToast('Error verifying registration. Please try again.', 'error');
+      const errMsg = 'Error verifying registration. Please try again.';
+      setFormErrors({ general: errMsg });
+      showToast(errMsg, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -461,10 +508,14 @@ export const AuthModal = () => {
         setResetTimer(60);
         showToast(data.message || `Reset code sent to ${cleanEmail}.`, 'success');
       } else {
-        showToast(data.error || 'Failed to dispatch password reset code.', 'error');
+        const errorMsg = data.error || 'Failed to dispatch password reset code.';
+        setFormErrors({ general: errorMsg, resetEmail: errorMsg });
+        showToast(errorMsg, 'error');
       }
     } catch (err) {
-      showToast('Error connecting to reset service. Please try again.', 'error');
+      const errMsg = 'Error connecting to reset service. Please try again.';
+      setFormErrors({ general: errMsg });
+      showToast(errMsg, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -506,10 +557,14 @@ export const AuthModal = () => {
         setIsForgotPassword(false);
         setActiveTab('login');
       } else {
-        showToast(data.error || 'Invalid reset code or password update failed.', 'error');
+        const errorMsg = data.error || 'Invalid reset code or password update failed.';
+        setFormErrors({ general: errorMsg });
+        showToast(errorMsg, 'error');
       }
     } catch (err) {
-      showToast('Error resetting password. Please try again.', 'error');
+      const errMsg = 'Error resetting password. Please try again.';
+      setFormErrors({ general: errMsg });
+      showToast(errMsg, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -743,6 +798,26 @@ export const AuthModal = () => {
                   </p>
                 </div>
 
+                {/* Conflict / General Error Alert Banner */}
+                {formErrors.general && (
+                  <div className="p-3.5 bg-red-500/15 border border-red-500/40 rounded-2xl flex items-start space-x-3 text-red-200 text-xs animate-shake">
+                    <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-400 mt-0.5 shrink-0 text-sm" />
+                    <div className="space-y-1 flex-1">
+                      <p className="font-semibold text-red-200 leading-snug">{formErrors.general}</p>
+                      {formErrors.general.toLowerCase().includes('google') && (
+                        <button
+                          type="button"
+                          onClick={handleGoogleAuth}
+                          className="text-xs font-bold text-[#D98A92] hover:text-white underline cursor-pointer flex items-center gap-1.5 pt-1"
+                        >
+                          <span>Click here to Sign In with Google</span>
+                          <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* 1-Click Google Sign In */}
                 <button
                   type="button"
@@ -867,6 +942,13 @@ export const AuthModal = () => {
                       </p>
                     </div>
 
+                    {formErrors.general && (
+                      <div className="p-3.5 bg-red-500/15 border border-red-500/40 rounded-2xl flex items-start space-x-3 text-red-200 text-xs animate-shake">
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-400 mt-0.5 shrink-0 text-sm" />
+                        <p className="font-semibold text-red-200 leading-snug">{formErrors.general}</p>
+                      </div>
+                    )}
+
                     <form onSubmit={handleForgotSendOtp} className="space-y-4">
                       <div className="space-y-1">
                         <label className="text-xs text-neutral-300 block font-medium">Registered Email</label>
@@ -914,6 +996,13 @@ export const AuthModal = () => {
                         Enter code sent to <strong className="text-[#D98A92]">{resetEmail}</strong>
                       </p>
                     </div>
+
+                    {formErrors.general && (
+                      <div className="p-3.5 bg-red-500/15 border border-red-500/40 rounded-2xl flex items-start space-x-3 text-red-200 text-xs animate-shake">
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-400 mt-0.5 shrink-0 text-sm" />
+                        <p className="font-semibold text-red-200 leading-snug">{formErrors.general}</p>
+                      </div>
+                    )}
 
                     <form onSubmit={handleForgotResetSubmit} className="space-y-3.5">
                       <div className="space-y-1 text-center">
@@ -1011,6 +1100,41 @@ export const AuthModal = () => {
                       </p>
                     </div>
 
+                    {/* Conflict / General Error Alert Banner */}
+                    {formErrors.general && (
+                      <div className="p-3.5 bg-red-500/15 border border-red-500/40 rounded-2xl flex items-start space-x-3 text-red-200 text-xs animate-shake">
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-400 mt-0.5 shrink-0 text-sm" />
+                        <div className="space-y-1 flex-1">
+                          <p className="font-semibold text-red-200 leading-snug">{formErrors.general}</p>
+                          {formErrors.general.toLowerCase().includes('google') && (
+                            <button
+                              type="button"
+                              onClick={handleGoogleAuth}
+                              className="text-xs font-bold text-[#D98A92] hover:text-white underline cursor-pointer flex items-center gap-1.5 pt-1"
+                            >
+                              <span>Click here to Sign In with Google</span>
+                              <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
+                            </button>
+                          )}
+                          {formErrors.general.toLowerCase().includes('password') && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setActiveTab('login');
+                                setAuthModalMode('login');
+                                setLoginEmail(regEmail);
+                                setFormErrors({});
+                              }}
+                              className="text-xs font-bold text-[#D98A92] hover:text-white underline cursor-pointer flex items-center gap-1.5 pt-1"
+                            >
+                              <span>Switch to Sign In</span>
+                              <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* 1-Click Google Register */}
                     <button
                       type="button"
@@ -1034,6 +1158,31 @@ export const AuthModal = () => {
                     </div>
 
                     <form onSubmit={handleRegisterSendOtp} className="space-y-3.5">
+                      {/* Full Name / Alias Input */}
+                      <div className="space-y-1">
+                        <label className="text-xs text-neutral-300 block font-medium">Full Name / Discreet Alias</label>
+                        <div className="relative flex items-center">
+                          <input
+                            type="text"
+                            required
+                            value={regName}
+                            onChange={(e) => handleFieldChange('regName', e.target.value, setRegName)}
+                            className={`w-full bg-[#121316] border rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none pl-10 ${
+                              formErrors.regName ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-[#B56571]'
+                            }`}
+                            placeholder="e.g. Rahul Sharma or Discreet Alias"
+                          />
+                          <FontAwesomeIcon icon={faUser} className="absolute left-3.5 text-neutral-500 text-xs pointer-events-none" />
+                        </div>
+                        {formErrors.regName && (
+                          <p className="text-[11px] text-red-400 font-mono flex items-center gap-1 pt-0.5">
+                            <FontAwesomeIcon icon={faTriangleExclamation} className="text-[10px]" />
+                            <span>{formErrors.regName}</span>
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Email Address Input */}
                       <div className="space-y-1">
                         <label className="text-xs text-neutral-300 block font-medium">Email / Gmail Address</label>
                         <div className="relative flex items-center">
@@ -1057,6 +1206,7 @@ export const AuthModal = () => {
                         )}
                       </div>
 
+                      {/* Password Input */}
                       <div className="space-y-1">
                         <label className="text-xs text-neutral-300 block font-medium">Create Password (Min 6 chars)</label>
                         <div className="relative flex items-center">
@@ -1084,6 +1234,38 @@ export const AuthModal = () => {
                           <p className="text-[11px] text-red-400 font-mono flex items-center gap-1 pt-0.5">
                             <FontAwesomeIcon icon={faTriangleExclamation} className="text-[10px]" />
                             <span>{formErrors.regPassword}</span>
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Confirm Password Input */}
+                      <div className="space-y-1">
+                        <label className="text-xs text-neutral-300 block font-medium">Confirm Password</label>
+                        <div className="relative flex items-center">
+                          <input
+                            type={showRegConfirmPassword ? 'text' : 'password'}
+                            required
+                            minLength={6}
+                            value={regConfirmPassword}
+                            onChange={(e) => handleFieldChange('regConfirmPassword', e.target.value, setRegConfirmPassword)}
+                            className={`w-full bg-[#121316] border rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none pl-10 pr-10 ${
+                              formErrors.regConfirmPassword ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-[#B56571]'
+                            }`}
+                            placeholder="Re-enter identical password"
+                          />
+                          <FontAwesomeIcon icon={faLock} className="absolute left-3.5 text-neutral-500 text-xs pointer-events-none" />
+                          <button
+                            type="button"
+                            onClick={() => setShowRegConfirmPassword(!showRegConfirmPassword)}
+                            className="absolute right-3 text-neutral-400 hover:text-[#D98A92] p-1 cursor-pointer"
+                          >
+                            <FontAwesomeIcon icon={showRegConfirmPassword ? faEyeSlash : faEye} className="text-xs" />
+                          </button>
+                        </div>
+                        {formErrors.regConfirmPassword && (
+                          <p className="text-[11px] text-red-400 font-mono flex items-center gap-1 pt-0.5">
+                            <FontAwesomeIcon icon={faTriangleExclamation} className="text-[10px]" />
+                            <span>{formErrors.regConfirmPassword}</span>
                           </p>
                         )}
                       </div>
@@ -1126,6 +1308,13 @@ export const AuthModal = () => {
                         We sent a code to <strong className="text-[#D98A92]">{regEmail}</strong>
                       </p>
                     </div>
+
+                    {formErrors.general && (
+                      <div className="p-3.5 bg-red-500/15 border border-red-500/40 rounded-2xl flex items-start space-x-3 text-red-200 text-xs animate-shake">
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-400 mt-0.5 shrink-0 text-sm" />
+                        <p className="font-semibold text-red-200 leading-snug">{formErrors.general}</p>
+                      </div>
+                    )}
 
                     <form onSubmit={handleRegisterVerifyOtp} className="space-y-4">
                       <div className="space-y-1 text-center">

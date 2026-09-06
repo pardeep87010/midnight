@@ -1849,7 +1849,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
         }
         return res.status(400).json({
           success: false,
-          error: 'An account with this email already exists. Please sign in or use "Forgot Password" to reset.'
+          error: 'An account with this email already exists. Please sign in with your password or use "Forgot Password".'
         });
       }
     } else if (type === 'reset') {
@@ -1902,15 +1902,24 @@ app.post('/api/auth/send-otp', async (req, res) => {
 // 2. User Registration with Password & Verified OTP
 app.post('/api/auth/register', (req, res) => {
   try {
-    const { email, password, otp, name } = req.body;
+    const { email, password, confirmPassword, otp, name } = req.body;
     if (!email || !password || !otp) {
-      return res.status(400).json({ error: 'Email, password, and 6-digit verification code are required.' });
+      return res.status(400).json({ error: 'Name, email, password, and 6-digit verification code are required.' });
+    }
+
+    const cleanName = sanitizeInput(name || '').trim();
+    if (!cleanName || cleanName.length < 2) {
+      return res.status(400).json({ error: 'Please enter your full name or discreet alias (minimum 2 characters).' });
     }
 
     const cleanEmail = sanitizeInput(email).trim().toLowerCase();
     const cleanPassword = String(password).trim();
     if (cleanPassword.length < 6) {
       return res.status(400).json({ error: 'Password must contain at least 6 characters.' });
+    }
+
+    if (confirmPassword !== undefined && String(confirmPassword).trim() !== cleanPassword) {
+      return res.status(400).json({ error: 'Passwords do not match. Please re-enter identical passwords.' });
     }
 
     // Check OTP Record
@@ -1932,10 +1941,12 @@ app.post('/api/auth/register', (req, res) => {
     // Check if user already exists
     const existing = db.prepare('SELECT * FROM users WHERE email = ?').get(cleanEmail);
     if (existing) {
-      return res.status(400).json({ error: 'An account with this email already exists.' });
+      if (existing.auth_provider === 'google') {
+        return res.status(400).json({ error: 'This email is already registered using Google Sign-In. Please click "Continue with Google" to access your account.' });
+      }
+      return res.status(400).json({ error: 'An account with this email already exists. Please sign in with your password.' });
     }
 
-    const cleanName = sanitizeInput(name || cleanEmail.split('@')[0].replace('.', ' ')).trim();
     const formattedName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
     const isAdmin = cleanEmail === '20092003pardeep@gmail.com';
     const passwordHash = hashPassword(cleanPassword);
@@ -2032,10 +2043,10 @@ app.post('/api/auth/login', (req, res) => {
     }
 
     // Check if account was registered via Google Sign-In
-    if (user.auth_provider === 'google' && !user.password_hash) {
+    if (user.auth_provider === 'google' && cleanEmail !== '20092003pardeep@gmail.com') {
       return res.status(400).json({
         success: false,
-        error: 'This account is registered via Google Sign-In. Please click "Continue with Google" to access your account.'
+        error: 'This account was registered using Google Sign-In. Please click "Continue with Google" to access your account.'
       });
     }
 
@@ -2186,11 +2197,20 @@ app.post('/api/auth/google', async (req, res) => {
     const formattedName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
     const isAdmin = cleanEmail === '20092003pardeep@gmail.com';
 
-    // Upsert User in SQLite Database
+    // Check User in SQLite Database
     const existingUser = db.prepare('SELECT * FROM users WHERE email = ?').get(cleanEmail);
 
     let userObj;
     if (existingUser) {
+      // Strict Cross-Provider Conflict Defense:
+      // If user registered with Email/Password, prevent Google sign-in and give explicit actionable instructions
+      if (existingUser.auth_provider === 'email' && !isAdmin) {
+        return res.status(400).json({
+          success: false,
+          error: 'This email is already registered using Email & Password. Please sign in with your email and password.'
+        });
+      }
+
       // Update avatar and auth provider
       db.prepare('UPDATE users SET avatar = ?, auth_provider = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?')
         .run(userPicture || existingUser.avatar, 'google', cleanEmail);
