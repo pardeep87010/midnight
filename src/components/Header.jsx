@@ -230,12 +230,16 @@ export const Header = ({ onOpenQuiz }) => {
           </div>
 
           <div className="border-t border-black/[0.08] dark:border-white/10 pt-4 max-w-lg mx-auto w-full flex justify-between items-center text-xs text-[#7A696C] dark:text-neutral-400 font-medium">
+            <button onClick={() => { navigateTo('orders'); setIsMenuOpen(false); }} className="text-[#A33F4D] dark:text-[#D98A92] font-semibold hover:underline">
+              📦 Track Order
+            </button>
+            <span>•</span>
             <button onClick={() => { navigateTo('shipping'); setIsMenuOpen(false); }} className="hover:text-[#A33F4D] dark:hover:text-[#D98A92]">
               Discreet Shipping
             </button>
             <span>•</span>
             <button onClick={() => { navigateTo('privacy'); setIsMenuOpen(false); }} className="hover:text-[#A33F4D] dark:hover:text-[#D98A92]">
-              Privacy Guarantee
+              Privacy
             </button>
             <span>•</span>
             <button onClick={() => { navigateTo('terms'); setIsMenuOpen(false); }} className="hover:text-[#A33F4D] dark:hover:text-[#D98A92]">

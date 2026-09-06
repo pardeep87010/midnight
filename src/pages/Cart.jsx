@@ -267,10 +267,10 @@ export const Cart = () => {
               Continue Shopping
             </button>
             <button
-              onClick={() => navigateTo('profile')}
+              onClick={() => navigateTo('orders')}
               className="w-full bg-[#FAF7F5] hover:bg-[#FAF3F0] text-[#181617] dark:bg-white/10 dark:hover:bg-white/20 dark:text-white border border-[#B56571]/25 dark:border-white/20 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs cursor-pointer shadow-xs"
             >
-              View in Sanctuary Profile
+              Track Order & View Receipt
             </button>
           </div>
         </div>

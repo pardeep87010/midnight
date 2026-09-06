@@ -371,7 +371,7 @@ export const Profile = () => {
 
         {/* 1. Order History */}
         <button 
-          onClick={() => setShowOrderHistoryModal(true)}
+          onClick={() => navigateTo('orders')}
           className="w-full bg-white/90 dark:bg-[#18191E]/90 backdrop-blur-xl border border-[#B56571]/25 dark:border-white/10 hover:border-[#B56571]/60 hover:bg-white dark:hover:bg-[#20222A] p-4.5 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl transition-all duration-300 group cursor-pointer active:scale-[0.99]"
         >
           <div className="flex items-center gap-4 text-left">

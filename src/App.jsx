@@ -22,6 +22,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(m => ({ de
 const TermsConditions = lazy(() => import('./pages/TermsConditions').then(m => ({ default: m.TermsConditions })));
 const ContactUs = lazy(() => import('./pages/ContactUs').then(m => ({ default: m.ContactUs })));
 const AdminPanel = lazy(() => import('./pages/AdminPanel').then(m => ({ default: m.AdminPanel })));
+const MyOrders = lazy(() => import('./pages/MyOrders').then(m => ({ default: m.MyOrders })));
 const SensoryQuizModal = lazy(() => import('./components/SensoryQuizModal').then(m => ({ default: m.SensoryQuizModal })));
 
 // Ultra-lightweight fallback spinner
@@ -50,6 +51,9 @@ export const App = () => {
         return <AdminPanel />;
       case 'profile':
         return <Profile />;
+      case 'orders':
+      case 'my-orders':
+        return <MyOrders />;
       case 'shipping':
         return <ShippingInfo />;
       case 'privacy':
