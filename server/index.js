@@ -2186,12 +2186,15 @@ app.post('/api/auth/google', async (req, res) => {
       }
     }
 
-    // Decode Google JWT if credential provided
-    if (credential && !userEmail) {
+    // Decode Google JWT (ID Token) if credential or token is provided
+    const candidateJwt = (credential && credential.includes('.')) ? credential : (accessToken && accessToken.includes('.') ? accessToken : null);
+    if (candidateJwt && !userEmail) {
       try {
-        const parts = credential.split('.');
+        const parts = candidateJwt.split('.');
         if (parts.length === 3) {
-          const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf-8'));
+          const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+          const jsonPayload = Buffer.from(base64, 'base64').toString('utf-8');
+          const payload = JSON.parse(jsonPayload);
           if (payload.email) userEmail = payload.email;
           if (payload.name) userName = payload.name;
           if (payload.picture) userPicture = payload.picture;

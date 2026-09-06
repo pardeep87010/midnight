@@ -394,15 +394,15 @@ export const AppProvider = ({ children }) => {
       if (hash && (hash.includes('access_token=') || hash.includes('id_token=') || hash.includes('error='))) {
         const raw = hash.startsWith('#') ? hash.substring(1) : hash;
         const params = new URLSearchParams(raw);
-        const token = params.get('access_token') || params.get('id_token');
-        const err = params.get('error');
+        const token = params.get('id_token') || params.get('access_token');
+        const err = params.get('error') || params.get('error_description');
 
         // If inside popup opened by opener
         if (window.opener) {
           try {
             if (token) {
-              window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_TOKEN', accessToken: token }, window.location.origin);
-              localStorage.setItem('mb_oauth_token_broadcast', JSON.stringify({ token, timestamp: Date.now() }));
+              window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_TOKEN', accessToken: params.get('access_token'), idToken: params.get('id_token'), token }, window.location.origin);
+              localStorage.setItem('mb_oauth_token_broadcast', JSON.stringify({ token, idToken: params.get('id_token'), accessToken: params.get('access_token'), timestamp: Date.now() }));
             } else if (err) {
               window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_ERROR', error: err }, window.location.origin);
             }
@@ -430,8 +430,9 @@ export const AppProvider = ({ children }) => {
     // 2. Listen to postMessage from popup window
     const handleOAuthMessage = async (e) => {
       if (e.origin !== window.location.origin && e.origin !== 'https://accounts.google.com') return;
-      if (e.data?.type === 'MB_GOOGLE_AUTH_TOKEN' && e.data.accessToken) {
-        await authenticateGoogleToken(e.data.accessToken);
+      const token = e.data?.idToken || e.data?.accessToken || e.data?.token;
+      if (e.data?.type === 'MB_GOOGLE_AUTH_TOKEN' && token) {
+        await authenticateGoogleToken(token);
       } else if (e.data?.type === 'MB_GOOGLE_AUTH_ERROR') {
         showToast(`Google Sign-In error: ${e.data.error || 'Access denied'}`, 'warning');
       }
@@ -442,9 +443,10 @@ export const AppProvider = ({ children }) => {
       if (e.key === 'mb_oauth_token_broadcast' && e.newValue) {
         try {
           const payload = JSON.parse(e.newValue);
-          if (payload.token && Date.now() - payload.timestamp < 15000) {
+          const token = payload.idToken || payload.accessToken || payload.token;
+          if (token && Date.now() - payload.timestamp < 15000) {
             localStorage.removeItem('mb_oauth_token_broadcast');
-            await authenticateGoogleToken(payload.token);
+            await authenticateGoogleToken(token);
           }
         } catch (err) {}
       }
