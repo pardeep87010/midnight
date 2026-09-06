@@ -80,6 +80,10 @@ export const AppProvider = ({ children }) => {
   const fetchOrders = async (email = null) => {
     try {
       const targetEmail = email || user?.email;
+      if (!targetEmail && !user?.isAdmin) {
+        setOrdersList([]);
+        return [];
+      }
       let url = '/api/orders';
       if (targetEmail) {
         url = `/api/orders?email=${encodeURIComponent(targetEmail)}`;
@@ -100,46 +104,43 @@ export const AppProvider = ({ children }) => {
     return [];
   };
 
-  // Saved Addresses State (Persisted in SQLite database & localStorage)
+  // Saved Addresses State (Strict per-user data isolation, empty by default)
   const [savedAddresses, setSavedAddresses] = useState(() => {
     try {
       const saved = localStorage.getItem('mb_saved_addresses');
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return [
-      {
-        id: 'addr_def_1',
-        userEmail: '20092003pardeep@gmail.com',
-        receiverName: 'Pardeep Kumar',
-        phone: '',
-        addressLine1: 'Flat 402, Imperial Heights, Worli Sea Face',
-        addressLine2: 'Near Coast Guard HQ',
-        city: 'Mumbai',
-        state: 'Maharashtra',
-        pincode: '400018',
-        label: 'Home',
-        isDefault: true
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(a => a.id !== 'addr_def_1' && a.userEmail !== '20092003pardeep@gmail.com');
+        }
       }
-    ];
+    } catch (e) {}
+    return [];
   });
 
   const fetchAddresses = async (email = null) => {
     try {
       const targetEmail = email || user?.email;
-      const url = targetEmail ? `/api/addresses?email=${encodeURIComponent(targetEmail)}` : '/api/addresses';
+      if (!targetEmail) {
+        setSavedAddresses([]);
+        return [];
+      }
+      const url = `/api/addresses?email=${encodeURIComponent(targetEmail)}`;
       const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           setSavedAddresses(data);
           try {
             localStorage.setItem('mb_saved_addresses', JSON.stringify(data));
           } catch (e) {}
+          return data;
         }
       }
     } catch (e) {
       console.warn('Backend /api/addresses unavailable:', e);
     }
+    return [];
   };
 
   const addSavedAddress = async (newAddr) => {
@@ -253,9 +254,18 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProducts();
-    fetchOrders();
-    fetchAddresses();
   }, []);
+
+  // Synchronize orders and addresses when active user changes
+  useEffect(() => {
+    if (user?.email) {
+      fetchOrders(user.email);
+      fetchAddresses(user.email);
+    } else {
+      setSavedAddresses([]);
+      setOrdersList([]);
+    }
+  }, [user?.email]);
 
   // Toast notification
   const [toast, setToast] = useState({ show: false, message: '', type: 'info' });
@@ -338,8 +348,12 @@ export const AppProvider = ({ children }) => {
   const logout = () => {
     const guestUser = { isLoggedIn: false, name: '', email: '', phone: '', isAdmin: false };
     setUser(guestUser);
+    setSavedAddresses([]);
+    setOrdersList([]);
     try {
       localStorage.removeItem('mb_user');
+      localStorage.removeItem('mb_saved_addresses');
+      localStorage.removeItem('mb_admin_token');
     } catch (e) {}
     showToast('Logged out securely.', 'info');
     navigateTo('home');

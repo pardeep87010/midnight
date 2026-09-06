@@ -1120,8 +1120,9 @@ app.post('/api/orders', orderLimiter, (req, res) => {
     if (orderEmailPayload.customerEmail && orderEmailPayload.customerEmail.includes('@')) {
       sendEmailViaResend(
         orderEmailPayload.customerEmail,
-        `Order Confirmation #${orderId} - MB Logistics`,
-        emailTemplates.getOrderConfirmationTemplate(orderEmailPayload)
+        `Order Confirmation #${orderId} - Midnight Bloom`,
+        emailTemplates.getOrderConfirmationTemplate(orderEmailPayload),
+        emailTemplates.getOrderConfirmationPlainText(orderEmailPayload)
       ).catch(e => console.warn('Customer order email notice:', e.message));
     }
 
@@ -1131,7 +1132,8 @@ app.post('/api/orders', orderLimiter, (req, res) => {
       sendEmailViaResend(
         adminAlertEmail,
         `🚨 New Order #${orderId} Alert - Midnight Bloom`,
-        emailTemplates.getAdminOrderAlertTemplate(orderEmailPayload)
+        emailTemplates.getAdminOrderAlertTemplate(orderEmailPayload),
+        emailTemplates.getAdminOrderAlertPlainText(orderEmailPayload)
       ).catch(e => console.warn('Admin order alert email notice:', e.message));
     }
 
@@ -1191,11 +1193,23 @@ app.put('/api/orders/:id/status', requireAdminAuth, async (req, res) => {
 app.get('/api/addresses', (req, res) => {
   try {
     const email = req.query.email ? sanitizeInput(req.query.email).toLowerCase() : null;
-    let rows;
+    let rows = [];
     if (email) {
       rows = db.prepare('SELECT * FROM addresses WHERE LOWER(user_email) = ? ORDER BY is_default DESC, created_at DESC').all(email);
     } else {
-      rows = db.prepare('SELECT * FROM addresses ORDER BY is_default DESC, created_at DESC').all();
+      // If no email query provided, require Admin Bearer authentication
+      const authHeader = req.headers['authorization'];
+      const customToken = req.headers['x-admin-token'];
+      let token = customToken || req.query.admin_token;
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.split(' ')[1];
+      }
+      if (token === ADMIN_SECRET) {
+        rows = db.prepare('SELECT * FROM addresses ORDER BY is_default DESC, created_at DESC').all();
+      } else {
+        // Return empty array for unauthenticated/unscoped requests to prevent data leakage
+        rows = [];
+      }
     }
 
     const addresses = rows.map(r => ({
@@ -1512,8 +1526,19 @@ app.post('/api/pay0pro/webhook', (req, res) => {
 // ==========================================
 const otpStore = new Map(); // email -> { otp, expiresAt, type }
 
+// Helper to strip HTML tags for plain-text fallback
+function stripHtml(html) {
+  if (!html) return '';
+  return html
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 // Helper to dispatch email via Resend API
-async function sendEmailViaResend(toEmail, subject, htmlContent) {
+async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '') {
   try {
     // 1. Prioritize process.env (Render Environment Variables / .env file)
     let apiKey = (process.env.RESEND_API_KEY || process.env.RESEND_EMAIL_API_KEY || '').trim();
@@ -1548,7 +1573,21 @@ async function sendEmailViaResend(toEmail, subject, htmlContent) {
       }
     }
 
+    const plainText = textContent || stripHtml(htmlContent);
+
     console.log(`📡 [RESEND DISPATCHING] To: ${toEmail} | From: ${fromEmail} | Subject: ${subject}`);
+
+    const payload = {
+      from: fromEmail,
+      to: [toEmail.trim()],
+      subject: subject,
+      html: htmlContent,
+      text: plainText,
+      reply_to: 'support@midnightbloom.in',
+      headers: {
+        'X-Entity-Ref-ID': `mb_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`
+      }
+    };
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -1556,12 +1595,7 @@ async function sendEmailViaResend(toEmail, subject, htmlContent) {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: [toEmail.trim()],
-        subject: subject,
-        html: htmlContent
-      })
+      body: JSON.stringify(payload)
     });
 
     const data = await res.json();
@@ -1874,14 +1908,15 @@ app.post('/api/auth/send-otp', async (req, res) => {
 
     console.log(`🔑 [SECURE OTP GENERATED] For ${cleanEmail}: ${otp} (Purpose: ${type})`);
 
-    // Luxury HTML Email Template from Engine
+    // High-Deliverability Subject & Templates
     const emailSubject = type === 'register' 
-      ? 'Your Midnight Bloom Confidential Verification Code' 
-      : 'Your Midnight Bloom Password Reset Code';
+      ? `Midnight Bloom Verification Code: ${otp}` 
+      : `Midnight Bloom Password Reset Code: ${otp}`;
 
     const emailHtml = emailTemplates.getOtpEmailTemplate(otp, type);
+    const emailText = emailTemplates.getOtpPlainText(otp, type);
 
-    const dispatchResult = await sendEmailViaResend(cleanEmail, emailSubject, emailHtml);
+    const dispatchResult = await sendEmailViaResend(cleanEmail, emailSubject, emailHtml, emailText);
 
     if (!dispatchResult.success) {
       return res.status(400).json({
@@ -1892,7 +1927,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
 
     res.json({
       success: true,
-      message: `A confidential 6-digit verification code has been dispatched to ${cleanEmail}.`
+      message: `A 6-digit verification code has been dispatched to ${cleanEmail}.`
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -1975,7 +2010,8 @@ app.post('/api/auth/register', (req, res) => {
     sendEmailViaResend(
       cleanEmail,
       'Welcome to Midnight Bloom - Confidential Intimate Wellness',
-      emailTemplates.getWelcomeVipTemplate(formattedName)
+      emailTemplates.getWelcomeVipTemplate(formattedName),
+      emailTemplates.getWelcomeVipPlainText(formattedName)
     ).catch(e => console.warn('Welcome email notice:', e.message));
 
     const userObj = {

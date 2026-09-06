@@ -163,26 +163,10 @@ export function initDB() {
   try { db.exec("ALTER TABLE orders ADD COLUMN customer_state TEXT;"); } catch (e) {}
   try { db.exec("ALTER TABLE orders ADD COLUMN customer_pincode TEXT;"); } catch (e) {}
 
-  // Seed default address if empty
-  const checkAddresses = db.prepare('SELECT COUNT(*) as count FROM addresses').get();
-  if (checkAddresses.count === 0) {
-    const insertAddr = db.prepare(`
-      INSERT INTO addresses (id, user_email, receiver_name, phone, address_line1, address_line2, city, state, pincode, label, is_default)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
-    `);
-    insertAddr.run(
-      'addr_def_1',
-      '20092003pardeep@gmail.com',
-      'Pardeep Kumar',
-      '',
-      'Flat 402, Imperial Heights, Worli Sea Face',
-      'Near Coast Guard HQ',
-      'Mumbai',
-      'Maharashtra',
-      '400018',
-      'Home'
-    );
-  }
+  // Auto-clean any dummy seed addresses from database
+  try {
+    db.prepare("DELETE FROM addresses WHERE id = 'addr_def_1'").run();
+  } catch (e) {}
 
   // Insert Default VIP Coupons if not exists
   const checkCoupon = db.prepare('SELECT COUNT(*) as count FROM coupons').get();

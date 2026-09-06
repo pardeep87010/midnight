@@ -59,7 +59,10 @@ export const Cart = () => {
   const [confirmedOrder, setConfirmedOrder] = useState(null);
 
   // Address Selection & Creation State
-  const defaultAddr = savedAddresses?.find(a => a.isDefault) || savedAddresses?.[0];
+  const defaultAddr = (Array.isArray(savedAddresses) && savedAddresses.length > 0) 
+    ? (savedAddresses.find(a => a.isDefault) || savedAddresses[0]) 
+    : null;
+
   const [selectedAddressId, setSelectedAddressId] = useState(defaultAddr ? defaultAddr.id : 'new');
   const [showNewAddressForm, setShowNewAddressForm] = useState(!defaultAddr);
   const [addressErrors, setAddressErrors] = useState({});
@@ -74,6 +77,29 @@ export const Cart = () => {
     label: 'Home',
     saveToProfile: true
   });
+
+  // Sync address form when user profile or saved addresses update
+  useEffect(() => {
+    if (user?.name || user?.phone) {
+      setNewAddress(prev => ({
+        ...prev,
+        receiverName: prev.receiverName || user?.name || '',
+        phone: prev.phone || user?.phone || ''
+      }));
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (savedAddresses && savedAddresses.length > 0) {
+      const def = savedAddresses.find(a => a.isDefault) || savedAddresses[0];
+      if (def && selectedAddressId === 'new' && !showNewAddressForm) {
+        setSelectedAddressId(def.id);
+      }
+    } else {
+      setSelectedAddressId('new');
+      setShowNewAddressForm(true);
+    }
+  }, [savedAddresses]);
 
   // INR Thresholds
   const freeGiftThreshold = 4999;
@@ -166,11 +192,15 @@ export const Cart = () => {
     const orderId = `MB-${Math.floor(100000 + Math.random() * 900000)}`;
     const fullShippingAddress = `${activeAddress.addressLine1 || activeAddress.address || ''}${activeAddress.addressLine2 ? ', ' + activeAddress.addressLine2 : ''}, ${activeAddress.city}, ${activeAddress.state} - ${activeAddress.pincode}`.trim();
 
+    const customerFullName = (activeAddress.receiverName || user?.name || 'Valued Client').trim();
+    const customerContactPhone = (activeAddress.phone || user?.phone || '').trim();
+    const customerUserEmail = (user?.email || 'customer@midnightbloom.in').trim();
+
     const newOrder = {
       id: orderId,
-      customerName: activeAddress.receiverName || user?.name || 'Aarav Sharma',
-      customerEmail: user?.email || 'customer@midnightbloom.in',
-      customerPhone: activeAddress.phone || user?.phone || '',
+      customerName: customerFullName,
+      customerEmail: customerUserEmail,
+      customerPhone: customerContactPhone,
       customerCity: activeAddress.city || 'Mumbai',
       customerState: activeAddress.state || 'Maharashtra',
       customerPincode: activeAddress.pincode || '',

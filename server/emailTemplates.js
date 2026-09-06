@@ -125,15 +125,15 @@ function getOtpEmailTemplate(otp, purpose = 'registration') {
   const isReset = purpose === 'reset';
   const title = isReset ? 'Reset Your Password Code' : 'Verify Your Email Address';
   const heading = isReset ? 'Password Reset Code' : 'Email Verification Code';
-  const preheader = `Your 6-digit confidential code is ${otp}. Valid for 5 minutes.`;
+  const preheader = `Your verification code is ${otp}. Valid for 5 minutes.`;
 
   const contentHtml = `
     <div style="text-align: center; margin-bottom: 24px;">
-      <h2 style="margin: 0 0 8px; font-family: Georgia, serif; font-size: 22px; color: #FAF7F5;">${heading}</h2>
+      <h2 style="margin: 0 0 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 22px; color: #FAF7F5;">${heading}</h2>
       <p style="margin: 0; font-size: 14px; color: #B3AAA8; line-height: 1.6;">
         ${isReset 
           ? 'We received a request to reset your Midnight Bloom account password.' 
-          : 'Thank you for joining Midnight Bloom. Please use the verification code below to activate your confidential account:'}
+          : 'Thank you for joining Midnight Bloom. Please use the verification code below to complete your registration:'}
       </p>
     </div>
 
@@ -141,7 +141,7 @@ function getOtpEmailTemplate(otp, purpose = 'registration') {
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 28px 0;">
       <tr>
         <td align="center">
-          <div style="display: inline-block; background: #1C1D22; border: 2px solid #D98A92; border-radius: 12px; padding: 18px 36px; letter-spacing: 12px; font-size: 32px; font-weight: bold; font-family: 'Courier New', Courier, monospace; color: #FAF7F5; text-indent: 12px; box-shadow: 0 4px 20px rgba(217, 138, 146, 0.15);">
+          <div style="display: inline-block; background: #1C1D22; border: 2px solid #D98A92; border-radius: 12px; padding: 18px 36px; letter-spacing: 10px; font-size: 32px; font-weight: bold; font-family: 'Courier New', Courier, monospace; color: #FAF7F5; text-indent: 10px; box-shadow: 0 4px 20px rgba(217, 138, 146, 0.15);">
             ${otp}
           </div>
         </td>
@@ -150,12 +150,140 @@ function getOtpEmailTemplate(otp, purpose = 'registration') {
 
     <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 14px 18px; margin: 24px 0 12px;">
       <p style="margin: 0; font-size: 12px; color: #A39B9D; line-height: 1.5;">
-        ⏳ <strong>Security Notice:</strong> This code is valid for <strong>5 minutes</strong>. Never disclose this code to anyone. If you did not initiate this request, you can safely disregard this email.
+        ⏳ <strong>Security Notice:</strong> This code will expire in <strong>5 minutes</strong>. If you did not request this verification code, please ignore this email.
       </p>
     </div>
   `;
 
   return wrapEmailLayout(title, preheader, contentHtml);
+}
+
+/**
+ * Plain Text Template Generators (Crucial for Gmail/Yahoo Anti-Spam & Deliverability)
+ */
+function getOtpPlainText(otp, purpose = 'registration') {
+  const isReset = purpose === 'reset';
+  return `
+Midnight Bloom
+--------------------------------------------------
+${isReset ? 'Password Reset Code' : 'Email Verification Code'}
+
+Your verification code is: ${otp}
+
+This code is valid for 5 minutes.
+If you did not request this code, you can safely ignore this email.
+
+--------------------------------------------------
+© ${new Date().getFullYear()} Midnight Bloom
+100% Discreet Packaging & Sensual Wellness Across India
+`.trim();
+}
+
+function getOrderConfirmationPlainText(order) {
+  const orderId = order.id || 'MB-000000';
+  const customerName = order.customerName || order.name || 'Valued Customer';
+  const totalAmount = Number(order.totalAmount || 0).toLocaleString('en-IN');
+  const paymentMode = order.paymentMode || 'Cash on Delivery (COD)';
+  const address = order.shippingAddress || order.address || 'Discreet Domestic Delivery, India';
+  const items = Array.isArray(order.items) ? order.items : [];
+  
+  const itemsList = items.map(i => `- ${i.name || 'Luxury Instrument'} (Qty: ${i.quantity || 1}) - ₹${Number(i.price || 0).toLocaleString('en-IN')}`).join('\n');
+
+  return `
+Midnight Bloom - Order Confirmation
+--------------------------------------------------
+Thank you for your order, ${customerName}!
+
+Order Number: #${orderId}
+Total Amount: ₹${totalAmount}
+Payment Mode: ${paymentMode}
+Delivery Packaging: 100% Plain Unmarked Box
+
+Items Ordered:
+${itemsList || '- Curated Sensual Instrument (x1)'}
+
+Delivery Address:
+${address}
+
+--------------------------------------------------
+Plain Box Guarantee: Zero adult labels on exterior packaging.
+Billing Descriptor: MB* SERVICES LLC
+
+For assistance, reply directly to this email.
+© ${new Date().getFullYear()} Midnight Bloom
+`.trim();
+}
+
+function getShippingUpdatePlainText(order, trackingNumber = '', courierName = 'BlueDart / BlrExpress', trackingUrl = '') {
+  const orderId = order.id || 'MB-000000';
+  const customerName = order.customerName || 'Valued Customer';
+  const status = order.status || 'Dispatched';
+
+  return `
+Midnight Bloom - Shipment Update
+--------------------------------------------------
+Hello ${customerName},
+
+Your order #${orderId} has been ${status}.
+
+Courier Partner: ${courierName}
+Tracking AWB Number: ${trackingNumber}
+Tracking Link: ${trackingUrl || 'https://midnightbloom.in/profile'}
+
+Discreet Delivery Promise:
+The exterior box contains zero adult descriptors or logos.
+
+--------------------------------------------------
+© ${new Date().getFullYear()} Midnight Bloom
+`.trim();
+}
+
+function getAdminOrderAlertPlainText(order) {
+  const orderId = order.id || 'MB-000000';
+  const customerName = order.customerName || 'Valued Client';
+  const customerEmail = order.customerEmail || 'customer@example.com';
+  const customerPhone = order.customerPhone || 'N/A';
+  const totalAmount = Number(order.totalAmount || 0).toLocaleString('en-IN');
+  const paymentMode = order.paymentMode || 'COD';
+  const city = order.customerCity || order.city || 'India';
+  const address = order.shippingAddress || order.address || 'Address provided';
+  const items = Array.isArray(order.items) ? order.items : [];
+  const itemsList = items.map(i => `- ${i.name} (Qty: ${i.quantity || 1}) - ₹${i.price}`).join('\n');
+
+  return `
+🚨 NEW ORDER ALERT: #${orderId}
+--------------------------------------------------
+Amount: ₹${totalAmount} (${paymentMode})
+Customer: ${customerName}
+Email: ${customerEmail}
+Phone: ${customerPhone}
+Destination: ${city}
+
+Shipping Address:
+${address}
+
+Items:
+${itemsList || '- 1x Luxury Wellness Instrument'}
+--------------------------------------------------
+Midnight Bloom Admin Notification
+`.trim();
+}
+
+function getWelcomeVipPlainText(customerName = 'Valued Member') {
+  return `
+Welcome to Midnight Bloom, ${customerName}!
+--------------------------------------------------
+You are now an official member of Midnight Bloom India.
+
+Welcome Reward: +200 Loyalty Points credited to your account.
+Use Promo Code: FIRST500 for savings on your first order.
+
+Discreet Delivery Guarantee: 100% Plain unbranded boxes with unbranded billing.
+
+Visit: https://midnightbloom.in/catalog
+--------------------------------------------------
+© ${new Date().getFullYear()} Midnight Bloom
+`.trim();
 }
 
 /**
@@ -525,21 +653,31 @@ function getWelcomeVipTemplate(customerName = 'Valued Member') {
 export {
   wrapEmailLayout,
   getOtpEmailTemplate,
+  getOtpPlainText,
   getOrderConfirmationTemplate,
+  getOrderConfirmationPlainText,
   getShippingUpdateTemplate,
+  getShippingUpdatePlainText,
   getNewProductLaunchTemplate,
   getAbandonedCartTemplate,
   getAdminOrderAlertTemplate,
-  getWelcomeVipTemplate
+  getAdminOrderAlertPlainText,
+  getWelcomeVipTemplate,
+  getWelcomeVipPlainText
 };
 
 export default {
   wrapEmailLayout,
   getOtpEmailTemplate,
+  getOtpPlainText,
   getOrderConfirmationTemplate,
+  getOrderConfirmationPlainText,
   getShippingUpdateTemplate,
+  getShippingUpdatePlainText,
   getNewProductLaunchTemplate,
   getAbandonedCartTemplate,
   getAdminOrderAlertTemplate,
-  getWelcomeVipTemplate
+  getAdminOrderAlertPlainText,
+  getWelcomeVipTemplate,
+  getWelcomeVipPlainText
 };
