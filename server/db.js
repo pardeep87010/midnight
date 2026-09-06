@@ -196,19 +196,10 @@ export function initDB() {
     insertCoupon.run('cpn-first500', 'FIRST500', 15, 1999);
   }
 
-  // Insert Default Environment Keys if not exists
-  const checkConfig = db.prepare('SELECT COUNT(*) as count FROM env_configs').get();
-  if (checkConfig.count === 0) {
-    const insertConfig = db.prepare(`
-      INSERT INTO env_configs (key, value, is_secret)
-      VALUES (?, ?, ?)
-    `);
-    insertConfig.run('PAY0PRO_API_KEY', 'pay0pro_live_sk_948192847192', 1);
-    insertConfig.run('PAY0PRO_MERCHANT_ID', 'MB_ENTERPRISE_INDIA_01', 0);
-    insertConfig.run('RESEND_EMAIL_API_KEY', 're_mb_live_sec_83910284', 1);
-    insertConfig.run('CLOUDFLARE_CDN_URL', 'https://cdn.midnightbloom.in', 0);
-    insertConfig.run('DISCREET_DESCRIPTOR', 'MB* SERVICES LLC', 0);
-  }
+  // Auto-clean placeholder dummy keys from database
+  try {
+    db.prepare("DELETE FROM env_configs WHERE value LIKE '%re_mb_live_sec%' OR value LIKE '%pay0pro_live_sk%'").run();
+  } catch (e) {}
 
   // 8. Users & Authentication Table
   db.exec(`

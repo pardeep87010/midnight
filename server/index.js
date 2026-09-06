@@ -1515,29 +1515,50 @@ const otpStore = new Map(); // email -> { otp, expiresAt, type }
 // Helper to dispatch email via Resend API
 async function sendEmailViaResend(toEmail, subject, htmlContent) {
   try {
-    const configRow = db.prepare("SELECT value FROM env_configs WHERE key = 'RESEND_API_KEY' OR key = 'RESEND_EMAIL_API_KEY'").get();
-    const apiKey = configRow?.value || process.env.RESEND_API_KEY || process.env.RESEND_EMAIL_API_KEY || '';
+    // 1. Prioritize process.env (Render Environment Variables / .env file)
+    let apiKey = (process.env.RESEND_API_KEY || process.env.RESEND_EMAIL_API_KEY || '').trim();
 
-    if (!apiKey || apiKey.includes('re_mb_live_sec_83910284') || apiKey.includes('xxxxxxxx')) {
-      console.warn('⚠️ [RESEND EMAIL NOTICE] No live Resend API key configured in database or .env');
+    // 2. If not in process.env, check database env_configs (excluding dummy placeholders)
+    if (!apiKey || apiKey.includes('re_mb_live_sec') || apiKey.includes('xxxx')) {
+      const configRow = db.prepare("SELECT value FROM env_configs WHERE (key = 'RESEND_API_KEY' OR key = 'RESEND_EMAIL_API_KEY') AND value NOT LIKE '%re_mb_live_sec%' AND value NOT LIKE '%xxxx%'").get();
+      if (configRow?.value) {
+        apiKey = configRow.value.trim();
+      }
+    }
+
+    if (!apiKey || apiKey.includes('re_mb_live_sec_83910284') || apiKey.includes('xxxxxxxx') || !apiKey.startsWith('re_')) {
+      console.warn('⚠️ [RESEND EMAIL NOTICE] No valid Resend API key found. Key must start with "re_"');
       return { 
         success: false, 
-        error: 'Email service is not configured. Please enter your live RESEND_API_KEY in the Admin Panel or Render Environment.' 
+        error: 'Email service is not configured. Please set RESEND_API_KEY in your Render Environment Variables (starts with re_...).' 
       };
     }
 
+    // Determine FROM sender address
     const fromRow = db.prepare("SELECT value FROM env_configs WHERE key = 'FROM_EMAIL'").get();
-    const fromEmail = fromRow?.value || process.env.FROM_EMAIL || 'Midnight Bloom <onboarding@resend.dev>';
+    let fromEmail = (process.env.FROM_EMAIL || fromRow?.value || '').trim();
+
+    if (!fromEmail) {
+      const customDomain = (process.env.RESEND_DOMAIN || process.env.DOMAIN || '').trim();
+      if (customDomain) {
+        const cleanDom = customDomain.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+        fromEmail = `Midnight Bloom <orders@${cleanDom}>`;
+      } else {
+        fromEmail = 'Midnight Bloom <onboarding@resend.dev>';
+      }
+    }
+
+    console.log(`📡 [RESEND DISPATCHING] To: ${toEmail} | From: ${fromEmail} | Subject: ${subject}`);
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey.trim()}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         from: fromEmail,
-        to: [toEmail],
+        to: [toEmail.trim()],
         subject: subject,
         html: htmlContent
       })
@@ -1548,8 +1569,11 @@ async function sendEmailViaResend(toEmail, subject, htmlContent) {
       console.log(`✉️ [RESEND SUCCESS] Email dispatched to ${toEmail} (ID: ${data.id}) via sender ${fromEmail}`);
       return { success: true, id: data.id };
     } else {
-      console.error('❌ [RESEND API ERROR]:', data);
-      return { success: false, error: data.message || 'Resend service failed to dispatch email.' };
+      console.error('❌ [RESEND API ERROR]:', JSON.stringify(data));
+      return { 
+        success: false, 
+        error: data.message || `Resend Error: ${JSON.stringify(data)}` 
+      };
     }
   } catch (err) {
     console.error('❌ [EMAIL DISPATCH EXCEPTION]:', err.message);
