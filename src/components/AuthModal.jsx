@@ -29,7 +29,8 @@ export const AuthModal = () => {
     setUser, 
     showToast, 
     navigateTo,
-    authModalRedirect 
+    authModalRedirect,
+    authenticateGoogleToken 
   } = useApp();
 
   const [activeTab, setActiveTab] = useState('login'); // 'login' | 'register'
@@ -181,46 +182,15 @@ export const AuthModal = () => {
           callback: async (tokenResponse) => {
             if (tokenResponse.error) {
               setIsLoading(false);
-              showToast('Google Sign-In was cancelled or popup closed.', 'warning');
+              showToast('Google Sign-In was cancelled.', 'warning');
               return;
             }
             if (tokenResponse.access_token) {
-              try {
-                // Fetch real user info from Google's endpoint
-                const gRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-                  headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
-                });
-                const gInfo = gRes.ok ? await gRes.json() : null;
-
-                // Pass to backend to authenticate & create session
-                const res = await fetch('/api/auth/google', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    accessToken: tokenResponse.access_token,
-                    email: gInfo?.email,
-                    name: gInfo?.name,
-                    picture: gInfo?.picture
-                  })
-                });
-                const data = await res.json();
-                if (res.ok && data.success && data.user) {
-                  handleAuthSuccess(data.user, `Google Verified: Welcome, ${data.user.name}!`);
-                } else {
-                  const errorMsg = data.error || 'Failed to authenticate with Google.';
-                  setFormErrors({ general: errorMsg });
-                  showToast(errorMsg, 'error');
-                  if (gInfo?.email) {
-                    setLoginEmail(gInfo.email);
-                    setActiveTab('login');
-                  }
-                }
-              } catch (err) {
-                const networkErr = 'Failed to complete Google account authentication. Please check your connection.';
-                setFormErrors({ general: networkErr });
-                showToast(networkErr, 'error');
-              } finally {
-                setIsLoading(false);
+              setIsLoading(true);
+              const result = await authenticateGoogleToken(tokenResponse.access_token);
+              setIsLoading(false);
+              if (!result?.success && result?.error) {
+                setFormErrors({ general: result.error });
               }
             }
           }

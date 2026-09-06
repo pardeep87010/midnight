@@ -10,6 +10,30 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
+    <!-- Ultra-Fast Google OAuth Popup & Hash Message Interceptor -->
+    <script>
+      (function() {
+        try {
+          var hash = window.location.hash;
+          if (hash && (hash.indexOf('access_token=') !== -1 || hash.indexOf('id_token=') !== -1 || hash.indexOf('error=') !== -1)) {
+            var raw = hash.charAt(0) === '#' ? hash.substring(1) : hash;
+            var params = new URLSearchParams(raw);
+            var token = params.get('access_token') || params.get('id_token');
+            var err = params.get('error');
+            if (window.opener) {
+              if (token) {
+                try { window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_TOKEN', accessToken: token }, '*'); } catch (e) {}
+                try { localStorage.setItem('mb_oauth_token_broadcast', JSON.stringify({ token: token, timestamp: Date.now() })); } catch (e) {}
+              } else if (err) {
+                try { window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_ERROR', error: err }, '*'); } catch (e) {}
+              }
+              window.close();
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
+    
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="et6F6v3nSnO3nFN-Az7tlHDCwksIXPfhtSAyx0mb9dA" />
     

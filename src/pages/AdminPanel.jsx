@@ -1957,13 +1957,14 @@ export const AdminPanel = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] pt-1">
                   <div className="bg-white/60 dark:bg-black/40 p-2.5 rounded-lg border border-black/5 dark:border-white/5">
                     <span className="font-bold block text-[#181617] dark:text-white font-mono text-[10px]">Authorized JavaScript Origins:</span>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">http://localhost:3000</code>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">https://licensed-qui-mtv-writing.trycloudflare.com</code>
+                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">{typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173'}</code>
+                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">http://localhost:5173</code>
+                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">https://midnight-bloom.onrender.com</code>
                   </div>
                   <div className="bg-white/60 dark:bg-black/40 p-2.5 rounded-lg border border-black/5 dark:border-white/5">
                     <span className="font-bold block text-[#181617] dark:text-white font-mono text-[10px]">Authorized Redirect URIs:</span>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">http://localhost:5000/api/auth/google/callback</code>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">https://licensed-qui-mtv-writing.trycloudflare.com/api/auth/google/callback</code>
+                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">{typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173'}</code>
+                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">https://midnight-bloom.onrender.com</code>
                   </div>
                 </div>
                 <p className="text-[10px] text-neutral-400 font-mono pt-0.5">

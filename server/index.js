@@ -31,13 +31,13 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://accounts.google.com", "https://apis.google.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://accounts.google.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
-      imgSrc: ["'self'", "data:", "blob:", "https://images.unsplash.com", "https://*.trycloudflare.com", "https://*.googleusercontent.com", "https://lh3.googleusercontent.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://accounts.google.com", "https://apis.google.com", "https://accounts.google.com/gsi/"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://accounts.google.com", "https://cdnjs.cloudflare.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "data:"],
+      imgSrc: ["'self'", "data:", "blob:", "https://images.unsplash.com", "https://*.trycloudflare.com", "https://*.googleusercontent.com", "https://lh3.googleusercontent.com", "https://accounts.google.com"],
       mediaSrc: ["'self'", "data:", "blob:"],
-      connectSrc: ["'self'", "https://*.trycloudflare.com", "http://localhost:*", "https://accounts.google.com", "https://oauth2.googleapis.com"],
-      frameSrc: ["'self'", "https://accounts.google.com"]
+      connectSrc: ["'self'", "https://*.trycloudflare.com", "http://localhost:*", "https://accounts.google.com", "https://oauth2.googleapis.com", "https://www.googleapis.com", "https://identitytoolkit.googleapis.com"],
+      frameSrc: ["'self'", "https://accounts.google.com", "https://accounts.google.com/gsi/"]
     }
   },
   crossOriginEmbedderPolicy: false,
@@ -2156,8 +2156,8 @@ app.post('/api/auth/google', async (req, res) => {
     let userName = name;
     let userPicture = picture;
 
-    // Verify Access Token via Google UserInfo API
-    if (accessToken) {
+    // Verify Access Token via Google UserInfo API or TokenInfo API
+    if (accessToken && !userEmail) {
       try {
         const gRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
           headers: { Authorization: `Bearer ${accessToken}` }
@@ -2171,10 +2171,23 @@ app.post('/api/auth/google', async (req, res) => {
       } catch (err) {
         console.warn('⚠️ Google UserInfo API verification notice:', err.message);
       }
+
+      // Fallback: Google TokenInfo Endpoint
+      if (!userEmail) {
+        try {
+          const tRes = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(accessToken)}`);
+          if (tRes.ok) {
+            const tData = await tRes.json();
+            if (tData.email) userEmail = tData.email;
+          }
+        } catch (err) {
+          console.warn('⚠️ Google TokenInfo verification fallback notice:', err.message);
+        }
+      }
     }
 
     // Decode Google JWT if credential provided
-    if (credential) {
+    if (credential && !userEmail) {
       try {
         const parts = credential.split('.');
         if (parts.length === 3) {

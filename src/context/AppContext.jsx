@@ -298,6 +298,119 @@ export const AppProvider = ({ children }) => {
     navigateTo('home');
   };
 
+  // Google Authentication Processor
+  const authenticateGoogleToken = async (token) => {
+    if (!token) return { success: false, error: 'No token provided' };
+    showToast('Verifying Google credentials...', 'info');
+    try {
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken: token, credential: token })
+      });
+      const data = await res.json();
+      if (res.ok && data.success && data.user) {
+        setUser(data.user);
+        try {
+          localStorage.setItem('mb_user', JSON.stringify(data.user));
+          if (data.user.isAdmin) {
+            localStorage.setItem('mb_admin_token', 'mb_admin_live_token_2026_sec_bloom');
+          }
+        } catch (e) {}
+        closeAuthModal();
+        showToast(`Google Verified: Welcome, ${data.user.name}!`, 'success');
+        if (authModalRedirect) {
+          navigateTo(authModalRedirect);
+        } else if (data.user.isAdmin) {
+          navigateTo('admin');
+        }
+        return { success: true, user: data.user };
+      } else {
+        const errorMsg = data.error || 'Failed to authenticate with Google.';
+        showToast(errorMsg, 'error');
+        openAuthModal('login');
+        return { success: false, error: errorMsg };
+      }
+    } catch (err) {
+      console.error('Google Auth verification error:', err);
+      showToast('Authentication network error. Please try again.', 'error');
+      return { success: false, error: err.message };
+    }
+  };
+
+  // Google OAuth URL Hash & Cross-Window Messenger Listener
+  useEffect(() => {
+    // 1. Process URL Hash (Redirect callback or direct landing)
+    const checkOAuthHash = async () => {
+      if (typeof window === 'undefined') return;
+      const hash = window.location.hash;
+      if (hash && (hash.includes('access_token=') || hash.includes('id_token=') || hash.includes('error='))) {
+        const raw = hash.startsWith('#') ? hash.substring(1) : hash;
+        const params = new URLSearchParams(raw);
+        const token = params.get('access_token') || params.get('id_token');
+        const err = params.get('error');
+
+        // If inside popup opened by opener
+        if (window.opener) {
+          try {
+            if (token) {
+              window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_TOKEN', accessToken: token }, window.location.origin);
+              localStorage.setItem('mb_oauth_token_broadcast', JSON.stringify({ token, timestamp: Date.now() }));
+            } else if (err) {
+              window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_ERROR', error: err }, window.location.origin);
+            }
+          } catch (e) {}
+          window.close();
+          return;
+        }
+
+        // Clean hash from URL address bar
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+
+        if (err) {
+          showToast(`Google Sign-In notice: ${err}`, 'warning');
+          return;
+        }
+
+        if (token) {
+          await authenticateGoogleToken(token);
+        }
+      }
+    };
+
+    checkOAuthHash();
+
+    // 2. Listen to postMessage from popup window
+    const handleOAuthMessage = async (e) => {
+      if (e.origin !== window.location.origin && e.origin !== 'https://accounts.google.com') return;
+      if (e.data?.type === 'MB_GOOGLE_AUTH_TOKEN' && e.data.accessToken) {
+        await authenticateGoogleToken(e.data.accessToken);
+      } else if (e.data?.type === 'MB_GOOGLE_AUTH_ERROR') {
+        showToast(`Google Sign-In error: ${e.data.error || 'Access denied'}`, 'warning');
+      }
+    };
+
+    // 3. Listen to localStorage broadcast from popup window (storage event)
+    const handleStorageEvent = async (e) => {
+      if (e.key === 'mb_oauth_token_broadcast' && e.newValue) {
+        try {
+          const payload = JSON.parse(e.newValue);
+          if (payload.token && Date.now() - payload.timestamp < 15000) {
+            localStorage.removeItem('mb_oauth_token_broadcast');
+            await authenticateGoogleToken(payload.token);
+          }
+        } catch (err) {}
+      }
+    };
+
+    window.addEventListener('message', handleOAuthMessage);
+    window.addEventListener('storage', handleStorageEvent);
+    return () => {
+      window.removeEventListener('message', handleOAuthMessage);
+      window.removeEventListener('storage', handleStorageEvent);
+    };
+  }, [authModalRedirect]);
+
   // Toast notification
   const [toast, setToast] = useState({ show: false, message: '', type: 'info' });
 
@@ -545,6 +658,7 @@ export const AppProvider = ({ children }) => {
         setUser,
         updateProfile,
         logout,
+        authenticateGoogleToken,
         theme,
         toggleTheme,
         toast,
