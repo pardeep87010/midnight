@@ -823,6 +823,81 @@ app.post('/api/products/clear-all', requireAdminAuth, (req, res) => {
 });
 
 // ==========================================
+// 3B. CUSTOMER REVIEWS REST API
+// ==========================================
+
+// GET /api/reviews (Get reviews for specific product or all)
+app.get('/api/reviews', (req, res) => {
+  try {
+    const { productId } = req.query;
+    let query = 'SELECT * FROM reviews';
+    const params = [];
+    if (productId && productId.trim()) {
+      query += ' WHERE product_id = ?';
+      params.push(sanitizeInput(productId));
+    }
+    query += ' ORDER BY created_at DESC';
+    const rows = db.prepare(query).all(...params);
+    res.json(rows.map(r => ({
+      id: r.id,
+      productId: r.product_id,
+      name: r.author_name,
+      rating: r.rating,
+      title: r.title,
+      content: r.content,
+      date: r.date,
+      verified: Boolean(r.is_verified),
+      createdAt: r.created_at
+    })));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/reviews (Submit new customer review)
+app.post('/api/reviews', (req, res) => {
+  try {
+    const { productId, name, rating, title, content, city } = req.body;
+    if (!name || !content) {
+      return res.status(400).json({ error: 'Name and review content are required.' });
+    }
+
+    const reviewId = `rev_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+    const cleanName = sanitizeInput(name);
+    const cleanCity = city ? sanitizeInput(city) : 'Mumbai';
+    const authorFormatted = `${cleanName}${cleanCity ? ' • ' + cleanCity : ''}`;
+
+    db.prepare(`
+      INSERT INTO reviews (id, product_id, author_name, rating, title, content, date, is_verified)
+      VALUES (?, ?, ?, ?, ?, ?, 'Just now', 1)
+    `).run(
+      reviewId,
+      productId ? sanitizeInput(productId) : 'general',
+      authorFormatted,
+      Math.min(5, Math.max(1, parseInt(rating) || 5)),
+      title ? sanitizeInput(title) : 'Verified Purchase Feedback',
+      sanitizeInput(content)
+    );
+
+    res.json({
+      success: true,
+      review: {
+        id: reviewId,
+        productId,
+        name: authorFormatted,
+        rating: parseInt(rating) || 5,
+        title: title || 'Verified Purchase Feedback',
+        content,
+        date: 'Just now',
+        verified: true
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ==========================================
 // 4. ORDERS REST API (WITH IDEMPOTENCY & RATE LIMITING)
 // ==========================================
 

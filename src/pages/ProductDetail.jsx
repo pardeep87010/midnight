@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faStar, 
@@ -13,13 +13,17 @@ import {
   faSpa, 
   faLocationDot, 
   faRotateRight, 
-  faTag 
+  faTag,
+  faXmark,
+  faPenToSquare,
+  faThumbsUp
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
-import { STITCH_PRODUCTS, VERIFIED_REVIEWS } from '../data/mockData';
+import { STITCH_PRODUCTS } from '../data/mockData';
+import { getProductReviews } from '../data/productReviews';
 
 export const ProductDetail = () => {
-  const { selectedProductId, addToCart, navigateTo, showToast, productsList } = useApp();
+  const { selectedProductId, addToCart, navigateTo, showToast, productsList, user } = useApp();
   
   // Safe product resolution
   const product = (productsList || []).find(p => p.id === selectedProductId) || (productsList || [])[0];
@@ -28,6 +32,31 @@ export const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('specs'); // specs, box, care, discreet
+
+  // Interactive Product-Specific Reviews State
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [newReviewForm, setNewReviewForm] = useState({
+    name: user?.name || '',
+    city: 'Mumbai',
+    rating: 5,
+    title: '',
+    content: ''
+  });
+
+  const [userSubmittedReviews, setUserSubmittedReviews] = useState(() => {
+    try {
+      const saved = localStorage.getItem('mb_user_reviews');
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
+  });
+
+  const baseReviews = useMemo(() => getProductReviews(product), [product]);
+  const productReviews = useMemo(() => {
+    const submitted = userSubmittedReviews[product?.id] || [];
+    return [...submitted, ...baseReviews];
+  }, [product?.id, baseReviews, userSubmittedReviews]);
 
   useEffect(() => {
     if (product?.colors && product.colors.length > 0) {
@@ -468,46 +497,235 @@ export const ProductDetail = () => {
         )}
       </div>
 
-      {/* Verified Reviews Section */}
+      {/* Verified Product-Specific Customer Reviews Section */}
       <div className="border-t border-black/[0.08] dark:border-white/10 pt-12 space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-black/[0.06] dark:border-white/10">
           <div>
-            <h3 className="text-2xl font-serif font-bold text-[#181617] dark:text-white">
-              Customer Reviews ({product?.reviewsCount || 420})
-            </h3>
-            <p className="text-xs text-[#7A696C] dark:text-neutral-400 mt-1 font-light">Real feedback from verified purchasers.</p>
+            <div className="flex items-center gap-3">
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#181617] dark:text-white">
+                Customer Reviews
+              </h3>
+              <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-[#B56571]/20 text-[#A33F4D] dark:text-[#D98A92] border border-[#B56571]/30">
+                {productReviews.length} Verified {productReviews.length === 1 ? 'Review' : 'Reviews'}
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-[#7A696C] dark:text-neutral-400 mt-1 font-light">
+              Real feedback from verified purchasers for <strong className="text-[#181617] dark:text-white">{product.name}</strong>.
+            </p>
           </div>
+
           <button
-            onClick={() => showToast('Review submission window opens after order confirmation.', 'info')}
-            className="bg-[#FAF3F0] hover:bg-[#B56571] hover:text-white border border-[#B56571]/30 text-[#A33F4D] dark:bg-white/[0.08] dark:border-[#D98A92]/40 dark:text-[#D98A92] px-6 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer w-fit shadow-xs"
+            onClick={() => setShowReviewModal(true)}
+            className="btn-gold px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider font-bold text-white transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-2 self-start md:self-auto"
           >
-            Write a Review
+            <FontAwesomeIcon icon={faPenToSquare} />
+            <span>Write a Review</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {VERIFIED_REVIEWS.map((rev) => (
-            <div key={rev.id} className="satin-card p-6 rounded-2xl space-y-3 shadow-lg">
-              <div className="flex justify-between items-start">
-                <div className="flex text-[#A33F4D] dark:text-[#D98A92] text-xs">
-                  {[...Array(rev.rating)].map((_, i) => (
-                    <FontAwesomeIcon key={i} icon={faStar} />
-                  ))}
+        {/* Product Reviews Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {productReviews.map((rev) => (
+            <div
+              key={rev.id}
+              className="satin-card p-5 sm:p-6 rounded-2xl space-y-3.5 shadow-lg border border-[#B56571]/20 dark:border-white/10 hover:border-[#B56571]/40 transition-all flex flex-col justify-between"
+            >
+              <div className="space-y-2.5">
+                <div className="flex justify-between items-center">
+                  <div className="flex text-amber-400 text-xs">
+                    {[...Array(rev.rating || 5)].map((_, i) => (
+                      <FontAwesomeIcon key={i} icon={faStar} />
+                    ))}
+                  </div>
+                  <span className="text-[10px] text-[#7A696C] dark:text-neutral-400 font-mono">{rev.date}</span>
                 </div>
-                <span className="text-[10px] text-[#7A696C] dark:text-neutral-500 font-mono">{rev.date}</span>
+                <h4 className="text-sm font-bold text-[#181617] dark:text-white font-serif line-clamp-1">
+                  "{rev.title}"
+                </h4>
+                <p className="text-xs text-[#5C4F52] dark:text-neutral-300 leading-relaxed font-light">
+                  {rev.content}
+                </p>
               </div>
-              <h4 className="text-sm font-bold text-[#181617] dark:text-white font-serif">"{rev.title}"</h4>
-              <p className="text-xs text-[#5C4F52] dark:text-neutral-300 leading-relaxed font-light">{rev.content}</p>
-              <div className="pt-2 border-t border-black/[0.06] dark:border-white/5 flex items-center justify-between text-[11px]">
-                <span className="font-semibold text-[#181617] dark:text-white">{rev.name}</span>
-                <span className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-[9px] px-2 py-0.5 rounded-full font-mono">
-                  Verified Buyer
+
+              <div className="pt-3 border-t border-black/[0.06] dark:border-white/5 flex items-center justify-between text-[11px]">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-semibold text-[#181617] dark:text-white">{rev.name}</span>
+                  {rev.city && (
+                    <span className="text-[10px] text-[#7A696C] dark:text-neutral-400 font-mono">• {rev.city}</span>
+                  )}
+                </div>
+                <span className="bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[9px] px-2 py-0.5 rounded-full font-mono font-semibold flex items-center gap-1">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-[8px]" />
+                  <span>Verified Buyer</span>
                 </span>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Interactive Write A Review Modal */}
+      {showReviewModal && (
+        <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-[#FAF7F5] dark:bg-[#18191E] border border-[#B56571]/30 dark:border-white/15 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl text-[#181617] dark:text-white">
+            
+            {/* Modal Header */}
+            <div className="flex items-start justify-between border-b border-black/10 dark:border-white/10 pb-4">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#A33F4D] dark:text-[#D98A92] font-bold">
+                  Verified Purchaser Experience
+                </span>
+                <h3 className="text-xl font-serif font-bold text-[#181617] dark:text-white mt-1">
+                  Review "{product.name}"
+                </h3>
+                <p className="text-xs text-[#7A696C] dark:text-neutral-400 font-light">
+                  Your review will help fellow sanctuary members make informed, confidential choices.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowReviewModal(false)}
+                className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-[#7A696C] dark:text-neutral-300 flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
+
+            {/* Review Form */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!newReviewForm.name.trim() || !newReviewForm.content.trim()) {
+                  showToast('Please provide your name and review details', 'warning');
+                  return;
+                }
+                const newRev = {
+                  id: `usr-rev-${Date.now()}`,
+                  name: newReviewForm.name.trim(),
+                  city: newReviewForm.city.trim() || 'Mumbai',
+                  verified: true,
+                  rating: Number(newReviewForm.rating) || 5,
+                  date: 'Just now',
+                  title: newReviewForm.title.trim() || 'Exceptional experience & total discretion',
+                  content: newReviewForm.content.trim()
+                };
+
+                const updated = {
+                  ...userSubmittedReviews,
+                  [product.id]: [newRev, ...(userSubmittedReviews[product.id] || [])]
+                };
+                setUserSubmittedReviews(updated);
+                try {
+                  localStorage.setItem('mb_user_reviews', JSON.stringify(updated));
+                } catch (err) {}
+
+                setShowReviewModal(false);
+                setNewReviewForm({ name: '', city: 'Mumbai', rating: 5, title: '', content: '' });
+                showToast('Thank you! Your verified review has been published.', 'success');
+              }}
+              className="space-y-4 text-xs font-sans"
+            >
+              {/* Star Rating Selector */}
+              <div className="space-y-1.5">
+                <label className="block text-[11px] font-mono uppercase tracking-wider text-[#7A696C] dark:text-neutral-400">
+                  Overall Rating
+                </label>
+                <div className="flex items-center gap-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      type="button"
+                      key={star}
+                      onClick={() => setNewReviewForm({ ...newReviewForm, rating: star })}
+                      className={`text-xl transition-all cursor-pointer ${
+                        star <= newReviewForm.rating ? 'text-amber-400 scale-110' : 'text-neutral-300 dark:text-neutral-600 hover:text-amber-300'
+                      }`}
+                    >
+                      <FontAwesomeIcon icon={faStar} />
+                    </button>
+                  ))}
+                  <span className="text-xs font-mono font-bold ml-2 text-[#A33F4D] dark:text-[#D98A92]">
+                    {newReviewForm.rating} Star{newReviewForm.rating > 1 ? 's' : ''}
+                  </span>
+                </div>
+              </div>
+
+              {/* Name & City Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="block text-[10px] font-mono uppercase tracking-wider text-[#7A696C] dark:text-neutral-400">
+                    Your Name / Alias *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={newReviewForm.name}
+                    onChange={(e) => setNewReviewForm({ ...newReviewForm, name: e.target.value })}
+                    placeholder="e.g. Ananya S. or Couple Alias"
+                    className="w-full bg-white dark:bg-[#121316] border border-black/10 dark:border-white/15 focus:border-[#B56571] text-xs px-3.5 py-2.5 rounded-xl outline-none"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block text-[10px] font-mono uppercase tracking-wider text-[#7A696C] dark:text-neutral-400">
+                    City (Discreet)
+                  </label>
+                  <input
+                    type="text"
+                    value={newReviewForm.city}
+                    onChange={(e) => setNewReviewForm({ ...newReviewForm, city: e.target.value })}
+                    placeholder="e.g. Mumbai, Delhi, Bangalore"
+                    className="w-full bg-white dark:bg-[#121316] border border-black/10 dark:border-white/15 focus:border-[#B56571] text-xs px-3.5 py-2.5 rounded-xl outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Review Title */}
+              <div className="space-y-1">
+                <label className="block text-[10px] font-mono uppercase tracking-wider text-[#7A696C] dark:text-neutral-400">
+                  Headline / Review Title
+                </label>
+                <input
+                  type="text"
+                  value={newReviewForm.title}
+                  onChange={(e) => setNewReviewForm({ ...newReviewForm, title: e.target.value })}
+                  placeholder="e.g. Incredible quiet motor and velvety feel"
+                  className="w-full bg-white dark:bg-[#121316] border border-black/10 dark:border-white/15 focus:border-[#B56571] text-xs px-3.5 py-2.5 rounded-xl outline-none"
+                />
+              </div>
+
+              {/* Review Content */}
+              <div className="space-y-1">
+                <label className="block text-[10px] font-mono uppercase tracking-wider text-[#7A696C] dark:text-neutral-400">
+                  Detailed Experience & Feedback *
+                </label>
+                <textarea
+                  required
+                  rows={3}
+                  value={newReviewForm.content}
+                  onChange={(e) => setNewReviewForm({ ...newReviewForm, content: e.target.value })}
+                  placeholder="Share your experience with sensation, material quality, battery life, and plain packaging discretion..."
+                  className="w-full bg-white dark:bg-[#121316] border border-black/10 dark:border-white/15 focus:border-[#B56571] text-xs p-3.5 rounded-xl outline-none resize-none"
+                />
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center justify-end gap-3 pt-2 border-t border-black/10 dark:border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setShowReviewModal(false)}
+                  className="px-4 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider text-[#7A696C] hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn-gold px-6 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider font-bold text-white shadow-lg cursor-pointer active:scale-95"
+                >
+                  Submit Verified Review
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );
