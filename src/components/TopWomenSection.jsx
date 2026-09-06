@@ -84,36 +84,44 @@ export const TopWomenSection = () => {
               {/* Product Details */}
               <div className="p-3.5 sm:p-4 flex flex-col justify-between flex-1 space-y-2.5 bg-white dark:bg-[#18181B]">
                 <div>
-                  {/* Discount & Rating Line */}
-                  <div className="flex items-center justify-between text-[11px] mb-1">
-                    <span className="font-bold text-[#A33F4D] dark:text-[#D98A92] font-mono">
-                      {item.discount || '20% Off'}
+                  {/* Discount & Deal Badge Line */}
+                  <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                    <span className="bg-[#B56571] text-white text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded">
+                      {item.discount || '25% off'}
                     </span>
-                    <div className="flex text-amber-400 text-[10px]">
-                      {[...Array(5)].map((_, i) => (
-                        <FontAwesomeIcon key={i} icon={faStar} />
-                      ))}
-                    </div>
+                    <span className="text-[#A33F4D] dark:text-[#D98A92] text-[9px] sm:text-[10px] font-bold">
+                      Limited time deal
+                    </span>
                   </div>
 
                   {/* Title */}
                   <h3
                     onClick={() => navigateTo('product-detail', item.id)}
-                    className="text-xs sm:text-sm font-bold text-[#181617] dark:text-white font-sans line-clamp-1 hover:text-[#A33F4D] dark:hover:text-[#D98A92] cursor-pointer transition-colors"
+                    className="text-xs sm:text-sm font-semibold text-[#181617] dark:text-white font-sans line-clamp-2 hover:text-[#A33F4D] dark:hover:text-[#D98A92] cursor-pointer transition-colors leading-snug"
                   >
                     {item.name}
                   </h3>
 
                   {/* Price Comparison */}
-                  <div className="flex items-baseline space-x-2 mt-1 font-mono">
+                  <div className="flex items-baseline gap-1.5 flex-wrap mt-1 font-mono">
+                    <span className="text-sm sm:text-base font-bold text-[#181617] dark:text-white">
+                      ₹{item.price}
+                    </span>
                     {item.originalPrice && (
-                      <span className="text-xs text-[#7A696C] dark:text-neutral-400 line-through">
-                        Rs. {item.originalPrice}
+                      <span className="text-[10px] sm:text-xs text-[#7A696C] dark:text-neutral-400 line-through">
+                        M.R.P: ₹{item.originalPrice}
                       </span>
                     )}
-                    <span className="text-sm sm:text-base font-bold text-[#A33F4D] dark:text-white">
-                      Rs. {item.price}
-                    </span>
+                  </div>
+
+                  {/* Rating Stars */}
+                  <div className="flex items-center space-x-1 text-[10px] text-[#A33F4D] dark:text-[#D98A92] pt-1">
+                    <div className="flex text-amber-400 text-[9px]">
+                      {[...Array(5)].map((_, i) => (
+                        <FontAwesomeIcon key={i} icon={faStar} />
+                      ))}
+                    </div>
+                    <span className="text-[#7A696C] dark:text-neutral-400 font-medium">({item.reviewsCount || 420})</span>
                   </div>
                 </div>
 

@@ -278,12 +278,12 @@ export const Home = ({ onOpenQuiz }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
             {STITCH_CATEGORIES.map((cat) => (
               <div
                 key={cat.id}
                 onClick={() => navigateTo('catalog', null, cat.id)}
-                className="group relative h-96 rounded-2xl overflow-hidden block shadow-2xl cursor-pointer border border-[#B56571]/20 dark:border-white/[0.08] satin-card"
+                className="group relative h-64 sm:h-96 rounded-2xl overflow-hidden block shadow-2xl cursor-pointer border border-[#B56571]/20 dark:border-white/[0.08] satin-card"
               >
                 <img
                   alt={cat.name}
@@ -292,17 +292,17 @@ export const Home = ({ onOpenQuiz }) => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#121316]/95 via-[#121316]/40 to-transparent group-hover:via-[#121316]/60 transition-colors duration-500"></div>
                 
-                <div className="absolute inset-x-4 bottom-4 luxury-glass p-5 rounded-xl flex flex-col justify-between transform transition-all duration-300">
+                <div className="absolute inset-x-2.5 sm:inset-x-4 bottom-2.5 sm:bottom-4 luxury-glass p-3 sm:p-5 rounded-xl flex flex-col justify-between transform transition-all duration-300">
                   <div>
-                    <h4 className="text-lg sm:text-xl text-white tracking-wide mb-1 font-serif font-bold">
+                    <h4 className="text-sm sm:text-lg text-white tracking-wide mb-0.5 sm:mb-1 font-serif font-bold line-clamp-1">
                       {cat.name}
                     </h4>
-                    <p className="text-[11px] text-[#F0B8BE] dark:text-[#D98A92] font-semibold uppercase tracking-wider font-mono">
+                    <p className="text-[10px] sm:text-[11px] text-[#F0B8BE] dark:text-[#D98A92] font-semibold uppercase tracking-wider font-mono line-clamp-1">
                       {cat.subtitle}
                     </p>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 flex flex-wrap gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="mt-2 pt-1.5 border-t border-white/10 hidden sm:flex flex-wrap gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {cat.subcategories.slice(0, 3).map((sub, i) => (
                       <span key={i} className="text-[9px] bg-black/70 px-2 py-0.5 rounded text-neutral-300 border border-white/5">
                         {sub}

@@ -258,30 +258,26 @@ export const Catalog = ({ onOpenQuiz }) => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {visibleProducts.map((prod) => {
             const defaultColor = getProductColor(prod);
             const imageUrl = (prod?.images && prod.images[0]) ? prod.images[0] : '/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_0.webp';
+            const discountPct = prod.discount || (prod.originalPrice ? `${Math.round(((prod.originalPrice - prod.price) / prod.originalPrice) * 100)}% off` : '20% off');
 
             return (
               <div
                 key={prod.id}
-                className="satin-card rounded-2xl overflow-hidden group flex flex-col justify-between animate-fade-in shadow-sm"
+                className="satin-card rounded-2xl overflow-hidden group flex flex-col justify-between animate-fade-in shadow-md hover:shadow-xl transition-all duration-300 border border-[#B56571]/20 dark:border-white/10"
               >
                 {/* Image Container with CDN optimization */}
-                <div className="h-[310px] w-full relative overflow-hidden bg-[#FAF7F5] dark:bg-[#141519]">
+                <div className="aspect-square sm:aspect-[4/5] w-full relative overflow-hidden bg-[#FAF7F5] dark:bg-[#141519] flex items-center justify-center">
                   {/* Luxury Frosted Badges */}
                   {prod.badge && (
-                    <div className="absolute top-3 left-3 z-10 flex items-center space-x-1.5 bg-black/65 backdrop-blur-md border border-[#B56571]/35 dark:border-white/15 px-3 py-1 rounded-full shadow-lg">
+                    <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 flex items-center space-x-1 bg-black/70 backdrop-blur-md border border-[#B56571]/35 dark:border-white/15 px-2 py-0.5 rounded-full shadow-md">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#D98A92] animate-pulse" />
-                      <span className="text-[9px] font-mono uppercase tracking-[0.18em] font-bold text-[#F0B8BE] dark:text-[#EAE0E1]">
+                      <span className="text-[8px] sm:text-[9px] font-mono uppercase tracking-wider font-bold text-[#F0B8BE] dark:text-[#EAE0E1]">
                         {prod.badge}
                       </span>
-                    </div>
-                  )}
-                  {prod.discount && (
-                    <div className="absolute top-3 right-3 z-10 bg-gradient-to-r from-[#B56571] to-[#8A434E] text-white font-mono text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-md border border-white/20">
-                      {prod.discount}
                     </div>
                   )}
 
@@ -295,58 +291,65 @@ export const Catalog = ({ onOpenQuiz }) => {
                   
                   <button
                     onClick={() => addToCart(prod, 1, defaultColor)}
-                    className="absolute bottom-3 right-3 bg-white/90 dark:bg-[#121316]/90 backdrop-blur text-[#A33F4D] dark:text-[#D98A92] w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[#B56571] hover:text-white shadow-xl cursor-pointer"
+                    className="hidden sm:flex absolute bottom-3 right-3 bg-white/90 dark:bg-[#121316]/90 backdrop-blur text-[#A33F4D] dark:text-[#D98A92] w-10 h-10 rounded-full items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[#B56571] hover:text-white shadow-xl cursor-pointer"
                     title="Add to Bag"
                   >
                     <FontAwesomeIcon icon={faCartPlus} className="text-sm" />
                   </button>
                 </div>
 
-                {/* Info */}
-                <div className="p-5 space-y-2.5">
-                  <div className="flex items-center space-x-1.5 text-[11px] text-[#A33F4D] dark:text-[#D98A92]">
-                    <div className="flex text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <FontAwesomeIcon key={i} icon={faStar} className="text-[10px]" />
-                      ))}
+                {/* Info Block (Optimized for 2-column mobile & desktop) */}
+                <div className="p-3 sm:p-4 space-y-2 flex flex-col justify-between flex-1">
+                  <div className="space-y-1.5">
+                    {/* Deal / Discount Badge Strip */}
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="bg-[#B56571] text-white text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded">
+                        {discountPct}
+                      </span>
+                      <span className="text-[#A33F4D] dark:text-[#D98A92] text-[9px] sm:text-[10px] font-bold">
+                        Limited time deal
+                      </span>
                     </div>
-                    <span className="text-[#7A696C] dark:text-neutral-400 font-medium">({prod.reviewsCount || 1})</span>
-                  </div>
 
-                  <div>
+                    {/* Price Comparison */}
+                    <div className="flex items-baseline gap-1.5 flex-wrap">
+                      <span className="text-sm sm:text-base font-bold text-[#181617] dark:text-white font-mono">
+                        ₹{(prod.price || 999).toLocaleString('en-IN')}
+                      </span>
+                      {prod.originalPrice && (
+                        <span className="text-[10px] sm:text-xs text-[#7A696C] dark:text-neutral-500 line-through font-mono">
+                          ₹{prod.originalPrice.toLocaleString('en-IN')}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title */}
                     <h3
                       onClick={() => navigateTo('product-detail', prod.id)}
-                      className="text-base text-[#181617] dark:text-white hover:text-[#A33F4D] dark:hover:text-[#D98A92] cursor-pointer font-serif font-bold transition-colors line-clamp-1"
+                      className="text-xs sm:text-sm text-[#181617] dark:text-white hover:text-[#A33F4D] dark:hover:text-[#D98A92] cursor-pointer font-sans font-semibold transition-colors line-clamp-2 leading-snug"
                     >
                       {prod.name}
                     </h3>
-                    <p className="text-[11px] text-[#7A696C] dark:text-neutral-400 line-clamp-1 mt-0.5 font-mono">
-                      {prod.subcategory || prod.category}
-                    </p>
+
+                    {/* Ratings */}
+                    <div className="flex items-center space-x-1 text-[10px] text-[#A33F4D] dark:text-[#D98A92]">
+                      <div className="flex text-amber-400 text-[9px]">
+                        {[...Array(5)].map((_, i) => (
+                          <FontAwesomeIcon key={i} icon={faStar} />
+                        ))}
+                      </div>
+                      <span className="text-[#7A696C] dark:text-neutral-400 font-medium">({prod.reviewsCount || 420})</span>
+                    </div>
                   </div>
 
-                  <div className="flex items-center space-x-2">
-                    <span className="text-base font-bold text-[#A33F4D] dark:text-[#D98A92] font-mono">₹{(prod.price || 999).toLocaleString('en-IN')}</span>
-                    {prod.originalPrice && (
-                      <span className="text-xs text-[#7A696C] dark:text-neutral-500 line-through font-mono">₹{prod.originalPrice.toLocaleString('en-IN')}</span>
-                    )}
-                  </div>
-
-                  <p className="text-[11px] text-[#5C4F52] dark:text-neutral-400 line-clamp-2 leading-relaxed font-light">
-                    {prod.description}
-                  </p>
-
-                  {/* Specs pill & Add button */}
-                  <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.06] flex items-center justify-between text-[11px]">
-                    <span className="text-[10px] text-[#7A696C] dark:text-neutral-400 font-mono flex items-center gap-1">
-                      <FontAwesomeIcon icon={faVolumeLow} className="text-[#A33F4D] dark:text-[#D98A92] text-[10px]" />
-                      <span>{prod.specs?.sound || '< 30 dB'}</span>
-                    </span>
+                  {/* Add to Bag Button (Touch-optimized for mobile & desktop) */}
+                  <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.06]">
                     <button
                       onClick={() => addToCart(prod, 1, defaultColor)}
-                      className="text-xs text-[#A33F4D] dark:text-[#D98A92] hover:underline font-bold uppercase tracking-wider cursor-pointer"
+                      className="w-full bg-[#FAF7F5] dark:bg-white/10 hover:bg-[#B56571] hover:text-white dark:hover:bg-[#B56571] text-[#A33F4D] dark:text-[#EAE0E1] border border-[#B56571]/30 dark:border-white/15 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all active:scale-95 cursor-pointer shadow-xs flex items-center justify-center gap-1.5"
                     >
-                      + Add to Bag
+                      <FontAwesomeIcon icon={faCartPlus} className="text-[10px]" />
+                      <span>Add to Bag</span>
                     </button>
                   </div>
                 </div>
