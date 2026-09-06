@@ -257,10 +257,57 @@ export const AppProvider = ({ children }) => {
     fetchAddresses();
   }, []);
 
+  // Toast notification
+  const [toast, setToast] = useState({ show: false, message: '', type: 'info' });
+
+  const showToast = (message, type = 'info') => {
+    setToast({ show: true, message, type });
+    setTimeout(() => {
+      setToast({ show: false, message: '', type: 'info' });
+    }, 3500);
+  };
+
+  // Floating Auth Modal State
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('login'); // 'login' | 'register'
+  const [authModalRedirect, setAuthModalRedirect] = useState(null);
+
+  const openAuthModal = (mode = 'login', redirect = null) => {
+    setAuthModalMode(mode);
+    setAuthModalRedirect(redirect);
+    setIsAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
+
   // Age verification state
   const [isAgeVerified, setIsAgeVerified] = useState(() => {
     return localStorage.getItem('velour_age_verified') === 'true';
   });
+
+  const verifyAge = (remember = false) => {
+    setIsAgeVerified(true);
+    if (remember) {
+      localStorage.setItem('velour_age_verified', 'true');
+    }
+  };
+
+  const navigateTo = (page, productId = null, category = null) => {
+    if (page === 'login') {
+      openAuthModal('login');
+      return;
+    }
+    if (page === 'register') {
+      openAuthModal('register');
+      return;
+    }
+    setCurrentPage(page);
+    if (productId) setSelectedProductId(productId);
+    if (category) setSelectedCategory(category);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // User auth state (Defaults to unauthenticated guest)
   const [user, setUser] = useState(() => {
@@ -410,53 +457,6 @@ export const AppProvider = ({ children }) => {
       window.removeEventListener('storage', handleStorageEvent);
     };
   }, [authModalRedirect]);
-
-  // Toast notification
-  const [toast, setToast] = useState({ show: false, message: '', type: 'info' });
-
-  const showToast = (message, type = 'info') => {
-    setToast({ show: true, message, type });
-    setTimeout(() => {
-      setToast({ show: false, message: '', type: 'info' });
-    }, 3500);
-  };
-
-  // Floating Auth Modal State
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authModalMode, setAuthModalMode] = useState('login'); // 'login' | 'register'
-  const [authModalRedirect, setAuthModalRedirect] = useState(null);
-
-  const openAuthModal = (mode = 'login', redirect = null) => {
-    setAuthModalMode(mode);
-    setAuthModalRedirect(redirect);
-    setIsAuthModalOpen(true);
-  };
-
-  const closeAuthModal = () => {
-    setIsAuthModalOpen(false);
-  };
-
-  const verifyAge = (remember = false) => {
-    setIsAgeVerified(true);
-    if (remember) {
-      localStorage.setItem('velour_age_verified', 'true');
-    }
-  };
-
-  const navigateTo = (page, productId = null, category = null) => {
-    if (page === 'login') {
-      openAuthModal('login');
-      return;
-    }
-    if (page === 'register') {
-      openAuthModal('register');
-      return;
-    }
-    setCurrentPage(page);
-    if (productId) setSelectedProductId(productId);
-    if (category) setSelectedCategory(category);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   // Cart operations (Requires Login to add items)
   const addToCart = (product, quantity = 1, color = 'Standard') => {
