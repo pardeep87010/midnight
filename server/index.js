@@ -2162,7 +2162,10 @@ app.post('/api/auth/google', async (req, res) => {
 // ==========================================
 app.get('/sitemap.xml', (req, res) => {
   try {
-    const baseUrl = 'https://midnightbloom.com';
+    const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    const baseUrl = process.env.SITE_URL || (host ? `${protocol}://${host}` : 'https://midnightbloom.com');
+    
     const products = db.prepare('SELECT slug, id, updated_at FROM products WHERE is_active = 1').all();
 
     const staticPages = [
@@ -2214,6 +2217,10 @@ app.get('/sitemap.xml', (req, res) => {
 });
 
 app.get('/robots.txt', (req, res) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const baseUrl = process.env.SITE_URL || (host ? `${protocol}://${host}` : 'https://midnightbloom.com');
+  
   res.type('text/plain');
   res.send(`User-agent: *
 Allow: /
@@ -2221,7 +2228,7 @@ Disallow: /api/admin/
 Disallow: /admin
 
 # Sitemaps
-Sitemap: https://midnightbloom.com/sitemap.xml
+Sitemap: ${baseUrl}/sitemap.xml
 `);
 });
 
