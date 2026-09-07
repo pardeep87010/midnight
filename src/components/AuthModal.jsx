@@ -151,7 +151,7 @@ export const AuthModal = () => {
         }
       }
     } catch (e) {}
-    return '';
+    return '590174044594-2epnbhjnoku1gv88rajf2jgi9rm3emd7.apps.googleusercontent.com';
   };
 
   // Initialize Google Identity Services (GSI) One-Tap / ID Token listener when modal opens

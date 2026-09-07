@@ -2177,10 +2177,10 @@ app.post('/api/auth/reset-password', (req, res) => {
 app.get('/api/auth/google/client-id', (req, res) => {
   try {
     const row = db.prepare("SELECT value FROM env_configs WHERE key = 'GOOGLE_CLIENT_ID'").get();
-    const clientId = row?.value || process.env.GOOGLE_CLIENT_ID || '';
+    const clientId = row?.value || process.env.GOOGLE_CLIENT_ID || '590174044594-2epnbhjnoku1gv88rajf2jgi9rm3emd7.apps.googleusercontent.com';
     res.json({ clientId });
   } catch (error) {
-    res.json({ clientId: process.env.GOOGLE_CLIENT_ID || '' });
+    res.json({ clientId: process.env.GOOGLE_CLIENT_ID || '590174044594-2epnbhjnoku1gv88rajf2jgi9rm3emd7.apps.googleusercontent.com' });
   }
 });
 
