@@ -9,35 +9,6 @@
     <meta name="theme-color" content="#0B0B0E" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    
-    <!-- Ultra-Fast Google OAuth Popup & Hash Message Interceptor -->
-    <script>
-      (function() {
-        try {
-          var hash = window.location.hash;
-          if (hash && (hash.indexOf('access_token=') !== -1 || hash.indexOf('id_token=') !== -1 || hash.indexOf('error=') !== -1)) {
-            var raw = hash.charAt(0) === '#' ? hash.substring(1) : hash;
-            var params = new URLSearchParams(raw);
-            var idToken = params.get('id_token');
-            var accessToken = params.get('access_token');
-            var token = idToken || accessToken;
-            var err = params.get('error') || params.get('error_description');
-            if (window.opener) {
-              if (token) {
-                try { window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_TOKEN', accessToken: accessToken, idToken: idToken, token: token }, '*'); } catch (e) {}
-                try { localStorage.setItem('mb_oauth_token_broadcast', JSON.stringify({ token: token, idToken: idToken, accessToken: accessToken, timestamp: Date.now() })); } catch (e) {}
-              } else if (err) {
-                try { window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_ERROR', error: err }, '*'); } catch (e) {}
-              }
-              setTimeout(function() {
-                try { window.close(); } catch (e) {}
-              }, 200);
-            }
-          }
-        } catch (e) {}
-      })();
-    </script>
-    
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="et6F6v3nSnO3nFN-Az7tlHDCwksIXPfhtSAyx0mb9dA" />
     
@@ -182,8 +153,6 @@
   </head>
   <body class="bg-matte-black text-on-background antialiased selection:bg-rose-gold/30 selection:text-rose-gold overflow-x-hidden">
     <div id="root" class="w-full max-w-full overflow-x-hidden"></div>
-    <!-- Google Identity Services (GSI) OAuth Library -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

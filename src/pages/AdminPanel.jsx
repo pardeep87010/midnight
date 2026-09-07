@@ -1955,75 +1955,7 @@ export const AdminPanel = () => {
               </div>
             </div>
 
-            {/* Google OAuth 2.0 Credentials Section */}
-            <div className="space-y-3 pt-2">
-              <div className="flex items-center space-x-2 text-xs font-mono font-bold text-[#181617] dark:text-white uppercase tracking-wider border-b border-black/[0.08] dark:border-neutral-800 pb-1.5">
-                <FontAwesomeIcon icon={faGlobe} className="text-[#A33F4D] dark:text-[#D98A92]" />
-                <span>4. Google OAuth 2.0 Credentials (1-Click Google Sign-In)</span>
-              </div>
 
-              <div className="p-4 rounded-xl bg-[#B56571]/10 border border-[#B56571]/20 space-y-2 text-xs text-[#5C4F52] dark:text-neutral-300 font-sans">
-                <div className="flex items-center gap-2 font-bold text-[#A33F4D] dark:text-[#D98A92] font-mono text-[11px]">
-                  <FontAwesomeIcon icon={faShieldHalved} />
-                  <span>Google Cloud Console Configuration Details:</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] pt-1">
-                  <div className="bg-white/60 dark:bg-black/40 p-2.5 rounded-lg border border-black/5 dark:border-white/5">
-                    <span className="font-bold block text-[#181617] dark:text-white font-mono text-[10px]">Authorized JavaScript Origins:</span>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">{typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173'}</code>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">http://localhost:5173</code>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">https://midnight-bloom.onrender.com</code>
-                  </div>
-                  <div className="bg-white/60 dark:bg-black/40 p-2.5 rounded-lg border border-black/5 dark:border-white/5">
-                    <span className="font-bold block text-[#181617] dark:text-white font-mono text-[10px]">Authorized Redirect URIs:</span>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">{typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173'}</code>
-                    <code className="text-[#A33F4D] dark:text-[#D98A92] font-mono text-[10px] block mt-0.5">https://midnight-bloom.onrender.com</code>
-                  </div>
-                </div>
-                <p className="text-[10px] text-neutral-400 font-mono pt-0.5">
-                  Scopes required: <span className="text-[#181617] dark:text-white">userinfo.email</span>, <span className="text-[#181617] dark:text-white">userinfo.profile</span>, <span className="text-[#181617] dark:text-white">openid</span>
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                <div>
-                  <label className="block text-[#5C4F52] dark:text-neutral-400 text-[11px] mb-1">
-                    GOOGLE_CLIENT_ID (.apps.googleusercontent.com) *
-                  </label>
-                  <input
-                    type="text"
-                    value={envConfig.GOOGLE_CLIENT_ID || ''}
-                    onChange={(e) => setEnvConfig({ ...envConfig, GOOGLE_CLIENT_ID: e.target.value })}
-                    placeholder="e.g. 123456789-abcdef.apps.googleusercontent.com"
-                    className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-md px-3 py-2 text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[#5C4F52] dark:text-neutral-400 text-[11px] mb-1">
-                    GOOGLE_CLIENT_SECRET (GOCSPX-...) *
-                  </label>
-                  <input
-                    type="password"
-                    value={envConfig.GOOGLE_CLIENT_SECRET || ''}
-                    onChange={(e) => setEnvConfig({ ...envConfig, GOOGLE_CLIENT_SECRET: e.target.value })}
-                    placeholder="••••••••••••••••••••••••••••••••"
-                    className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-md px-3 py-2 text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571]"
-                  />
-                </div>
-                <div className="sm:col-span-2">
-                  <label className="block text-[#5C4F52] dark:text-neutral-400 text-[11px] mb-1">
-                    GOOGLE_REDIRECT_URI (Callback Endpoint)
-                  </label>
-                  <input
-                    type="text"
-                    value={envConfig.GOOGLE_REDIRECT_URI || ''}
-                    onChange={(e) => setEnvConfig({ ...envConfig, GOOGLE_REDIRECT_URI: e.target.value })}
-                    placeholder="http://localhost:5000/api/auth/google/callback"
-                    className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-md px-3 py-2 text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571]"
-                  />
-                </div>
-              </div>
-            </div>
 
             <div className="flex justify-end pt-3 border-t border-black/[0.08] dark:border-neutral-800">
               <button

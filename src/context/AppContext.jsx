@@ -107,87 +107,6 @@ export const AppProvider = ({ children }) => {
     navigateTo('home');
   };
 
-  // Google Authentication Processor
-  const authenticateGoogleToken = async (tokenPayload) => {
-    if (!tokenPayload) return { success: false, error: 'No token provided' };
-    showToast('Verifying Google credentials...', 'info');
-    
-    let payload = {};
-    if (typeof tokenPayload === 'string') {
-      payload = { accessToken: tokenPayload, credential: tokenPayload };
-    } else if (typeof tokenPayload === 'object') {
-      payload = { ...tokenPayload };
-    }
-
-    // 1. If we have an access token but no email yet, fetch Google UserInfo on the client
-    if (payload.accessToken && !payload.email && !payload.accessToken.includes('.')) {
-      try {
-        const uRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: `Bearer ${payload.accessToken}` }
-        });
-        if (uRes.ok) {
-          const uData = await uRes.json();
-          if (uData.email) payload.email = uData.email;
-          if (uData.name) payload.name = uData.name;
-          if (uData.picture) payload.picture = uData.picture;
-        }
-      } catch (e) {
-        console.warn('Client Google UserInfo fetch notice:', e);
-      }
-    }
-
-    // 2. If we have a JWT credential (3 parts with dots), decode payload on the client
-    const jwtToken = (payload.credential && payload.credential.includes('.')) ? payload.credential : (payload.accessToken && payload.accessToken.includes('.') ? payload.accessToken : null);
-    if (jwtToken && !payload.email) {
-      try {
-        const parts = jwtToken.split('.');
-        if (parts.length === 3) {
-          const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
-          const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-          const decoded = JSON.parse(jsonPayload);
-          if (decoded.email) payload.email = decoded.email;
-          if (decoded.name) payload.name = decoded.name;
-          if (decoded.picture) payload.picture = decoded.picture;
-        }
-      } catch (e) {
-        console.warn('Client JWT decode notice:', e);
-      }
-    }
-
-    try {
-      const res = await fetch('/api/auth/google', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (res.ok && data.success && data.user) {
-        setUser(data.user);
-        try {
-          localStorage.setItem('mb_user', JSON.stringify(data.user));
-          if (data.user.isAdmin) {
-            localStorage.setItem('mb_admin_token', 'mb_admin_live_token_2026_sec_bloom');
-          }
-        } catch (e) {}
-        closeAuthModal();
-        showToast(`Google Verified: Welcome, ${data.user.name}!`, 'success');
-        if (authModalRedirect) {
-          navigateTo(authModalRedirect);
-        } else if (data.user.isAdmin) {
-          navigateTo('admin');
-        }
-        return { success: true, user: data.user };
-      } else {
-        const errorMsg = data.error || 'Failed to authenticate with Google.';
-        showToast(errorMsg, 'error');
-        return { success: false, error: errorMsg };
-      }
-    } catch (err) {
-      console.error('Google Auth verification error:', err);
-      showToast('Authentication network error. Please try again.', 'error');
-      return { success: false, error: err.message };
-    }
-  };
 
   useEffect(() => {
     try {
@@ -440,82 +359,7 @@ export const AppProvider = ({ children }) => {
     }
   }, [user?.email]);
 
-  // Google OAuth URL Hash & Cross-Window Messenger Listener
-  useEffect(() => {
-    // 1. Process URL Hash (Redirect callback or direct landing)
-    const checkOAuthHash = async () => {
-      if (typeof window === 'undefined') return;
-      const hash = window.location.hash;
-      if (hash && (hash.includes('access_token=') || hash.includes('id_token=') || hash.includes('error='))) {
-        const raw = hash.startsWith('#') ? hash.substring(1) : hash;
-        const params = new URLSearchParams(raw);
-        const token = params.get('id_token') || params.get('access_token');
-        const err = params.get('error') || params.get('error_description');
 
-        // If inside popup opened by opener
-        if (window.opener) {
-          try {
-            if (token) {
-              window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_TOKEN', accessToken: params.get('access_token'), idToken: params.get('id_token'), token }, window.location.origin);
-              localStorage.setItem('mb_oauth_token_broadcast', JSON.stringify({ token, idToken: params.get('id_token'), accessToken: params.get('access_token'), timestamp: Date.now() }));
-            } else if (err) {
-              window.opener.postMessage({ type: 'MB_GOOGLE_AUTH_ERROR', error: err }, window.location.origin);
-            }
-          } catch (e) {}
-          setTimeout(() => {
-            try { window.close(); } catch (e) {}
-          }, 200);
-          return;
-        }
-
-        // Clean hash from URL address bar
-        window.history.replaceState(null, '', window.location.pathname + window.location.search);
-
-        if (err) {
-          showToast(`Google Sign-In notice: ${err}`, 'warning');
-          return;
-        }
-
-        if (token) {
-          await authenticateGoogleToken(token);
-        }
-      }
-    };
-
-    checkOAuthHash();
-
-    // 2. Listen to postMessage from popup window
-    const handleOAuthMessage = async (e) => {
-      if (e.origin !== window.location.origin && e.origin !== 'https://accounts.google.com') return;
-      const token = e.data?.idToken || e.data?.accessToken || e.data?.token;
-      if (e.data?.type === 'MB_GOOGLE_AUTH_TOKEN' && token) {
-        await authenticateGoogleToken(token);
-      } else if (e.data?.type === 'MB_GOOGLE_AUTH_ERROR') {
-        showToast(`Google Sign-In error: ${e.data.error || 'Access denied'}`, 'warning');
-      }
-    };
-
-    // 3. Listen to localStorage broadcast from popup window (storage event)
-    const handleStorageEvent = async (e) => {
-      if (e.key === 'mb_oauth_token_broadcast' && e.newValue) {
-        try {
-          const payload = JSON.parse(e.newValue);
-          const token = payload.idToken || payload.accessToken || payload.token;
-          if (token && Date.now() - payload.timestamp < 15000) {
-            localStorage.removeItem('mb_oauth_token_broadcast');
-            await authenticateGoogleToken(token);
-          }
-        } catch (err) {}
-      }
-    };
-
-    window.addEventListener('message', handleOAuthMessage);
-    window.addEventListener('storage', handleStorageEvent);
-    return () => {
-      window.removeEventListener('message', handleOAuthMessage);
-      window.removeEventListener('storage', handleStorageEvent);
-    };
-  }, [authModalRedirect]);
 
   // Cart operations (Requires Login to add items)
   const addToCart = (product, quantity = 1, color = 'Standard') => {
@@ -717,7 +561,6 @@ export const AppProvider = ({ children }) => {
         setUser,
         updateProfile,
         logout,
-        authenticateGoogleToken,
         theme,
         toggleTheme,
         toast,
