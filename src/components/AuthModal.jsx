@@ -66,10 +66,6 @@ export const AuthModal = () => {
   const [resetTimer, setResetTimer] = useState(60);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isGoogleSetupOpen, setIsGoogleSetupOpen] = useState(false);
-  const [setupClientId, setSetupClientId] = useState('');
-  const [setupClientSecret, setSetupClientSecret] = useState('');
-  const [isConnectingGoogle, setIsConnectingGoogle] = useState(false);
   const videoRef = useRef(null);
 
   const prevIsOpenRef = useRef(false);
@@ -80,7 +76,6 @@ export const AuthModal = () => {
       if (!prevIsOpenRef.current) {
         setActiveTab(authModalMode === 'register' ? 'register' : 'login');
         setIsForgotPassword(false);
-        setIsGoogleSetupOpen(false);
         setFormErrors({});
         setRegStep(1);
         setResetStep(1);
@@ -92,20 +87,6 @@ export const AuthModal = () => {
         setShowRegConfirmPassword(false);
       }
       prevIsOpenRef.current = true;
-
-      // Pre-populate stored Google Client ID if available
-      try {
-        const saved = localStorage.getItem('mb_env_config');
-        if (saved) {
-          const cfg = JSON.parse(saved);
-          if (cfg.GOOGLE_CLIENT_ID && !cfg.GOOGLE_CLIENT_ID.includes('xxxxxxxx')) {
-            setSetupClientId(cfg.GOOGLE_CLIENT_ID);
-          }
-          if (cfg.GOOGLE_CLIENT_SECRET && !cfg.GOOGLE_CLIENT_SECRET.includes('xxxxxxxx')) {
-            setSetupClientSecret(cfg.GOOGLE_CLIENT_SECRET);
-          }
-        }
-      } catch (e) {}
     } else {
       prevIsOpenRef.current = false;
     }
@@ -283,57 +264,12 @@ export const AuthModal = () => {
     }
 
     if (!clientId) {
-      // Open interactive setup dialog so user can enter Google Client ID
-      setIsGoogleSetupOpen(true);
+      showToast('Google Sign-In is temporarily unavailable. Please sign in with email & password.', 'warning');
+      setFormErrors({ general: 'Google Sign-In is temporarily unavailable. Please use email and password.' });
       return;
     }
 
     triggerGoogleOAuth(clientId);
-  };
-
-  // Save Google Client ID & immediately start Google Login
-  const handleSaveGoogleConfigAndLogin = async (e) => {
-    e.preventDefault();
-    const cleanId = setupClientId.trim();
-    if (!cleanId || cleanId.length < 10) {
-      showToast('Please enter a valid Google Client ID', 'warning');
-      return;
-    }
-
-    setIsConnectingGoogle(true);
-    try {
-      const existing = JSON.parse(localStorage.getItem('mb_env_config') || '{}');
-      const updated = {
-        ...existing,
-        GOOGLE_CLIENT_ID: cleanId,
-        ...(setupClientSecret.trim() ? { GOOGLE_CLIENT_SECRET: setupClientSecret.trim() } : {})
-      };
-      localStorage.setItem('mb_env_config', JSON.stringify(updated));
-
-      // Sync to backend
-      await fetch('/api/config', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
-        },
-        body: JSON.stringify({
-          GOOGLE_CLIENT_ID: cleanId,
-          ...(setupClientSecret.trim() ? { GOOGLE_CLIENT_SECRET: setupClientSecret.trim() } : {})
-        })
-      }).catch(err => console.warn('Backend sync notice:', err));
-
-      setIsGoogleSetupOpen(false);
-      showToast('Google Client ID connected! Opening Google Sign-In...', 'success');
-
-      setTimeout(() => {
-        triggerGoogleOAuth(cleanId);
-      }, 300);
-    } catch (err) {
-      showToast('Failed to save Google Client ID', 'error');
-    } finally {
-      setIsConnectingGoogle(false);
-    }
   };
 
   // Clear field errors on input change
@@ -671,7 +607,7 @@ export const AuthModal = () => {
           <div className="space-y-6">
             
             {/* Tab Switcher (Sign In vs Create Account) */}
-            {!isForgotPassword && !isGoogleSetupOpen && (
+            {!isForgotPassword && (
               <div className="flex bg-black/50 p-1 rounded-2xl border border-white/10 max-w-xs mx-auto mb-2">
                 <button
                   type="button"
@@ -705,98 +641,9 @@ export const AuthModal = () => {
             )}
 
             {/* ===================================================== */}
-            {/* VIEW: GOOGLE OAUTH 2.0 CONNECT & SETUP DIALOG */}
-            {/* ===================================================== */}
-            {isGoogleSetupOpen && (
-              <div className="space-y-5 animate-fade-in">
-                <div className="text-center space-y-1.5">
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto shadow-inner">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24">
-                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
-                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-serif font-bold text-white">
-                    Google Sign-In Connection
-                  </h3>
-                  <p className="text-xs text-neutral-300 font-light leading-relaxed max-w-sm mx-auto">
-                    Apne Google Cloud Console ka <strong className="text-[#D98A92]">Google Client ID</strong> yahan enter karein taaki Google ka live account selector popup open ho sake.
-                  </p>
-                </div>
-
-                <form onSubmit={handleSaveGoogleConfigAndLogin} className="space-y-4">
-                  <div className="space-y-1">
-                    <label className="text-xs text-neutral-300 block font-medium">Google Client ID</label>
-                    <input
-                      type="text"
-                      required
-                      value={setupClientId}
-                      onChange={(e) => setSetupClientId(e.target.value)}
-                      placeholder="e.g. 104829104829-xxxxxxx.apps.googleusercontent.com"
-                      className="w-full bg-[#121316] border border-white/15 focus:border-[#B56571] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 font-mono focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs text-neutral-300 block font-medium">
-                      Google Client Secret <span className="text-[10px] text-neutral-500">(Optional)</span>
-                    </label>
-                    <input
-                      type="password"
-                      value={setupClientSecret}
-                      onChange={(e) => setSetupClientSecret(e.target.value)}
-                      placeholder="GOCSPX-xxxxxxxxxxxxxxxxxxxxxxxx"
-                      className="w-full bg-[#121316] border border-white/15 focus:border-[#B56571] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 font-mono focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="p-3 bg-black/40 border border-white/10 rounded-xl space-y-1 text-[11px] text-neutral-400">
-                    <div className="flex items-center justify-between text-neutral-300 font-mono">
-                      <span>Authorized JavaScript Origin:</span>
-                    </div>
-                    <code className="block bg-[#121316] p-1.5 rounded text-[10px] text-[#D98A92] font-mono break-all select-all">
-                      {window.location.origin}
-                    </code>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isConnectingGoogle}
-                    className="w-full btn-gold py-3.5 rounded-full font-bold uppercase tracking-wider text-xs text-white shadow-xl cursor-pointer"
-                  >
-                    {isConnectingGoogle ? 'CONNECTING GOOGLE...' : 'CONNECT & SIGN IN WITH GOOGLE'}
-                  </button>
-                </form>
-
-                <div className="flex items-center justify-between pt-2 text-xs">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      closeAuthModal();
-                      navigateTo('admin');
-                    }}
-                    className="text-[#D98A92] hover:underline cursor-pointer"
-                  >
-                    Open Admin Panel (ENV Manager)
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setIsGoogleSetupOpen(false)}
-                    className="text-neutral-400 hover:text-white cursor-pointer"
-                  >
-                    Back to Normal Sign In
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* ===================================================== */}
             {/* VIEW A: SIGN IN FORM */}
             {/* ===================================================== */}
-            {activeTab === 'login' && !isForgotPassword && !isGoogleSetupOpen && (
+            {activeTab === 'login' && !isForgotPassword && (
               <div className="space-y-5 animate-fade-in">
                 <div className="text-center space-y-1">
                   <h3 className="text-2xl sm:text-3xl text-white font-serif font-bold tracking-tight">
@@ -828,7 +675,7 @@ export const AuthModal = () => {
                 )}
 
                 {/* 1-Click Google Sign In */}
-                <div className="space-y-1.5">
+                <div>
                   <button
                     type="button"
                     onClick={handleGoogleAuth}
@@ -843,15 +690,6 @@ export const AuthModal = () => {
                     </svg>
                     <span>Continue with Google</span>
                   </button>
-                  <div className="flex justify-end">
-                    <button
-                      type="button"
-                      onClick={() => setIsGoogleSetupOpen(true)}
-                      className="text-[10px] text-neutral-500 hover:text-[#D98A92] cursor-pointer"
-                    >
-                      Configure Google Client ID ⚙️
-                    </button>
-                  </div>
                 </div>
 
                 <div className="flex items-center space-x-3">
@@ -951,7 +789,7 @@ export const AuthModal = () => {
             {/* ===================================================== */}
             {/* VIEW B: FORGOT PASSWORD OTP RECOVERY */}
             {/* ===================================================== */}
-            {isForgotPassword && !isGoogleSetupOpen && (
+            {isForgotPassword && (
               <div className="space-y-5 animate-fade-in">
                 {resetStep === 1 ? (
                   <div className="space-y-4">
@@ -1106,7 +944,7 @@ export const AuthModal = () => {
             {/* ===================================================== */}
             {/* VIEW C: CREATE ACCOUNT (REGISTER) FORM */}
             {/* ===================================================== */}
-            {activeTab === 'register' && !isForgotPassword && !isGoogleSetupOpen && (
+            {activeTab === 'register' && !isForgotPassword && (
               <div className="space-y-5 animate-fade-in">
                 
                 {regStep === 1 ? (
@@ -1156,7 +994,7 @@ export const AuthModal = () => {
                     )}
 
                     {/* 1-Click Google Register */}
-                    <div className="space-y-1.5">
+                    <div>
                       <button
                         type="button"
                         onClick={handleGoogleAuth}
@@ -1171,15 +1009,6 @@ export const AuthModal = () => {
                         </svg>
                         <span>Continue with Google</span>
                       </button>
-                      <div className="flex justify-end">
-                        <button
-                          type="button"
-                          onClick={() => setIsGoogleSetupOpen(true)}
-                          className="text-[10px] text-neutral-500 hover:text-[#D98A92] cursor-pointer"
-                        >
-                          Configure Google Client ID ⚙️
-                        </button>
-                      </div>
                     </div>
 
                     <div className="flex items-center space-x-3">
