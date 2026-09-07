@@ -108,14 +108,57 @@ export const AppProvider = ({ children }) => {
   };
 
   // Google Authentication Processor
-  const authenticateGoogleToken = async (token) => {
-    if (!token) return { success: false, error: 'No token provided' };
+  const authenticateGoogleToken = async (tokenPayload) => {
+    if (!tokenPayload) return { success: false, error: 'No token provided' };
     showToast('Verifying Google credentials...', 'info');
+    
+    let payload = {};
+    if (typeof tokenPayload === 'string') {
+      payload = { accessToken: tokenPayload, credential: tokenPayload };
+    } else if (typeof tokenPayload === 'object') {
+      payload = { ...tokenPayload };
+    }
+
+    // 1. If we have an access token but no email yet, fetch Google UserInfo on the client
+    if (payload.accessToken && !payload.email && !payload.accessToken.includes('.')) {
+      try {
+        const uRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${payload.accessToken}` }
+        });
+        if (uRes.ok) {
+          const uData = await uRes.json();
+          if (uData.email) payload.email = uData.email;
+          if (uData.name) payload.name = uData.name;
+          if (uData.picture) payload.picture = uData.picture;
+        }
+      } catch (e) {
+        console.warn('Client Google UserInfo fetch notice:', e);
+      }
+    }
+
+    // 2. If we have a JWT credential (3 parts with dots), decode payload on the client
+    const jwtToken = (payload.credential && payload.credential.includes('.')) ? payload.credential : (payload.accessToken && payload.accessToken.includes('.') ? payload.accessToken : null);
+    if (jwtToken && !payload.email) {
+      try {
+        const parts = jwtToken.split('.');
+        if (parts.length === 3) {
+          const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+          const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+          const decoded = JSON.parse(jsonPayload);
+          if (decoded.email) payload.email = decoded.email;
+          if (decoded.name) payload.name = decoded.name;
+          if (decoded.picture) payload.picture = decoded.picture;
+        }
+      } catch (e) {
+        console.warn('Client JWT decode notice:', e);
+      }
+    }
+
     try {
       const res = await fetch('/api/auth/google', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: token, credential: token })
+        body: JSON.stringify(payload)
       });
       const data = await res.json();
       if (res.ok && data.success && data.user) {
