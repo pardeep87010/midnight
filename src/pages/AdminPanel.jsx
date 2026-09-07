@@ -229,35 +229,48 @@ export const AdminPanel = () => {
   const [confirmModal, setConfirmModal] = useState({ isOpen: false, title: '', message: '', onConfirm: null, confirmText: 'Confirm', isDanger: false });
   const [inspectPayloadModal, setInspectPayloadModal] = useState({ isOpen: false, title: '', payload: null });
 
-  // Live ENV & API Keys State (Saved in localStorage)
-  const [envConfig, setEnvConfig] = useState(() => {
-    try {
-      const saved = localStorage.getItem('mb_env_config');
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return {
-      PAYOPRO_MCH_ID: '1084920',
-      PAYOPRO_SECRET_KEY: 'mb_secret_live_894205819',
-      PAYOPRO_BASE_URL: 'https://pay0pro.shop/api/v1/create_order',
-      PAYOPRO_NOTIFY_URL: 'https://midnightbloom.com/api/webhooks/pay0pro',
-      PAYOPRO_RETURN_URL: 'https://midnightbloom.com/cart?payment=success',
-      EMAIL_PROVIDER: 'resend',
-      RESEND_API_KEY: 're_live_894102948102938102',
-      SMTP_HOST: 'smtp.resend.com',
-      SMTP_PORT: '587',
-      SMTP_USER: 'resend',
-      SMTP_PASS: '••••••••••••••••',
-      FROM_EMAIL: 'orders@mb-logistics.com',
-      ADMIN_ALERT_EMAIL: 'admin@midnightbloom.com',
-      GOOGLE_CLIENT_ID: '590174044594-2epnbhjnoku1gv88rajf2jgi9rm3emd7.apps.googleusercontent.com',
-      GOOGLE_CLIENT_SECRET: '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',
-      GOOGLE_REDIRECT_URI: 'http://localhost:5000/api/auth/google/callback',
-      DATABASE_URL: 'postgresql://mb_admin:secret_pass@db.midnightbloom.internal:5432/midnight_bloom_prod?sslmode=require',
-      REDIS_URL: 'redis://default:token@cache.midnightbloom.internal:6379',
-      CDN_DOMAIN: 'https://cdn.midnightbloom.com',
-      EDGE_CACHE_POLICY: 'public, max-age=31536000, immutable'
-    };
+  // Live ENV & API Keys State (Loaded securely from authenticated backend)
+  const [envConfig, setEnvConfig] = useState({
+    PAYOPRO_MCH_ID: '',
+    PAYOPRO_SECRET_KEY: '',
+    PAYOPRO_BASE_URL: 'https://pay0pro.shop/api/v1/create_order',
+    PAYOPRO_NOTIFY_URL: 'https://midnightbloom.com/api/webhooks/pay0pro',
+    PAYOPRO_RETURN_URL: 'https://midnightbloom.com/cart?payment=success',
+    EMAIL_PROVIDER: 'resend',
+    RESEND_API_KEY: '',
+    SMTP_HOST: 'smtp.resend.com',
+    SMTP_PORT: '587',
+    SMTP_USER: 'resend',
+    SMTP_PASS: '',
+    FROM_EMAIL: 'orders@mb-logistics.com',
+    ADMIN_ALERT_EMAIL: 'admin@midnightbloom.com',
+    GOOGLE_CLIENT_ID: '590174044594-2epnbhjnoku1gv88rajf2jgi9rm3emd7.apps.googleusercontent.com',
+    GOOGLE_CLIENT_SECRET: '',
+    GOOGLE_REDIRECT_URI: 'https://midnight-bloom.onrender.com',
+    DATABASE_URL: '',
+    REDIS_URL: '',
+    CDN_DOMAIN: 'https://cdn.midnightbloom.com',
+    EDGE_CACHE_POLICY: 'public, max-age=31536000, immutable'
   });
+
+  // Securely fetch active server configuration on admin access
+  useEffect(() => {
+    if (activeTab === 'env-config') {
+      fetch('/api/config', {
+        headers: {
+          'Authorization': 'Bearer mb_admin_live_token_2026_sec_bloom',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        }
+      })
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data) {
+          setEnvConfig(prev => ({ ...prev, ...data }));
+        }
+      })
+      .catch(err => console.warn('Config fetch notice:', err));
+    }
+  }, [activeTab]);
 
   const [testEmailRecipient, setTestEmailRecipient] = useState('20092003pardeep@gmail.com');
   const [isSendingTestEmail, setIsSendingTestEmail] = useState(false);

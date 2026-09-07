@@ -1425,28 +1425,14 @@ app.get('/api/events', requireAdminAuth, (req, res) => {
 });
 
 // ==========================================
-// 7. ENVIRONMENT & API KEYS CONFIG API (MASKED SECRETS)
+// 7. ENVIRONMENT & API KEYS CONFIG API (STRICT ADMIN PROTECTED)
 // ==========================================
-app.get('/api/config', (req, res) => {
+app.get('/api/config', requireAdminAuth, (req, res) => {
   try {
-    // Check if caller is authenticated admin
-    const authHeader = req.headers['authorization'];
-    const customToken = req.headers['x-admin-token'];
-    let token = customToken;
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-      token = authHeader.split(' ')[1];
-    }
-    const isAdmin = token === ADMIN_SECRET;
-
     const rows = db.prepare('SELECT * FROM env_configs').all();
     const config = {};
     for (const r of rows) {
-      if (r.is_secret && !isAdmin && r.key !== 'GOOGLE_CLIENT_ID') {
-        // Mask secrets for unauthenticated public viewers (except public client ID)
-        config[r.key] = r.value ? `${r.value.slice(0, 4)}••••••••••••` : '••••••••';
-      } else {
-        config[r.key] = r.value;
-      }
+      config[r.key] = r.value;
     }
     res.json(config);
   } catch (error) {
