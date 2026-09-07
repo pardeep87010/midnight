@@ -185,15 +185,17 @@ export function initDB() {
     db.prepare("DELETE FROM env_configs WHERE value LIKE '%re_mb_live_sec%' OR value LIKE '%pay0pro_live_sk%'").run();
   } catch (e) {}
 
-  // Seed / Update Official Google OAuth Credentials
+  // Seed / Update Official Resend Credentials & Domain
   try {
     const upsertConfig = db.prepare(`
       INSERT INTO env_configs (key, value, is_secret, updated_at)
       VALUES (?, ?, ?, CURRENT_TIMESTAMP)
       ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP
     `);
-    upsertConfig.run('GOOGLE_CLIENT_ID', '590174044594-2epnbhjnoku1gv88rajf2jgi9rm3emd7.apps.googleusercontent.com', 0);
-    upsertConfig.run('GOOGLE_CLIENT_SECRET', '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', 1);
+    upsertConfig.run('RESEND_API_KEY', 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy', 1);
+    upsertConfig.run('RESEND_EMAIL_API_KEY', 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy', 1);
+    upsertConfig.run('RESEND_DOMAIN', 'playnixclub.bet', 0);
+    upsertConfig.run('FROM_EMAIL', 'Midnight Bloom <orders@playnixclub.bet>', 0);
   } catch (e) {}
 
   // 8. Users & Authentication Table

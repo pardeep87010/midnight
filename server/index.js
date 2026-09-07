@@ -1537,26 +1537,24 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
       }
     }
 
-    if (!apiKey || apiKey.includes('re_mb_live_sec_83910284') || apiKey.includes('xxxxxxxx') || !apiKey.startsWith('re_')) {
-      console.warn('⚠️ [RESEND EMAIL NOTICE] No valid Resend API key found. Key must start with "re_"');
-      return { 
-        success: false, 
-        error: 'Email service is not configured. Please set RESEND_API_KEY in your Render Environment Variables (starts with re_...).' 
-      };
+    // Default to verified production Resend API Key
+    if (!apiKey || apiKey.includes('re_mb_live_sec') || apiKey.includes('xxxx') || !apiKey.startsWith('re_')) {
+      apiKey = 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy';
     }
 
-    // Determine FROM sender address
+    // Determine FROM sender address (Default verified domain: playnixclub.bet)
     const fromRow = db.prepare("SELECT value FROM env_configs WHERE key = 'FROM_EMAIL'").get();
     let fromEmail = (process.env.FROM_EMAIL || fromRow?.value || '').trim();
 
-    if (!fromEmail) {
-      const customDomain = (process.env.RESEND_DOMAIN || process.env.DOMAIN || '').trim();
-      if (customDomain) {
-        const cleanDom = customDomain.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
-        fromEmail = `Midnight Bloom <orders@${cleanDom}>`;
-      } else {
-        fromEmail = 'Midnight Bloom <onboarding@resend.dev>';
-      }
+    if (!fromEmail || fromEmail.includes('onboarding@resend.dev') || fromEmail.includes('@midnightbloom.com')) {
+      const customDomain = (process.env.RESEND_DOMAIN || process.env.DOMAIN || 'playnixclub.bet').trim();
+      const cleanDom = customDomain.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+      fromEmail = `Midnight Bloom <orders@${cleanDom}>`;
+    } else if (!fromEmail.includes('@')) {
+      const cleanDom = fromEmail.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+      fromEmail = `Midnight Bloom <orders@${cleanDom}>`;
+    } else if (!fromEmail.includes('<') && fromEmail.includes('@')) {
+      fromEmail = `Midnight Bloom <${fromEmail}>`;
     }
 
     const plainText = textContent || stripHtml(htmlContent);
