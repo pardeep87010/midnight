@@ -349,3 +349,129 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* =========================================================================
+   CLEAN 1-PAGE PRINT MEDIA OPTIMIZATION
+   ========================================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  html, body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #root {
+    background: transparent !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide everything on the page by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Completely remove layout elements that could create additional blank pages or clutter */
+  header, footer, nav, aside, .top-ribbon, .mobile-drawer, .floating-cart, .no-print, button, a {
+    display: none !important;
+  }
+
+  /* Reset modal overlay so it doesn't take fixed screen space or introduce scrolling offsets */
+  .print-modal-overlay {
+    position: static !important;
+    inset: auto !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  /* Expose only the invoice / shipping slip */
+  .printable-receipt,
+  .printable-receipt *,
+  .printable-manifest,
+  .printable-manifest * {
+    visibility: visible !important;
+  }
+
+  .printable-receipt,
+  .printable-manifest {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 16px 20px !important;
+    background: #FFFFFF !important;
+    color: #111111 !important;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    break-inside: avoid !important;
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  /* Ink-friendly light boxes inside the receipt */
+  .printable-receipt .bg-black\/40,
+  .printable-receipt .bg-black\/20,
+  .printable-receipt .bg-\[\#18191E\],
+  .printable-receipt .bg-white\/\[0\.03\],
+  .printable-manifest .bg-\[\#18191E\] {
+    background-color: #F8F8F8 !important;
+    border: 1px solid #E2E2E2 !important;
+    color: #111111 !important;
+  }
+
+  .printable-receipt .text-white, 
+  .printable-manifest .text-white {
+    color: #111111 !important;
+  }
+
+  .printable-receipt .text-neutral-400,
+  .printable-receipt .text-neutral-300,
+  .printable-receipt .text-neutral-500,
+  .printable-receipt .text-neutral-600,
+  .printable-manifest .text-neutral-600 {
+    color: #555555 !important;
+  }
+
+  .printable-receipt .text-\[\#D98A92\], 
+  .printable-receipt .text-\[\#B56571\] {
+    color: #8A2432 !important;
+  }
+
+  .printable-receipt .border-white\/10,
+  .printable-receipt .border-white\/15,
+  .printable-receipt .border-white\/5 {
+    border-color: #E2E2E2 !important;
+  }
+
+  .printable-receipt .text-emerald-400 {
+    color: #047857 !important;
+  }
+}
+

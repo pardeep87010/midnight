@@ -2805,8 +2805,8 @@ export const AdminPanel = () => {
 
       {/* PRINTABLE SHIPPING SLIP MODAL */}
       {printOrder && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto font-mono">
-          <div className="bg-white text-black p-8 rounded-2xl max-w-lg w-full space-y-6 shadow-2xl border border-neutral-300 animate-fade-in">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto font-mono print-modal-overlay">
+          <div className="printable-manifest bg-white text-black p-8 rounded-2xl max-w-lg w-full space-y-6 shadow-2xl border border-neutral-300 animate-fade-in">
             <div className="border-b-2 border-black pb-4 flex justify-between items-start">
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-widest text-neutral-600 block">CONFIDENTIAL FULFILLMENT SLIP</span>
@@ -2815,7 +2815,7 @@ export const AdminPanel = () => {
               </div>
               <button 
                 onClick={() => setPrintOrder(null)}
-                className="text-black font-bold p-1 cursor-pointer"
+                className="text-black font-bold p-1 cursor-pointer no-print"
               >
                 ✕
               </button>
@@ -2852,7 +2852,7 @@ export const AdminPanel = () => {
               TAMPER-PROOF DISCREET SEAL • DO NOT ACCEPT IF SEAL IS BROKEN
             </div>
 
-            <div className="flex justify-end gap-2 pt-2">
+            <div className="flex justify-end gap-2 pt-2 no-print">
               <button
                 onClick={() => { window.print(); }}
                 className="bg-[#A33F4D] text-white hover:bg-[#8F3340] px-5 py-2 rounded text-xs font-bold uppercase cursor-pointer shadow"

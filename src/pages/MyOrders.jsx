@@ -777,8 +777,8 @@ export const MyOrders = () => {
 
         {/* Confidential Printable Receipt Modal */}
         {activeReceiptOrder && (
-          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in">
-            <div className="bg-[#18191E] border border-white/15 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl text-white max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in print-modal-overlay">
+            <div className="printable-receipt bg-[#18191E] border border-white/15 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl text-white max-h-[90vh] overflow-y-auto">
               
               {/* Receipt Header */}
               <div className="flex items-start justify-between border-b border-white/10 pb-4">
@@ -795,7 +795,7 @@ export const MyOrders = () => {
                 </div>
                 <button
                   onClick={() => setActiveReceiptOrder(null)}
-                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer no-print"
                 >
                   <FontAwesomeIcon icon={faCircleXmark} />
                 </button>
@@ -861,7 +861,7 @@ export const MyOrders = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-2">
+              <div className="flex items-center justify-end gap-3 pt-2 no-print">
                 <button
                   onClick={() => window.print()}
                   className="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center gap-2 cursor-pointer"
