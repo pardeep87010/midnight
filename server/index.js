@@ -2436,16 +2436,16 @@ app.get('/sitemap.xml', (req, res) => {
   try {
     const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
     const host = req.headers['x-forwarded-host'] || req.headers.host;
-    const baseUrl = process.env.SITE_URL || (host ? `${protocol}://${host}` : 'https://midnightbloom.com');
+    const baseUrl = process.env.SITE_URL || (host ? `${protocol}://${host}` : 'https://midnight-bloom.onrender.com');
     
     const products = db.prepare('SELECT slug, id, updated_at FROM products WHERE is_active = 1').all();
 
     const staticPages = [
       { url: '', priority: '1.0', changefreq: 'daily' },
+      { url: '/home', priority: '1.0', changefreq: 'daily' },
       { url: '/catalog', priority: '0.9', changefreq: 'daily' },
-      { url: '/categories/men', priority: '0.8', changefreq: 'weekly' },
-      { url: '/categories/women', priority: '0.8', changefreq: 'weekly' },
-      { url: '/categories/couples', priority: '0.8', changefreq: 'weekly' },
+      { url: '/cart', priority: '0.7', changefreq: 'weekly' },
+      { url: '/orders', priority: '0.6', changefreq: 'weekly' },
       { url: '/privacy', priority: '0.5', changefreq: 'monthly' },
       { url: '/terms', priority: '0.5', changefreq: 'monthly' },
       { url: '/shipping', priority: '0.6', changefreq: 'monthly' },
@@ -2491,7 +2491,7 @@ app.get('/sitemap.xml', (req, res) => {
 app.get('/robots.txt', (req, res) => {
   const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
   const host = req.headers['x-forwarded-host'] || req.headers.host;
-  const baseUrl = process.env.SITE_URL || (host ? `${protocol}://${host}` : 'https://midnightbloom.com');
+  const baseUrl = process.env.SITE_URL || (host ? `${protocol}://${host}` : 'https://midnight-bloom.onrender.com');
   
   res.type('text/plain');
   res.send(`User-agent: *
@@ -2507,11 +2507,25 @@ Sitemap: ${baseUrl}/sitemap.xml
 // Serve Frontend Production Build (SPA Fallback - Express 5 Compatible)
 const distPath = path.join(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
-  // Express 5 compatible fallback middleware (avoids path-to-regexp wildcard PathError)
+  app.use(express.static(distPath, { index: false }));
+  // Express 5 compatible fallback middleware with dynamic baseUrl injection
   app.use((req, res, next) => {
     if (req.method === 'GET' && !req.path.startsWith('/api')) {
-      return res.sendFile(path.join(distPath, 'index.html'));
+      const indexPath = path.join(distPath, 'index.html');
+      const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+      const host = req.headers['x-forwarded-host'] || req.headers.host;
+      const baseUrl = process.env.SITE_URL || (host ? `${protocol}://${host}` : 'https://midnight-bloom.onrender.com');
+
+      fs.readFile(indexPath, 'utf8', (err, html) => {
+        if (err) return res.sendFile(indexPath);
+        // Ensure canonical and OG URLs match current host
+        const replacedHtml = html
+          .replaceAll('https://midnightbloom.com', baseUrl)
+          .replaceAll('https://midnight-bloom.onrender.com', baseUrl);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.send(replacedHtml);
+      });
+      return;
     }
     next();
   });

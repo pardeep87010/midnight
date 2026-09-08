@@ -3,4 +3,6 @@ Allow: /
 Disallow: /api/admin/
 Disallow: /admin
 
-Sitemap: https://midnightbloom.com/sitemap.xml
+# Sitemaps
+Sitemap: https://midnight-bloom.onrender.com/sitemap.xml
+
