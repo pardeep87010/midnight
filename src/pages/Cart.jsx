@@ -214,16 +214,22 @@ export const Cart = () => {
       customerPincode: activeAddress.pincode || '',
       shippingAddress: fullShippingAddress,
       totalAmount: total,
+      total_amount: total,
+      total: total,
+      subtotal: cartSubtotal,
       paymentMode: 'Cash on Delivery (COD)',
       packaging: packagingType === 'plain-box' ? '100% Plain Unbranded Box' : 'Discreet Eco-Kraft Mailer',
       statementDescriptor: 'MB* SERVICES LLC',
       status: 'Processing',
       date: new Date().toISOString().split('T')[0],
       items: cart.map(item => ({
-        name: item.product?.name || 'Luxury Instrument',
-        quantity: item.quantity,
-        price: item.product?.price || 0,
-        color: item.color
+        id: item.product?.id || item.id,
+        slug: item.product?.slug || item.slug,
+        name: item.product?.name || item.name || 'Luxury Instrument',
+        quantity: item.quantity || 1,
+        price: Number(item.product?.price) || Number(item.price) || 0,
+        color: item.color || 'Standard',
+        image: item.product?.image || item.image || ''
       }))
     };
 

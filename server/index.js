@@ -936,7 +936,10 @@ app.get('/api/orders', (req, res) => {
       customerState: r.customer_state || '',
       customerPincode: r.customer_pincode || '',
       shippingAddress: r.shipping_address || r.customer_city || '',
-      totalAmount: r.total_amount,
+      totalAmount: Number(r.total_amount) || 0,
+      total_amount: Number(r.total_amount) || 0,
+      total: Number(r.total_amount) || 0,
+      subtotal: Number(r.total_amount) || 0,
       paymentMode: r.payment_mode || 'Cash on Delivery (COD)',
       paymentMethod: r.payment_mode || 'Cash on Delivery (COD)',
       payment_mode: r.payment_mode || 'Cash on Delivery (COD)',
@@ -945,9 +948,11 @@ app.get('/api/orders', (req, res) => {
       statementDescriptor: r.statement_descriptor,
       status: r.status,
       items: r.items_json ? JSON.parse(r.items_json) : [],
+      items_json: r.items_json,
       idempotencyKey: r.idempotency_key,
       date: r.created_at ? r.created_at.split('T')[0] : new Date().toISOString().split('T')[0],
-      createdAt: r.created_at
+      createdAt: r.created_at,
+      created_at: r.created_at
     }));
     res.json(orders);
   } catch (error) {
@@ -971,7 +976,8 @@ app.post('/api/orders', orderLimiter, (req, res) => {
           id: existing.id,
           customerName: existing.customer_name,
           customerEmail: existing.customer_email,
-          totalAmount: existing.total_amount,
+          totalAmount: Number(existing.total_amount) || 0,
+          total_amount: Number(existing.total_amount) || 0,
           status: existing.status
         }
       });
@@ -1002,7 +1008,7 @@ app.post('/api/orders', orderLimiter, (req, res) => {
         WHERE id = ? OR slug = ? OR name = ?
       `).get(item.id || '', item.slug || '', item.name || '');
 
-      if (dbProduct) {
+      if (dbProduct && Number(dbProduct.price) > 0) {
         realPrice = Number(dbProduct.price);
         realName = dbProduct.name;
         if (dbProduct.images_json) {
@@ -1012,8 +1018,7 @@ app.post('/api/orders', orderLimiter, (req, res) => {
           } catch (e) {}
         }
       } else {
-        // Fallback for custom luxury catalog items: prevent zero or negative manipulation
-        realPrice = Math.max(999, Number(item.price) || 2999);
+        realPrice = Number(item.price) > 0 ? Number(item.price) : 499;
       }
 
       serverSubtotal += realPrice * qty;

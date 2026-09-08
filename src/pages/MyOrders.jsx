@@ -439,7 +439,9 @@ export const MyOrders = () => {
               const isExpanded = expandedOrderId === order.id || displayedOrders.length === 1;
               const awbNumber = order.awb || order.tracking_number || ('MB-IND-' + String(order.id || '9876').slice(-4) + '-EXP');
               const courier = order.courier || 'BlueDart Discreet Express';
-              const totalAmount = order.total_amount || order.total || order.subtotal || 0;
+              const itemsTotal = items.reduce((sum, it) => sum + ((Number(it.price) || Number(it.product?.price) || 0) * (Number(it.quantity) || 1)), 0);
+              const rawOrderTotal = order.totalAmount ?? order.total_amount ?? order.total ?? order.subtotal ?? 0;
+              const totalAmount = (Number(rawOrderTotal) > 0) ? Number(rawOrderTotal) : itemsTotal;
               const shippingAddr = order.shippingAddress || order.shipping_address || {};
 
               // Status color configurations
@@ -820,24 +822,33 @@ export const MyOrders = () => {
               </div>
 
               {/* Price Calculation Summary */}
-              <div className="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-2 text-xs font-mono">
-                <div className="flex justify-between text-neutral-400">
-                  <span>Subtotal:</span>
-                  <span>{formatPrice(activeReceiptOrder.total_amount || activeReceiptOrder.total || 0)}</span>
-                </div>
-                <div className="flex justify-between text-emerald-400">
-                  <span>Plain Express Courier:</span>
-                  <span>FREE</span>
-                </div>
-                <div className="flex justify-between text-neutral-400">
-                  <span>Discreet Tax Descriptor:</span>
-                  <span>Included</span>
-                </div>
-                <div className="flex justify-between pt-2 border-t border-white/10 text-sm font-bold text-white">
-                  <span>Total Paid:</span>
-                  <span className="text-[#D98A92]">{formatPrice(activeReceiptOrder.total_amount || activeReceiptOrder.total || 0)}</span>
-                </div>
-              </div>
+              {(() => {
+                const receiptItems = parseOrderItems(activeReceiptOrder);
+                const receiptItemsTotal = receiptItems.reduce((sum, it) => sum + ((Number(it.price) || Number(it.product?.price) || 0) * (Number(it.quantity) || 1)), 0);
+                const rawReceiptTotal = activeReceiptOrder.totalAmount ?? activeReceiptOrder.total_amount ?? activeReceiptOrder.total ?? activeReceiptOrder.subtotal ?? 0;
+                const receiptTotal = (Number(rawReceiptTotal) > 0) ? Number(rawReceiptTotal) : receiptItemsTotal;
+
+                return (
+                  <div className="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-2 text-xs font-mono">
+                    <div className="flex justify-between text-neutral-400">
+                      <span>Subtotal:</span>
+                      <span>{formatPrice(receiptTotal)}</span>
+                    </div>
+                    <div className="flex justify-between text-emerald-400">
+                      <span>Plain Express Courier:</span>
+                      <span>FREE</span>
+                    </div>
+                    <div className="flex justify-between text-neutral-400">
+                      <span>Discreet Tax Descriptor:</span>
+                      <span>Included</span>
+                    </div>
+                    <div className="flex justify-between pt-2 border-t border-white/10 text-sm font-bold text-white">
+                      <span>Total Paid:</span>
+                      <span className="text-[#D98A92]">{formatPrice(receiptTotal)}</span>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Confidential Footnote */}
               <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 text-[11px] text-neutral-400 space-y-1">
