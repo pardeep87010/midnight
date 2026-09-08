@@ -281,25 +281,29 @@ app.get('/api/admin/users', requireAdminAuth, (req, res) => {
       params.push(sParam, sParam, sParam, sParam);
     }
 
-    // Date Filters
+    // Date Filters (handles both UTC and localtime)
     if (dateFilter === 'today') {
-      whereClause += " AND date(created_at) = date('now', 'localtime')";
+      whereClause += " AND (date(created_at) = date('now') OR date(created_at, 'localtime') = date('now', 'localtime'))";
     } else if (dateFilter === 'yesterday') {
-      whereClause += " AND date(created_at) = date('now', '-1 day', 'localtime')";
+      whereClause += " AND (date(created_at) = date('now', '-1 day') OR date(created_at, 'localtime') = date('now', '-1 day', 'localtime'))";
     } else if (dateFilter === 'this_week') {
-      whereClause += " AND date(created_at) >= date('now', '-7 days', 'localtime')";
+      whereClause += " AND (date(created_at) >= date('now', '-7 days') OR date(created_at, 'localtime') >= date('now', '-7 days', 'localtime'))";
     } else if (dateFilter === 'last_week') {
-      whereClause += " AND date(created_at) >= date('now', '-14 days', 'localtime') AND date(created_at) < date('now', '-7 days', 'localtime')";
+      whereClause += " AND (date(created_at) >= date('now', '-14 days') AND date(created_at) < date('now', '-7 days'))";
     } else if (dateFilter === 'this_month') {
-      whereClause += " AND strftime('%Y-%m', created_at) = strftime('%Y-%m', 'now', 'localtime')";
+      whereClause += " AND (strftime('%Y-%m', created_at) = strftime('%Y-%m', 'now') OR strftime('%Y-%m', created_at, 'localtime') = strftime('%Y-%m', 'now', 'localtime'))";
     } else if (dateFilter === 'last_month') {
-      whereClause += " AND strftime('%Y-%m', created_at) = strftime('%Y-%m', 'now', '-1 month', 'localtime')";
+      whereClause += " AND (strftime('%Y-%m', created_at) = strftime('%Y-%m', 'now', '-1 month') OR strftime('%Y-%m', created_at, 'localtime') = strftime('%Y-%m', 'now', '-1 month', 'localtime'))";
     }
 
     // Auth Provider Filter
     if (authProvider && authProvider !== 'all') {
-      whereClause += ' AND auth_provider = ?';
-      params.push(authProvider);
+      if (authProvider === 'email') {
+        whereClause += " AND (auth_provider = 'email' OR auth_provider IS NULL OR auth_provider = '')";
+      } else {
+        whereClause += ' AND auth_provider = ?';
+        params.push(authProvider);
+      }
     }
 
     // Tier Filter
@@ -1041,6 +1045,10 @@ app.post('/api/orders', orderLimiter, (req, res) => {
         serverDiscount = dbCoupon.discount_percent 
           ? Math.round((serverSubtotal * dbCoupon.discount_percent) / 100) 
           : (dbCoupon.discount_amount || 0);
+        // Increment real database coupon usage
+        try {
+          db.prepare('UPDATE coupons SET current_uses = current_uses + 1 WHERE UPPER(code) = ?').run(cleanCode);
+        } catch (e) {}
       }
     }
 
@@ -1412,6 +1420,119 @@ app.post('/api/coupons/validate', couponLimiter, (req, res) => {
       discountAmount: discount,
       message: `Coupon ${coupon.code} applied: ${coupon.discount_percent}% savings!`
     });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// GET /api/admin/coupons (Admin Protected - Real Database Usage Counts)
+app.get('/api/admin/coupons', requireAdminAuth, (req, res) => {
+  try {
+    const coupons = db.prepare(`
+      SELECT 
+        id, 
+        code, 
+        discount_percent as discountPercent, 
+        discount_amount as flatDiscount, 
+        min_order_amount as minOrder, 
+        is_active as isActive, 
+        current_uses as usageCount, 
+        max_uses as maxUses, 
+        created_at as createdAt
+      FROM coupons 
+      ORDER BY created_at DESC
+    `).all();
+    res.json(coupons.map(c => ({
+      ...c,
+      isActive: Boolean(c.isActive),
+      usageCount: Number(c.usageCount) || 0,
+      minOrder: Number(c.minOrder) || 0,
+      discountPercent: Number(c.discountPercent) || 0,
+      flatDiscount: Number(c.flatDiscount) || 0
+    })));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/admin/coupons (Admin Protected - Create Promo Code)
+app.post('/api/admin/coupons', requireAdminAuth, (req, res) => {
+  try {
+    const { code, discountPercent, flatDiscount, minOrder, maxUses } = req.body;
+    if (!code || !code.trim()) {
+      return res.status(400).json({ error: 'Coupon code is required.' });
+    }
+    const cleanCode = sanitizeInput(code).trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+    const existing = db.prepare('SELECT * FROM coupons WHERE UPPER(code) = UPPER(?)').get(cleanCode);
+    if (existing) {
+      return res.status(400).json({ error: `Coupon code "${cleanCode}" already exists.` });
+    }
+
+    const couponId = `cpn_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`;
+    db.prepare(`
+      INSERT INTO coupons (id, code, discount_percent, discount_amount, min_order_amount, is_active, current_uses, max_uses)
+      VALUES (?, ?, ?, ?, ?, 1, 0, ?)
+    `).run(
+      couponId,
+      cleanCode,
+      discountPercent ? Number(discountPercent) : null,
+      flatDiscount ? Number(flatDiscount) : null,
+      minOrder ? Number(minOrder) : 0,
+      maxUses ? Number(maxUses) : 1000
+    );
+
+    db.prepare(`
+      INSERT INTO event_logs (id, event_type, payload_json, status)
+      VALUES (?, 'coupon.created', ?, 'processed')
+    `).run(`evt_cpn_${Date.now()}`, JSON.stringify({ couponId, code: cleanCode, discountPercent, minOrder }));
+
+    res.status(201).json({
+      success: true,
+      message: `Coupon "${cleanCode}" created successfully.`,
+      coupon: {
+        id: couponId,
+        code: cleanCode,
+        discountPercent: Number(discountPercent) || 0,
+        flatDiscount: Number(flatDiscount) || 0,
+        minOrder: Number(minOrder) || 0,
+        isActive: true,
+        usageCount: 0
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// PUT /api/admin/coupons/:code/toggle (Admin Protected - Pause / Activate Promo Code)
+app.put('/api/admin/coupons/:code/toggle', requireAdminAuth, (req, res) => {
+  try {
+    const cleanCode = sanitizeInput(req.params.code).trim().toUpperCase();
+    const coupon = db.prepare('SELECT * FROM coupons WHERE UPPER(code) = UPPER(?)').get(cleanCode);
+    if (!coupon) {
+      return res.status(404).json({ error: 'Coupon not found.' });
+    }
+
+    const nextState = coupon.is_active ? 0 : 1;
+    db.prepare('UPDATE coupons SET is_active = ? WHERE UPPER(code) = UPPER(?)').run(nextState, cleanCode);
+
+    res.json({
+      success: true,
+      code: cleanCode,
+      isActive: Boolean(nextState),
+      message: `Coupon ${cleanCode} is now ${nextState ? 'ACTIVE' : 'PAUSED'}.`
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// DELETE /api/admin/coupons/:code (Admin Protected - Delete Promo Code)
+app.delete('/api/admin/coupons/:code', requireAdminAuth, (req, res) => {
+  try {
+    const cleanCode = sanitizeInput(req.params.code).trim().toUpperCase();
+    db.prepare('DELETE FROM coupons WHERE UPPER(code) = UPPER(?)').run(cleanCode);
+    res.json({ success: true, message: `Coupon "${cleanCode}" deleted from database.` });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

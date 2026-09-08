@@ -19,6 +19,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
 import { validateEmail, validatePassword, validateOtp, validateName } from '../utils/validation';
+import { eventBus } from '../services/eventBus';
 
 export const AuthModal = () => {
   const { 
@@ -120,12 +121,31 @@ export const AuthModal = () => {
   }, [isAuthModalOpen, closeAuthModal]);
 
   // Complete Auth Success
-  const handleAuthSuccess = (userObj, successMsg) => {
+  const handleAuthSuccess = (userObj, successMsg, isNewRegistration = false) => {
     setUser(userObj);
     try {
       localStorage.setItem('mb_user', JSON.stringify(userObj));
       if (userObj.isAdmin) {
         localStorage.setItem('mb_admin_token', 'mb_admin_live_token_2026_sec_bloom');
+      }
+    } catch (e) {}
+
+    // Publish to Real-Time Event Bus
+    try {
+      if (isNewRegistration) {
+        eventBus.publish('user.registered', {
+          userId: userObj.id,
+          name: userObj.name,
+          email: userObj.email,
+          authProvider: userObj.authMethod || 'email'
+        });
+      } else {
+        eventBus.publish('user.logged_in', {
+          userId: userObj.id,
+          name: userObj.name,
+          email: userObj.email,
+          authProvider: userObj.authMethod || 'email'
+        });
       }
     } catch (e) {}
 
@@ -278,7 +298,7 @@ export const AuthModal = () => {
       });
       const data = await res.json();
       if (res.ok && data.success && data.user) {
-        handleAuthSuccess(data.user, data.message || `Account verified! Welcome, ${data.user.name}. 200 VIP Points added!`);
+        handleAuthSuccess(data.user, data.message || `Account verified! Welcome, ${data.user.name}. 200 VIP Points added!`, true);
       } else {
         const errorMsg = data.error || 'Invalid OTP. Please check the 6-digit code and try again.';
         setFormErrors({ general: errorMsg, regOtp: errorMsg });

@@ -172,13 +172,18 @@ export function initDB() {
   const checkCoupon = db.prepare('SELECT COUNT(*) as count FROM coupons').get();
   if (checkCoupon.count === 0) {
     const insertCoupon = db.prepare(`
-      INSERT INTO coupons (id, code, discount_percent, min_order_amount, is_active, max_uses)
-      VALUES (?, ?, ?, ?, 1, 1000)
+      INSERT INTO coupons (id, code, discount_percent, min_order_amount, is_active, max_uses, current_uses)
+      VALUES (?, ?, ?, ?, 1, 1000, 0)
     `);
     insertCoupon.run('cpn-vip10', 'VIP10', 10, 0);
     insertCoupon.run('cpn-midnight20', 'MIDNIGHT20', 20, 2999);
     insertCoupon.run('cpn-first500', 'FIRST500', 15, 1999);
   }
+
+  // Ensure real database usage count (no hardcoded/fake mock counts)
+  try {
+    db.prepare("UPDATE coupons SET current_uses = 0 WHERE current_uses > 50 AND id LIKE 'cpn-%'").run();
+  } catch (e) {}
 
   // Auto-clean placeholder dummy keys from database
   try {

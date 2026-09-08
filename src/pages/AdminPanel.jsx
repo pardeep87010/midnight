@@ -68,6 +68,7 @@ export const AdminPanel = () => {
     clearAllProducts,
     fetchProducts,
     ordersList, 
+    fetchOrders,
     updateOrderStatus, 
     navigateTo, 
     showToast,
@@ -202,12 +203,9 @@ export const AdminPanel = () => {
     colors: 'Midnight Onyx:#1C1C1C, Rose Gold:#C5A880'
   });
 
-  // Coupons Manager State
-  const [coupons, setCoupons] = useState([
-    { code: 'VIP10', discountPercent: 10, minOrder: 1999, usageCount: 342, isActive: true },
-    { code: 'MIDNIGHT20', discountPercent: 20, minOrder: 4999, usageCount: 189, isActive: true },
-    { code: 'FIRST500', flatDiscount: 500, minOrder: 2999, usageCount: 88, isActive: true }
-  ]);
+  // Coupons Manager State (Fetched from backend database)
+  const [coupons, setCoupons] = useState([]);
+  const [isLoadingCoupons, setIsLoadingCoupons] = useState(false);
   const [newCouponCode, setNewCouponCode] = useState('');
   const [newCouponPercent, setNewCouponPercent] = useState(15);
   const [newCouponMinOrder, setNewCouponMinOrder] = useState(1999);
@@ -487,7 +485,30 @@ export const AdminPanel = () => {
     }
   };
 
-  const handleCreateCoupon = (e) => {
+  // Fetch Coupons from Database
+  const fetchAdminCoupons = async () => {
+    setIsLoadingCoupons(true);
+    try {
+      const res = await fetch('/api/admin/coupons', {
+        headers: {
+          'Authorization': 'Bearer mb_admin_live_token_2026_sec_bloom',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setCoupons(data);
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to load coupons:', err);
+    } finally {
+      setIsLoadingCoupons(false);
+    }
+  };
+
+  const handleCreateCoupon = async (e) => {
     e.preventDefault();
     if (!newCouponCode.trim()) {
       showToast('Please enter a promo coupon code.', 'warning');
@@ -496,10 +517,6 @@ export const AdminPanel = () => {
     const cleanCode = newCouponCode.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
     if (cleanCode.length < 3) {
       showToast('Coupon code must be at least 3 characters.', 'warning');
-      return;
-    }
-    if (coupons.find(c => c.code === cleanCode)) {
-      showToast('Coupon code already exists!', 'warning');
       return;
     }
     const percentVal = parseInt(newCouponPercent);
@@ -513,20 +530,52 @@ export const AdminPanel = () => {
       return;
     }
 
-    const newCoupon = {
-      code: cleanCode,
-      discountPercent: percentVal,
-      minOrder: minOrderVal,
-      usageCount: 0,
-      isActive: true
-    };
-    setCoupons([newCoupon, ...coupons]);
-    setNewCouponCode('');
-    showToast(`Created new VIP promo code: ${cleanCode}!`, 'success');
+    try {
+      const res = await fetch('/api/admin/coupons', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer mb_admin_live_token_2026_sec_bloom',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        },
+        body: JSON.stringify({
+          code: cleanCode,
+          discountPercent: percentVal,
+          minOrder: minOrderVal
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        showToast(`Created new VIP promo code: ${cleanCode}!`, 'success');
+        setNewCouponCode('');
+        fetchAdminCoupons();
+      } else {
+        showToast(data.error || 'Failed to create coupon code.', 'error');
+      }
+    } catch (err) {
+      showToast('Error creating coupon: ' + err.message, 'error');
+    }
   };
 
-  const toggleCoupon = (code) => {
-    setCoupons(coupons.map(c => c.code === code ? { ...c, isActive: !c.isActive } : c));
+  const toggleCoupon = async (code) => {
+    try {
+      const res = await fetch(`/api/admin/coupons/${code}/toggle`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'Bearer mb_admin_live_token_2026_sec_bloom',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        }
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        showToast(data.message, 'info');
+        setCoupons(prev => prev.map(c => c.code === code ? { ...c, isActive: data.isActive } : c));
+      } else {
+        showToast(data.error || 'Failed to update coupon status.', 'error');
+      }
+    } catch (err) {
+      showToast('Error updating coupon', 'error');
+    }
   };
 
   // ==========================================
@@ -707,7 +756,48 @@ export const AdminPanel = () => {
     });
   };
 
-  const refreshEventData = () => {
+  // Synchronize orders, users, coupons when switching tabs
+  useEffect(() => {
+    if (activeTab === 'orders') {
+      fetchOrders();
+    } else if (activeTab === 'coupons') {
+      fetchAdminCoupons();
+    } else if (activeTab === 'users') {
+      fetchAdminUsers(1, usersSearch, usersDateFilter, usersAuthProvider, usersTierFilter);
+    }
+  }, [activeTab]);
+
+  const refreshEventData = async () => {
+    try {
+      const res = await fetch('/api/events', {
+        headers: {
+          'Authorization': 'Bearer mb_admin_live_token_2026_sec_bloom',
+          'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+        }
+      });
+      if (res.ok) {
+        const serverEvents = await res.json();
+        if (Array.isArray(serverEvents) && serverEvents.length > 0) {
+          const formatted = serverEvents.map(evt => {
+            let parsedPayload = evt.payload_json;
+            try {
+              if (typeof evt.payload_json === 'string') parsedPayload = JSON.parse(evt.payload_json);
+            } catch (e) {}
+            return {
+              eventId: evt.id,
+              eventType: evt.event_type,
+              idempotencyKey: evt.idempotency_key,
+              status: evt.status ? evt.status.toUpperCase() : 'DELIVERED',
+              timestamp: evt.created_at || new Date().toISOString(),
+              payload: parsedPayload
+            };
+          });
+          setEventLogs(formatted);
+          setSentNotifications(notificationService.getNotifications());
+          return;
+        }
+      }
+    } catch (e) {}
     setEventLogs(eventBus.getLogs());
     setSentNotifications(notificationService.getNotifications());
   };
@@ -1339,6 +1429,17 @@ export const AdminPanel = () => {
                 Manage Indian customer shipments, 100% anonymous plain packaging dispatch (Zero KYC required), and generate tamper-proof delivery manifests.
               </p>
             </div>
+
+            <button
+              onClick={() => {
+                fetchOrders();
+                showToast('Orders synchronized with live database', 'info');
+              }}
+              className="bg-white dark:bg-[#18181B] hover:bg-[#FAF3F0] dark:hover:bg-neutral-800 text-[#181617] dark:text-white px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-xs border border-[#B56571]/25 dark:border-neutral-700 transition-all active:scale-95"
+            >
+              <FontAwesomeIcon icon={faRotateRight} />
+              <span>Refresh Orders</span>
+            </button>
           </div>
 
           <div className="divide-y divide-[#B56571]/15 dark:divide-neutral-800">
@@ -1411,14 +1512,27 @@ export const AdminPanel = () => {
       {/* TAB 3: VIP COUPONS & PROMO ENGINE */}
       {activeTab === 'coupons' && (
         <div className="bg-white dark:bg-[#0D0D11] border border-[#B56571]/20 dark:border-neutral-800 rounded-xl p-6 space-y-6 animate-fade-in font-sans shadow-xs">
-          <div className="border-b border-black/[0.08] dark:border-neutral-800 pb-4">
-            <h3 className="text-lg font-bold text-[#181617] dark:text-white flex items-center space-x-2">
-              <FontAwesomeIcon icon={faTag} className="text-[#A33F4D] dark:text-[#D98A92]" />
-              <span>VIP Coupons & Discount Engine</span>
-            </h3>
-            <p className="text-xs text-[#5C4F52] dark:text-neutral-400 mt-1 font-light">
-              Create and manage marketing promo codes for Indian customers.
-            </p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/[0.08] dark:border-neutral-800 pb-4">
+            <div>
+              <h3 className="text-lg font-bold text-[#181617] dark:text-white flex items-center space-x-2">
+                <FontAwesomeIcon icon={faTag} className="text-[#A33F4D] dark:text-[#D98A92]" />
+                <span>VIP Coupons & Discount Engine</span>
+              </h3>
+              <p className="text-xs text-[#5C4F52] dark:text-neutral-400 mt-1 font-light">
+                Create and manage marketing promo codes for Indian customers with live database usage tracking.
+              </p>
+            </div>
+
+            <button
+              onClick={() => {
+                fetchAdminCoupons();
+                showToast('VIP coupons synchronized from database', 'info');
+              }}
+              className="bg-white dark:bg-[#18181B] hover:bg-[#FAF3F0] dark:hover:bg-neutral-800 text-[#181617] dark:text-white px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-xs border border-[#B56571]/25 dark:border-neutral-700 transition-all active:scale-95"
+            >
+              <FontAwesomeIcon icon={faRotateRight} className={isLoadingCoupons ? 'animate-spin' : ''} />
+              <span>Refresh Coupons</span>
+            </button>
           </div>
 
           <form onSubmit={handleCreateCoupon} className="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-[#FAF7F5] dark:bg-black/50 p-4 rounded-xl border border-[#B56571]/15 dark:border-neutral-800 items-end">
@@ -1474,29 +1588,43 @@ export const AdminPanel = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#B56571]/15 dark:divide-neutral-800 bg-white dark:bg-black">
-                {coupons.map((c, i) => (
-                  <tr key={i} className="hover:bg-[#FAF3F0] dark:hover:bg-white/[0.04] transition-colors">
-                    <td className="p-3 font-bold text-[#181617] dark:text-white">{c.code}</td>
-                    <td className="p-3">{c.discountPercent ? `${c.discountPercent}% OFF` : `₹${c.flatDiscount} OFF`}</td>
-                    <td className="p-3">₹{c.minOrder?.toLocaleString('en-IN')}</td>
-                    <td className="p-3">{c.usageCount} orders</td>
-                    <td className="p-3">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        c.isActive ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30' : 'bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/30'
-                      }`}>
-                        {c.isActive ? 'ACTIVE' : 'PAUSED'}
-                      </span>
-                    </td>
-                    <td className="p-3 text-right">
-                      <button
-                        onClick={() => toggleCoupon(c.code)}
-                        className="text-[#A33F4D] dark:text-[#D98A92] hover:underline cursor-pointer font-bold"
-                      >
-                        {c.isActive ? 'Pause' : 'Activate'}
-                      </button>
+                {isLoadingCoupons ? (
+                  <tr>
+                    <td colSpan={6} className="p-6 text-center text-xs font-mono text-[#7A696C] dark:text-neutral-400">
+                      Loading VIP coupons from database...
                     </td>
                   </tr>
-                ))}
+                ) : coupons.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="p-6 text-center text-xs font-mono text-[#7A696C] dark:text-neutral-400">
+                      No promo coupons created yet. Use the form above to create your first discount code.
+                    </td>
+                  </tr>
+                ) : (
+                  coupons.map((c, i) => (
+                    <tr key={i} className="hover:bg-[#FAF3F0] dark:hover:bg-white/[0.04] transition-colors">
+                      <td className="p-3 font-bold text-[#181617] dark:text-white">{c.code}</td>
+                      <td className="p-3">{c.discountPercent ? `${c.discountPercent}% OFF` : `₹${c.flatDiscount || 0} OFF`}</td>
+                      <td className="p-3">₹{c.minOrder?.toLocaleString('en-IN')}</td>
+                      <td className="p-3">{c.usageCount || 0} orders</td>
+                      <td className="p-3">
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                          c.isActive ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30' : 'bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/30'
+                        }`}>
+                          {c.isActive ? 'ACTIVE' : 'PAUSED'}
+                        </span>
+                      </td>
+                      <td className="p-3 text-right">
+                        <button
+                          onClick={() => toggleCoupon(c.code)}
+                          className="text-[#A33F4D] dark:text-[#D98A92] hover:underline cursor-pointer font-bold"
+                        >
+                          {c.isActive ? 'Pause' : 'Activate'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

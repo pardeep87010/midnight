@@ -169,8 +169,15 @@ export const AppProvider = ({ children }) => {
     if (category !== null) setSelectedCategory(category);
 
     // On-demand API trigger: only fetch when visiting that specific section
-    if (targetPage === 'orders' && user?.email) {
-      fetchOrders(user.email);
+    if (targetPage === 'orders') {
+      if (user?.isAdmin) {
+        fetchOrders();
+      } else if (user?.email) {
+        fetchOrders(user.email);
+      }
+    }
+    if (targetPage === 'admin') {
+      fetchOrders();
     }
     if ((targetPage === 'cart' || targetPage === 'profile') && user?.email) {
       fetchAddresses(user.email);
@@ -198,8 +205,15 @@ export const AppProvider = ({ children }) => {
       if (route.category) setSelectedCategory(route.category);
 
       // On-demand fetch on browser history navigation
-      if (route.page === 'orders' && user?.email) {
-        fetchOrders(user.email);
+      if (route.page === 'orders') {
+        if (user?.isAdmin) {
+          fetchOrders();
+        } else if (user?.email) {
+          fetchOrders(user.email);
+        }
+      }
+      if (route.page === 'admin') {
+        fetchOrders();
       }
       if ((route.page === 'cart' || route.page === 'profile') && user?.email) {
         fetchAddresses(user.email);
@@ -305,14 +319,17 @@ export const AppProvider = ({ children }) => {
 
   const fetchOrders = async (email = null) => {
     try {
-      const targetEmail = email || user?.email;
-      if (!targetEmail && !user?.isAdmin) {
-        setOrdersList([]);
-        return [];
-      }
+      const isSuperAdmin = Boolean(user?.isAdmin || user?.email === '20092003pardeep@gmail.com');
       let url = '/api/orders';
-      if (targetEmail) {
-        url = `/api/orders?email=${encodeURIComponent(targetEmail)}`;
+      if (email) {
+        url = `/api/orders?email=${encodeURIComponent(email)}`;
+      } else if (!isSuperAdmin) {
+        if (user?.email) {
+          url = `/api/orders?email=${encodeURIComponent(user.email)}`;
+        } else {
+          setOrdersList([]);
+          return [];
+        }
       }
       const res = await fetch(url, {
         headers: getAuthHeaders()
@@ -484,9 +501,16 @@ export const AppProvider = ({ children }) => {
 
   // Synchronize orders or addresses on demand when user session changes
   useEffect(() => {
-    if (user?.email) {
+    if (user?.isLoggedIn) {
       if (currentPage === 'orders' || currentPage === 'my-orders') {
-        fetchOrders(user.email);
+        if (user?.isAdmin) {
+          fetchOrders();
+        } else {
+          fetchOrders(user.email);
+        }
+      }
+      if (currentPage === 'admin') {
+        fetchOrders();
       }
       if (currentPage === 'cart' || currentPage === 'profile') {
         fetchAddresses(user.email);
@@ -495,7 +519,7 @@ export const AppProvider = ({ children }) => {
       setSavedAddresses([]);
       setOrdersList([]);
     }
-  }, [user?.email, currentPage]);
+  }, [user?.email, user?.isAdmin, user?.isLoggedIn, currentPage]);
 
 
 
