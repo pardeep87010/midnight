@@ -3,10 +3,95 @@ import { STITCH_CATEGORIES, STITCH_PRODUCTS } from '../data/mockData';
 
 const AppContext = createContext();
 
+// URL Router Helper Functions
+export const parseLocation = (pathname = '/', search = '') => {
+  if (typeof window === 'undefined') return { page: 'home', productId: '', category: 'all' };
+  
+  const p = pathname || window.location.pathname || '/';
+  const s = search || window.location.search || '';
+  const cleanPath = p.toLowerCase().replace(/\/+$/, '') || '/';
+  const params = new URLSearchParams(s);
+
+  if (cleanPath === '' || cleanPath === '/' || cleanPath === '/home') {
+    return { page: 'home', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/cart' || cleanPath === '/checkout') {
+    return { page: 'cart', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/catalog' || cleanPath === '/products' || cleanPath === '/shop') {
+    const category = params.get('category') || 'all';
+    return { page: 'catalog', productId: '', category };
+  }
+  if (cleanPath.startsWith('/product/')) {
+    const rawId = p.substring('/product/'.length).trim();
+    return { page: 'product-detail', productId: decodeURIComponent(rawId), category: 'all' };
+  }
+  if (cleanPath === '/product') {
+    const productId = params.get('id') || params.get('slug') || '';
+    return { page: 'product-detail', productId, category: 'all' };
+  }
+  if (cleanPath === '/admin' || cleanPath === '/dashboard') {
+    return { page: 'admin', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/profile' || cleanPath === '/account') {
+    return { page: 'profile', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/orders' || cleanPath === '/my-orders') {
+    return { page: 'orders', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/shipping' || cleanPath === '/shipping-info') {
+    return { page: 'shipping', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/privacy' || cleanPath === '/privacy-policy') {
+    return { page: 'privacy', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/terms' || cleanPath === '/terms-and-conditions') {
+    return { page: 'terms', productId: '', category: 'all' };
+  }
+  if (cleanPath === '/contact' || cleanPath === '/contact-us') {
+    return { page: 'contact', productId: '', category: 'all' };
+  }
+  return { page: 'home', productId: '', category: 'all' };
+};
+
+export const getURLForPage = (page, productId = null, category = null) => {
+  switch (page) {
+    case 'home':
+      return '/home';
+    case 'cart':
+      return '/cart';
+    case 'catalog':
+      return category && category !== 'all' ? `/catalog?category=${encodeURIComponent(category)}` : '/catalog';
+    case 'product-detail':
+      return productId ? `/product/${encodeURIComponent(productId)}` : '/catalog';
+    case 'admin':
+      return '/admin';
+    case 'profile':
+      return '/profile';
+    case 'orders':
+    case 'my-orders':
+      return '/orders';
+    case 'shipping':
+      return '/shipping';
+    case 'privacy':
+      return '/privacy';
+    case 'terms':
+      return '/terms';
+    case 'contact':
+      return '/contact';
+    default:
+      return '/home';
+  }
+};
+
 export const AppProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedProductId, setSelectedProductId] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const initialRoute = typeof window !== 'undefined' 
+    ? parseLocation(window.location.pathname, window.location.search) 
+    : { page: 'home', productId: '', category: 'all' };
+
+  const [currentPage, setCurrentPage] = useState(initialRoute.page);
+  const [selectedProductId, setSelectedProductId] = useState(initialRoute.productId);
+  const [selectedCategory, setSelectedCategory] = useState(initialRoute.category);
   const [searchQuery, setSearchQuery] = useState('');
   const [cart, setCart] = useState([]);
   const [isLoadingBackend, setIsLoadingBackend] = useState(true);
@@ -67,7 +152,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const navigateTo = (page, productId = null, category = null) => {
+  const navigateTo = (page, productId = null, category = null, options = {}) => {
     if (page === 'login') {
       openAuthModal('login');
       return;
@@ -76,11 +161,60 @@ export const AppProvider = ({ children }) => {
       openAuthModal('register');
       return;
     }
-    setCurrentPage(page);
-    if (productId) setSelectedProductId(productId);
-    if (category) setSelectedCategory(category);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const targetPage = (page === 'my-orders') ? 'orders' : page;
+
+    setCurrentPage(targetPage);
+    if (productId !== null) setSelectedProductId(productId);
+    if (category !== null) setSelectedCategory(category);
+
+    // On-demand API trigger: only fetch when visiting that specific section
+    if (targetPage === 'orders' && user?.email) {
+      fetchOrders(user.email);
+    }
+    if ((targetPage === 'cart' || targetPage === 'profile') && user?.email) {
+      fetchAddresses(user.email);
+    }
+
+    // Update browser URL for clean, shareable routes (e.g. /home, /cart, /catalog, /product/:id)
+    if (typeof window !== 'undefined' && !options.skipPush) {
+      const targetUrl = getURLForPage(targetPage, productId || (targetPage === 'product-detail' ? selectedProductId : null), category || selectedCategory);
+      if (window.location.pathname + window.location.search !== targetUrl) {
+        window.history.pushState({ page: targetPage, productId, category }, '', targetUrl);
+      }
+    }
+
+    if (!options.skipScroll) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
+
+  // Synchronize browser history and popstate (Back / Forward buttons)
+  useEffect(() => {
+    const handlePopState = () => {
+      const route = parseLocation(window.location.pathname, window.location.search);
+      setCurrentPage(route.page);
+      if (route.productId) setSelectedProductId(route.productId);
+      if (route.category) setSelectedCategory(route.category);
+
+      // On-demand fetch on browser history navigation
+      if (route.page === 'orders' && user?.email) {
+        fetchOrders(user.email);
+      }
+      if ((route.page === 'cart' || route.page === 'profile') && user?.email) {
+        fetchAddresses(user.email);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    // Initial URL normalization (e.g. root '/' -> '/home')
+    if (window.location.pathname === '/') {
+      window.history.replaceState({ page: 'home' }, '', '/home');
+    }
+
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [user?.email]);
 
   const updateProfile = (profileData) => {
     setUser(prev => {
@@ -348,16 +482,20 @@ export const AppProvider = ({ children }) => {
     fetchProducts();
   }, []);
 
-  // Synchronize orders and addresses when active user changes
+  // Synchronize orders or addresses on demand when user session changes
   useEffect(() => {
     if (user?.email) {
-      fetchOrders(user.email);
-      fetchAddresses(user.email);
+      if (currentPage === 'orders' || currentPage === 'my-orders') {
+        fetchOrders(user.email);
+      }
+      if (currentPage === 'cart' || currentPage === 'profile') {
+        fetchAddresses(user.email);
+      }
     } else {
       setSavedAddresses([]);
       setOrdersList([]);
     }
-  }, [user?.email]);
+  }, [user?.email, currentPage]);
 
 
 

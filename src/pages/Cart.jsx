@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faXmark, 
@@ -46,6 +46,7 @@ export const Cart = () => {
     user,
     openAuthModal,
     savedAddresses,
+    fetchAddresses,
     addSavedAddress,
     createOrder
   } = useApp();
@@ -77,6 +78,13 @@ export const Cart = () => {
     label: 'Home',
     saveToProfile: true
   });
+
+  // On-demand fetch of delivery addresses for Cart checkout
+  useEffect(() => {
+    if (user?.email) {
+      fetchAddresses(user.email);
+    }
+  }, [user?.email]);
 
   // Sync address form when user profile or saved addresses update
   useEffect(() => {

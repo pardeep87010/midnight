@@ -25,8 +25,8 @@ import { getProductReviews } from '../data/productReviews';
 export const ProductDetail = () => {
   const { selectedProductId, addToCart, navigateTo, showToast, productsList, user } = useApp();
   
-  // Safe product resolution
-  const product = (productsList || []).find(p => p.id === selectedProductId) || (productsList || [])[0];
+  // Safe product resolution by ID or Slug
+  const product = (productsList || []).find(p => String(p.id) === String(selectedProductId) || p.slug === selectedProductId) || (productsList || [])[0];
 
   const [selectedColor, setSelectedColor] = useState('Standard');
   const [quantity, setQuantity] = useState(1);
