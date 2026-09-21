@@ -543,6 +543,15 @@ export const AppProvider = ({ children }) => {
       }
     });
     showToast(`Added ${product.name} to bag!`, 'success');
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'AddToCart', {
+        content_name: product.name,
+        content_ids: [product.id],
+        content_type: 'product',
+        value: (product.price || 0) * quantity,
+        currency: 'INR'
+      });
+    }
     return true;
   };
 
@@ -669,6 +678,14 @@ export const AppProvider = ({ children }) => {
       });
       if (res.ok) {
         const data = await res.json();
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq('track', 'Purchase', {
+            value: Number(orderData.totalAmount || orderData.total || 0),
+            currency: 'INR',
+            content_type: 'product',
+            num_items: Array.isArray(orderData.items) ? orderData.items.length : 1
+          });
+        }
         await fetchOrders();
         return data;
       }

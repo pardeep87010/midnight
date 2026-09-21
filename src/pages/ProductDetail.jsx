@@ -66,6 +66,16 @@ export const ProductDetail = () => {
       setSelectedColor('Standard');
     }
     setActiveImageIndex(0);
+
+    if (product && typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'ViewContent', {
+        content_name: product.name,
+        content_ids: [product.id],
+        content_type: 'product',
+        value: Number(product.price || 0),
+        currency: 'INR'
+      });
+    }
   }, [selectedProductId, product]);
 
   if (!product) {
