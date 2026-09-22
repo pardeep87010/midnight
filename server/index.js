@@ -583,7 +583,7 @@ app.delete('/api/admin/users/:id', requireAdminAuth, (req, res) => {
 });
 
 // POST /api/admin/clean-demo-data (Super Admin Master Data Wipe)
-app.post('/api/admin/clean-demo-data', requireAdmin, (req, res) => {
+app.post('/api/admin/clean-demo-data', requireAdminAuth, (req, res) => {
   try {
     const adminEmail = req.user?.email || '20092003pardeep@gmail.com';
     if (adminEmail !== '20092003pardeep@gmail.com') {
