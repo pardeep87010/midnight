@@ -582,6 +582,39 @@ app.delete('/api/admin/users/:id', requireAdminAuth, (req, res) => {
   }
 });
 
+// POST /api/admin/clean-demo-data (Super Admin Master Data Wipe)
+app.post('/api/admin/clean-demo-data', requireAdmin, (req, res) => {
+  try {
+    const adminEmail = req.user?.email || '20092003pardeep@gmail.com';
+    if (adminEmail !== '20092003pardeep@gmail.com') {
+      return res.status(403).json({ error: 'Unauthorized. Super Admin access required.' });
+    }
+
+    // 1. Delete all non-admin users
+    const delUsers = db.prepare("DELETE FROM users WHERE email != '20092003pardeep@gmail.com'").run();
+    // 2. Delete all orders
+    const delOrders = db.prepare("DELETE FROM orders").run();
+    // 3. Delete all addresses
+    const delAddresses = db.prepare("DELETE FROM addresses").run();
+    // 4. Delete all event logs
+    const delEvents = db.prepare("DELETE FROM event_logs").run();
+    // 5. Reset coupons
+    const resetCoupons = db.prepare("UPDATE coupons SET current_uses = 0").run();
+
+    res.json({
+      success: true,
+      message: 'All demo and user data permanently wiped. Super Admin account preserved.',
+      deletedUsers: delUsers.changes,
+      deletedOrders: delOrders.changes,
+      deletedAddresses: delAddresses.changes,
+      deletedEvents: delEvents.changes,
+      resetCoupons: resetCoupons.changes
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ==========================================
 // 3. PRODUCTS REST API
 // ==========================================
