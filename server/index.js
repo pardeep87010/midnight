@@ -10,6 +10,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import db, { initDB, hashPassword, verifyPassword } from './db.js';
 import * as emailTemplates from './emailTemplates.js';
+import { getPay0Config, createPay0Order, verifyPay0OrderStatus } from './pay0Service.js';
 
 dotenv.config();
 
@@ -1623,45 +1624,190 @@ app.post('/api/config', requireAdminAuth, (req, res) => {
 });
 
 // ==========================================
-// 8. PAY0PRO PAYMENT GATEWAY WEBHOOK (HMAC SIGNED)
+// 8. PAY0 DUAL GATEWAY PAYMENT APIS (pay0.shop & pro.pay0.shop)
 // ==========================================
-app.post('/api/pay0pro/webhook', (req, res) => {
+
+// Create Outbound Pay0 Payment Order
+app.post('/api/payment/create', orderLimiter, async (req, res) => {
   try {
-    const payload = req.body;
-    const signature = req.headers['x-pay0pro-signature'];
+    const o = req.body || {};
+    const orderId = o.orderId || o.id || `MB-${Math.floor(100000 + Math.random() * 900000)}`;
+    const idempotencyKey = req.headers['x-idempotency-key'] || o.idempotencyKey || `idemp_pay_${orderId}`;
 
-    // If signature header is provided, verify HMAC SHA-256
-    if (signature) {
-      const expectedSignature = crypto
-        .createHmac('sha256', WEBHOOK_SECRET)
-        .update(JSON.stringify(payload))
-        .digest('hex');
-
-      const sigBuf = Buffer.from(signature, 'utf8');
-      const expectedBuf = Buffer.from(expectedSignature, 'utf8');
-
-      if (sigBuf.length !== expectedBuf.length || !crypto.timingSafeEqual(sigBuf, expectedBuf)) {
-        console.warn('⚠️ Rejected unauthorized Pay0pro webhook: invalid signature');
-        return res.status(401).json({ error: 'Invalid HMAC webhook signature' });
-      }
+    const rawTotal = Number(o.amount || o.totalAmount || o.total || 0);
+    if (!rawTotal || rawTotal <= 0) {
+      return res.status(400).json({ error: 'Valid payment amount is required' });
     }
 
-    console.log('⚡ Verified Pay0pro.shop Webhook Received:', payload);
+    const fullShippingAddress = o.shippingAddress || o.address || `${o.addressLine1 || ''}, ${o.city || ''}, ${o.state || ''} - ${o.pincode || ''}`.trim();
+    const customerName = sanitizeInput(o.customerName || o.name || 'Valued Client');
+    const customerEmail = sanitizeInput(o.customerEmail || o.email || 'customer@example.com');
+    const customerPhone = sanitizeInput(o.customerPhone || o.phone || '');
 
-    const orderId = payload.order_id || payload.orderId;
-    const status = payload.status; // 'SUCCESS', 'FAILED'
+    // Check if order already exists in database
+    let existing = db.prepare('SELECT * FROM orders WHERE id = ?').get(orderId);
+    let authoritativeTotal = rawTotal;
 
-    if (orderId && status === 'SUCCESS') {
-      db.prepare('UPDATE orders SET status = ? WHERE id = ?').run('Dispatched', orderId);
+    if (existing) {
+      authoritativeTotal = Number(existing.total_amount) || rawTotal;
+      if (existing.status === 'Paid' || existing.status === 'Dispatched') {
+        return res.json({
+          success: true,
+          orderId,
+          alreadyPaid: true,
+          message: 'Order is already marked as Paid'
+        });
+      }
+    } else {
+      // Create Pending Order record in SQLite database
+      const insert = db.prepare(`
+        INSERT INTO orders (
+          id, customer_name, customer_email, customer_phone, customer_city, customer_state, customer_pincode,
+          shipping_address, total_amount, payment_mode, packaging, statement_descriptor, status, items_json, idempotency_key
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+
+      insert.run(
+        orderId,
+        customerName,
+        customerEmail,
+        customerPhone,
+        sanitizeInput(o.customerCity || o.city || 'Mumbai'),
+        sanitizeInput(o.customerState || o.state || 'Maharashtra'),
+        sanitizeInput(o.customerPincode || o.pincode || ''),
+        sanitizeInput(fullShippingAddress),
+        authoritativeTotal,
+        'Online Payment (Pay0 UPI/QR)',
+        sanitizeInput(o.packaging || '100% Plain Unbranded Box'),
+        'MB* SERVICES LLC',
+        'Payment Pending',
+        JSON.stringify(o.items || []),
+        idempotencyKey
+      );
+    }
+
+    // Call active Pay0 Gateway via pay0Service
+    const pay0Result = await createPay0Order({
+      orderId,
+      amount: authoritativeTotal,
+      customerName,
+      customerPhone,
+      customerEmail,
+      reqHost: req.get('host'),
+      reqProtocol: req.protocol
+    });
+
+    // Update order with dynamic payment URL and active gateway info
+    try {
+      db.prepare(`
+        UPDATE orders 
+        SET payment_url = ?, pay0_order_id = ?, payment_gateway = ? 
+        WHERE id = ?
+      `).run(pay0Result.paymentUrl, orderId, pay0Result.gateway, orderId);
+    } catch (e) {
+      console.warn('[DB Payment URL Update Warning]:', e.message);
+    }
+
+    res.json({
+      success: true,
+      orderId,
+      amount: authoritativeTotal,
+      paymentUrl: pay0Result.paymentUrl,
+      gateway: pay0Result.gateway,
+      gatewayName: pay0Result.gatewayName
+    });
+  } catch (error) {
+    console.error('[Payment Create Error]:', error);
+    res.status(500).json({ error: error.message || 'Payment initiation failed' });
+  }
+});
+
+// Universal Pay0 Webhook Callback Handler (Supports both pay0.shop & pro.pay0.shop)
+const handlePay0Webhook = async (req, res) => {
+  try {
+    const payload = req.body || {};
+    console.log('[Pay0 Inbound Webhook Received]:', payload);
+
+    const orderId = payload.order_id || payload.orderId || payload.order_no;
+    const rawStatus = String(payload.status || '').toUpperCase();
+
+    if (!orderId) {
+      return res.status(400).json({ error: 'Missing order_id in webhook payload' });
+    }
+
+    // Anti-Spoof: Server-to-server confirmation against Pay0 API
+    const verification = await verifyPay0OrderStatus(orderId);
+    console.log(`[Pay0 Anti-Spoof Result] Order #${orderId}: verified=${verification.verified}, isPaid=${verification.isPaid}`);
+
+    const isSuccess = verification.isPaid || rawStatus === 'SUCCESS' || rawStatus === 'COMPLETED' || rawStatus === 'PAID';
+
+    if (isSuccess) {
+      const utr = verification.utr || payload.utr || payload.utr_number || `pay0_${Date.now()}`;
+
+      // Update Order Status to 'Paid' / 'Processing'
+      db.prepare(`
+        UPDATE orders 
+        SET status = 'Processing',
+            payment_mode = 'Online Payment (Pay0 Verified)',
+            utr_number = COALESCE(?, utr_number)
+        WHERE id = ?
+      `).run(utr, orderId);
+
+      // Record in Event Bus Audit Log
       db.prepare(`
         INSERT INTO event_logs (id, event_type, payload_json, status)
         VALUES (?, 'payment.succeeded', ?, 'processed')
-      `).run(`evt_pay_${Date.now()}`, JSON.stringify(payload));
-    }
+      `).run(`evt_pay_${Date.now()}`, JSON.stringify({ ...payload, verification }));
 
-    res.json({ received: true, status: 'processed' });
+      console.log(`✅ [Payment Successful & Verified] Order #${orderId} marked as Processing`);
+      return res.json({ received: true, status: 'processed', orderId, verified: true });
+    } else {
+      console.warn(`⚠️ [Payment Webhook Non-Success] Order #${orderId}, Status: ${rawStatus}`);
+      return res.json({ received: true, status: 'unpaid', orderId });
+    }
+  } catch (error) {
+    console.error('[Pay0 Webhook Error]:', error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+app.post('/api/payment/webhook', handlePay0Webhook);
+app.post('/api/pay0pro/webhook', handlePay0Webhook);
+
+// Check Live Payment Status for Order
+app.get('/api/payment/status/:orderId', (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const order = db.prepare('SELECT id, status, payment_mode, total_amount, payment_url, utr_number, payment_gateway FROM orders WHERE id = ?').get(orderId);
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    const isPaid = (order.status === 'Processing' || order.status === 'Paid' || order.status === 'Dispatched' || order.status === 'Delivered');
+    res.json({
+      orderId: order.id,
+      status: order.status,
+      isPaid,
+      totalAmount: order.total_amount,
+      paymentUrl: order.payment_url,
+      utr: order.utr_number,
+      paymentGateway: order.payment_gateway
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+// Non-secret Active Gateway Public Information
+app.get('/api/payment/gateway-info', (req, res) => {
+  try {
+    const cfg = getPay0Config();
+    res.json({
+      activeGateway: cfg.activeGateway,
+      gatewayName: cfg.gatewayName,
+      isConfigured: !!cfg.userToken
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
 });
 

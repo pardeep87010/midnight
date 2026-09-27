@@ -229,11 +229,15 @@ export const AdminPanel = () => {
 
   // Live ENV & API Keys State (Loaded securely from authenticated backend)
   const [envConfig, setEnvConfig] = useState({
-    PAYOPRO_MCH_ID: '',
-    PAYOPRO_SECRET_KEY: '',
-    PAYOPRO_BASE_URL: 'https://pay0pro.shop/api/v1/create_order',
-    PAYOPRO_NOTIFY_URL: 'https://midnightbloom.com/api/webhooks/pay0pro',
-    PAYOPRO_RETURN_URL: 'https://midnightbloom.com/cart?payment=success',
+    ACTIVE_PAYMENT_GATEWAY: 'pay0_std',
+    PAY0_STD_USER_TOKEN: '',
+    PAY0_STD_SECRET_KEY: '',
+    PAY0_STD_WEBHOOK_URL: '',
+    PAY0_STD_REDIRECT_URL: '',
+    PAY0_PRO_USER_TOKEN: '',
+    PAY0_PRO_SECRET_KEY: '',
+    PAY0_PRO_WEBHOOK_URL: '',
+    PAY0_PRO_REDIRECT_URL: '',
     EMAIL_PROVIDER: 'resend',
     RESEND_API_KEY: '',
     SMTP_HOST: 'smtp.resend.com',
@@ -1958,43 +1962,192 @@ export const AdminPanel = () => {
               </button>
             </div>
 
-            {/* Pay0pro.shop Section */}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2 text-xs font-mono font-bold text-[#181617] dark:text-white uppercase tracking-wider border-b border-black/[0.08] dark:border-neutral-800 pb-1.5">
-                <FontAwesomeIcon icon={faCreditCard} className="text-[#A33F4D] dark:text-[#D98A92]" />
-                <span>1. Pay0pro.shop Payment Gateway Credentials</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                <div>
-                  <label className="block text-[#5C4F52] dark:text-neutral-400 text-[11px] mb-1">PAYOPRO_MCH_ID (Merchant ID) *</label>
-                  <input
-                    type="text"
-                    required
-                    value={envConfig.PAYOPRO_MCH_ID}
-                    onChange={(e) => setEnvConfig({ ...envConfig, PAYOPRO_MCH_ID: e.target.value })}
-                    className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-md px-3 py-2 text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571]"
-                  />
+            {/* 1. Pay0 Dual Gateway Management Engine */}
+            <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/[0.08] dark:border-neutral-800 pb-2.5">
+                <div className="flex items-center space-x-2 text-xs font-mono font-bold text-[#181617] dark:text-white uppercase tracking-wider">
+                  <FontAwesomeIcon icon={faCreditCard} className="text-[#A33F4D] dark:text-[#D98A92]" />
+                  <span>1. Payment Gateway Engine (Pay0 Dual Integration)</span>
                 </div>
-                <div>
-                  <label className="block text-[#5C4F52] dark:text-neutral-400 text-[11px] mb-1">PAYOPRO_SECRET_KEY (MD5 Secret) *</label>
-                  <input
-                    type="text"
-                    required
-                    value={envConfig.PAYOPRO_SECRET_KEY}
-                    onChange={(e) => setEnvConfig({ ...envConfig, PAYOPRO_SECRET_KEY: e.target.value })}
-                    className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-md px-3 py-2 text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571]"
-                  />
-                </div>
-                <div className="sm:col-span-2">
-                  <label className="block text-[#5C4F52] dark:text-neutral-400 text-[11px] mb-1">PAYOPRO_BASE_URL (API Endpoint)</label>
-                  <input
-                    type="text"
-                    value={envConfig.PAYOPRO_BASE_URL}
-                    onChange={(e) => setEnvConfig({ ...envConfig, PAYOPRO_BASE_URL: e.target.value })}
-                    className="w-full bg-[#FAF7F5] dark:bg-black border border-[#B56571]/25 dark:border-neutral-700 rounded-md px-3 py-2 text-[#181617] dark:text-white focus:outline-none focus:border-[#B56571]"
-                  />
+
+                {/* 1-Click Active Gateway Switcher */}
+                <div className="flex items-center gap-1.5 bg-black/5 dark:bg-black/40 p-1 rounded-xl border border-black/10 dark:border-white/10 font-mono text-[11px]">
+                  <span className="text-[10px] text-[#5C4F52] dark:text-neutral-400 font-semibold px-2">Active Gateway:</span>
+                  <button
+                    type="button"
+                    onClick={() => setEnvConfig(prev => ({ ...prev, ACTIVE_PAYMENT_GATEWAY: 'pay0_std' }))}
+                    className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      (envConfig.ACTIVE_PAYMENT_GATEWAY || 'pay0_std') === 'pay0_std'
+                        ? 'bg-emerald-600 text-white shadow-sm'
+                        : 'text-neutral-500 hover:text-neutral-300'
+                    }`}
+                  >
+                    Pay0 Standard (pay0.shop)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEnvConfig(prev => ({ ...prev, ACTIVE_PAYMENT_GATEWAY: 'pay0_pro' }))}
+                    className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      envConfig.ACTIVE_PAYMENT_GATEWAY === 'pay0_pro'
+                        ? 'bg-indigo-600 text-white shadow-sm'
+                        : 'text-neutral-500 hover:text-neutral-300'
+                    }`}
+                  >
+                    Pay0 Pro (pro.pay0.shop)
+                  </button>
                 </div>
               </div>
+
+              {/* Side-by-Side Gateway Config Cards */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* Gateway 1: Pay0 Standard (pay0.shop) */}
+                <div className={`p-4 rounded-xl border transition-all space-y-3 font-mono ${
+                  (envConfig.ACTIVE_PAYMENT_GATEWAY || 'pay0_std') === 'pay0_std'
+                    ? 'border-emerald-500/40 bg-emerald-500/[0.03] dark:bg-emerald-950/20'
+                    : 'border-black/10 dark:border-neutral-800 bg-black/[0.02] dark:bg-black/30 opacity-75'
+                }`}>
+                  <div className="flex items-center justify-between pb-1 border-b border-black/[0.06] dark:border-neutral-800">
+                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                      Gateway 1: Pay0 Standard (pay0.shop)
+                    </span>
+                    {(envConfig.ACTIVE_PAYMENT_GATEWAY || 'pay0_std') === 'pay0_std' && (
+                      <span className="text-[9px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold uppercase">
+                        Active
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="space-y-2 text-xs">
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_STD_USER_TOKEN (User Token)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_STD_USER_TOKEN || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_STD_USER_TOKEN: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-emerald-500"
+                        placeholder="e7d3b644cef8f32dec1b8ce4cd5802e3"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_STD_SECRET_KEY (Secret Key)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_STD_SECRET_KEY || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_STD_SECRET_KEY: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-emerald-500"
+                        placeholder="IAvFPh0w1N816336807"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_STD_WEBHOOK_URL (Optional Custom Callback)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_STD_WEBHOOK_URL || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_STD_WEBHOOK_URL: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-emerald-500"
+                        placeholder="https://yourdomain.com/api/payment/webhook"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_STD_REDIRECT_URL (Optional Custom Return)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_STD_REDIRECT_URL || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_STD_REDIRECT_URL: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-emerald-500"
+                        placeholder="https://yourdomain.com/cart?payment=success"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gateway 2: Pay0 Pro (pro.pay0.shop) */}
+                <div className={`p-4 rounded-xl border transition-all space-y-3 font-mono ${
+                  envConfig.ACTIVE_PAYMENT_GATEWAY === 'pay0_pro'
+                    ? 'border-indigo-500/40 bg-indigo-500/[0.03] dark:bg-indigo-950/20'
+                    : 'border-black/10 dark:border-neutral-800 bg-black/[0.02] dark:bg-black/30 opacity-75'
+                }`}>
+                  <div className="flex items-center justify-between pb-1 border-b border-black/[0.06] dark:border-neutral-800">
+                    <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                      Gateway 2: Pay0 Pro (pro.pay0.shop)
+                    </span>
+                    {envConfig.ACTIVE_PAYMENT_GATEWAY === 'pay0_pro' && (
+                      <span className="text-[9px] bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30 px-2 py-0.5 rounded-full font-bold uppercase">
+                        Active
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="space-y-2 text-xs">
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_PRO_USER_TOKEN (User Token)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_PRO_USER_TOKEN || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_PRO_USER_TOKEN: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-indigo-500"
+                        placeholder="pro.pay0.shop user token"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_PRO_SECRET_KEY (Secret Key)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_PRO_SECRET_KEY || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_PRO_SECRET_KEY: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-indigo-500"
+                        placeholder="pro.pay0.shop secret key"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_PRO_WEBHOOK_URL (Optional Custom Callback)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_PRO_WEBHOOK_URL || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_PRO_WEBHOOK_URL: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-indigo-500"
+                        placeholder="https://yourdomain.com/api/payment/webhook"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[#5C4F52] dark:text-neutral-400 text-[10px] uppercase font-bold mb-1">
+                        PAY0_PRO_REDIRECT_URL (Optional Custom Return)
+                      </label>
+                      <input
+                        type="text"
+                        value={envConfig.PAY0_PRO_REDIRECT_URL || ''}
+                        onChange={(e) => setEnvConfig({ ...envConfig, PAY0_PRO_REDIRECT_URL: e.target.value })}
+                        className="w-full bg-[#FAF7F5] dark:bg-black border border-black/15 dark:border-neutral-700 rounded-md px-3 py-1.5 text-xs text-[#181617] dark:text-white focus:outline-none focus:border-indigo-500"
+                        placeholder="https://yourdomain.com/cart?payment=success"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-[11px] text-[#5C4F52] dark:text-neutral-400 font-mono font-light">
+                ℹ️ At any given time, only the active gateway processes customer checkout. Both gateway credentials remain saved in the database.
+              </p>
             </div>
 
             {/* Email Notification Section */}

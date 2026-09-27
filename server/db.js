@@ -157,11 +157,15 @@ export function initDB() {
     CREATE INDEX IF NOT EXISTS idx_addresses_user_email ON addresses(user_email);
   `);
 
-  // Auto-migration for enhanced order address fields in existing database
+  // Auto-migration for enhanced order address & payment gateway fields in existing database
   try { db.exec("ALTER TABLE orders ADD COLUMN customer_phone TEXT;"); } catch (e) {}
   try { db.exec("ALTER TABLE orders ADD COLUMN shipping_address TEXT;"); } catch (e) {}
   try { db.exec("ALTER TABLE orders ADD COLUMN customer_state TEXT;"); } catch (e) {}
   try { db.exec("ALTER TABLE orders ADD COLUMN customer_pincode TEXT;"); } catch (e) {}
+  try { db.exec("ALTER TABLE orders ADD COLUMN payment_url TEXT;"); } catch (e) {}
+  try { db.exec("ALTER TABLE orders ADD COLUMN pay0_order_id TEXT;"); } catch (e) {}
+  try { db.exec("ALTER TABLE orders ADD COLUMN utr_number TEXT;"); } catch (e) {}
+  try { db.exec("ALTER TABLE orders ADD COLUMN payment_gateway TEXT;"); } catch (e) {}
 
   // Auto-clean any dummy seed addresses from database
   try {
@@ -201,6 +205,20 @@ export function initDB() {
     upsertConfig.run('RESEND_EMAIL_API_KEY', 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy', 1);
     upsertConfig.run('RESEND_DOMAIN', 'playnixclub.bet', 0);
     upsertConfig.run('FROM_EMAIL', 'Midnight Bloom <orders@playnixclub.bet>', 0);
+
+    // Seed Pay0 Dual Gateway Defaults if not already set
+    const checkActiveGateway = db.prepare("SELECT value FROM env_configs WHERE key = 'ACTIVE_PAYMENT_GATEWAY'").get();
+    if (!checkActiveGateway) {
+      upsertConfig.run('ACTIVE_PAYMENT_GATEWAY', 'pay0_std', 0);
+    }
+    const checkStdToken = db.prepare("SELECT value FROM env_configs WHERE key = 'PAY0_STD_USER_TOKEN'").get();
+    if (!checkStdToken) {
+      upsertConfig.run('PAY0_STD_USER_TOKEN', 'e7d3b644cef8f32dec1b8ce4cd5802e3', 1);
+    }
+    const checkStdSecret = db.prepare("SELECT value FROM env_configs WHERE key = 'PAY0_STD_SECRET_KEY'").get();
+    if (!checkStdSecret) {
+      upsertConfig.run('PAY0_STD_SECRET_KEY', 'IAvFPh0w1N816336807', 1);
+    }
   } catch (e) {}
 
   // 8. Users & Authentication Table

@@ -109,6 +109,37 @@ export const Cart = () => {
     }
   }, [savedAddresses]);
 
+  // Handle return from Pay0 Payment Gateway (?payment=success&order_id=...)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentParam = urlParams.get('payment');
+    const orderIdParam = urlParams.get('order_id') || urlParams.get('orderId');
+
+    if (paymentParam === 'success' && orderIdParam) {
+      fetch(`/api/payment/status/${encodeURIComponent(orderIdParam)}`)
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data && data.orderId) {
+            setConfirmedOrder({
+              id: data.orderId,
+              customerName: user?.name || 'Valued Client',
+              totalAmount: data.totalAmount || 0,
+              total_amount: data.totalAmount || 0,
+              total: data.totalAmount || 0,
+              paymentMode: data.paymentGateway ? `Online (${data.paymentGateway.toUpperCase()})` : 'Online Payment (Pay0 Verified)',
+              status: data.status || 'Paid',
+              utrNumber: data.utr || null
+            });
+            setOrderComplete(true);
+            clearCart();
+            showToast(`Payment Confirmed for Order #${data.orderId}!`, 'success');
+          }
+        })
+        .catch(err => console.error('Error verifying payment on return:', err));
+    }
+  }, []);
+
   // INR Thresholds
   const freeGiftThreshold = 4999;
   const amountToGift = Math.max(0, freeGiftThreshold - cartSubtotal);
@@ -204,6 +235,8 @@ export const Cart = () => {
     const customerContactPhone = (activeAddress.phone || user?.phone || '').trim();
     const customerUserEmail = (user?.email || 'customer@midnightbloom.in').trim();
 
+    const isOnline = selectedPaymentMode === 'online';
+
     const newOrder = {
       id: orderId,
       customerName: customerFullName,
@@ -217,10 +250,10 @@ export const Cart = () => {
       total_amount: total,
       total: total,
       subtotal: cartSubtotal,
-      paymentMode: 'Cash on Delivery (COD)',
+      paymentMode: isOnline ? 'Online Payment (Pay0 UPI/QR)' : 'Cash on Delivery (COD)',
       packaging: packagingType === 'plain-box' ? '100% Plain Unbranded Box' : 'Discreet Eco-Kraft Mailer',
       statementDescriptor: 'MB* SERVICES LLC',
-      status: 'Processing',
+      status: isOnline ? 'Payment Pending' : 'Processing',
       date: new Date().toISOString().split('T')[0],
       items: cart.map(item => ({
         id: item.product?.id || item.id,
@@ -233,7 +266,36 @@ export const Cart = () => {
       }))
     };
 
-    // 2. Persist in SQLite Database via API
+    // Online Payment via Pay0 Gateway
+    if (isOnline) {
+      try {
+        const res = await fetch('/api/payment/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-idempotency-key': idempotencyKey
+          },
+          body: JSON.stringify(newOrder)
+        });
+
+        const data = await res.json();
+        if (data.success && data.paymentUrl) {
+          showToast(`Connecting to ${data.gatewayName || 'Payment Gateway'}...`, 'info');
+          clearCart();
+          // Seamless redirect to Pay0 payment page
+          window.location.href = data.paymentUrl;
+          return;
+        } else {
+          throw new Error(data.error || 'Could not initiate online payment');
+        }
+      } catch (err) {
+        setIsCheckingOut(false);
+        showToast(err.message || 'Payment gateway connection failed. Please choose Cash on Delivery.', 'error');
+        return;
+      }
+    }
+
+    // 2. Persist COD Order in SQLite Database via API
     await createOrder(newOrder);
 
     // 3. Publish 'order.placed' & 'payment.succeeded' events via Event Bus
@@ -821,49 +883,57 @@ export const Cart = () => {
                 </p>
               </div>
 
-              {/* 2. Online Payment Options (UPI / Cards / Net Banking) - Notice Badge */}
+              {/* 2. Online Payment Options (Pay0 UPI / Cards / Net Banking) - Active */}
               <div 
-                onClick={() => {
-                  setSelectedPaymentMode('cod');
-                  showToast('Online payment gateway is temporarily undergoing scheduled PCI-DSS banking maintenance. COD is active with instant priority dispatch.', 'info');
-                }}
-                className="p-3.5 rounded-xl border border-dashed border-black/20 dark:border-white/15 bg-black/[0.02] dark:bg-black/40 space-y-2 cursor-pointer hover:border-[#B56571]/40 transition-all opacity-85"
+                onClick={() => setSelectedPaymentMode('online')}
+                className={`p-3.5 rounded-xl border-2 transition-all cursor-pointer space-y-1.5 ${
+                  selectedPaymentMode === 'online'
+                    ? 'border-[#B56571] dark:border-[#D98A92] bg-[#FAF3F0] dark:bg-[#18191E] shadow-sm'
+                    : 'border-black/10 dark:border-white/10 bg-black/5 dark:bg-black/20 opacity-70 hover:opacity-100'
+                }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/50" />
-                    <span className="text-xs font-bold text-[#181617] dark:text-white font-mono flex items-center gap-1.5">
-                      <FontAwesomeIcon icon={faCreditCard} className="text-xs text-[#A33F4D] dark:text-[#D98A92]" />
-                      <span>Online Payment (UPI / Cards / Net Banking)</span>
+                  <div className="flex items-center space-x-2.5">
+                    <span className={`w-3 h-3 rounded-full flex items-center justify-center ${
+                      selectedPaymentMode === 'online' ? 'bg-[#B56571] dark:bg-[#D98A92] ring-2 ring-[#B56571]/30' : 'bg-slate-400'
+                    }`}>
+                      {selectedPaymentMode === 'online' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                     </span>
+                    <div className="flex items-center gap-1.5">
+                      <FontAwesomeIcon icon={faCreditCard} className="text-xs text-[#A33F4D] dark:text-[#D98A92]" />
+                      <span className="text-xs font-bold text-[#181617] dark:text-white font-mono">
+                        Online Payment (Pay0 UPI / QR Code / Cards)
+                      </span>
+                    </div>
                   </div>
-                  <span className="text-[9px] font-mono text-amber-600 dark:text-amber-400 font-bold px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
-                    Maintenance
+                  <span className="text-[10px] text-indigo-700 dark:text-indigo-400 font-bold font-mono px-2 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/25">
+                    Instant UPI
                   </span>
                 </div>
 
                 {/* Online Payment Provider Visual Badges */}
-                <div className="flex flex-wrap items-center gap-1.5 pl-4 text-[10px] font-mono text-[#7A696C] dark:text-neutral-400">
+                <div className="flex flex-wrap items-center gap-1.5 pl-5 text-[10px] font-mono text-[#7A696C] dark:text-neutral-400">
                   <span className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                    UPI (GPay / PhonePe / Paytm)
+                    Google Pay / PhonePe / Paytm / BHIM
                   </span>
                   <span className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                    Cards (Visa / Master / RuPay)
+                    UPI QR Code
                   </span>
                   <span className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                    Net Banking
+                    Cards & Net Banking
                   </span>
                 </div>
 
-                <p className="text-[10px] text-[#7A696C] dark:text-neutral-400 font-light pl-4 flex items-center gap-1">
-                  <FontAwesomeIcon icon={faCircleInfo} className="text-[9px] text-amber-500 shrink-0" />
-                  <span>Online gateway undergoing scheduled upgrade. Please use COD for instant door-to-door dispatch.</span>
+                <p className="text-[11px] text-[#5C4F52] dark:text-neutral-300 font-light leading-relaxed pl-5">
+                  Instant automated checkout via Pay0. Seamless UPI intent or scan QR code with any UPI app on mobile or desktop.
                 </p>
               </div>
 
               <div className="flex items-center space-x-1.5 px-1 text-[10px] text-[#7A696C] dark:text-neutral-400 font-mono">
                 <FontAwesomeIcon icon={faShieldHalved} className="text-[#A33F4D] dark:text-[#D98A92]" />
-                <span>Zero advance payment required • Pay safely upon delivery</span>
+                <span>
+                  {selectedPaymentMode === 'online' ? '256-bit Encrypted Bank Grade SSL Checkout • 100% Secure' : 'Zero advance payment required • Pay safely upon delivery'}
+                </span>
               </div>
             </div>
 
@@ -872,8 +942,21 @@ export const Cart = () => {
               disabled={isCheckingOut}
               className="w-full btn-gold py-4 rounded-full font-bold uppercase tracking-wider text-xs transition-all active:scale-95 shadow-xl flex items-center justify-center space-x-2 cursor-pointer text-white"
             >
-              <FontAwesomeIcon icon={faLock} className="text-xs" />
-              <span>{isCheckingOut ? 'Securing Order in Database...' : `Place Order with Cash on Delivery (₹${total.toLocaleString('en-IN')})`}</span>
+              {isCheckingOut ? (
+                <>
+                  <span className="animate-spin mr-2">⏳</span>
+                  <span>{selectedPaymentMode === 'online' ? 'Connecting to Pay0 Gateway...' : 'Processing Discreet Order...'}</span>
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={selectedPaymentMode === 'online' ? faCreditCard : faLock} className="text-xs mr-2" />
+                  <span>
+                    {selectedPaymentMode === 'online' 
+                      ? `Pay Online via UPI • ₹${total.toLocaleString('en-IN')}` 
+                      : `Confirm Order via COD • ₹${total.toLocaleString('en-IN')}`}
+                  </span>
+                </>
+              )}
             </button>
 
             <div className="text-center pt-2 text-[11px] text-[#5C4F52] dark:text-neutral-400 space-y-1 font-light">

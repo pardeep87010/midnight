@@ -127,13 +127,14 @@ export const STITCH_CATEGORIES = [
 // Completely clean/empty catalog - no mock/demo products
 export const STITCH_PRODUCTS = [
   {
-    "id": "lelo-mona-wave",
+    "id": "lelo-mona-wave-dual-motor-g-spot-wand",
     "name": "LELO Mona Wave Dual-Motor G-Spot Wand",
+    "slug": "lelo-mona-wave-dual-motor-g-spot-wand",
     "category": "vibrators",
     "subcategory": "G-Spot Vibrators",
-    "price": 999,
-    "originalPrice": 1499,
-    "discount": "33% OFF",
+    "price": 12499,
+    "originalPrice": 15999,
+    "discount": "22% OFF",
     "badge": "Luxury Flagship",
     "stock": 35,
     "subtitle": "WaveMotion technology that mimics the come-hither finger motion",
@@ -152,20 +153,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Midnight Plum",
-        "hex": "#3E1C4D"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Rose Gold",
-        "hex": "#B76E79"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_0.webp",
-      "/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_1.webp",
-      "/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_2.webp",
-      "/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_3.webp",
-      "/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_4.webp"
     ],
     "inTheBox": [
       "LELO Mona Wave Dual-Motor G-Spot Wand Main Unit",
@@ -173,18 +167,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/LELO Mona Wave Dual-Motor G-Spot Wand_0.webp",
+      "/product-images/LELO Mona Wave Dual-Motor G-Spot Wand_1.webp",
+      "/product-images/LELO Mona Wave Dual-Motor G-Spot Wand_2.webp",
+      "/product-images/LELO Mona Wave Dual-Motor G-Spot Wand_3.webp",
+      "/product-images/LELO Mona Wave Dual-Motor G-Spot Wand_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 136,
-    "image": "/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_0.webp"
+    "reviewsCount": 140
   },
   {
-    "id": "bullet-vibrator-pro",
+    "id": "the-micro-pulse-bullet-vibrator-pro",
     "name": "The Micro-Pulse Bullet Vibrator Pro",
+    "slug": "the-micro-pulse-bullet-vibrator-pro",
     "category": "vibrators",
     "subcategory": "Bullet Vibrators",
-    "price": 499,
-    "originalPrice": 799,
-    "discount": "38% OFF",
+    "price": 2499,
+    "originalPrice": 3299,
+    "discount": "24% OFF",
     "badge": "Beginner Essential",
     "stock": 80,
     "subtitle": "Discreet pinpoint external clitoral stimulation wand",
@@ -203,7 +204,7 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Rose Gold Ember",
+        "name": "Velvet Rose",
         "hex": "#B76E79"
       },
       {
@@ -211,31 +212,30 @@ export const STITCH_PRODUCTS = [
         "hex": "#1C1C1C"
       }
     ],
-    "images": [
-      "/product-images/The%20Micro-Pulse%20Bullet%20Vibrator%20Pro_0.webp",
-      "/product-images/The%20Micro-Pulse%20Bullet%20Vibrator%20Pro_3.webp.webp",
-      "/product-images/The%20Micro-Pulse%20Bullet%20Vibrator%20Pro_1.webp",
-      "/product-images/The%20Micro-Pulse%20Bullet%20Vibrator%20Pro_2.webp",
-      "/product-images/The%20Micro-Pulse%20Bullet%20Vibrator%20Pro_3.webp"
-    ],
     "inTheBox": [
       "The Micro-Pulse Bullet Vibrator Pro Main Unit",
       "Magnetic USB Fast Charger / User Guide",
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Micro-Pulse Bullet Vibrator Pro_0.webp",
+      "/product-images/The Micro-Pulse Bullet Vibrator Pro_1.webp",
+      "/product-images/The Micro-Pulse Bullet Vibrator Pro_2.webp",
+      "/product-images/The Micro-Pulse Bullet Vibrator Pro_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 186,
-    "image": "/product-images/The%20Micro-Pulse%20Bullet%20Vibrator%20Pro_0.webp"
+    "reviewsCount": 95
   },
   {
-    "id": "dual-sensation-rabbit-pro",
+    "id": "the-dual-sensation-rabbit-vibrator-pro",
     "name": "The Dual-Sensation Rabbit Vibrator Pro",
+    "slug": "the-dual-sensation-rabbit-vibrator-pro",
     "category": "vibrators",
     "subcategory": "Rabbit Vibrators",
-    "price": 799,
-    "originalPrice": 1199,
-    "discount": "33% OFF",
+    "price": 6499,
+    "originalPrice": 8099,
+    "discount": "20% OFF",
     "badge": "Best Seller",
     "stock": 45,
     "subtitle": "Shaft for internal G-spot + clitoral bunny-ear stimulator",
@@ -254,19 +254,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Velvet Plum",
-        "hex": "#4D1E4B"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Blush Rose",
-        "hex": "#B76E79"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Dual-Sensation%20Rabbit%20Vibrator%20Pro_0.webp",
-      "/product-images/The%20Dual-Sensation%20Rabbit%20Vibrator%20Pro_1.webp",
-      "/product-images/The%20Dual-Sensation%20Rabbit%20Vibrator%20Pro_2.webp",
-      "/product-images/The%20Dual-Sensation%20Rabbit%20Vibrator%20Pro_3.webp"
     ],
     "inTheBox": [
       "The Dual-Sensation Rabbit Vibrator Pro Main Unit",
@@ -274,18 +268,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Dual-Sensation Rabbit Vibrator Pro_0.webp",
+      "/product-images/The Dual-Sensation Rabbit Vibrator Pro_1.webp",
+      "/product-images/The Dual-Sensation Rabbit Vibrator Pro_2.webp",
+      "/product-images/The Dual-Sensation Rabbit Vibrator Pro_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 148,
-    "image": "/product-images/The%20Dual-Sensation%20Rabbit%20Vibrator%20Pro_0.webp"
+    "reviewsCount": 127
   },
   {
-    "id": "aura-power-wand",
+    "id": "the-empress-heavy-duty-full-body-wand-massager",
     "name": "The Empress Heavy-Duty Full Body Wand Massager",
+    "slug": "the-empress-heavy-duty-full-body-wand-massager",
     "category": "vibrators",
     "subcategory": "Wand Vibrators",
-    "price": 899,
-    "originalPrice": 1299,
-    "discount": "31% OFF",
+    "price": 8799,
+    "originalPrice": 10899,
+    "discount": "19% OFF",
     "badge": "Heavyweight Power",
     "stock": 30,
     "subtitle": "High-torque broad head massager for rumbling vibrations",
@@ -304,19 +304,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Frosted Rose",
+        "name": "Velvet Rose",
         "hex": "#B76E79"
       },
       {
-        "name": "Obsidian Black",
+        "name": "Midnight Onyx",
         "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Empress%20Heavy-Duty%20Full%20Body%20Wand%20Massager_0.webp",
-      "/product-images/The%20Empress%20Heavy-Duty%20Full%20Body%20Wand%20Massager_1.webp",
-      "/product-images/The%20Empress%20Heavy-Duty%20Full%20Body%20Wand%20Massager_2.webp",
-      "/product-images/The%20Empress%20Heavy-Duty%20Full%20Body%20Wand%20Massager_3.webp"
     ],
     "inTheBox": [
       "The Empress Heavy-Duty Full Body Wand Massager Main Unit",
@@ -324,18 +318,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Empress Heavy-Duty Full Body Wand Massager_0.webp",
+      "/product-images/The Empress Heavy-Duty Full Body Wand Massager_1.webp",
+      "/product-images/The Empress Heavy-Duty Full Body Wand Massager_2.webp",
+      "/product-images/The Empress Heavy-Duty Full Body Wand Massager_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 183,
-    "image": "/product-images/The%20Empress%20Heavy-Duty%20Full%20Body%20Wand%20Massager_0.webp"
+    "reviewsCount": 80
   },
   {
-    "id": "whisper-magnetic-panty-vibe",
+    "id": "the-whisper-remote-control-magnetic-panty-vibrator",
     "name": "The Whisper Remote-Control Magnetic Panty Vibrator",
+    "slug": "the-whisper-remote-control-magnetic-panty-vibrator",
     "category": "vibrators",
     "subcategory": "Panty Vibrators",
-    "price": 699,
-    "originalPrice": 999,
-    "discount": "30% OFF",
+    "price": 4999,
+    "originalPrice": 6999,
+    "discount": "28% OFF",
     "badge": "Discreet Wearable",
     "stock": 55,
     "subtitle": "Magnetic clamp wearable vibe with long-range wireless remote",
@@ -354,7 +354,7 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Rose Gold Ember",
+        "name": "Velvet Rose",
         "hex": "#B76E79"
       },
       {
@@ -362,30 +362,30 @@ export const STITCH_PRODUCTS = [
         "hex": "#1C1C1C"
       }
     ],
-    "images": [
-      "/product-images/The%20Whisper%20Remote-Control%20Magnetic%20Panty%20Vibrator_0.webp",
-      "/product-images/The%20Whisper%20Remote-Control%20Magnetic%20Panty%20Vibrator_1.webp",
-      "/product-images/The%20Whisper%20Remote-Control%20Magnetic%20Panty%20Vibrator_2.webp",
-      "/product-images/The%20Whisper%20Remote-Control%20Magnetic%20Panty%20Vibrator_3.webp"
-    ],
     "inTheBox": [
       "The Whisper Remote-Control Magnetic Panty Vibrator Main Unit",
       "Magnetic USB Fast Charger / User Guide",
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Whisper Remote-Control Magnetic Panty Vibrator_0.webp",
+      "/product-images/The Whisper Remote-Control Magnetic Panty Vibrator_1.webp",
+      "/product-images/The Whisper Remote-Control Magnetic Panty Vibrator_2.webp",
+      "/product-images/The Whisper Remote-Control Magnetic Panty Vibrator_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 165,
-    "image": "/product-images/The%20Whisper%20Remote-Control%20Magnetic%20Panty%20Vibrator_0.webp"
+    "reviewsCount": 148
   },
   {
-    "id": "eggstacy-love-egg-pro",
+    "id": "eggstacy-wireless-remote-love-egg-pro",
     "name": "Eggstacy Wireless Remote Love Egg Pro",
+    "slug": "eggstacy-wireless-remote-love-egg-pro",
     "category": "vibrators",
     "subcategory": "Egg Vibrators",
-    "price": 599,
-    "originalPrice": 899,
-    "discount": "33% OFF",
+    "price": 3499,
+    "originalPrice": 4999,
+    "discount": "30% OFF",
     "badge": "Couples Favorite",
     "stock": 60,
     "subtitle": "Kegel strengthening & internal wireless love egg",
@@ -404,19 +404,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Sky Mint",
-        "hex": "#38BDF8"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Velvet Rose",
-        "hex": "#B56571"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/Eggstacy%20Wireless%20Remote%20Love%20Egg%20Pro_0.webp",
-      "/product-images/Eggstacy%20Wireless%20Remote%20Love%20Egg%20Pro_1.webp",
-      "/product-images/Eggstacy%20Wireless%20Remote%20Love%20Egg%20Pro_2.webp",
-      "/product-images/Eggstacy%20Wireless%20Remote%20Love%20Egg%20Pro_3.webp"
     ],
     "inTheBox": [
       "Eggstacy Wireless Remote Love Egg Pro Main Unit",
@@ -424,18 +418,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/Eggstacy Wireless Remote Love Egg Pro_0.webp",
+      "/product-images/Eggstacy Wireless Remote Love Egg Pro_1.webp",
+      "/product-images/Eggstacy Wireless Remote Love Egg Pro_2.webp",
+      "/product-images/Eggstacy Wireless Remote Love Egg Pro_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 59,
-    "image": "/product-images/Eggstacy%20Wireless%20Remote%20Love%20Egg%20Pro_0.webp"
+    "reviewsCount": 73
   },
   {
-    "id": "lelo-gigi-2",
+    "id": "lelo-gigi-2-targeted-g-spot-stimulator",
     "name": "LELO Gigi 2 Targeted G-Spot Stimulator",
+    "slug": "lelo-gigi-2-targeted-g-spot-stimulator",
     "category": "vibrators",
     "subcategory": "G-Spot Vibrators",
-    "price": 899,
-    "originalPrice": 1349,
-    "discount": "33% OFF",
+    "price": 9999,
+    "originalPrice": 12999,
+    "discount": "23% OFF",
     "badge": "Award Winner",
     "stock": 28,
     "subtitle": "Flattened sculpted tip engineered for pinpoint G-spot pressure",
@@ -454,19 +454,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Plum Purple",
-        "hex": "#4A154B"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Champagne Pearl",
-        "hex": "#E5DCC3"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/LELO%20Gigi%202%20Targeted%20G-Spot%20Stimulator_0.webp",
-      "/product-images/LELO%20Gigi%202%20Targeted%20G-Spot%20Stimulator_1.webp",
-      "/product-images/LELO%20Gigi%202%20Targeted%20G-Spot%20Stimulator_2.webp",
-      "/product-images/LELO%20Gigi%202%20Targeted%20G-Spot%20Stimulator_3.webp"
     ],
     "inTheBox": [
       "LELO Gigi 2 Targeted G-Spot Stimulator Main Unit",
@@ -474,18 +468,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/LELO Gigi 2 Targeted G-Spot Stimulator_0.webp",
+      "/product-images/LELO Gigi 2 Targeted G-Spot Stimulator_1.webp",
+      "/product-images/LELO Gigi 2 Targeted G-Spot Stimulator_2.webp",
+      "/product-images/LELO Gigi 2 Targeted G-Spot Stimulator_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 118,
-    "image": "/product-images/LELO%20Gigi%202%20Targeted%20G-Spot%20Stimulator_0.webp"
+    "reviewsCount": 126
   },
   {
-    "id": "we-vibe-chorus-couples",
+    "id": "we-vibe-chorus-couples-app-controlled-vibrator",
     "name": "We-Vibe Chorus Couples App-Controlled Vibrator",
+    "slug": "we-vibe-chorus-couples-app-controlled-vibrator",
     "category": "vibrators",
     "subcategory": "Couples Vibrators",
-    "price": 999,
-    "originalPrice": 1499,
-    "discount": "33% OFF",
+    "price": 14499,
+    "originalPrice": 17999,
+    "discount": "19% OFF",
     "badge": "Best for Couples",
     "stock": 22,
     "subtitle": "Worn during intercourse for simultaneous dual-partner stimulation",
@@ -504,21 +504,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Cosmic Blue",
-        "hex": "#1E3A8A"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Sunset Pink",
-        "hex": "#DB2777"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/We-Vibe%20Chorus%20Couples%20App-Controlled%20Vibrator_0.webp",
-      "/product-images/We-Vibe%20Chorus%20Couples%20App-Controlled%20Vibrator_1.webp",
-      "/product-images/We-Vibe%20Chorus%20Couples%20App-Controlled%20Vibrator_2.webp",
-      "/product-images/We-Vibe%20Chorus%20Couples%20App-Controlled%20Vibrator_3.webp",
-      "/product-images/We-Vibe%20Chorus%20Couples%20App-Controlled%20Vibrator_4.webp",
-      "/product-images/We-Vibe%20Chorus%20Couples%20App-Controlled%20Vibrator_5.webp"
     ],
     "inTheBox": [
       "We-Vibe Chorus Couples App-Controlled Vibrator Main Unit",
@@ -526,18 +518,26 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/We-Vibe Chorus Couples App-Controlled Vibrator_0.webp",
+      "/product-images/We-Vibe Chorus Couples App-Controlled Vibrator_1.webp",
+      "/product-images/We-Vibe Chorus Couples App-Controlled Vibrator_2.webp",
+      "/product-images/We-Vibe Chorus Couples App-Controlled Vibrator_3.webp",
+      "/product-images/We-Vibe Chorus Couples App-Controlled Vibrator_4.webp",
+      "/product-images/We-Vibe Chorus Couples App-Controlled Vibrator_5.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 185,
-    "image": "/product-images/We-Vibe%20Chorus%20Couples%20App-Controlled%20Vibrator_0.webp"
+    "reviewsCount": 61
   },
   {
-    "id": "svakom-tanya-thermal",
+    "id": "svakom-tanya-ergonomic-38-c-thermal-vibrator",
     "name": "Svakom Tanya Ergonomic 38°C Thermal Vibrator",
+    "slug": "svakom-tanya-ergonomic-38-c-thermal-vibrator",
     "category": "vibrators",
     "subcategory": "G-Spot Vibrators",
-    "price": 799,
-    "originalPrice": 1199,
-    "discount": "33% OFF",
+    "price": 6999,
+    "originalPrice": 8999,
+    "discount": "22% OFF",
     "badge": "Thermal Warmth",
     "stock": 32,
     "subtitle": "Warms up to body temperature (38°C) with dual-motor pulsation",
@@ -557,18 +557,12 @@ export const STITCH_PRODUCTS = [
     "colors": [
       {
         "name": "Velvet Rose",
-        "hex": "#B56571"
+        "hex": "#B76E79"
       },
       {
-        "name": "Obsidian Onyx",
+        "name": "Midnight Onyx",
         "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/Svakom%20Tanya%20Ergonomic%2038C%20Thermal%20Vibrator_0.webp",
-      "/product-images/Svakom%20Tanya%20Ergonomic%2038C%20Thermal%20Vibrator_1.webp",
-      "/product-images/Svakom%20Tanya%20Ergonomic%2038C%20Thermal%20Vibrator_2.webp",
-      "/product-images/Svakom%20Tanya%20Ergonomic%2038C%20Thermal%20Vibrator_3.webp"
     ],
     "inTheBox": [
       "Svakom Tanya Ergonomic 38°C Thermal Vibrator Main Unit",
@@ -576,18 +570,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/Svakom Tanya Ergonomic 38C Thermal Vibrator_0.webp",
+      "/product-images/Svakom Tanya Ergonomic 38C Thermal Vibrator_1.webp",
+      "/product-images/Svakom Tanya Ergonomic 38C Thermal Vibrator_2.webp",
+      "/product-images/Svakom Tanya Ergonomic 38C Thermal Vibrator_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 181,
-    "image": "/product-images/Svakom%20Tanya%20Ergonomic%2038C%20Thermal%20Vibrator_0.webp"
+    "reviewsCount": 61
   },
   {
-    "id": "fun-factory-miss-bi",
+    "id": "fun-factory-miss-bi-double-g-spot-clitoral-toy",
     "name": "Fun Factory Miss Bi Double G-Spot & Clitoral Toy",
+    "slug": "fun-factory-miss-bi-double-g-spot-clitoral-toy",
     "category": "vibrators",
     "subcategory": "Rabbit Vibrators",
-    "price": 849,
-    "originalPrice": 1249,
-    "discount": "32% OFF",
+    "price": 7999,
+    "originalPrice": 9999,
+    "discount": "20% OFF",
     "badge": "German Engineering",
     "stock": 25,
     "subtitle": "Curved dual-flex body crafted in Germany for deep fullness",
@@ -606,20 +606,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Neon Magenta",
-        "hex": "#BE185D"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Deep Sea",
-        "hex": "#0369A1"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/Fun%20Factory%20Miss%20Bi%20Double%20G-Spot%20and%20Clitoral%20Toy_0.webp",
-      "/product-images/Fun%20Factory%20Miss%20Bi%20Double%20G-Spot%20and%20Clitoral%20Toy_1.webp",
-      "/product-images/Fun%20Factory%20Miss%20Bi%20Double%20G-Spot%20and%20Clitoral%20Toy_2.webp",
-      "/product-images/Fun%20Factory%20Miss%20Bi%20Double%20G-Spot%20and%20Clitoral%20Toy_3.webp",
-      "/product-images/Fun%20Factory%20Miss%20Bi%20Double%20G-Spot%20and%20Clitoral%20Toy_4.webp"
     ],
     "inTheBox": [
       "Fun Factory Miss Bi Double G-Spot & Clitoral Toy Main Unit",
@@ -627,18 +620,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/Fun Factory Miss Bi Double G-Spot and Clitoral Toy_0.webp",
+      "/product-images/Fun Factory Miss Bi Double G-Spot and Clitoral Toy_1.webp",
+      "/product-images/Fun Factory Miss Bi Double G-Spot and Clitoral Toy_2.webp",
+      "/product-images/Fun Factory Miss Bi Double G-Spot and Clitoral Toy_3.webp",
+      "/product-images/Fun Factory Miss Bi Double G-Spot and Clitoral Toy_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 112,
-    "image": "/product-images/Fun%20Factory%20Miss%20Bi%20Double%20G-Spot%20and%20Clitoral%20Toy_0.webp"
+    "reviewsCount": 102
   },
   {
-    "id": "satisfyer-double-joy",
+    "id": "satisfyer-double-joy-synchronized-couples-ring",
     "name": "Satisfyer Double Joy Synchronized Couples Ring",
+    "slug": "satisfyer-double-joy-synchronized-couples-ring",
     "category": "vibrators",
     "subcategory": "Couples Vibrators",
-    "price": 649,
-    "originalPrice": 999,
-    "discount": "35% OFF",
+    "price": 4599,
+    "originalPrice": 5999,
+    "discount": "23% OFF",
     "badge": "App Enabled",
     "stock": 40,
     "subtitle": "Bluetooth app-controlled ergonomic couple ring",
@@ -657,19 +657,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Midnight Blue",
-        "hex": "#1E293B"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Rose Pink",
-        "hex": "#F43F5E"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/Satisfyer%20Double%20Joy%20Synchronized%20Couples%20Ring_0.webp",
-      "/product-images/Satisfyer%20Double%20Joy%20Synchronized%20Couples%20Ring_1.webp",
-      "/product-images/Satisfyer%20Double%20Joy%20Synchronized%20Couples%20Ring_2.webp",
-      "/product-images/Satisfyer%20Double%20Joy%20Synchronized%20Couples%20Ring_3.webp"
     ],
     "inTheBox": [
       "Satisfyer Double Joy Synchronized Couples Ring Main Unit",
@@ -677,18 +671,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/Satisfyer Double Joy Synchronized Couples Ring_0.webp",
+      "/product-images/Satisfyer Double Joy Synchronized Couples Ring_1.webp",
+      "/product-images/Satisfyer Double Joy Synchronized Couples Ring_2.webp",
+      "/product-images/Satisfyer Double Joy Synchronized Couples Ring_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 78,
-    "image": "/product-images/Satisfyer%20Double%20Joy%20Synchronized%20Couples%20Ring_0.webp"
+    "reviewsCount": 98
   },
   {
-    "id": "petite-lipstick-vibe",
+    "id": "the-petite-lipstick-travel-discreet-vibrator",
     "name": "The Petite Lipstick Travel Discreet Vibrator",
+    "slug": "the-petite-lipstick-travel-discreet-vibrator",
     "category": "vibrators",
     "subcategory": "Bullet Vibrators",
-    "price": 499,
-    "originalPrice": 699,
-    "discount": "29% OFF",
+    "price": 1499,
+    "originalPrice": 2299,
+    "discount": "35% OFF",
     "badge": "Discreet Disguise",
     "stock": 90,
     "subtitle": "Disguised as high-end designer lipstick for total travel discretion",
@@ -707,19 +707,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Gloss Carmine",
-        "hex": "#991B1B"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Rose Gold",
-        "hex": "#B76E79"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Petite%20Lipstick%20Travel%20Discreet%20Vibrator_0.webp",
-      "/product-images/The%20Petite%20Lipstick%20Travel%20Discreet%20Vibrator_1.webp",
-      "/product-images/The%20Petite%20Lipstick%20Travel%20Discreet%20Vibrator_2.webp",
-      "/product-images/The%20Petite%20Lipstick%20Travel%20Discreet%20Vibrator_3.webp"
     ],
     "inTheBox": [
       "The Petite Lipstick Travel Discreet Vibrator Main Unit",
@@ -727,18 +721,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Petite Lipstick Travel Discreet Vibrator_0.webp",
+      "/product-images/The Petite Lipstick Travel Discreet Vibrator_1.webp",
+      "/product-images/The Petite Lipstick Travel Discreet Vibrator_2.webp",
+      "/product-images/The Petite Lipstick Travel Discreet Vibrator_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 60,
-    "image": "/product-images/The%20Petite%20Lipstick%20Travel%20Discreet%20Vibrator_0.webp"
+    "reviewsCount": 61
   },
   {
-    "id": "palm-grip-sensual-massager",
+    "id": "the-palm-grip-ergonomic-body-massager",
     "name": "The Palm-Grip Ergonomic Body Massager",
+    "slug": "the-palm-grip-ergonomic-body-massager",
     "category": "vibrators",
     "subcategory": "Wand Vibrators",
-    "price": 599,
-    "originalPrice": 899,
-    "discount": "33% OFF",
+    "price": 3999,
+    "originalPrice": 5499,
+    "discount": "27% OFF",
     "badge": "Ergonomic Choice",
     "stock": 38,
     "subtitle": "Fits naturally into palm of hand for effortless pressure control",
@@ -757,19 +757,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Lavender Mist",
-        "hex": "#A855F7"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Slate Onyx",
-        "hex": "#1E293B"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Palm-Grip%20Ergonomic%20Body%20Massager_0.webp",
-      "/product-images/The%20Palm-Grip%20Ergonomic%20Body%20Massager_1.webp",
-      "/product-images/The%20Palm-Grip%20Ergonomic%20Body%20Massager_2.webp",
-      "/product-images/The%20Palm-Grip%20Ergonomic%20Body%20Massager_3.webp"
     ],
     "inTheBox": [
       "The Palm-Grip Ergonomic Body Massager Main Unit",
@@ -777,18 +771,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Palm-Grip Ergonomic Body Massager_0.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_1.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_2.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 107,
-    "image": "/product-images/The%20Palm-Grip%20Ergonomic%20Body%20Massager_0.webp"
+    "reviewsCount": 123
   },
   {
-    "id": "flexi-tip-rabbit-curve",
+    "id": "the-flexi-tip-curve-360-rabbit-vibrator",
     "name": "The Flexi-Tip Curve 360° Rabbit Vibrator",
+    "slug": "the-flexi-tip-curve-360-rabbit-vibrator",
     "category": "vibrators",
     "subcategory": "Rabbit Vibrators",
-    "price": 749,
-    "originalPrice": 1099,
-    "discount": "32% OFF",
+    "price": 5299,
+    "originalPrice": 6999,
+    "discount": "24% OFF",
     "badge": "Ultra-Flexible",
     "stock": 42,
     "subtitle": "360° flexible silicone tip that bends to your exact natural contours",
@@ -807,20 +807,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Dusky Rose",
-        "hex": "#B56571"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
         "name": "Midnight Onyx",
         "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Flexi-Tip%20Curve%20360%20Rabbit%20Vibrator_0.webp",
-      "/product-images/The%20Flexi-Tip%20Curve%20360%20Rabbit%20Vibrator_1.webp",
-      "/product-images/The%20Flexi-Tip%20Curve%20360%20Rabbit%20Vibrator_2.webp",
-      "/product-images/The%20Flexi-Tip%20Curve%20360%20Rabbit%20Vibrator_3.webp",
-      "/product-images/The%20Flexi-Tip%20Curve%20360%20Rabbit%20Vibrator_4.webp"
     ],
     "inTheBox": [
       "The Flexi-Tip Curve 360° Rabbit Vibrator Main Unit",
@@ -828,18 +821,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Flexi-Tip Curve 360 Rabbit Vibrator_0.webp",
+      "/product-images/The Flexi-Tip Curve 360 Rabbit Vibrator_1.webp",
+      "/product-images/The Flexi-Tip Curve 360 Rabbit Vibrator_2.webp",
+      "/product-images/The Flexi-Tip Curve 360 Rabbit Vibrator_3.webp",
+      "/product-images/The Flexi-Tip Curve 360 Rabbit Vibrator_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 80,
-    "image": "/product-images/The%20Flexi-Tip%20Curve%20360%20Rabbit%20Vibrator_0.webp"
+    "reviewsCount": 141
   },
   {
-    "id": "micro-sonic-finger-vibe",
+    "id": "the-micro-sonic-finger-vibrator-sleeve",
     "name": "The Micro-Sonic Finger Vibrator Sleeve",
+    "slug": "the-micro-sonic-finger-vibrator-sleeve",
     "category": "vibrators",
     "subcategory": "Bullet Vibrators",
-    "price": 499,
-    "originalPrice": 749,
-    "discount": "33% OFF",
+    "price": 1899,
+    "originalPrice": 2699,
+    "discount": "30% OFF",
     "badge": "Hands-On Touch",
     "stock": 65,
     "subtitle": "Wearable textured silicone finger cot with high-frequency micro-motor",
@@ -858,20 +858,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Blush Pink",
-        "hex": "#F43F5E"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Stealth Black",
+        "name": "Midnight Onyx",
         "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Micro-Sonic%20Finger%20Vibrator%20Sleeve_0.webp",
-      "/product-images/The%20Micro-Sonic%20Finger%20Vibrator%20Sleeve_1.webp",
-      "/product-images/The%20Micro-Sonic%20Finger%20Vibrator%20Sleeve_2.webp",
-      "/product-images/The%20Micro-Sonic%20Finger%20Vibrator%20Sleeve_3.webp",
-      "/product-images/The%20Micro-Sonic%20Finger%20Vibrator%20Sleeve_4.webp"
     ],
     "inTheBox": [
       "The Micro-Sonic Finger Vibrator Sleeve Main Unit",
@@ -879,18 +872,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Micro-Sonic Finger Vibrator Sleeve_0.webp",
+      "/product-images/The Micro-Sonic Finger Vibrator Sleeve_1.webp",
+      "/product-images/The Micro-Sonic Finger Vibrator Sleeve_2.webp",
+      "/product-images/The Micro-Sonic Finger Vibrator Sleeve_3.webp",
+      "/product-images/The Micro-Sonic Finger Vibrator Sleeve_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 109,
-    "image": "/product-images/The%20Micro-Sonic%20Finger%20Vibrator%20Sleeve_0.webp"
+    "reviewsCount": 90
   },
   {
-    "id": "whisper-luxury-wand-set",
+    "id": "the-whisper-quiet-luxury-wand-mist-set",
     "name": "The Whisper-Quiet Luxury Wand & Mist Set",
+    "slug": "the-whisper-quiet-luxury-wand-mist-set",
     "category": "vibrators",
     "subcategory": "Wand Vibrators",
-    "price": 649,
-    "originalPrice": 949,
-    "discount": "32% OFF",
+    "price": 3499,
+    "originalPrice": 4999,
+    "discount": "30% OFF",
     "badge": "Complete Ritual",
     "stock": 50,
     "subtitle": "Includes portable mini wand massager + botanical toy cleaning mist",
@@ -909,20 +909,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Rose Gold Obsidian",
-        "hex": "#1C1C1C"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Champagne Pink",
-        "hex": "#F0B8BE"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Whisper-Quiet%20Luxury%20Wand%20and%20Mist%20Set_0.webp",
-      "/product-images/The%20Whisper-Quiet%20Luxury%20Wand%20and%20Mist%20Set_1.webp",
-      "/product-images/The%20Whisper-Quiet%20Luxury%20Wand%20and%20Mist%20Set_2.webp",
-      "/product-images/The%20Whisper-Quiet%20Luxury%20Wand%20and%20Mist%20Set_3.webp",
-      "/product-images/The%20Whisper-Quiet%20Luxury%20Wand%20and%20Mist%20Set_4.webp"
     ],
     "inTheBox": [
       "The Whisper-Quiet Luxury Wand & Mist Set Main Unit",
@@ -930,18 +923,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Whisper-Quiet Luxury Wand and Mist Set_0.webp",
+      "/product-images/The Whisper-Quiet Luxury Wand and Mist Set_1.webp",
+      "/product-images/The Whisper-Quiet Luxury Wand and Mist Set_2.webp",
+      "/product-images/The Whisper-Quiet Luxury Wand and Mist Set_3.webp",
+      "/product-images/The Whisper-Quiet Luxury Wand and Mist Set_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 112,
-    "image": "/product-images/The%20Whisper-Quiet%20Luxury%20Wand%20and%20Mist%20Set_0.webp"
+    "reviewsCount": 101
   },
   {
-    "id": "naturalis-dual-density-dildo",
+    "id": "the-naturalis-realistic-dual-density-dildo",
     "name": "The Naturalis Realistic Dual-Density Dildo",
+    "slug": "the-naturalis-realistic-dual-density-dildo",
     "category": "dildos-insertables",
     "subcategory": "Realistic Dildos",
-    "price": 799,
-    "originalPrice": 1199,
-    "discount": "33% OFF",
+    "price": 5399,
+    "originalPrice": 6699,
+    "discount": "20% OFF",
     "badge": "Hyper-Realistic",
     "stock": 40,
     "subtitle": "Lifelike dual-layer silicone mold designed to mimic natural anatomy",
@@ -960,23 +960,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Caramel Tone",
-        "hex": "#C68A4C"
-      },
-      {
-        "name": "Natural Sand",
-        "hex": "#D2A374"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
         "name": "Midnight Onyx",
         "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Naturalis%20Realistic%20Dual-Density%20Dildo_0.webp",
-      "/product-images/The%20Naturalis%20Realistic%20Dual-Density%20Dildo_1.webp",
-      "/product-images/The%20Naturalis%20Realistic%20Dual-Density%20Dildo_2.webp",
-      "/product-images/The%20Naturalis%20Realistic%20Dual-Density%20Dildo_3.webp"
     ],
     "inTheBox": [
       "The Naturalis Realistic Dual-Density Dildo Main Unit",
@@ -984,18 +974,24 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Naturalis Realistic Dual-Density Dildo_0.webp",
+      "/product-images/The Naturalis Realistic Dual-Density Dildo_1.webp",
+      "/product-images/The Naturalis Realistic Dual-Density Dildo_2.webp",
+      "/product-images/The Naturalis Realistic Dual-Density Dildo_3.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 92,
-    "image": "/product-images/The%20Naturalis%20Realistic%20Dual-Density%20Dildo_0.webp"
+    "reviewsCount": 98
   },
   {
-    "id": "prism-borosilicate-glass-dildo",
+    "id": "the-prism-handcrafted-borosilicate-glass-dildo",
     "name": "The Prism Handcrafted Borosilicate Glass Dildo",
+    "slug": "the-prism-handcrafted-borosilicate-glass-dildo",
     "category": "dildos-insertables",
     "subcategory": "Glass Dildos",
-    "price": 699,
-    "originalPrice": 999,
-    "discount": "30% OFF",
+    "price": 4699,
+    "originalPrice": 6099,
+    "discount": "22% OFF",
     "badge": "Temperature Play",
     "stock": 35,
     "subtitle": "Non-porous, hand-blown crystal glass toy that can be heated or cooled",
@@ -1014,16 +1010,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Clear Crystal",
-        "hex": "#E6F0FA"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Cobalt Swirl",
-        "hex": "#1D3557"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Prism%20Handcrafted%20Borosilicate%20Glass%20Dildo_0.webp"
     ],
     "inTheBox": [
       "The Prism Handcrafted Borosilicate Glass Dildo Main Unit",
@@ -1031,18 +1024,21 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Prism Handcrafted Borosilicate Glass Dildo_0.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 126,
-    "image": "/product-images/The%20Prism%20Handcrafted%20Borosilicate%20Glass%20Dildo_0.webp"
+    "reviewsCount": 145
   },
   {
-    "id": "apex-stainless-steel-dildo",
+    "id": "the-apex-mirror-polished-stainless-steel-metal-dildo",
     "name": "The Apex Mirror-Polished Stainless Steel Metal Dildo",
+    "slug": "the-apex-mirror-polished-stainless-steel-metal-dildo",
     "category": "dildos-insertables",
     "subcategory": "Metal Dildos",
-    "price": 849,
-    "originalPrice": 1249,
-    "discount": "32% OFF",
+    "price": 6099,
+    "originalPrice": 7799,
+    "discount": "22% OFF",
     "badge": "Heavyweight Luxe",
     "stock": 20,
     "subtitle": "Heavy, mirror-polished steel insertable delivering deep fullness",
@@ -1061,20 +1057,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Mirror Chrome",
-        "hex": "#C0C0C0"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Rose Gold Plated",
-        "hex": "#B76E79"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Apex%20Mirror-Polished%20Stainless%20Steel%20Metal%20Dildo_0.webp",
-      "/product-images/The%20Apex%20Mirror-Polished%20Stainless%20Steel%20Metal%20Dildo_1.webp",
-      "/product-images/The%20Apex%20Mirror-Polished%20Stainless%20Steel%20Metal%20Dildo_2.webp",
-      "/product-images/The%20Apex%20Mirror-Polished%20Stainless%20Steel%20Metal%20Dildo_3.webp",
-      "/product-images/The%20Apex%20Mirror-Polished%20Stainless%20Steel%20Metal%20Dildo_4.webp"
     ],
     "inTheBox": [
       "The Apex Mirror-Polished Stainless Steel Metal Dildo Main Unit",
@@ -1082,18 +1071,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_0.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_1.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_2.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_3.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 110,
-    "image": "/product-images/The%20Apex%20Mirror-Polished%20Stainless%20Steel%20Metal%20Dildo_0.webp"
+    "reviewsCount": 47
   },
   {
-    "id": "pure-curve-silicone-dildo",
+    "id": "the-pure-curve-liquid-silicone-flexible-dildo",
     "name": "The Pure Curve Liquid Silicone Flexible Dildo",
+    "slug": "the-pure-curve-liquid-silicone-flexible-dildo",
     "category": "dildos-insertables",
     "subcategory": "Silicone Dildos",
-    "price": 599,
-    "originalPrice": 899,
-    "discount": "33% OFF",
+    "price": 3999,
+    "originalPrice": 5099,
+    "discount": "21% OFF",
     "badge": "Body-Safe Choice",
     "stock": 55,
     "subtitle": "Flexible, velvety soft textured medical silicone insertable",
@@ -1112,20 +1108,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Midnight Plum",
-        "hex": "#3E1C4D"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Blush Rose",
-        "hex": "#B76E79"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Pure%20Curve%20Liquid%20Silicone%20Flexible%20Dildo_0.webp",
-      "/product-images/The%20Pure%20Curve%20Liquid%20Silicone%20Flexible%20Dildo_1.webp",
-      "/product-images/The%20Pure%20Curve%20Liquid%20Silicone%20Flexible%20Dildo_2.webp",
-      "/product-images/The%20Pure%20Curve%20Liquid%20Silicone%20Flexible%20Dildo_3.webp",
-      "/product-images/The%20Pure%20Curve%20Liquid%20Silicone%20Flexible%20Dildo_4.webp"
     ],
     "inTheBox": [
       "The Pure Curve Liquid Silicone Flexible Dildo Main Unit",
@@ -1133,18 +1122,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Pure Curve Liquid Silicone Flexible Dildo_0.webp",
+      "/product-images/The Pure Curve Liquid Silicone Flexible Dildo_1.webp",
+      "/product-images/The Pure Curve Liquid Silicone Flexible Dildo_2.webp",
+      "/product-images/The Pure Curve Liquid Silicone Flexible Dildo_3.webp",
+      "/product-images/The Pure Curve Liquid Silicone Flexible Dildo_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 168,
-    "image": "/product-images/The%20Pure%20Curve%20Liquid%20Silicone%20Flexible%20Dildo_0.webp"
+    "reviewsCount": 122
   },
   {
-    "id": "kinetic-drive-thrusting-dildo",
+    "id": "the-kinetic-drive-automated-thrusting-dildo",
     "name": "The Kinetic Drive Automated Thrusting Dildo",
+    "slug": "the-kinetic-drive-automated-thrusting-dildo",
     "category": "dildos-insertables",
     "subcategory": "Thrusting Dildos",
-    "price": 999,
-    "originalPrice": 1499,
-    "discount": "33% OFF",
+    "price": 11499,
+    "originalPrice": 14899,
+    "discount": "23% OFF",
     "badge": "Motorized Tech",
     "stock": 18,
     "subtitle": "Mechanically strokes in and out up to 3 inches on its own",
@@ -1163,17 +1159,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Obsidian Velvet",
-        "hex": "#1C1C1C"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Rose Gold",
-        "hex": "#B76E79"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Kinetic%20Drive%20Automated%20Thrusting%20Dildo_0.webp",
-      "/product-images/The%20Kinetic%20Drive%20Automated%20Thrusting%20Dildo_1.webp"
     ],
     "inTheBox": [
       "The Kinetic Drive Automated Thrusting Dildo Main Unit",
@@ -1181,18 +1173,22 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Kinetic Drive Automated Thrusting Dildo_0.webp",
+      "/product-images/The Kinetic Drive Automated Thrusting Dildo_1.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 188,
-    "image": "/product-images/The%20Kinetic%20Drive%20Automated%20Thrusting%20Dildo_0.webp"
+    "reviewsCount": 109
   },
   {
-    "id": "infinity-connected-double-dildo",
+    "id": "the-infinity-connected-flexible-double-dildo",
     "name": "The Infinity Connected Flexible Double Dildo",
+    "slug": "the-infinity-connected-flexible-double-dildo",
     "category": "dildos-insertables",
     "subcategory": "Double Dildos",
-    "price": 799,
-    "originalPrice": 1199,
-    "discount": "33% OFF",
+    "price": 5799,
+    "originalPrice": 7499,
+    "discount": "22% OFF",
     "badge": "Couples Favorite",
     "stock": 25,
     "subtitle": "Dual-ended 38cm piece for partner-to-partner connection",
@@ -1211,20 +1207,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Deep Mulberry",
-        "hex": "#42163B"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Charcoal Black",
+        "name": "Midnight Onyx",
         "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Infinity%20Connected%20Flexible%20Double%20Dildo_0.webp",
-      "/product-images/The%20Infinity%20Connected%20Flexible%20Double%20Dildo_1.webp",
-      "/product-images/The%20Infinity%20Connected%20Flexible%20Double%20Dildo_2.webp",
-      "/product-images/The%20Infinity%20Connected%20Flexible%20Double%20Dildo_3.webp",
-      "/product-images/The%20Infinity%20Connected%20Flexible%20Double%20Dildo_4.webp"
     ],
     "inTheBox": [
       "The Infinity Connected Flexible Double Dildo Main Unit",
@@ -1232,18 +1221,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Infinity Connected Flexible Double Dildo_0.webp",
+      "/product-images/The Infinity Connected Flexible Double Dildo_1.webp",
+      "/product-images/The Infinity Connected Flexible Double Dildo_2.webp",
+      "/product-images/The Infinity Connected Flexible Double Dildo_3.webp",
+      "/product-images/The Infinity Connected Flexible Double Dildo_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 147,
-    "image": "/product-images/The%20Infinity%20Connected%20Flexible%20Double%20Dildo_0.webp"
+    "reviewsCount": 124
   },
   {
-    "id": "strong-hold-suction-cup-dildo",
+    "id": "the-strong-hold-hands-free-suction-cup-dildo",
     "name": "The Strong-Hold Hands-Free Suction-Cup Dildo",
+    "slug": "the-strong-hold-hands-free-suction-cup-dildo",
     "category": "dildos-insertables",
     "subcategory": "Suction-Cup Dildos",
-    "price": 649,
-    "originalPrice": 949,
-    "discount": "32% OFF",
+    "price": 4399,
+    "originalPrice": 5799,
+    "discount": "23% OFF",
     "badge": "Hands-Free Top Pick",
     "stock": 50,
     "subtitle": "Powerful vacuum base attaches to shower tiles, walls, or harness",
@@ -1262,7 +1258,7 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Rose Gold Ember",
+        "name": "Velvet Rose",
         "hex": "#B76E79"
       },
       {
@@ -1270,28 +1266,28 @@ export const STITCH_PRODUCTS = [
         "hex": "#1C1C1C"
       }
     ],
-    "images": [
-      "/product-images/The%20Strong-Hold%20Hands-Free%20Suction-Cup%20Dildo_0.webp",
-      "/product-images/The%20Strong-Hold%20Hands-Free%20Suction-Cup%20Dildo_1.webp"
-    ],
     "inTheBox": [
       "The Strong-Hold Hands-Free Suction-Cup Dildo Main Unit",
       "Magnetic USB Fast Charger / User Guide",
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Strong-Hold Hands-Free Suction-Cup Dildo_0.webp",
+      "/product-images/The Strong-Hold Hands-Free Suction-Cup Dildo_1.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 162,
-    "image": "/product-images/The%20Strong-Hold%20Hands-Free%20Suction-Cup%20Dildo_0.webp"
+    "reviewsCount": 150
   },
   {
-    "id": "ribbed-spiral-gspot-dildo",
+    "id": "the-spiral-ribbed-contoured-g-spot-dildo",
     "name": "The Spiral-Ribbed Contoured G-Spot Dildo",
+    "slug": "the-spiral-ribbed-contoured-g-spot-dildo",
     "category": "dildos-insertables",
     "subcategory": "Silicone Dildos",
-    "price": 549,
-    "originalPrice": 799,
-    "discount": "31% OFF",
+    "price": 3699,
+    "originalPrice": 4899,
+    "discount": "24% OFF",
     "badge": "Textured Friction",
     "stock": 45,
     "subtitle": "Ascending textured ridges that massage on both insertion and withdrawal",
@@ -1310,18 +1306,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Obsidian Velvet",
-        "hex": "#1C1C1C"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Velvet Violet",
-        "hex": "#581C87"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Spiral-Ribbed%20Contoured%20G-Spot%20Dildo_0.webp",
-      "/product-images/The%20Spiral-Ribbed%20Contoured%20G-Spot%20Dildo_1.webp",
-      "/product-images/The%20Spiral-Ribbed%20Contoured%20G-Spot%20Dildo_2.webp"
     ],
     "inTheBox": [
       "The Spiral-Ribbed Contoured G-Spot Dildo Main Unit",
@@ -1329,18 +1320,23 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Spiral-Ribbed Contoured G-Spot Dildo_0.webp",
+      "/product-images/The Spiral-Ribbed Contoured G-Spot Dildo_1.webp",
+      "/product-images/The Spiral-Ribbed Contoured G-Spot Dildo_2.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 127,
-    "image": "/product-images/The%20Spiral-Ribbed%20Contoured%20G-Spot%20Dildo_0.webp"
+    "reviewsCount": 92
   },
   {
-    "id": "crystal-swirl-borosilicate-wand",
+    "id": "the-crystal-swirl-dual-end-glass-sensation-wand",
     "name": "The Crystal Swirl Dual-End Glass Sensation Wand",
+    "slug": "the-crystal-swirl-dual-end-glass-sensation-wand",
     "category": "dildos-insertables",
     "subcategory": "Glass Dildos",
-    "price": 749,
-    "originalPrice": 1099,
-    "discount": "32% OFF",
+    "price": 4999,
+    "originalPrice": 6499,
+    "discount": "23% OFF",
     "badge": "Artisanal Glass",
     "stock": 28,
     "subtitle": "Dual-ended glass toy with beaded tip on one side & bulb on other",
@@ -1359,18 +1355,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Champagne Swirl",
-        "hex": "#D4AF37"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Pure Crystal",
-        "hex": "#F8FAFC"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Crystal%20Swirl%20Dual-End%20Glass%20Sensation%20Wand_0.webp",
-      "/product-images/The%20Crystal%20Swirl%20Dual-End%20Glass%20Sensation%20Wand_1.webp",
-      "/product-images/The%20Crystal%20Swirl%20Dual-End%20Glass%20Sensation%20Wand_2.webp"
     ],
     "inTheBox": [
       "The Crystal Swirl Dual-End Glass Sensation Wand Main Unit",
@@ -1378,18 +1369,74 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Crystal Swirl Dual-End Glass Sensation Wand_0.webp",
+      "/product-images/The Crystal Swirl Dual-End Glass Sensation Wand_1.webp",
+      "/product-images/The Crystal Swirl Dual-End Glass Sensation Wand_2.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 139,
-    "image": "/product-images/The%20Crystal%20Swirl%20Dual-End%20Glass%20Sensation%20Wand_0.webp"
+    "reviewsCount": 158
   },
   {
-    "id": "flexible-bendable-wire-dildo",
+    "id": "the-monarch-600g-heavyweight-surgical-steel-dildo",
+    "name": "The Monarch 600g Heavyweight Surgical Steel Dildo",
+    "slug": "the-monarch-600g-heavyweight-surgical-steel-dildo",
+    "category": "dildos-insertables",
+    "subcategory": "Metal Dildos",
+    "price": 7499,
+    "originalPrice": 9499,
+    "discount": "21% OFF",
+    "badge": "Heavy Girth",
+    "stock": 15,
+    "subtitle": "Solid 600g heavyweight mirror steel dildo for maximum fullness",
+    "description": "Weighing a solid 600 grams of seamless 316L medical stainless steel, delivering unparalleled stretch, fullness, and deep sensation.",
+    "sound": "Silent",
+    "material": "316L Mirror-Polished Steel",
+    "battery": "Manual",
+    "waterproof": "100% Submersible",
+    "modes": "Weighted Girth Stimulation",
+    "specs": {
+      "sound": "Silent",
+      "material": "316L Mirror-Polished Steel",
+      "battery": "Manual",
+      "waterproof": "100% Submersible",
+      "modes": "Weighted Girth Stimulation"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Monarch 600g Heavyweight Surgical Steel Dildo Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_0.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_1.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_2.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_3.webp",
+      "/product-images/The Apex Mirror-Polished Stainless Steel Metal Dildo_4.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 121
+  },
+  {
+    "id": "the-poseable-internal-spine-multi-angle-dildo",
     "name": "The Poseable Internal Spine Multi-Angle Dildo",
+    "slug": "the-poseable-internal-spine-multi-angle-dildo",
     "category": "dildos-insertables",
     "subcategory": "Silicone Dildos",
-    "price": 699,
-    "originalPrice": 999,
-    "discount": "30% OFF",
+    "price": 4799,
+    "originalPrice": 6199,
+    "discount": "22% OFF",
     "badge": "Custom Angle",
     "stock": 35,
     "subtitle": "Flexible internal metal spine holds any bend or curve you shape",
@@ -1408,20 +1455,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Plum Ember",
-        "hex": "#701A75"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
         "name": "Midnight Onyx",
         "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Poseable%20Internal%20Spine%20Multi-Angle%20Dildo_0.webp",
-      "/product-images/The%20Poseable%20Internal%20Spine%20Multi-Angle%20Dildo_1.webp",
-      "/product-images/The%20Poseable%20Internal%20Spine%20Multi-Angle%20Dildo_2.webp",
-      "/product-images/The%20Poseable%20Internal%20Spine%20Multi-Angle%20Dildo_3.webp",
-      "/product-images/The%20Poseable%20Internal%20Spine%20Multi-Angle%20Dildo_4.webp"
     ],
     "inTheBox": [
       "The Poseable Internal Spine Multi-Angle Dildo Main Unit",
@@ -1429,18 +1469,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Poseable Internal Spine Multi-Angle Dildo_0.webp",
+      "/product-images/The Poseable Internal Spine Multi-Angle Dildo_1.webp",
+      "/product-images/The Poseable Internal Spine Multi-Angle Dildo_2.webp",
+      "/product-images/The Poseable Internal Spine Multi-Angle Dildo_3.webp",
+      "/product-images/The Poseable Internal Spine Multi-Angle Dildo_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 92,
-    "image": "/product-images/The%20Poseable%20Internal%20Spine%20Multi-Angle%20Dildo_0.webp"
+    "reviewsCount": 150
   },
   {
-    "id": "harness-ready-oring-dildo",
+    "id": "the-sovereign-flared-base-harness-ready-dildo",
     "name": "The Sovereign Flared Base Harness-Ready Dildo",
+    "slug": "the-sovereign-flared-base-harness-ready-dildo",
     "category": "dildos-insertables",
     "subcategory": "Realistic Dildos",
-    "price": 649,
-    "originalPrice": 899,
-    "discount": "28% OFF",
+    "price": 4199,
+    "originalPrice": 5399,
+    "discount": "22% OFF",
     "badge": "Harness Compatible",
     "stock": 40,
     "subtitle": "Flared base compatible with all standard strap-on O-rings",
@@ -1459,17 +1506,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Natural Tan",
-        "hex": "#D97706"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Jet Black",
-        "hex": "#18181B"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Sovereign%20Flared%20Base%20Harness-Ready%20Dildo_0.webp",
-      "/product-images/The%20Sovereign%20Flared%20Base%20Harness-Ready%20Dildo_1.webp"
     ],
     "inTheBox": [
       "The Sovereign Flared Base Harness-Ready Dildo Main Unit",
@@ -1477,18 +1520,22 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Sovereign Flared Base Harness-Ready Dildo_0.webp",
+      "/product-images/The Sovereign Flared Base Harness-Ready Dildo_1.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 151,
-    "image": "/product-images/The%20Sovereign%20Flared%20Base%20Harness-Ready%20Dildo_0.webp"
+    "reviewsCount": 114
   },
   {
-    "id": "textured-ripple-wave-dildo",
+    "id": "the-ocean-wave-textured-silicone-dildo",
     "name": "The Ocean-Wave Textured Silicone Dildo",
+    "slug": "the-ocean-wave-textured-silicone-dildo",
     "category": "dildos-insertables",
     "subcategory": "Silicone Dildos",
-    "price": 599,
-    "originalPrice": 849,
-    "discount": "29% OFF",
+    "price": 3899,
+    "originalPrice": 4999,
+    "discount": "22% OFF",
     "badge": "Wave Texture",
     "stock": 48,
     "subtitle": "Horizontal wave ripples that create undulating internal friction",
@@ -1507,20 +1554,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Teal Lagoon",
-        "hex": "#0D9488"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Rose Pink",
-        "hex": "#F43F5E"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Ocean-Wave%20Textured%20Silicone%20Dildo_0.webp",
-      "/product-images/The%20Ocean-Wave%20Textured%20Silicone%20Dildo_1.webp",
-      "/product-images/The%20Ocean-Wave%20Textured%20Silicone%20Dildo_2.webp",
-      "/product-images/The%20Ocean-Wave%20Textured%20Silicone%20Dildo_3.webp",
-      "/product-images/The%20Ocean-Wave%20Textured%20Silicone%20Dildo_4.webp"
     ],
     "inTheBox": [
       "The Ocean-Wave Textured Silicone Dildo Main Unit",
@@ -1528,18 +1568,25 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Ocean-Wave Textured Silicone Dildo_0.webp",
+      "/product-images/The Ocean-Wave Textured Silicone Dildo_1.webp",
+      "/product-images/The Ocean-Wave Textured Silicone Dildo_2.webp",
+      "/product-images/The Ocean-Wave Textured Silicone Dildo_3.webp",
+      "/product-images/The Ocean-Wave Textured Silicone Dildo_4.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 160,
-    "image": "/product-images/The%20Ocean-Wave%20Textured%20Silicone%20Dildo_0.webp"
+    "reviewsCount": 140
   },
   {
-    "id": "dual-tone-realistic-veined-dildo",
+    "id": "the-anatomica-dual-tone-veined-silicone-dildo",
     "name": "The Anatomica Dual-Tone Veined Silicone Dildo",
+    "slug": "the-anatomica-dual-tone-veined-silicone-dildo",
     "category": "dildos-insertables",
     "subcategory": "Realistic Dildos",
-    "price": 699,
-    "originalPrice": 999,
-    "discount": "30% OFF",
+    "price": 4599,
+    "originalPrice": 5899,
+    "discount": "22% OFF",
     "badge": "Anatomical Precision",
     "stock": 36,
     "subtitle": "Hand-painted dual-tone silicone with pronounced veins & defined head",
@@ -1558,18 +1605,13 @@ export const STITCH_PRODUCTS = [
     },
     "colors": [
       {
-        "name": "Espresso Bronze",
-        "hex": "#78350F"
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
       },
       {
-        "name": "Warm Sand",
-        "hex": "#FBBF24"
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
       }
-    ],
-    "images": [
-      "/product-images/The%20Anatomica%20Dual-Tone%20Veined%20Silicone%20Dildo_0.webp",
-      "/product-images/The%20Anatomica%20Dual-Tone%20Veined%20Silicone%20Dildo_1.webp",
-      "/product-images/The%20Anatomica%20Dual-Tone%20Veined%20Silicone%20Dildo_2.webp"
     ],
     "inTheBox": [
       "The Anatomica Dual-Tone Veined Silicone Dildo Main Unit",
@@ -1577,9 +1619,3555 @@ export const STITCH_PRODUCTS = [
       "Velvet Travel Pouch",
       "Confidential User Manual & Warranty Card"
     ],
+    "images": [
+      "/product-images/The Anatomica Dual-Tone Veined Silicone Dildo_0.webp",
+      "/product-images/The Anatomica Dual-Tone Veined Silicone Dildo_1.webp",
+      "/product-images/The Anatomica Dual-Tone Veined Silicone Dildo_2.webp"
+    ],
     "rating": 5,
-    "reviewsCount": 115,
-    "image": "/product-images/The%20Anatomica%20Dual-Tone%20Veined%20Silicone%20Dildo_0.webp"
+    "reviewsCount": 82
+  },
+  {
+    "id": "the-flared-velvet-silicone-butt-plug",
+    "name": "The Flared Velvet Silicone Butt Plug",
+    "slug": "the-flared-velvet-silicone-butt-plug",
+    "category": "anal-toys",
+    "subcategory": "Butt Plugs",
+    "price": 3099,
+    "originalPrice": 4099,
+    "discount": "25% OFF",
+    "badge": "Safe & Classic",
+    "stock": 65,
+    "subtitle": "Flared safety base toy designed for comfortable long-wear",
+    "description": "Engineered with a smooth tapered tip and safety flared ergonomic base designed to remain comfortably in place during solo play or partner intercourse.",
+    "sound": "Silent",
+    "material": "Medical Liquid Silicone & Crystal Gem",
+    "battery": "Non-electric",
+    "waterproof": "100% Submersible",
+    "modes": "Ergonomic Flared Anchor",
+    "specs": {
+      "sound": "Silent",
+      "material": "Medical Liquid Silicone & Crystal Gem",
+      "battery": "Non-electric",
+      "waterproof": "100% Submersible",
+      "modes": "Ergonomic Flared Anchor"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Flared Velvet Silicone Butt Plug Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 80
+  },
+  {
+    "id": "the-sensual-graduated-anal-beads",
+    "name": "The Sensual Graduated Anal Beads",
+    "slug": "the-sensual-graduated-anal-beads",
+    "category": "anal-toys",
+    "subcategory": "Anal Beads",
+    "price": 3299,
+    "originalPrice": 4399,
+    "discount": "24% OFF",
+    "badge": "Climax Booster",
+    "stock": 50,
+    "subtitle": "5 graduating spheres for intense sensation upon insertion & removal",
+    "description": "Features 5 progressive graduating spheres designed to build profound fullness upon insertion and explosive climactic release upon slow removal.",
+    "sound": "Silent",
+    "material": "Flexible Medical Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Waterproof",
+    "modes": "Progressive Sphere Resistance",
+    "specs": {
+      "sound": "Silent",
+      "material": "Flexible Medical Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Waterproof",
+      "modes": "Progressive Sphere Resistance"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Sensual Graduated Anal Beads Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 67
+  },
+  {
+    "id": "the-nexus-ergonomic-prostate-massager",
+    "name": "The Nexus Ergonomic Prostate Massager",
+    "slug": "the-nexus-ergonomic-prostate-massager",
+    "category": "anal-toys",
+    "subcategory": "Prostate Massagers",
+    "price": 8099,
+    "originalPrice": 10099,
+    "discount": "20% OFF",
+    "badge": "#1 Men Sex Toy",
+    "stock": 35,
+    "subtitle": "Angled specifically to stimulate the male P-spot & perineum",
+    "description": "Angled specifically with an anatomical curve to target and massage the male P-spot and perineum with dual-motor synchronized vibration.",
+    "sound": "< 30 dB (Whisper Silent)",
+    "material": "100% Medical Liquid Silicone",
+    "battery": "120 min runtime / Magnetic USB",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "8 Dual-Motor Vibration Modes",
+    "specs": {
+      "sound": "< 30 dB (Whisper Silent)",
+      "material": "100% Medical Liquid Silicone",
+      "battery": "120 min runtime / Magnetic USB",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "8 Dual-Motor Vibration Modes"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Nexus Ergonomic Prostate Massager Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Palm-Grip Ergonomic Body Massager_0.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_1.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_2.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_3.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 113
+  },
+  {
+    "id": "the-expand-air-inflatable-silicone-butt-plug",
+    "name": "The Expand-Air Inflatable Silicone Butt Plug",
+    "slug": "the-expand-air-inflatable-silicone-butt-plug",
+    "category": "anal-toys",
+    "subcategory": "Inflatable Plugs",
+    "price": 6099,
+    "originalPrice": 7799,
+    "discount": "22% OFF",
+    "badge": "Custom Sensation",
+    "stock": 25,
+    "subtitle": "Features a precision hand pump to expand internal girth up to 2.5x",
+    "description": "Features a medical-grade hand bulb pump and pressure release valve allowing you to expand the internal girth smoothly and customize fullness.",
+    "sound": "Silent",
+    "material": "Multi-Layer Seamless Silicone",
+    "battery": "Manual Hand Pump",
+    "waterproof": "100% Washable",
+    "modes": "Expandable Custom Diameter up to 2.5x",
+    "specs": {
+      "sound": "Silent",
+      "material": "Multi-Layer Seamless Silicone",
+      "battery": "Manual Hand Pump",
+      "waterproof": "100% Washable",
+      "modes": "Expandable Custom Diameter up to 2.5x"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Expand-Air Inflatable Silicone Butt Plug Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Ergonomic Silicone Ball Gag with Breathable Air Channels_0.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 151
+  },
+  {
+    "id": "the-sovereign-ergonomic-metal-anal-hook",
+    "name": "The Sovereign Ergonomic Metal Anal Hook",
+    "slug": "the-sovereign-ergonomic-metal-anal-hook",
+    "category": "anal-toys",
+    "subcategory": "Anal Hooks",
+    "price": 5399,
+    "originalPrice": 6699,
+    "discount": "20% OFF",
+    "badge": "Kink Specialist",
+    "stock": 18,
+    "subtitle": "Mirror-polished steel curve designed for targeted hands-free pressure",
+    "description": "Sleek, mirror-polished steel anchor hook designed to maintain steady, deep internal pressure without slipping during sensory play sessions.",
+    "sound": "Silent",
+    "material": "Surgical Stainless Steel",
+    "battery": "Non-electric",
+    "waterproof": "100% Submersible",
+    "modes": "Targeted Anchor Ergonomics",
+    "specs": {
+      "sound": "Silent",
+      "material": "Surgical Stainless Steel",
+      "battery": "Non-electric",
+      "waterproof": "100% Submersible",
+      "modes": "Targeted Anchor Ergonomics"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Sovereign Ergonomic Metal Anal Hook Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 103
+  },
+  {
+    "id": "lelo-hugo-remote-controlled-prostate-vibrator",
+    "name": "LELO Hugo Remote-Controlled Prostate Vibrator",
+    "slug": "lelo-hugo-remote-controlled-prostate-vibrator",
+    "category": "anal-toys",
+    "subcategory": "Prostate Massagers",
+    "price": 15499,
+    "originalPrice": 19999,
+    "discount": "22% OFF",
+    "badge": "Luxury Men Choice",
+    "stock": 14,
+    "subtitle": "SenseMotion wireless motion-controlled dual vibrating prostate toy",
+    "description": "Two powerful motors stimulate the prostate and perineum, controlled by a wireless remote that alters vibrations according to your hand tilt motions.",
+    "sound": "< 25 dB",
+    "material": "Silky Premium Medical Silicone",
+    "battery": "120 min USB Rechargeable",
+    "waterproof": "100% Waterproof",
+    "modes": "8 SenseMotion Interactive Speeds",
+    "specs": {
+      "sound": "< 25 dB",
+      "material": "Silky Premium Medical Silicone",
+      "battery": "120 min USB Rechargeable",
+      "waterproof": "100% Waterproof",
+      "modes": "8 SenseMotion Interactive Speeds"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "LELO Hugo Remote-Controlled Prostate Vibrator Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 56
+  },
+  {
+    "id": "the-jewel-base-crystal-glass-anal-plug",
+    "name": "The Jewel-Base Crystal Glass Anal Plug",
+    "slug": "the-jewel-base-crystal-glass-anal-plug",
+    "category": "anal-toys",
+    "subcategory": "Butt Plugs",
+    "price": 2899,
+    "originalPrice": 3899,
+    "discount": "25% OFF",
+    "badge": "Aesthetic Gem",
+    "stock": 55,
+    "subtitle": "Hand-blown crystal glass plug crowned with a faceted gemstone base",
+    "description": "Ultra-smooth non-porous borosilicate glass plug with a jewel base that catches the light beautifully. Hypoallergenic and temperature-play ready.",
+    "sound": "Silent",
+    "material": "Borosilicate Glass & Crystal Gem",
+    "battery": "Non-electric",
+    "waterproof": "100% Boilable",
+    "modes": "Thermal Heat/Cool Play",
+    "specs": {
+      "sound": "Silent",
+      "material": "Borosilicate Glass & Crystal Gem",
+      "battery": "Non-electric",
+      "waterproof": "100% Boilable",
+      "modes": "Thermal Heat/Cool Play"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Jewel-Base Crystal Glass Anal Plug Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Crystal Swirl Dual-End Glass Sensation Wand_0.webp",
+      "/product-images/The Crystal Swirl Dual-End Glass Sensation Wand_1.webp",
+      "/product-images/The Crystal Swirl Dual-End Glass Sensation Wand_2.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 92
+  },
+  {
+    "id": "the-dual-motor-vibrating-prostate-perineum-stimulator",
+    "name": "The Dual-Motor Vibrating Prostate & Perineum Stimulator",
+    "slug": "the-dual-motor-vibrating-prostate-perineum-stimulator",
+    "category": "anal-toys",
+    "subcategory": "Prostate Massagers",
+    "price": 5499,
+    "originalPrice": 7299,
+    "discount": "25% OFF",
+    "badge": "Dual Resonance",
+    "stock": 32,
+    "subtitle": "Synchronized internal P-spot head and external perineum vibration arm",
+    "description": "Engineered with two independent motors to deliver deep rumbles simultaneously against the internal prostate gland and the external perineum base.",
+    "sound": "< 29 dB",
+    "material": "Soft Touch Medical Silicone",
+    "battery": "90 min Magnetic USB",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "10 Synchronized Patterns",
+    "specs": {
+      "sound": "< 29 dB",
+      "material": "Soft Touch Medical Silicone",
+      "battery": "90 min Magnetic USB",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "10 Synchronized Patterns"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Dual-Motor Vibrating Prostate & Perineum Stimulator Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Eclipse Dual Resonance Vibrating Cock Ring_0.jpg",
+      "/product-images/The Eclipse Dual Resonance Vibrating Cock Ring_1.jpg",
+      "/product-images/The Eclipse Dual Resonance Vibrating Cock Ring_2.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 58
+  },
+  {
+    "id": "the-beginner-petite-tapered-silicone-plug-set",
+    "name": "The Beginner Petite Tapered Silicone Plug Set",
+    "slug": "the-beginner-petite-tapered-silicone-plug-set",
+    "category": "anal-toys",
+    "subcategory": "Butt Plugs",
+    "price": 2499,
+    "originalPrice": 3499,
+    "discount": "28% OFF",
+    "badge": "3-Piece Starter Kit",
+    "stock": 70,
+    "subtitle": "Set of 3 graduating plugs (Small, Medium, Large) for smooth progression",
+    "description": "Includes 3 velvety liquid silicone plugs of increasing sizes, each featuring a narrow tapered tip and wide flared safety anchor base.",
+    "sound": "Silent",
+    "material": "100% Medical Platinum Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Waterproof",
+    "modes": "Graduated Size Training (S, M, L)",
+    "specs": {
+      "sound": "Silent",
+      "material": "100% Medical Platinum Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Waterproof",
+      "modes": "Graduated Size Training (S, M, L)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Beginner Petite Tapered Silicone Plug Set Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 144
+  },
+  {
+    "id": "the-heavyweight-350g-steel-flared-anal-anchor",
+    "name": "The Heavyweight 350g Steel Flared Anal Anchor",
+    "slug": "the-heavyweight-350g-steel-flared-anal-anchor",
+    "category": "anal-toys",
+    "subcategory": "Butt Plugs",
+    "price": 4299,
+    "originalPrice": 5699,
+    "discount": "25% OFF",
+    "badge": "Weighted Sensation",
+    "stock": 25,
+    "subtitle": "Weighted 350g mirror-finish stainless steel plug for intense fullness",
+    "description": "Solid surgical-grade steel plug providing weighted internal sensation that moves naturally with your posture and responds instantly to temperature.",
+    "sound": "Silent",
+    "material": "316L Surgical Stainless Steel",
+    "battery": "Non-electric",
+    "waterproof": "100% Submersible",
+    "modes": "Weighted Fullness Play",
+    "specs": {
+      "sound": "Silent",
+      "material": "316L Surgical Stainless Steel",
+      "battery": "Non-electric",
+      "waterproof": "100% Submersible",
+      "modes": "Weighted Fullness Play"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Heavyweight 350g Steel Flared Anal Anchor Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 60
+  },
+  {
+    "id": "the-kinetic-rotating-bead-motorized-anal-wand",
+    "name": "The Kinetic Rotating Bead Motorized Anal Wand",
+    "slug": "the-kinetic-rotating-bead-motorized-anal-wand",
+    "category": "anal-toys",
+    "subcategory": "Prostate Massagers",
+    "price": 8999,
+    "originalPrice": 11999,
+    "discount": "25% OFF",
+    "badge": "Motorized Rotation",
+    "stock": 20,
+    "subtitle": "Internal motorized rotating beads create continuous swirling waves",
+    "description": "Internal mechanical drive rotates stainless steel beads smoothly in clockwise and counter-clockwise directions to deliver profound swirling pressure.",
+    "sound": "< 32 dB",
+    "material": "Silicone & Internal Steel Bearings",
+    "battery": "100 min USB Rechargeable",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "5 Rotation Speeds + 7 Vibration Modes",
+    "specs": {
+      "sound": "< 32 dB",
+      "material": "Silicone & Internal Steel Bearings",
+      "battery": "100 min USB Rechargeable",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "5 Rotation Speeds + 7 Vibration Modes"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Kinetic Rotating Bead Motorized Anal Wand Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 132
+  },
+  {
+    "id": "the-spiral-ridge-borosilicate-crystal-plug",
+    "name": "The Spiral Ridge Borosilicate Crystal Plug",
+    "slug": "the-spiral-ridge-borosilicate-crystal-plug",
+    "category": "anal-toys",
+    "subcategory": "Butt Plugs",
+    "price": 2999,
+    "originalPrice": 3999,
+    "discount": "25% OFF",
+    "badge": "Spiral Swirl",
+    "stock": 45,
+    "subtitle": "Twisted spiral ribs handcrafted into non-porous borosilicate glass",
+    "description": "Features a gentle spiral twist that massages sensory nerve endings upon insertion and rotational movement. Safe for warm water or ice bath temperature play.",
+    "sound": "Silent",
+    "material": "Borosilicate Glass",
+    "battery": "Non-electric",
+    "waterproof": "100% Boilable",
+    "modes": "Rotational Tactile Stimulation",
+    "specs": {
+      "sound": "Silent",
+      "material": "Borosilicate Glass",
+      "battery": "Non-electric",
+      "waterproof": "100% Boilable",
+      "modes": "Rotational Tactile Stimulation"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Spiral Ridge Borosilicate Crystal Plug Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 121
+  },
+  {
+    "id": "the-hands-free-perineum-prostate-rocker",
+    "name": "The Hands-Free Perineum Prostate Rocker",
+    "slug": "the-hands-free-perineum-prostate-rocker",
+    "category": "anal-toys",
+    "subcategory": "Prostate Massagers",
+    "price": 4799,
+    "originalPrice": 6299,
+    "discount": "24% OFF",
+    "badge": "Hands-Free Play",
+    "stock": 30,
+    "subtitle": "Rocks naturally with body movement to stimulate the prostate hands-free",
+    "description": "Curved anatomical cradle design that rocks against the pelvic floor and perineum with pelvic contractions for effortless hands-free P-spot stimulation.",
+    "sound": "Silent",
+    "material": "Platinum Liquid Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Submersible",
+    "modes": "Pelvic Contraction Rocking",
+    "specs": {
+      "sound": "Silent",
+      "material": "Platinum Liquid Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Submersible",
+      "modes": "Pelvic Contraction Rocking"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Hands-Free Perineum Prostate Rocker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_0.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_1.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_2.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_3.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_4.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 91
+  },
+  {
+    "id": "the-tri-sphere-ergonomic-flexible-anal-beads",
+    "name": "The Tri-Sphere Ergonomic Flexible Anal Beads",
+    "slug": "the-tri-sphere-ergonomic-flexible-anal-beads",
+    "category": "anal-toys",
+    "subcategory": "Anal Beads",
+    "price": 2799,
+    "originalPrice": 3699,
+    "discount": "24% OFF",
+    "badge": "Flexible Training",
+    "stock": 50,
+    "subtitle": "3 connected flexible spheres with ergonomic finger retrieval ring",
+    "description": "Engineered with 3 progressive spheres on a flexible silicone cord and a sturdy safety finger loop for effortless control, gentle stretch, and sensational removal.",
+    "sound": "Silent",
+    "material": "100% Medical Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Waterproof",
+    "modes": "Progressive Stretch Training",
+    "specs": {
+      "sound": "Silent",
+      "material": "100% Medical Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Waterproof",
+      "modes": "Progressive Stretch Training"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Tri-Sphere Ergonomic Flexible Anal Beads Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 159
+  },
+  {
+    "id": "the-velvet-skin-fleshlight-textured-stroker-case",
+    "name": "The Velvet-Skin Fleshlight Textured Stroker Case",
+    "slug": "the-velvet-skin-fleshlight-textured-stroker-case",
+    "category": "male-masturbators",
+    "subcategory": "Fleshlight Cases",
+    "price": 6699,
+    "originalPrice": 8499,
+    "discount": "20% OFF",
+    "badge": "Male Best Seller",
+    "stock": 55,
+    "subtitle": "Discreet handheld case with patented textured SuperSkin internal sleeve",
+    "description": "Iconic discreet flashlight-style case with an ultra-soft textured SuperSkin internal sleeve that replicates natural anatomy with adjustable air suction end-cap.",
+    "sound": "Whisper Soft",
+    "material": "Patented RealFeel SuperSkin + ABS Hardcase",
+    "battery": "Manual Suction",
+    "waterproof": "100% Washable Core",
+    "modes": "Adjustable Air Suction Dial",
+    "specs": {
+      "sound": "Whisper Soft",
+      "material": "Patented RealFeel SuperSkin + ABS Hardcase",
+      "battery": "Manual Suction",
+      "waterproof": "100% Washable Core",
+      "modes": "Adjustable Air Suction Dial"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Velvet-Skin Fleshlight Textured Stroker Case Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Velvet-Skin Fleshlight Textured Stroker Case_0.webp",
+      "/product-images/The Velvet-Skin Fleshlight Textured Stroker Case_1.webp",
+      "/product-images/The Velvet-Skin Fleshlight Textured Stroker Case_2.webp",
+      "/product-images/The Velvet-Skin Fleshlight Textured Stroker Case_3.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 122
+  },
+  {
+    "id": "the-compact-ribbed-pocket-pussy-manual-stroker",
+    "name": "The Compact Ribbed Pocket Pussy Manual Stroker",
+    "slug": "the-compact-ribbed-pocket-pussy-manual-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Manual Strokers",
+    "price": 2499,
+    "originalPrice": 3299,
+    "discount": "24% OFF",
+    "badge": "Compact & Discreet",
+    "stock": 85,
+    "subtitle": "Portable, pocket-sized sleeve with internal chamber ribbed nodules",
+    "description": "Pocket-sized discrete sleeve with intense internal micro-ribs and a squeeze-responsive body that adapts to your desired pressure.",
+    "sound": "Completely Silent",
+    "material": "Ultra-Soft Hypoallergenic TPE",
+    "battery": "Manual",
+    "waterproof": "100% Washable",
+    "modes": "Manual Pressure Squeeze",
+    "specs": {
+      "sound": "Completely Silent",
+      "material": "Ultra-Soft Hypoallergenic TPE",
+      "battery": "Manual",
+      "waterproof": "100% Washable",
+      "modes": "Manual Pressure Squeeze"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Compact Ribbed Pocket Pussy Manual Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_0.jpg",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_1.jpg",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_2.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_3.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_4.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_5.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_6.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 88
+  },
+  {
+    "id": "the-apex-motion-heated-automatic-male-stroker",
+    "name": "The Apex Motion Heated Automatic Male Stroker",
+    "slug": "the-apex-motion-heated-automatic-male-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 13999,
+    "originalPrice": 17499,
+    "discount": "20% OFF",
+    "badge": "High-Tech Flagship",
+    "stock": 20,
+    "subtitle": "Motorized thrusting up to 300 strokes/min + 40°C thermal heating chamber",
+    "description": "Robotic linear motion auto-stroker with internal 40°C thermal heating chamber. Moves up and down hands-free at up to 300 thrusts per minute with customizable suction.",
+    "sound": "< 38 dB",
+    "material": "Ultra-Soft RealFeel TPE + Alloy Chassis",
+    "battery": "90 min Fast Charging Dock",
+    "waterproof": "Washable Core (IPX7)",
+    "modes": "7 Auto-Stroking Speeds + 40C Heating",
+    "specs": {
+      "sound": "< 38 dB",
+      "material": "Ultra-Soft RealFeel TPE + Alloy Chassis",
+      "battery": "90 min Fast Charging Dock",
+      "waterproof": "Washable Core (IPX7)",
+      "modes": "7 Auto-Stroking Speeds + 40C Heating"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Apex Motion Heated Automatic Male Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_0.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_1.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_2.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_3.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_4.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 127
+  },
+  {
+    "id": "the-precision-vacuum-cylinder-penis-pump",
+    "name": "The Precision Vacuum Cylinder Penis Pump",
+    "slug": "the-precision-vacuum-cylinder-penis-pump",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 5399,
+    "originalPrice": 6699,
+    "discount": "20% OFF",
+    "badge": "Stamina & Size",
+    "stock": 40,
+    "subtitle": "Vacuum cylinder with precision PSI gauge and quick-release valve",
+    "description": "Medical-grade acrylic vacuum cylinder with calibrated millimeter measuring scale, quick-release pressure valve, and ultra-flexible silicone airtight seal.",
+    "sound": "Silent",
+    "material": "Shatterproof Acrylic & Silicone Seal",
+    "battery": "Pneumatic Hand Grip Pump",
+    "waterproof": "100% Submersible & Washable",
+    "modes": "Calibrated PSI Pressure Tuning",
+    "specs": {
+      "sound": "Silent",
+      "material": "Shatterproof Acrylic & Silicone Seal",
+      "battery": "Pneumatic Hand Grip Pump",
+      "waterproof": "100% Submersible & Washable",
+      "modes": "Calibrated PSI Pressure Tuning"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Precision Vacuum Cylinder Penis Pump Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_0.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_1.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_2.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_3.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 142
+  },
+  {
+    "id": "spinner-pleasure-gear-motorized-auto-stroker",
+    "name": "Spinner Pleasure Gear Motorized Auto-Stroker",
+    "slug": "spinner-pleasure-gear-motorized-auto-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 2499,
+    "originalPrice": 3999,
+    "discount": "37% OFF",
+    "badge": "Men Top Choice",
+    "stock": 60,
+    "subtitle": "Thermal spiral motorized stroker with vacuum suction chamber",
+    "description": "Thermal spiral motorized male stroker featuring multi-speed automatic rotations, dynamic pneumatic vacuum pressure, and 40°C soothing warmth.",
+    "sound": "< 32 dB",
+    "material": "SuperSkin & ABS Core",
+    "battery": "120 min USB Fast Charge",
+    "waterproof": "100% Washable Core",
+    "modes": "7 Rotation Speeds + 5 Suction Patterns",
+    "specs": {
+      "sound": "< 32 dB",
+      "material": "SuperSkin & ABS Core",
+      "battery": "120 min USB Fast Charge",
+      "waterproof": "100% Washable Core",
+      "modes": "7 Rotation Speeds + 5 Suction Patterns"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Spinner Pleasure Gear Motorized Auto-Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 129
+  },
+  {
+    "id": "naughty-nights-x-calmras-stroker",
+    "name": "Naughty Nights X Calmras Stroker",
+    "slug": "naughty-nights-x-calmras-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Fleshlight Cases",
+    "price": 999,
+    "originalPrice": 1596,
+    "discount": "37% OFF",
+    "badge": "Pocket Value",
+    "stock": 95,
+    "subtitle": "Discreet pocket case with ultra-soft ribbed textured inner sleeve",
+    "description": "Discreet pocket case featuring an ultra-soft ribbed textured inner sleeve that replicates natural anatomy with an airtight suction release end-cap.",
+    "sound": "Completely Silent",
+    "material": "Hypoallergenic SuperSoft Silicone",
+    "battery": "Manual Suction Dial",
+    "waterproof": "100% Submersible",
+    "modes": "Adjustable End-Cap Air Resistance",
+    "specs": {
+      "sound": "Completely Silent",
+      "material": "Hypoallergenic SuperSoft Silicone",
+      "battery": "Manual Suction Dial",
+      "waterproof": "100% Submersible",
+      "modes": "Adjustable End-Cap Air Resistance"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Naughty Nights X Calmras Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 97
+  },
+  {
+    "id": "pathan-dotted-stamina-endurance-stroker",
+    "name": "Pathan Dotted Stamina Endurance Stroker",
+    "slug": "pathan-dotted-stamina-endurance-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Manual Strokers",
+    "price": 1499,
+    "originalPrice": 2599,
+    "discount": "42% OFF",
+    "badge": "Stamina Essential",
+    "stock": 75,
+    "subtitle": "High-density studded nodules providing intense tactile friction",
+    "description": "Engineered with high-density studded nodules providing intense tactile friction and stamina endurance training in a compact travel-ready sleeve.",
+    "sound": "Silent",
+    "material": "Multi-Ribbed Platinum Silicone",
+    "battery": "Manual Control",
+    "waterproof": "100% Waterproof",
+    "modes": "Customizable Squeeze Tension",
+    "specs": {
+      "sound": "Silent",
+      "material": "Multi-Ribbed Platinum Silicone",
+      "battery": "Manual Control",
+      "waterproof": "100% Waterproof",
+      "modes": "Customizable Squeeze Tension"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Pathan Dotted Stamina Endurance Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 42
+  },
+  {
+    "id": "beat-stroker-ultra-flex-open-ended-sleeve",
+    "name": "Beat Stroker Ultra-Flex Open-Ended Sleeve",
+    "slug": "beat-stroker-ultra-flex-open-ended-sleeve",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 3499,
+    "originalPrice": 6999,
+    "discount": "50% OFF",
+    "badge": "50% Off Special",
+    "stock": 45,
+    "subtitle": "Open-ended ergonomic silicone sleeve with customizable squeeze",
+    "description": "Open-ended ergonomic silicone sleeve with customizable squeeze resistance, multi-frequency vibration pulses, and simultaneous oral/manual simulation.",
+    "sound": "< 30 dB",
+    "material": "Soft Velvet Liquid Silicone",
+    "battery": "Magnetic USB Rechargeable",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "10 High-Torque Pulsing Modes",
+    "specs": {
+      "sound": "< 30 dB",
+      "material": "Soft Velvet Liquid Silicone",
+      "battery": "Magnetic USB Rechargeable",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "10 High-Torque Pulsing Modes"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Beat Stroker Ultra-Flex Open-Ended Sleeve Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 123
+  },
+  {
+    "id": "naughty-nights-x-calmras-matrix-cup",
+    "name": "Naughty Nights X Calmras Matrix Cup",
+    "slug": "naughty-nights-x-calmras-matrix-cup",
+    "category": "male-masturbators",
+    "subcategory": "Fleshlight Cases",
+    "price": 999,
+    "originalPrice": 1499,
+    "discount": "33% OFF",
+    "badge": "High Demand",
+    "stock": 90,
+    "subtitle": "Geometric diamond ribbed internal core delivering targeted glans stimulation",
+    "description": "Features a geometric diamond ribbed internal core delivering targeted penile glans stimulation and intense climax acceleration.",
+    "sound": "Silent",
+    "material": "Medical-Grade Soft Touch Polymer",
+    "battery": "Non-electric",
+    "waterproof": "100% Washable",
+    "modes": "Ergonomic Hand Grip",
+    "specs": {
+      "sound": "Silent",
+      "material": "Medical-Grade Soft Touch Polymer",
+      "battery": "Non-electric",
+      "waterproof": "100% Washable",
+      "modes": "Ergonomic Hand Grip"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Naughty Nights X Calmras Matrix Cup Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 69
+  },
+  {
+    "id": "tenga-flip-zero-electronic-pulsing-masturbator",
+    "name": "Tenga Flip Zero Electronic Pulsing Masturbator",
+    "slug": "tenga-flip-zero-electronic-pulsing-masturbator",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 11999,
+    "originalPrice": 14999,
+    "discount": "20% OFF",
+    "badge": "Japanese Precision",
+    "stock": 22,
+    "subtitle": "Dual vibrating cores with flip-open easy-wash design",
+    "description": "Iconic Japanese flip-open casing with two high-torque vibrating motors, seamless internal elastomer ribs, and hygienic drying stand.",
+    "sound": "< 34 dB",
+    "material": "Medical Elastomer & ABS Hard Shell",
+    "battery": "90 min Magnetic USB Charge",
+    "waterproof": "100% Waterproof (Washable)",
+    "modes": "5 Pulsing Speeds + 2 Vibration Cores",
+    "specs": {
+      "sound": "< 34 dB",
+      "material": "Medical Elastomer & ABS Hard Shell",
+      "battery": "90 min Magnetic USB Charge",
+      "waterproof": "100% Waterproof (Washable)",
+      "modes": "5 Pulsing Speeds + 2 Vibration Cores"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Tenga Flip Zero Electronic Pulsing Masturbator Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Tenga Flip Zero Electronic Pulsing Masturbator_0.webp",
+      "/product-images/Tenga Flip Zero Electronic Pulsing Masturbator_1.webp",
+      "/product-images/Tenga Flip Zero Electronic Pulsing Masturbator_2.webp",
+      "/product-images/Tenga Flip Zero Electronic Pulsing Masturbator_3.webp",
+      "/product-images/Tenga Flip Zero Electronic Pulsing Masturbator_4.webp",
+      "/product-images/Tenga Flip Zero Electronic Pulsing Masturbator_5.webp",
+      "/product-images/Tenga Flip Zero Electronic Pulsing Masturbator_6.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 56
+  },
+  {
+    "id": "tenga-3d-spiral-geometric-reversible-stroker",
+    "name": "Tenga 3D Spiral Geometric Reversible Stroker",
+    "slug": "tenga-3d-spiral-geometric-reversible-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Manual Strokers",
+    "price": 2899,
+    "originalPrice": 3899,
+    "discount": "25% OFF",
+    "badge": "Geometric Art",
+    "stock": 50,
+    "subtitle": "Turn inside-out to wash & dry, geometric internal spiral ribs",
+    "description": "Sculpted silicone sleeve that sits on a sleek vanity display stand. Turns inside out effortlessly for thorough washing and rapid air drying.",
+    "sound": "Silent",
+    "material": "High-Elasticity Medical Polymer",
+    "battery": "Manual",
+    "waterproof": "100% Waterproof",
+    "modes": "Spiral Texture Grip",
+    "specs": {
+      "sound": "Silent",
+      "material": "High-Elasticity Medical Polymer",
+      "battery": "Manual",
+      "waterproof": "100% Waterproof",
+      "modes": "Spiral Texture Grip"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Tenga 3D Spiral Geometric Reversible Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Tenga 3D Spiral Geometric Reversible Stroker_0.webp",
+      "/product-images/Tenga 3D Spiral Geometric Reversible Stroker_1.webp",
+      "/product-images/Tenga 3D Spiral Geometric Reversible Stroker_2.webp",
+      "/product-images/Tenga 3D Spiral Geometric Reversible Stroker_3.webp",
+      "/product-images/Tenga 3D Spiral Geometric Reversible Stroker_4.webp",
+      "/product-images/Tenga 3D Spiral Geometric Reversible Stroker_5.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 87
+  },
+  {
+    "id": "arcwave-ion-air-pulse-pleasure-glans-stroker",
+    "name": "Arcwave Ion Air-Pulse Pleasure Glans Stroker",
+    "slug": "arcwave-ion-air-pulse-pleasure-glans-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 16999,
+    "originalPrice": 20999,
+    "discount": "19% OFF",
+    "badge": "Revolutionary Tech",
+    "stock": 16,
+    "subtitle": "Pleasure Air suction technology targeted directly at the penile glans",
+    "description": "World-first male masturbator using patented Pleasure Air technology to stimulate the sensitive nerve endings of the glans with touchless pulsating airwaves.",
+    "sound": "< 30 dB",
+    "material": "CleanTech Silicone & Smart Base",
+    "battery": "120 min Wireless Charging Base",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "8 Sonic Air-Pulse Intensities + Smart Twist",
+    "specs": {
+      "sound": "< 30 dB",
+      "material": "CleanTech Silicone & Smart Base",
+      "battery": "120 min Wireless Charging Base",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "8 Sonic Air-Pulse Intensities + Smart Twist"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Arcwave Ion Air-Pulse Pleasure Glans Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Arcwave Ion Air-Pulse Pleasure Glans Stroker_0.jpg",
+      "/product-images/Arcwave Ion Air-Pulse Pleasure Glans Stroker_1.jpg",
+      "/product-images/Arcwave Ion Air-Pulse Pleasure Glans Stroker_2.jpg",
+      "/product-images/Arcwave Ion Air-Pulse Pleasure Glans Stroker_3.jpg",
+      "/product-images/Arcwave Ion Air-Pulse Pleasure Glans Stroker_4.jpg",
+      "/product-images/Arcwave Ion Air-Pulse Pleasure Glans Stroker_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 102
+  },
+  {
+    "id": "the-hands-free-suction-base-articulating-male-stroker",
+    "name": "The Hands-Free Suction Base Articulating Male Stroker",
+    "slug": "the-hands-free-suction-base-articulating-male-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 7999,
+    "originalPrice": 10499,
+    "discount": "24% OFF",
+    "badge": "Hands-Free Rig",
+    "stock": 25,
+    "subtitle": "Heavy-duty ball-joint suction mount allows hands-free pleasure at any angle",
+    "description": "Equipped with an industrial-strength suction clamp and 360° articulating ball joint that locks onto tables, walls, or headboards for total hands-free control.",
+    "sound": "< 35 dB",
+    "material": "Dual-Layer TPE & Steel Joint Mount",
+    "battery": "USB Fast Charging",
+    "waterproof": "Washable Sleeve",
+    "modes": "Multi-Speed Thrust & Vibration",
+    "specs": {
+      "sound": "< 35 dB",
+      "material": "Dual-Layer TPE & Steel Joint Mount",
+      "battery": "USB Fast Charging",
+      "waterproof": "Washable Sleeve",
+      "modes": "Multi-Speed Thrust & Vibration"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Hands-Free Suction Base Articulating Male Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_0.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_1.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_2.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_3.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_4.jpg",
+      "/product-images/The Hands-Free Suction Base Articulating Male Stroker_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 47
+  },
+  {
+    "id": "the-crystal-clear-multi-chamber-ribbed-stroker",
+    "name": "The Crystal Clear Multi-Chamber Ribbed Stroker",
+    "slug": "the-crystal-clear-multi-chamber-ribbed-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Manual Strokers",
+    "price": 2199,
+    "originalPrice": 2999,
+    "discount": "26% OFF",
+    "badge": "Visual Sensory",
+    "stock": 60,
+    "subtitle": "Transparent crystal elastomer lets you view every stroke in real time",
+    "description": "Transparent high-clarity soft elastomer with alternating ribbed and textured nodules that provides thrilling visual feedback during solo play.",
+    "sound": "Silent",
+    "material": "100% Phthalate-Free Clear Elastomer",
+    "battery": "Manual",
+    "waterproof": "100% Washable",
+    "modes": "Squeeze & Stroke Friction",
+    "specs": {
+      "sound": "Silent",
+      "material": "100% Phthalate-Free Clear Elastomer",
+      "battery": "Manual",
+      "waterproof": "100% Washable",
+      "modes": "Squeeze & Stroke Friction"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Crystal Clear Multi-Chamber Ribbed Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_0.jpg",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_1.jpg",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_2.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_3.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_4.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_5.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_6.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 151
+  },
+  {
+    "id": "the-vulcan-42-c-thermal-dual-chamber-stroker",
+    "name": "The Vulcan 42°C Thermal Dual-Chamber Stroker",
+    "slug": "the-vulcan-42-c-thermal-dual-chamber-stroker",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 9499,
+    "originalPrice": 12499,
+    "discount": "24% OFF",
+    "badge": "42°C Body Heat",
+    "stock": 20,
+    "subtitle": "Dual-ended sleeve with rapid 42°C internal heating elements",
+    "description": "Features two distinct textured entry ports (oral & tight canal) with rapid internal heating elements that warm to a lifelike 42°C.",
+    "sound": "< 32 dB",
+    "material": "RealFeel Medical Silicone & ABS Core",
+    "battery": "120 min Fast USB Charge",
+    "waterproof": "Removable Washable Core",
+    "modes": "6 Auto Vibrations + Dual-Zone Warmth",
+    "specs": {
+      "sound": "< 32 dB",
+      "material": "RealFeel Medical Silicone & ABS Core",
+      "battery": "120 min Fast USB Charge",
+      "waterproof": "Removable Washable Core",
+      "modes": "6 Auto Vibrations + Dual-Zone Warmth"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Vulcan 42°C Thermal Dual-Chamber Stroker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_0.jpg",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_1.jpg",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_2.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_3.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_4.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_5.webp",
+      "/product-images/The Crystal Clear Multi-Chamber Ribbed Stroker_6.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 118
+  },
+  {
+    "id": "the-hydro-max-digital-automatic-motorized-penis-pump",
+    "name": "The Hydro-Max Digital Automatic Motorized Penis Pump",
+    "slug": "the-hydro-max-digital-automatic-motorized-penis-pump",
+    "category": "male-masturbators",
+    "subcategory": "Automatic Strokers",
+    "price": 7899,
+    "originalPrice": 10299,
+    "discount": "23% OFF",
+    "badge": "Digital Sensor",
+    "stock": 28,
+    "subtitle": "Electric motorized vacuum pump with digital LCD pressure readout",
+    "description": "Electric motorized cylinder pump featuring real-time LCD pressure gauge, automated step-by-step training programs, and emergency safety release.",
+    "sound": "< 35 dB",
+    "material": "Medical Acrylic & Liquid Silicone Flange",
+    "battery": "180 min USB Rechargeable",
+    "waterproof": "IPX7 Submersible",
+    "modes": "4 Automatic Vacuum Pressure Cycles",
+    "specs": {
+      "sound": "< 35 dB",
+      "material": "Medical Acrylic & Liquid Silicone Flange",
+      "battery": "180 min USB Rechargeable",
+      "waterproof": "IPX7 Submersible",
+      "modes": "4 Automatic Vacuum Pressure Cycles"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Hydro-Max Digital Automatic Motorized Penis Pump Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_0.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_1.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_2.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_3.jpg",
+      "/product-images/The Hydro-Max Digital Automatic Motorized Penis Pump_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 147
+  },
+  {
+    "id": "the-pulse-charge-vibrating-dual-cock-ring",
+    "name": "The Pulse-Charge Vibrating Dual Cock Ring",
+    "slug": "the-pulse-charge-vibrating-dual-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Vibrating Cock Rings",
+    "price": 2699,
+    "originalPrice": 3299,
+    "discount": "18% OFF",
+    "badge": "Couples Favorite",
+    "stock": 75,
+    "subtitle": "Stretches around shaft & testicles with high-frequency clitoral bullet",
+    "description": "Elastic silicone dual-loop ring that restricts blood flow for rock-solid stamina while a contoured vibrating motor provides continuous partner stimulation.",
+    "sound": "< 25 dB",
+    "material": "100% Medical Platinum Silicone",
+    "battery": "80 min USB Fast Rechargeable",
+    "waterproof": "IPX8 100% Submersible",
+    "modes": "10 Sensation Speeds",
+    "specs": {
+      "sound": "< 25 dB",
+      "material": "100% Medical Platinum Silicone",
+      "battery": "80 min USB Fast Rechargeable",
+      "waterproof": "IPX8 100% Submersible",
+      "modes": "10 Sensation Speeds"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Pulse-Charge Vibrating Dual Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Pulse-Charge Vibrating Dual Cock Ring_0.jpg",
+      "/product-images/The Pulse-Charge Vibrating Dual Cock Ring_1.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 110
+  },
+  {
+    "id": "the-double-lock-shaft-ball-stretchy-cock-ring",
+    "name": "The Double-Lock Shaft & Ball Stretchy Cock Ring",
+    "slug": "the-double-lock-shaft-ball-stretchy-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Stretchy Silicone Rings",
+    "price": 1899,
+    "originalPrice": 2499,
+    "discount": "24% OFF",
+    "badge": "Stamina Essential",
+    "stock": 90,
+    "subtitle": "Figure-8 dual-loop ring for maximum erection firmness and stamina delay",
+    "description": "Ergonomic Figure-8 loop engineered from ultra-elastic velvety silicone. Locks firmly around both the shaft base and testicles for enhanced size and prolonged climax.",
+    "sound": "Completely Silent",
+    "material": "Premium Velvet Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Waterproof",
+    "modes": "Anatomical Ergonomic Dual-Lock",
+    "specs": {
+      "sound": "Completely Silent",
+      "material": "Premium Velvet Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Waterproof",
+      "modes": "Anatomical Ergonomic Dual-Lock"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Double-Lock Shaft & Ball Stretchy Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_0.webp",
+      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_1.webp",
+      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_2.webp",
+      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_3.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 45
+  },
+  {
+    "id": "the-eclipse-dual-resonance-vibrating-cock-ring",
+    "name": "The Eclipse Dual Resonance Vibrating Cock Ring",
+    "slug": "the-eclipse-dual-resonance-vibrating-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Vibrating Cock Rings",
+    "price": 4499,
+    "originalPrice": 5599,
+    "discount": "20% OFF",
+    "badge": "Couples Top Choice",
+    "stock": 50,
+    "subtitle": "Restricts blood flow for stamina + buzzing vibrations",
+    "description": "Restricts blood flow to prolong stamina while delivering powerful direct clitoral stimulation with twin micro-vibration motors.",
+    "sound": "< 25 dB",
+    "material": "Stretch-Flex Liquid Silicone",
+    "battery": "75 min Magnetic USB",
+    "waterproof": "IPX8 100% Submersible",
+    "modes": "10 Synchronized Modes",
+    "specs": {
+      "sound": "< 25 dB",
+      "material": "Stretch-Flex Liquid Silicone",
+      "battery": "75 min Magnetic USB",
+      "waterproof": "IPX8 100% Submersible",
+      "modes": "10 Synchronized Modes"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Eclipse Dual Resonance Vibrating Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Eclipse Dual Resonance Vibrating Cock Ring_0.jpg",
+      "/product-images/The Eclipse Dual Resonance Vibrating Cock Ring_1.jpg",
+      "/product-images/The Eclipse Dual Resonance Vibrating Cock Ring_2.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 52
+  },
+  {
+    "id": "the-titan-mirror-polished-surgical-steel-cock-ring",
+    "name": "The Titan Mirror-Polished Surgical Steel Cock Ring",
+    "slug": "the-titan-mirror-polished-surgical-steel-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Metal Cock Rings",
+    "price": 2999,
+    "originalPrice": 3999,
+    "discount": "25% OFF",
+    "badge": "Solid Steel",
+    "stock": 40,
+    "subtitle": "Solid 316L mirror-polished medical steel ring for firm constriction",
+    "description": "Precision machined from surgical-grade stainless steel with smooth radius inner edges for profound firmness, weight, and enhanced staying power.",
+    "sound": "Silent",
+    "material": "316L Surgical Stainless Steel",
+    "battery": "Non-electric",
+    "waterproof": "100% Submersible",
+    "modes": "Solid Constriction (Available in 45mm, 50mm, 55mm)",
+    "specs": {
+      "sound": "Silent",
+      "material": "316L Surgical Stainless Steel",
+      "battery": "Non-electric",
+      "waterproof": "100% Submersible",
+      "modes": "Solid Constriction (Available in 45mm, 50mm, 55mm)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Titan Mirror-Polished Surgical Steel Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Titan Mirror-Polished Surgical Steel Cock Ring_0.jpg",
+      "/product-images/The Titan Mirror-Polished Surgical Steel Cock Ring_1.jpg",
+      "/product-images/The Titan Mirror-Polished Surgical Steel Cock Ring_2.jpg",
+      "/product-images/The Titan Mirror-Polished Surgical Steel Cock Ring_3.jpg",
+      "/product-images/The Titan Mirror-Polished Surgical Steel Cock Ring_4.jpg",
+      "/product-images/The Titan Mirror-Polished Surgical Steel Cock Ring_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 155
+  },
+  {
+    "id": "the-textured-stamina-extender-girth-sleeve",
+    "name": "The Textured Stamina Extender Girth Sleeve",
+    "slug": "the-textured-stamina-extender-girth-sleeve",
+    "category": "cock-rings",
+    "subcategory": "Stretchy Silicone Rings",
+    "price": 1999,
+    "originalPrice": 2799,
+    "discount": "28% OFF",
+    "badge": "Girth Booster",
+    "stock": 65,
+    "subtitle": "Adds 0.5 inches girth & textured friction with testicle strap",
+    "description": "Ultra-soft studded silicone sleeve that fits snugly over the penile shaft to add visible girth, delay ejaculation, and provide intense internal ribbed stimulation.",
+    "sound": "Silent",
+    "material": "Super-Stretch Platinum Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Washable",
+    "modes": "Girth Extension & Stamina Lock",
+    "specs": {
+      "sound": "Silent",
+      "material": "Super-Stretch Platinum Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Washable",
+      "modes": "Girth Extension & Stamina Lock"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Textured Stamina Extender Girth Sleeve Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Textured Stamina Extender Girth Sleeve_0.webp",
+      "/product-images/The Textured Stamina Extender Girth Sleeve_1.webp",
+      "/product-images/The Textured Stamina Extender Girth Sleeve_2.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 115
+  },
+  {
+    "id": "we-vibe-pivot-high-intensity-wireless-cock-ring",
+    "name": "We-Vibe Pivot High-Intensity Wireless Cock Ring",
+    "slug": "we-vibe-pivot-high-intensity-wireless-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Vibrating Cock Rings",
+    "price": 7999,
+    "originalPrice": 9999,
+    "discount": "20% OFF",
+    "badge": "App Controlled",
+    "stock": 30,
+    "subtitle": "Wide silicone band with powerful rumbles controlled via We-Connect app",
+    "description": "Features a wide comfort-fit silicone band that maintains firm erections while a pivoting vibrating head stimulates the clitoris with deep customizable rumbles.",
+    "sound": "< 24 dB",
+    "material": "Silky Soft-Touch Silicone",
+    "battery": "120 min Magnetic USB Charge",
+    "waterproof": "100% Waterproof",
+    "modes": "10 Modes + Smartphone App Control",
+    "specs": {
+      "sound": "< 24 dB",
+      "material": "Silky Soft-Touch Silicone",
+      "battery": "120 min Magnetic USB Charge",
+      "waterproof": "100% Waterproof",
+      "modes": "10 Modes + Smartphone App Control"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "We-Vibe Pivot High-Intensity Wireless Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/We-Vibe Pivot High-Intensity Wireless Cock Ring_0.jpg",
+      "/product-images/We-Vibe Pivot High-Intensity Wireless Cock Ring_1.jpg",
+      "/product-images/We-Vibe Pivot High-Intensity Wireless Cock Ring_2.jpg",
+      "/product-images/We-Vibe Pivot High-Intensity Wireless Cock Ring_3.jpg",
+      "/product-images/We-Vibe Pivot High-Intensity Wireless Cock Ring_4.jpg",
+      "/product-images/We-Vibe Pivot High-Intensity Wireless Cock Ring_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 115
+  },
+  {
+    "id": "svakom-tyler-remote-controlled-vibrating-cock-ring",
+    "name": "Svakom Tyler Remote-Controlled Vibrating Cock Ring",
+    "slug": "svakom-tyler-remote-controlled-vibrating-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Vibrating Cock Rings",
+    "price": 5999,
+    "originalPrice": 7999,
+    "discount": "25% OFF",
+    "badge": "Long-Distance Play",
+    "stock": 35,
+    "subtitle": "Wireless partner remote & app-enabled dual stimulation ring",
+    "description": "Ergonomic vibrating ring equipped with a wireless handheld remote and internet long-distance connection via smartphone for thrilling partner play anywhere.",
+    "sound": "< 26 dB",
+    "material": "Medical-Grade Liquid Silicone",
+    "battery": "90 min Fast USB Charge",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "5 Speeds + 5 Vibration Rhythms",
+    "specs": {
+      "sound": "< 26 dB",
+      "material": "Medical-Grade Liquid Silicone",
+      "battery": "90 min Fast USB Charge",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "5 Speeds + 5 Vibration Rhythms"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Svakom Tyler Remote-Controlled Vibrating Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Svakom Tyler Remote-Controlled Vibrating Cock Ring_0.jpg",
+      "/product-images/Svakom Tyler Remote-Controlled Vibrating Cock Ring_1.jpg",
+      "/product-images/Svakom Tyler Remote-Controlled Vibrating Cock Ring_2.jpg",
+      "/product-images/Svakom Tyler Remote-Controlled Vibrating Cock Ring_3.jpg",
+      "/product-images/Svakom Tyler Remote-Controlled Vibrating Cock Ring_4.jpg",
+      "/product-images/Svakom Tyler Remote-Controlled Vibrating Cock Ring_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 100
+  },
+  {
+    "id": "the-tri-lock-triple-loop-silicone-cock-ring",
+    "name": "The Tri-Lock Triple Loop Silicone Cock Ring",
+    "slug": "the-tri-lock-triple-loop-silicone-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Stretchy Silicone Rings",
+    "price": 2199,
+    "originalPrice": 2999,
+    "discount": "26% OFF",
+    "badge": "Triple Lockdown",
+    "stock": 60,
+    "subtitle": "3 connected rings secure shaft base, testicles, and scrotum separately",
+    "description": "Triple-loop constriction harness that isolates and supports the shaft base, perineum, and scrotal sac for extreme firmness, stamina, and fullness.",
+    "sound": "Silent",
+    "material": "High-Elasticity Medical Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Submersible",
+    "modes": "3-Point Anatomical Support",
+    "specs": {
+      "sound": "Silent",
+      "material": "High-Elasticity Medical Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Submersible",
+      "modes": "3-Point Anatomical Support"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Tri-Lock Triple Loop Silicone Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Tri-Lock Triple Loop Silicone Cock Ring_0.webp",
+      "/product-images/The Tri-Lock Triple Loop Silicone Cock Ring_1.webp",
+      "/product-images/The Tri-Lock Triple Loop Silicone Cock Ring_2.webp",
+      "/product-images/The Tri-Lock Triple Loop Silicone Cock Ring_3.webp",
+      "/product-images/The Tri-Lock Triple Loop Silicone Cock Ring_4.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 145
+  },
+  {
+    "id": "the-magnetic-heavyweight-ball-stretcher-ring",
+    "name": "The Magnetic Heavyweight Ball Stretcher Ring",
+    "slug": "the-magnetic-heavyweight-ball-stretcher-ring",
+    "category": "cock-rings",
+    "subcategory": "Metal Cock Rings",
+    "price": 3699,
+    "originalPrice": 4899,
+    "discount": "24% OFF",
+    "badge": "Heavyweight Fit",
+    "stock": 30,
+    "subtitle": "Precision magnetic clasp ring for comfortable scrotal elongation",
+    "description": "Crafted with neodymium magnetic locking pins for easy one-handed placement and smooth heavyweight scrotal restriction.",
+    "sound": "Silent",
+    "material": "316L Surgical Stainless Steel & Neodymium Magnets",
+    "battery": "Non-electric",
+    "waterproof": "100% Waterproof",
+    "modes": "Magnetic Quick-Lock",
+    "specs": {
+      "sound": "Silent",
+      "material": "316L Surgical Stainless Steel & Neodymium Magnets",
+      "battery": "Non-electric",
+      "waterproof": "100% Waterproof",
+      "modes": "Magnetic Quick-Lock"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Magnetic Heavyweight Ball Stretcher Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Magnetic Heavyweight Ball Stretcher Ring_0.jpg",
+      "/product-images/The Magnetic Heavyweight Ball Stretcher Ring_1.jpg",
+      "/product-images/The Magnetic Heavyweight Ball Stretcher Ring_2.jpg",
+      "/product-images/The Magnetic Heavyweight Ball Stretcher Ring_3.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 71
+  },
+  {
+    "id": "the-pleasure-nodule-vibrating-partner-cock-ring",
+    "name": "The Pleasure-Nodule Vibrating Partner Cock Ring",
+    "slug": "the-pleasure-nodule-vibrating-partner-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Vibrating Cock Rings",
+    "price": 2999,
+    "originalPrice": 3999,
+    "discount": "25% OFF",
+    "badge": "Dual Sensation",
+    "stock": 55,
+    "subtitle": "Features flexible silicone ticklers that massage partner with every thrust",
+    "description": "Stretchy silicone constriction band crowned with a flexible vibrating tickler that directly massages the clitoris or G-spot during penetration.",
+    "sound": "< 27 dB",
+    "material": "Silky Soft Silicone",
+    "battery": "60 min USB Fast Charge",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "7 Sensation Patterns",
+    "specs": {
+      "sound": "< 27 dB",
+      "material": "Silky Soft Silicone",
+      "battery": "60 min USB Fast Charge",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "7 Sensation Patterns"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Pleasure-Nodule Vibrating Partner Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Pleasure-Nodule Vibrating Partner Cock Ring_0.webp",
+      "/product-images/The Pleasure-Nodule Vibrating Partner Cock Ring_1.jpg",
+      "/product-images/The Pleasure-Nodule Vibrating Partner Cock Ring_2.jpg",
+      "/product-images/The Pleasure-Nodule Vibrating Partner Cock Ring_3.jpg",
+      "/product-images/The Pleasure-Nodule Vibrating Partner Cock Ring_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 86
+  },
+  {
+    "id": "the-artisan-leather-buckle-adjustable-cock-ring",
+    "name": "The Artisan Leather Buckle Adjustable Cock Ring",
+    "slug": "the-artisan-leather-buckle-adjustable-cock-ring",
+    "category": "cock-rings",
+    "subcategory": "Metal Cock Rings",
+    "price": 2399,
+    "originalPrice": 3199,
+    "discount": "25% OFF",
+    "badge": "Artisanal Leather",
+    "stock": 45,
+    "subtitle": "Handcrafted full-grain leather strap with adjustable steel roller buckle",
+    "description": "Soft padded leather band with steel buckle holes that allows precise micro-adjustments for your customized tightness and comfort.",
+    "sound": "Silent",
+    "material": "Full-Grain Bridle Leather & Steel Hardware",
+    "battery": "Non-electric",
+    "waterproof": "Wipe Clean",
+    "modes": "6 Adjustable Size Holes",
+    "specs": {
+      "sound": "Silent",
+      "material": "Full-Grain Bridle Leather & Steel Hardware",
+      "battery": "Non-electric",
+      "waterproof": "Wipe Clean",
+      "modes": "6 Adjustable Size Holes"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Artisan Leather Buckle Adjustable Cock Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Artisan Leather Buckle Adjustable Cock Ring_0.jpg",
+      "/product-images/The Artisan Leather Buckle Adjustable Cock Ring_1.jpg",
+      "/product-images/The Artisan Leather Buckle Adjustable Cock Ring_2.jpg",
+      "/product-images/The Artisan Leather Buckle Adjustable Cock Ring_3.jpg",
+      "/product-images/The Artisan Leather Buckle Adjustable Cock Ring_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 56
+  },
+  {
+    "id": "the-crown-lock-glans-shaft-delay-ring",
+    "name": "The Crown-Lock Glans & Shaft Delay Ring",
+    "slug": "the-crown-lock-glans-shaft-delay-ring",
+    "category": "cock-rings",
+    "subcategory": "Stretchy Silicone Rings",
+    "price": 1799,
+    "originalPrice": 2399,
+    "discount": "25% OFF",
+    "badge": "Delay Focus",
+    "stock": 80,
+    "subtitle": "Sits comfortably below the glans crown to desensitize & prolong sessions",
+    "description": "Snug contoured silicone band designed to sit immediately below the corona ridge, moderating over-sensitivity and maximizing stamina.",
+    "sound": "Silent",
+    "material": "100% Medical Platinum Silicone",
+    "battery": "Non-electric",
+    "waterproof": "100% Waterproof",
+    "modes": "Corona Delay Grip",
+    "specs": {
+      "sound": "Silent",
+      "material": "100% Medical Platinum Silicone",
+      "battery": "Non-electric",
+      "waterproof": "100% Waterproof",
+      "modes": "Corona Delay Grip"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Crown-Lock Glans & Shaft Delay Ring Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_0.jpg",
+      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_1.jpg",
+      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_2.jpg",
+      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_3.jpg",
+      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_4.jpg",
+      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_5.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 65
+  },
+  {
+    "id": "the-empress-womanizer-air-pulse-clitoral-massager",
+    "name": "The Empress Womanizer Air-Pulse Clitoral Massager",
+    "slug": "the-empress-womanizer-air-pulse-clitoral-massager",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 10999,
+    "originalPrice": 13999,
+    "discount": "21% OFF",
+    "badge": "Iconic Tech",
+    "stock": 25,
+    "subtitle": "Uses compressed air waves for touchless clitoral climax",
+    "description": "Patented Pleasure Air technology envelops the clitoris in pulsating waves of air pressure without direct friction, leading to rapid multiple orgasms.",
+    "sound": "< 27 dB (Whisper Quiet)",
+    "material": "100% Medical Liquid Silicone",
+    "battery": "120 min Magnetic USB",
+    "waterproof": "IPX7 Submersible",
+    "modes": "12 Intensity Levels + Smart Silence",
+    "specs": {
+      "sound": "< 27 dB (Whisper Quiet)",
+      "material": "100% Medical Liquid Silicone",
+      "battery": "120 min Magnetic USB",
+      "waterproof": "IPX7 Submersible",
+      "modes": "12 Intensity Levels + Smart Silence"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Empress Womanizer Air-Pulse Clitoral Massager Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_0.webp",
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_1.webp",
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_2.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 115
+  },
+  {
+    "id": "the-rose-petal-pulsating-suction-clitoral-cup",
+    "name": "The Rose Petal Pulsating Suction Clitoral Cup",
+    "slug": "the-rose-petal-pulsating-suction-clitoral-cup",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 3699,
+    "originalPrice": 4899,
+    "discount": "24% OFF",
+    "badge": "Viral Sensation",
+    "stock": 70,
+    "subtitle": "Sculpted like an elegant blooming rose with vacuum oral suction",
+    "description": "Discreet rose-shaped silicone cup that forms an airtight seal around the clitoris, stimulating with fluttering suction pulses that simulate oral tongue flutter.",
+    "sound": "< 28 dB",
+    "material": "Silky Velvet Silicone",
+    "battery": "90 min USB Rechargeable",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "10 Sucking & Fluttering Speeds",
+    "specs": {
+      "sound": "< 28 dB",
+      "material": "Silky Velvet Silicone",
+      "battery": "90 min USB Rechargeable",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "10 Sucking & Fluttering Speeds"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Rose Petal Pulsating Suction Clitoral Cup Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Rose Petal Pulsating Suction Clitoral Cup_0.jpg",
+      "/product-images/The Rose Petal Pulsating Suction Clitoral Cup_1.jpg",
+      "/product-images/The Rose Petal Pulsating Suction Clitoral Cup_2.jpg",
+      "/product-images/The Rose Petal Pulsating Suction Clitoral Cup_3.jpg",
+      "/product-images/The Rose Petal Pulsating Suction Clitoral Cup_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 40
+  },
+  {
+    "id": "magic-box-2-in-1-silicone-tongue-licker-air-suction",
+    "name": "Magic Box 2-in-1 Silicone Tongue Licker + Air Suction",
+    "slug": "magic-box-2-in-1-silicone-tongue-licker-air-suction",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 4999,
+    "originalPrice": 6999,
+    "discount": "28% OFF",
+    "badge": "Dual Sensory",
+    "stock": 45,
+    "subtitle": "Rapid silicone oral tongue licking motion + touchless vacuum air pulses",
+    "description": "Dual sensory innovation combining rapid flexible silicone tongue licking motion with touchless vacuum air pulses for instant climactic release.",
+    "sound": "< 28 dB",
+    "material": "100% Medical Grade Silicone",
+    "battery": "Wireless Fast Charging Dock",
+    "waterproof": "IPX7 100% Waterproof",
+    "modes": "7 Licking Modes + 7 Suction Intensities",
+    "specs": {
+      "sound": "< 28 dB",
+      "material": "100% Medical Grade Silicone",
+      "battery": "Wireless Fast Charging Dock",
+      "waterproof": "IPX7 100% Waterproof",
+      "modes": "7 Licking Modes + 7 Suction Intensities"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Magic Box 2-in-1 Silicone Tongue Licker + Air Suction Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_0.webp",
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_1.webp",
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_2.webp",
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_3.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 55
+  },
+  {
+    "id": "satisfyer-pro-2-generation-3-sonic-air-wave-stimulator",
+    "name": "Satisfyer Pro 2 Generation 3 Sonic Air-Wave Stimulator",
+    "slug": "satisfyer-pro-2-generation-3-sonic-air-wave-stimulator",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 5499,
+    "originalPrice": 6999,
+    "discount": "21% OFF",
+    "badge": "Global Best Seller",
+    "stock": 55,
+    "subtitle": "Air Pulse technology with Liquid Air vibration cap and app connectivity",
+    "description": "Features two interchangeable caps (including ultra-thin silicone Liquid Air cap) and 11 touchless air-wave programs customizable via Bluetooth app.",
+    "sound": "< 26 dB",
+    "material": "Soft-Touch Silicone & Metallic Shell",
+    "battery": "120 min Magnetic USB",
+    "waterproof": "IPX7 100% Submersible",
+    "modes": "11 Air-Pulse Programs + 12 Vibration Settings",
+    "specs": {
+      "sound": "< 26 dB",
+      "material": "Soft-Touch Silicone & Metallic Shell",
+      "battery": "120 min Magnetic USB",
+      "waterproof": "IPX7 100% Submersible",
+      "modes": "11 Air-Pulse Programs + 12 Vibration Settings"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Satisfyer Pro 2 Generation 3 Sonic Air-Wave Stimulator Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Satisfyer Pro 2 Generation 3 Sonic Air-Wave Stimulator_0.avif",
+      "/product-images/Satisfyer Pro 2 Generation 3 Sonic Air-Wave Stimulator_1.avif",
+      "/product-images/Satisfyer Pro 2 Generation 3 Sonic Air-Wave Stimulator_2.avif",
+      "/product-images/Satisfyer Pro 2 Generation 3 Sonic Air-Wave Stimulator_3.avif",
+      "/product-images/Satisfyer Pro 2 Generation 3 Sonic Air-Wave Stimulator_4.avif"
+    ],
+    "rating": 5,
+    "reviewsCount": 45
+  },
+  {
+    "id": "lelo-sona-2-cruise-sonic-clitoral-massager",
+    "name": "LELO Sona 2 Cruise Sonic Clitoral Massager",
+    "slug": "lelo-sona-2-cruise-sonic-clitoral-massager",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 13999,
+    "originalPrice": 17499,
+    "discount": "20% OFF",
+    "badge": "Sonic Technology",
+    "stock": 20,
+    "subtitle": "Sonic waves that resonate through 75% more of the internal clitoral structure",
+    "description": "Cruise Control technology prevents power drop during firm pressure, sending deep sonic acoustic waves throughout the entire internal clitoral network.",
+    "sound": "< 26 dB",
+    "material": "Ultra-Smooth Medical Silicone & ABS",
+    "battery": "120 min USB Fast Charge",
+    "waterproof": "100% Waterproof",
+    "modes": "8 Sonic Sensation Patterns",
+    "specs": {
+      "sound": "< 26 dB",
+      "material": "Ultra-Smooth Medical Silicone & ABS",
+      "battery": "120 min USB Fast Charge",
+      "waterproof": "100% Waterproof",
+      "modes": "8 Sonic Sensation Patterns"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "LELO Sona 2 Cruise Sonic Clitoral Massager Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/LELO Sona 2 Cruise Sonic Clitoral Massager_0.jpg",
+      "/product-images/LELO Sona 2 Cruise Sonic Clitoral Massager_1.jpg",
+      "/product-images/LELO Sona 2 Cruise Sonic Clitoral Massager_2.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 92
+  },
+  {
+    "id": "womanizer-premium-eco-biodegradable-air-pulse",
+    "name": "Womanizer Premium Eco Biodegradable Air-Pulse",
+    "slug": "womanizer-premium-eco-biodegradable-air-pulse",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 14999,
+    "originalPrice": 18999,
+    "discount": "21% OFF",
+    "badge": "Eco Luxury",
+    "stock": 15,
+    "subtitle": "Crafted with renewable Biolene biodegradable material & Smart Silence",
+    "description": "Eco-conscious sensual luxury engineered with renewable Biolene, Smart Silence contact sensor, and 12 Pleasure Air touchless pressure intensities.",
+    "sound": "< 25 dB",
+    "material": "Biodegradable Biolene & Medical Silicone",
+    "battery": "240 min Magnetic Charging",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "12 Pleasure Air Intensities + Smart Silence",
+    "specs": {
+      "sound": "< 25 dB",
+      "material": "Biodegradable Biolene & Medical Silicone",
+      "battery": "240 min Magnetic Charging",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "12 Pleasure Air Intensities + Smart Silence"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "Womanizer Premium Eco Biodegradable Air-Pulse Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Womanizer Premium Eco Biodegradable Air-Pulse_0.jpg",
+      "/product-images/Womanizer Premium Eco Biodegradable Air-Pulse_1.jpg",
+      "/product-images/Womanizer Premium Eco Biodegradable Air-Pulse_2.jpg",
+      "/product-images/Womanizer Premium Eco Biodegradable Air-Pulse_3.jpg",
+      "/product-images/Womanizer Premium Eco Biodegradable Air-Pulse_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 135
+  },
+  {
+    "id": "the-dual-end-vacuum-air-suction-g-spot-wand",
+    "name": "The Dual-End Vacuum Air Suction + G-Spot Wand",
+    "slug": "the-dual-end-vacuum-air-suction-g-spot-wand",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 6499,
+    "originalPrice": 8499,
+    "discount": "23% OFF",
+    "badge": "Dual Stimulation",
+    "stock": 35,
+    "subtitle": "Touchless air suction on one end + insertable G-spot vibrator on other",
+    "description": "Two toys in one: an air-pulse suction nozzle on one end and a curved insertable G-spot vibrator on the other with independent dual-button controls.",
+    "sound": "< 29 dB",
+    "material": "100% Platinum Silicone",
+    "battery": "100 min USB Charge",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "10 Suction Modes + 10 Vibration Modes",
+    "specs": {
+      "sound": "< 29 dB",
+      "material": "100% Platinum Silicone",
+      "battery": "100 min USB Charge",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "10 Suction Modes + 10 Vibration Modes"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Dual-End Vacuum Air Suction + G-Spot Wand Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_0.webp",
+      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_1.webp",
+      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_2.webp",
+      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_3.webp",
+      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_4.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 53
+  },
+  {
+    "id": "the-tulip-blossom-touchless-clitoral-sucker",
+    "name": "The Tulip Blossom Touchless Clitoral Sucker",
+    "slug": "the-tulip-blossom-touchless-clitoral-sucker",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 3299,
+    "originalPrice": 4299,
+    "discount": "23% OFF",
+    "badge": "Petal Design",
+    "stock": 60,
+    "subtitle": "Sculpted tulip petals with ultra-soft silicone vacuum cup",
+    "description": "Delicate floral aesthetic containing a high-frequency pneumatic air-pulse engine that creates fluttering rhythmic oral suction.",
+    "sound": "< 27 dB",
+    "material": "Soft Medical Silicone",
+    "battery": "90 min USB Magnetic",
+    "waterproof": "IPX7 100% Submersible",
+    "modes": "8 Pulsating Air Speeds",
+    "specs": {
+      "sound": "< 27 dB",
+      "material": "Soft Medical Silicone",
+      "battery": "90 min USB Magnetic",
+      "waterproof": "IPX7 100% Submersible",
+      "modes": "8 Pulsating Air Speeds"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Tulip Blossom Touchless Clitoral Sucker Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Tulip Blossom Touchless Clitoral Sucker_0.webp",
+      "/product-images/The Tulip Blossom Touchless Clitoral Sucker_1.gif",
+      "/product-images/The Tulip Blossom Touchless Clitoral Sucker_2.webp",
+      "/product-images/The Tulip Blossom Touchless Clitoral Sucker_3.webp",
+      "/product-images/The Tulip Blossom Touchless Clitoral Sucker_4.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 117
+  },
+  {
+    "id": "the-precision-air-wave-multi-nozzle-massager",
+    "name": "The Precision Air-Wave Multi-Nozzle Massager",
+    "slug": "the-precision-air-wave-multi-nozzle-massager",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 4599,
+    "originalPrice": 5999,
+    "discount": "23% OFF",
+    "badge": "Custom Fit",
+    "stock": 40,
+    "subtitle": "Includes 3 interchangeable silicone suction cups (Petite, Medium, Broad)",
+    "description": "Comes equipped with 3 interchangeable ergonomic silicone suction heads to fit all body anatomies and focus airflow for customized sensation.",
+    "sound": "< 28 dB",
+    "material": "Silicone & Electroplated Trim",
+    "battery": "120 min USB Fast Charge",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "10 Pulse Frequencies",
+    "specs": {
+      "sound": "< 28 dB",
+      "material": "Silicone & Electroplated Trim",
+      "battery": "120 min USB Fast Charge",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "10 Pulse Frequencies"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Precision Air-Wave Multi-Nozzle Massager Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_0.webp",
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_1.webp",
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_2.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 159
+  },
+  {
+    "id": "the-ergonomic-palm-fit-touchless-sonic-stimulator",
+    "name": "The Ergonomic Palm-Fit Touchless Sonic Stimulator",
+    "slug": "the-ergonomic-palm-fit-touchless-sonic-stimulator",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 3999,
+    "originalPrice": 5299,
+    "discount": "24% OFF",
+    "badge": "Palm Grip",
+    "stock": 48,
+    "subtitle": "Smooth curved pebble shape designed for intuitive in-palm guidance",
+    "description": "Contours seamlessly into the palm with a centered thumb control pad, allowing natural touchless air suction placement.",
+    "sound": "< 27 dB",
+    "material": "Velvet Touch Medical Silicone",
+    "battery": "100 min USB Charge",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "9 Air-Pulse Intensities",
+    "specs": {
+      "sound": "< 27 dB",
+      "material": "Velvet Touch Medical Silicone",
+      "battery": "100 min USB Charge",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "9 Air-Pulse Intensities"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Ergonomic Palm-Fit Touchless Sonic Stimulator Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Palm-Grip Ergonomic Body Massager_0.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_1.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_2.webp",
+      "/product-images/The Palm-Grip Ergonomic Body Massager_3.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 138
+  },
+  {
+    "id": "the-aqua-pulse-in-shower-clitoral-vacuum-toy",
+    "name": "The Aqua-Pulse In-Shower Clitoral Vacuum Toy",
+    "slug": "the-aqua-pulse-in-shower-clitoral-vacuum-toy",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 3799,
+    "originalPrice": 4999,
+    "discount": "24% OFF",
+    "badge": "Bath & Shower",
+    "stock": 50,
+    "subtitle": "Engineered for warm bath & shower water play with IPX8 rating",
+    "description": "Fully submersible IPX8 waterproof air-pulse toy that creates swirling hydrostatic water currents when used in warm baths for novel sensations.",
+    "sound": "< 26 dB",
+    "material": "Hydrophobic Liquid Silicone",
+    "battery": "90 min Magnetic USB",
+    "waterproof": "IPX8 100% Submersible",
+    "modes": "10 Hydro-Pulse Speeds",
+    "specs": {
+      "sound": "< 26 dB",
+      "material": "Hydrophobic Liquid Silicone",
+      "battery": "90 min Magnetic USB",
+      "waterproof": "IPX8 100% Submersible",
+      "modes": "10 Hydro-Pulse Speeds"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Aqua-Pulse In-Shower Clitoral Vacuum Toy Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_0.webp",
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_1.webp",
+      "/product-images/The Empress Womanizer Air-Pulse Clitoral Massager_2.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 97
+  },
+  {
+    "id": "the-ultra-discreet-compact-air-suction-pebble",
+    "name": "The Ultra-Discreet Compact Air-Suction Pebble",
+    "slug": "the-ultra-discreet-compact-air-suction-pebble",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 2999,
+    "originalPrice": 3999,
+    "discount": "25% OFF",
+    "badge": "Pocket Travel",
+    "stock": 65,
+    "subtitle": "Miniature pocket air-pulse toy with travel lock & hygienic cap",
+    "description": "Ultra-portable pocket pebble featuring a magnetic travel cover cap, zero-sound travel lock, and surprising air-pulse intensity.",
+    "sound": "< 25 dB",
+    "material": "Medical Silicone & Magnetic Cap",
+    "battery": "80 min USB Charge",
+    "waterproof": "IPX7 Waterproof",
+    "modes": "8 Air Wave Modes",
+    "specs": {
+      "sound": "< 25 dB",
+      "material": "Medical Silicone & Magnetic Cap",
+      "battery": "80 min USB Charge",
+      "waterproof": "IPX7 Waterproof",
+      "modes": "8 Air Wave Modes"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Ultra-Discreet Compact Air-Suction Pebble Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Ultra-Discreet Compact Air-Suction Pebble_0.png",
+      "/product-images/The Ultra-Discreet Compact Air-Suction Pebble_2.jpg",
+      "/product-images/The Ultra-Discreet Compact Air-Suction Pebble_3.png"
+    ],
+    "rating": 5,
+    "reviewsCount": 140
+  },
+  {
+    "id": "the-electra-high-frequency-violet-wand-electro-kit",
+    "name": "The Electra High-Frequency Violet Wand Electro-Kit",
+    "slug": "the-electra-high-frequency-violet-wand-electro-kit",
+    "category": "bdsm-kink",
+    "subcategory": "Violet Wands",
+    "price": 9999,
+    "originalPrice": 12999,
+    "discount": "23% OFF",
+    "badge": "Electrifying Tech",
+    "stock": 18,
+    "subtitle": "High-frequency glass electrode for tingling electrical chills",
+    "description": "Professional high-frequency Tesla electro-stimulation wand with 4 specialized glass electrodes that emit crackling blue-violet sparks for sensory thrills.",
+    "sound": "Crackling Spark Arc",
+    "material": "Insulated Bakelite & Borosilicate Gas Tubes",
+    "battery": "AC Mains Powered / Adjustable Dial",
+    "waterproof": "Keep Dry",
+    "modes": "Continuous Dial Voltage (10kV - 45kV)",
+    "specs": {
+      "sound": "Crackling Spark Arc",
+      "material": "Insulated Bakelite & Borosilicate Gas Tubes",
+      "battery": "AC Mains Powered / Adjustable Dial",
+      "waterproof": "Keep Dry",
+      "modes": "Continuous Dial Voltage (10kV - 45kV)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Electra High-Frequency Violet Wand Electro-Kit Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Electra High-Frequency Violet Wand Electro-Kit_0.jpg",
+      "/product-images/The Electra High-Frequency Violet Wand Electro-Kit_1.jpg",
+      "/product-images/The Electra High-Frequency Violet Wand Electro-Kit_2.jpg",
+      "/product-images/The Electra High-Frequency Violet Wand Electro-Kit_3.jpg",
+      "/product-images/The Electra High-Frequency Violet Wand Electro-Kit_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 107
+  },
+  {
+    "id": "the-sovereign-handcrafted-genuine-leather-restraints-set",
+    "name": "The Sovereign Handcrafted Genuine Leather Restraints Set",
+    "slug": "the-sovereign-handcrafted-genuine-leather-restraints-set",
+    "category": "bdsm-kink",
+    "subcategory": "Leather Restraints",
+    "price": 4999,
+    "originalPrice": 6499,
+    "discount": "23% OFF",
+    "badge": "Handmade Leather",
+    "stock": 35,
+    "subtitle": "Padded wrist & ankle cuffs with quick-release metal clasps",
+    "description": "Handcrafted from full-grain vegetable-tanned bridle leather lined with ultra-soft shearling fur for comfortable secure restraint play.",
+    "sound": "Silent",
+    "material": "Full-Grain Leather, Shearling Fur & Steel D-Rings",
+    "battery": "Non-electric",
+    "waterproof": "Wipe Clean",
+    "modes": "Adjustable Buckle Sizing with 4 Cuffs",
+    "specs": {
+      "sound": "Silent",
+      "material": "Full-Grain Leather, Shearling Fur & Steel D-Rings",
+      "battery": "Non-electric",
+      "waterproof": "Wipe Clean",
+      "modes": "Adjustable Buckle Sizing with 4 Cuffs"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Sovereign Handcrafted Genuine Leather Restraints Set Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Sovereign Handcrafted Genuine Leather Restraints Set_0.jpg",
+      "/product-images/The Sovereign Handcrafted Genuine Leather Restraints Set_1.webp",
+      "/product-images/The Sovereign Handcrafted Genuine Leather Restraints Set_2.jpg",
+      "/product-images/The Sovereign Handcrafted Genuine Leather Restraints Set_3.jpg",
+      "/product-images/The Sovereign Handcrafted Genuine Leather Restraints Set_4.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 136
+  },
+  {
+    "id": "the-obsidian-velvet-leather-flogger-multi-tassel-crop",
+    "name": "The Obsidian Velvet Leather Flogger & Multi-Tassel Crop",
+    "slug": "the-obsidian-velvet-leather-flogger-multi-tassel-crop",
+    "category": "bdsm-kink",
+    "subcategory": "Floggers & Crops",
+    "price": 3499,
+    "originalPrice": 4599,
+    "discount": "24% OFF",
+    "badge": "Sensory Thud",
+    "stock": 45,
+    "subtitle": "40 weighted soft leather tails for rhythmic sensory impact play",
+    "description": "Features 40 premium suede and full-grain leather falls mounted to a braided leather handle that delivers thrilling thuddy sensory feedback.",
+    "sound": "Sensory Thud",
+    "material": "Soft Genuine Leather & Braided Handle",
+    "battery": "Non-electric",
+    "waterproof": "Wipe Clean",
+    "modes": "Variable Impact Swings (40 Tails)",
+    "specs": {
+      "sound": "Sensory Thud",
+      "material": "Soft Genuine Leather & Braided Handle",
+      "battery": "Non-electric",
+      "waterproof": "Wipe Clean",
+      "modes": "Variable Impact Swings (40 Tails)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Obsidian Velvet Leather Flogger & Multi-Tassel Crop Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_0.webp",
+      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_1.webp",
+      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_2.webp",
+      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_3.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 123
+  },
+  {
+    "id": "the-ergonomic-silicone-ball-gag-with-breathable-air-channels",
+    "name": "The Ergonomic Silicone Ball Gag with Breathable Air Channels",
+    "slug": "the-ergonomic-silicone-ball-gag-with-breathable-air-channels",
+    "category": "bdsm-kink",
+    "subcategory": "Leather Restraints",
+    "price": 2199,
+    "originalPrice": 2899,
+    "discount": "24% OFF",
+    "badge": "Safe Airflow",
+    "stock": 55,
+    "subtitle": "Hygienic silicone ball with perforated center air tube & leather strap",
+    "description": "Engineered for comfort and safety with medical-grade silicone containing central air holes for easy natural breathing, secured by an adjustable buckle.",
+    "sound": "Muffled",
+    "material": "100% Medical Silicone & Leather Strap",
+    "battery": "Non-electric",
+    "waterproof": "100% Washable Ball",
+    "modes": "Adjustable Buckle (38-55cm)",
+    "specs": {
+      "sound": "Muffled",
+      "material": "100% Medical Silicone & Leather Strap",
+      "battery": "Non-electric",
+      "waterproof": "100% Washable Ball",
+      "modes": "Adjustable Buckle (38-55cm)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Ergonomic Silicone Ball Gag with Breathable Air Channels Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Ergonomic Silicone Ball Gag with Breathable Air Channels_0.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 48
+  },
+  {
+    "id": "the-silk-satin-blindfold-sensory-restraint-tie",
+    "name": "The Silk Satin Blindfold & Sensory Restraint Tie",
+    "slug": "the-silk-satin-blindfold-sensory-restraint-tie",
+    "category": "bdsm-kink",
+    "subcategory": "Leather Restraints",
+    "price": 1499,
+    "originalPrice": 2199,
+    "discount": "32% OFF",
+    "badge": "Sensory Deprivation",
+    "stock": 90,
+    "subtitle": "Double-layered mulberry silk for 100% light blackout & heightened touch",
+    "description": "Padded double-layered 100% mulberry silk blindfold that blocks out all ambient light to dramatically heighten hearing, touch, and sensual anticipation.",
+    "sound": "Silent",
+    "material": "100% Natural Mulberry Silk & Cotton Padding",
+    "battery": "Non-electric",
+    "waterproof": "Hand Washable",
+    "modes": "Sensory Light Deprivation (Tie-on Fit)",
+    "specs": {
+      "sound": "Silent",
+      "material": "100% Natural Mulberry Silk & Cotton Padding",
+      "battery": "Non-electric",
+      "waterproof": "Hand Washable",
+      "modes": "Sensory Light Deprivation (Tie-on Fit)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Silk Satin Blindfold & Sensory Restraint Tie Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_0.jpg",
+      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_1.jpg",
+      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_2.jpg",
+      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_3.jpg",
+      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_4.jpg",
+      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_5.webp"
+    ],
+    "rating": 5,
+    "reviewsCount": 118
+  },
+  {
+    "id": "the-weighted-stainless-steel-nipple-clamps-with-chain",
+    "name": "The Weighted Stainless Steel Nipple Clamps with Chain",
+    "slug": "the-weighted-stainless-steel-nipple-clamps-with-chain",
+    "category": "bdsm-kink",
+    "subcategory": "Leather Restraints",
+    "price": 2499,
+    "originalPrice": 3299,
+    "discount": "24% OFF",
+    "badge": "Pinch & Pull",
+    "stock": 50,
+    "subtitle": "Adjustable tension rubber-tipped alligator clamps linked by steel chain",
+    "description": "Pair of stainless steel alligator clamps with protective silicone tips and knurled tension screws that allow exact calibration from gentle pressure to firm pinch.",
+    "sound": "Clinking Chain",
+    "material": "Stainless Steel & Silicone Protectors",
+    "battery": "Non-electric",
+    "waterproof": "100% Submersible",
+    "modes": "Micrometer Screw Tension Tuning",
+    "specs": {
+      "sound": "Clinking Chain",
+      "material": "Stainless Steel & Silicone Protectors",
+      "battery": "Non-electric",
+      "waterproof": "100% Submersible",
+      "modes": "Micrometer Screw Tension Tuning"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Weighted Stainless Steel Nipple Clamps with Chain Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Weighted Stainless Steel Nipple Clamps with Chain_0.jpg",
+      "/product-images/The Weighted Stainless Steel Nipple Clamps with Chain_1.jpg",
+      "/product-images/The Weighted Stainless Steel Nipple Clamps with Chain_2.jpg",
+      "/product-images/The Weighted Stainless Steel Nipple Clamps with Chain_3.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 132
+  },
+  {
+    "id": "the-premium-shibari-100-natural-cotton-rope-set-3x10m",
+    "name": "The Premium Shibari 100% Natural Cotton Rope Set (3x10m)",
+    "slug": "the-premium-shibari-100-natural-cotton-rope-set-3x10m",
+    "category": "bdsm-kink",
+    "subcategory": "Leather Restraints",
+    "price": 2799,
+    "originalPrice": 3699,
+    "discount": "24% OFF",
+    "badge": "Japanese Shibari",
+    "stock": 60,
+    "subtitle": "3 bundles of 6mm triple-braided untreated soft Japanese bondage rope",
+    "description": "Triple-braided natural Japanese cotton rope treated with organic jojoba and beeswax for buttery smooth skin glide without rope burn.",
+    "sound": "Silent",
+    "material": "100% Natural Cotton & Beeswax Treatment",
+    "battery": "Non-electric",
+    "waterproof": "Keep Dry",
+    "modes": "3 x 10m Lengths (6mm Diameter)",
+    "specs": {
+      "sound": "Silent",
+      "material": "100% Natural Cotton & Beeswax Treatment",
+      "battery": "Non-electric",
+      "waterproof": "Keep Dry",
+      "modes": "3 x 10m Lengths (6mm Diameter)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Premium Shibari 100% Natural Cotton Rope Set (3x10m) Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Premium Shibari 100% Natural Cotton Rope Set (3x10m)_0.jpg",
+      "/product-images/The Premium Shibari 100% Natural Cotton Rope Set (3x10m)_1.jpg",
+      "/product-images/The Premium Shibari 100% Natural Cotton Rope Set (3x10m)_2.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 67
+  },
+  {
+    "id": "the-dual-sided-leather-spanking-paddle",
+    "name": "The Dual-Sided Leather Spanking Paddle",
+    "slug": "the-dual-sided-leather-spanking-paddle",
+    "category": "bdsm-kink",
+    "subcategory": "Floggers & Crops",
+    "price": 2999,
+    "originalPrice": 3899,
+    "discount": "23% OFF",
+    "badge": "Sting & Thud",
+    "stock": 40,
+    "subtitle": "Smooth firm leather on one side and soft suede on the other",
+    "description": "Solid wooden core reinforced with double-layered leather. Features smooth glossy leather on one side for sharp sting and soft velvety suede on the other for warm thud.",
+    "sound": "Sensory Slap",
+    "material": "Genuine Leather, Soft Suede & Solid Core",
+    "battery": "Non-electric",
+    "waterproof": "Wipe Clean",
+    "modes": "Dual-Sided Impact (Sting / Thud)",
+    "specs": {
+      "sound": "Sensory Slap",
+      "material": "Genuine Leather, Soft Suede & Solid Core",
+      "battery": "Non-electric",
+      "waterproof": "Wipe Clean",
+      "modes": "Dual-Sided Impact (Sting / Thud)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Dual-Sided Leather Spanking Paddle Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Dual-Sided Leather Spanking Paddle_0.jpg",
+      "/product-images/The Dual-Sided Leather Spanking Paddle_1.jpg",
+      "/product-images/The Dual-Sided Leather Spanking Paddle_2.jpg",
+      "/product-images/The Dual-Sided Leather Spanking Paddle_3.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 94
+  },
+  {
+    "id": "the-universal-under-bed-discreet-bondage-restraint-system",
+    "name": "The Universal Under-Bed Discreet Bondage Restraint System",
+    "slug": "the-universal-under-bed-discreet-bondage-restraint-system",
+    "category": "bdsm-kink",
+    "subcategory": "Leather Restraints",
+    "price": 3699,
+    "originalPrice": 4999,
+    "discount": "26% OFF",
+    "badge": "Travel Friendly",
+    "stock": 45,
+    "subtitle": "Straps slide invisibly under any mattress with 4 adjustable padded cuffs",
+    "description": "Fully adjustable cross-straps that fit securely under any mattress (King, Queen, Single) with 4 quick-clip padded wrist and ankle restraints.",
+    "sound": "Silent",
+    "material": "High-Tensile Nylon & Neoprene Cuffs",
+    "battery": "Non-electric",
+    "waterproof": "Washable Straps",
+    "modes": "Universal Mattress Fit (4 Limb Points)",
+    "specs": {
+      "sound": "Silent",
+      "material": "High-Tensile Nylon & Neoprene Cuffs",
+      "battery": "Non-electric",
+      "waterproof": "Washable Straps",
+      "modes": "Universal Mattress Fit (4 Limb Points)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Universal Under-Bed Discreet Bondage Restraint System Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Universal Under-Bed Discreet Bondage Restraint System_0.webp",
+      "/product-images/The Universal Under-Bed Discreet Bondage Restraint System_1.webp",
+      "/product-images/The Universal Under-Bed Discreet Bondage Restraint System_2.jpg",
+      "/product-images/The Universal Under-Bed Discreet Bondage Restraint System_3.jpg",
+      "/product-images/The Universal Under-Bed Discreet Bondage Restraint System_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 129
+  },
+  {
+    "id": "the-sensory-feather-tickler-wartenberg-neuro-pinwheel-kit",
+    "name": "The Sensory Feather Tickler & Wartenberg Neuro-Pinwheel Kit",
+    "slug": "the-sensory-feather-tickler-wartenberg-neuro-pinwheel-kit",
+    "category": "bdsm-kink",
+    "subcategory": "Floggers & Crops",
+    "price": 1999,
+    "originalPrice": 2799,
+    "discount": "28% OFF",
+    "badge": "Sensory Contrast",
+    "stock": 65,
+    "subtitle": "Pair containing ultra-soft ostrich feather wand + stainless pinwheel",
+    "description": "Explore the thrill of temperature and sensation contrast with an ultra-soft natural feather tickler paired with a medical stainless steel Wartenberg pinwheel.",
+    "sound": "Whisper Soft",
+    "material": "Natural Feathers, Acrylic Handle & Stainless Pinwheel",
+    "battery": "Non-electric",
+    "waterproof": "Keep Dry",
+    "modes": "Sensory Contrast Nerve Play",
+    "specs": {
+      "sound": "Whisper Soft",
+      "material": "Natural Feathers, Acrylic Handle & Stainless Pinwheel",
+      "battery": "Non-electric",
+      "waterproof": "Keep Dry",
+      "modes": "Sensory Contrast Nerve Play"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Sensory Feather Tickler & Wartenberg Neuro-Pinwheel Kit Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Sensory Feather Tickler & Wartenberg Neuro-Pinwheel Kit_0.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 78
+  },
+  {
+    "id": "the-velvet-botanical-100-organic-water-based-lubricant-150ml",
+    "name": "The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)",
+    "slug": "the-velvet-botanical-100-organic-water-based-lubricant-150ml",
+    "category": "lubricants-care",
+    "subcategory": "Water-Based Lubes",
+    "price": 1299,
+    "originalPrice": 1799,
+    "discount": "28% OFF",
+    "badge": "100% Organic",
+    "stock": 120,
+    "subtitle": "Infused with Aloe Vera, Chamomile & Hyaluronic Acid for lasting glide",
+    "description": "Ultra-pure, pH-balanced 100% water-based formula that mimics natural moisture with zero stickiness, stains, or synthetic parabens. Safe for all silicone toys.",
+    "sound": "Silent",
+    "material": "Purified Water, Aloe Vera, Hyaluronic Acid",
+    "battery": "Non-electric",
+    "waterproof": "100% Water Soluble & Condom Safe",
+    "modes": "Long-Lasting Silk Glide (150ml Pump)",
+    "specs": {
+      "sound": "Silent",
+      "material": "Purified Water, Aloe Vera, Hyaluronic Acid",
+      "battery": "Non-electric",
+      "waterproof": "100% Water Soluble & Condom Safe",
+      "modes": "Long-Lasting Silk Glide (150ml Pump)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Velvet Botanical 100% Organic Water-Based Lubricant (150ml) Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_0.jpg",
+      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_1.jpg",
+      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_2.jpg",
+      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_3.jpg",
+      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 42
+  },
+  {
+    "id": "the-silk-glide-long-lasting-silicone-hybrid-lubricant-100ml",
+    "name": "The Silk-Glide Long-Lasting Silicone Hybrid Lubricant (100ml)",
+    "slug": "the-silk-glide-long-lasting-silicone-hybrid-lubricant-100ml",
+    "category": "lubricants-care",
+    "subcategory": "Silicone Lubes",
+    "price": 1599,
+    "originalPrice": 2199,
+    "discount": "27% OFF",
+    "badge": "Waterproof Glide",
+    "stock": 90,
+    "subtitle": "Ultra-concentrated hybrid formula designed for shower & bath sessions",
+    "description": "High-viscosity hybrid formula that never dissolves or evaporates in water, delivering an unbeatably smooth cushion for long-lasting shower and bath intimacy.",
+    "sound": "Silent",
+    "material": "Medical-Grade Dimethicone & Botanical Silk",
+    "battery": "Non-electric",
+    "waterproof": "100% Water Resistant Formula",
+    "modes": "Shower & Anal Compatible (100ml)",
+    "specs": {
+      "sound": "Silent",
+      "material": "Medical-Grade Dimethicone & Botanical Silk",
+      "battery": "Non-electric",
+      "waterproof": "100% Water Resistant Formula",
+      "modes": "Shower & Anal Compatible (100ml)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Silk-Glide Long-Lasting Silicone Hybrid Lubricant (100ml) Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 116
+  },
+  {
+    "id": "the-sensual-warming-tingling-botanical-arousal-gel-50ml",
+    "name": "The Sensual Warming & Tingling Botanical Arousal Gel (50ml)",
+    "slug": "the-sensual-warming-tingling-botanical-arousal-gel-50ml",
+    "category": "lubricants-care",
+    "subcategory": "Arousal Gels",
+    "price": 1499,
+    "originalPrice": 1999,
+    "discount": "25% OFF",
+    "badge": "Arousal Booster",
+    "stock": 80,
+    "subtitle": "Natural ginger & peppermint extracts that stimulate localized blood flow",
+    "description": "A single drop triggers a pleasurable warming rush followed by pulsating tingling sensations that heighten sensitivity and accelerate climax.",
+    "sound": "Silent",
+    "material": "Natural Ginger, Mentha Piperita & L-Arginine",
+    "battery": "Non-electric",
+    "waterproof": "Washable",
+    "modes": "Localized Micro-Circulation Enhancement",
+    "specs": {
+      "sound": "Silent",
+      "material": "Natural Ginger, Mentha Piperita & L-Arginine",
+      "battery": "Non-electric",
+      "waterproof": "Washable",
+      "modes": "Localized Micro-Circulation Enhancement"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Sensual Warming & Tingling Botanical Arousal Gel (50ml) Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 105
+  },
+  {
+    "id": "the-pure-clean-antibacterial-toy-cleaning-mist-120ml",
+    "name": "The Pure-Clean Antibacterial Toy Cleaning Mist (120ml)",
+    "slug": "the-pure-clean-antibacterial-toy-cleaning-mist-120ml",
+    "category": "lubricants-care",
+    "subcategory": "Care & Cleaning",
+    "price": 999,
+    "originalPrice": 1499,
+    "discount": "33% OFF",
+    "badge": "Hygiene Essential",
+    "stock": 150,
+    "subtitle": "Alcohol-free & bleach-free antibacterial spray safe for silicone & glass",
+    "description": "Fast-acting sanitizing spray that eliminates 99.9% of bacteria within 60 seconds while preserving the silky finish of medical silicone, glass, and cyber-skin.",
+    "sound": "Silent Spray",
+    "material": "Tea Tree Extract, Zinc Ricinoleate, Purified Aqua",
+    "battery": "Non-electric",
+    "waterproof": "Liquid Spray",
+    "modes": "60-Second Sanitization Mist",
+    "specs": {
+      "sound": "Silent Spray",
+      "material": "Tea Tree Extract, Zinc Ricinoleate, Purified Aqua",
+      "battery": "Non-electric",
+      "waterproof": "Liquid Spray",
+      "modes": "60-Second Sanitization Mist"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Pure-Clean Antibacterial Toy Cleaning Mist (120ml) Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 42
+  },
+  {
+    "id": "the-soothing-jojoba-sweet-almond-intimate-massage-oil-200ml",
+    "name": "The Soothing Jojoba & Sweet Almond Intimate Massage Oil (200ml)",
+    "slug": "the-soothing-jojoba-sweet-almond-intimate-massage-oil-200ml",
+    "category": "lubricants-care",
+    "subcategory": "Massage Oils",
+    "price": 1699,
+    "originalPrice": 2299,
+    "discount": "26% OFF",
+    "badge": "Full Body Wellness",
+    "stock": 70,
+    "subtitle": "Cold-pressed Jojoba, Sweet Almond & Lavender for relaxing sensual touch",
+    "description": "Non-greasy, fast-absorbing botanical oil blend infused with pure French lavender and vitamin E that melts tension and deeply nourishes skin.",
+    "sound": "Silent",
+    "material": "Cold-Pressed Jojoba Oil, Sweet Almond Oil, Lavender EO",
+    "battery": "Non-electric",
+    "waterproof": "Oil Formula",
+    "modes": "Sensual Full-Body Touch & Gliding Massage",
+    "specs": {
+      "sound": "Silent",
+      "material": "Cold-Pressed Jojoba Oil, Sweet Almond Oil, Lavender EO",
+      "battery": "Non-electric",
+      "waterproof": "Oil Formula",
+      "modes": "Sensual Full-Body Touch & Gliding Massage"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Soothing Jojoba & Sweet Almond Intimate Massage Oil (200ml) Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 155
+  },
+  {
+    "id": "the-anti-friction-desensitizing-stamina-delay-spray-for-men-30ml",
+    "name": "The Anti-Friction Desensitizing Stamina Delay Spray for Men (30ml)",
+    "slug": "the-anti-friction-desensitizing-stamina-delay-spray-for-men-30ml",
+    "category": "lubricants-care",
+    "subcategory": "Arousal Gels",
+    "price": 1899,
+    "originalPrice": 2599,
+    "discount": "27% OFF",
+    "badge": "Endurance Pro",
+    "stock": 85,
+    "subtitle": "Micro-dosed clove & lidocaine complex that prolongs endurance up to 3x",
+    "description": "Fast-absorbing, non-transfer desensitizing spray that prolongs lovemaking without numbing partner sensation. Delivers peak confidence and staying power.",
+    "sound": "Silent Spray",
+    "material": "Clove Oil, Laureth-9, Panax Ginseng Extract",
+    "battery": "Non-electric",
+    "waterproof": "Quick Absorbing",
+    "modes": "Metred Dose Pump (30ml / 60 Applications)",
+    "specs": {
+      "sound": "Silent Spray",
+      "material": "Clove Oil, Laureth-9, Panax Ginseng Extract",
+      "battery": "Non-electric",
+      "waterproof": "Quick Absorbing",
+      "modes": "Metred Dose Pump (30ml / 60 Applications)"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B76E79"
+      },
+      {
+        "name": "Midnight Onyx",
+        "hex": "#1C1C1C"
+      }
+    ],
+    "inTheBox": [
+      "The Anti-Friction Desensitizing Stamina Delay Spray for Men (30ml) Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewsCount": 91
+  },
+  {
+    "id": "aoonice-ai-sync-clitoral-air-pulse-pussy-pump-vibrator",
+    "name": "Aoonice AI-Sync Clitoral Air-Pulse & Pussy Pump Vibrator",
+    "slug": "aoonice-ai-sync-clitoral-air-pulse-pussy-pump-vibrator",
+    "category": "air-pressure-suction",
+    "subcategory": "Womanizer Air-Wave",
+    "price": 4999,
+    "originalPrice": 6999,
+    "discount": "28% OFF",
+    "badge": "AI Pleasure Sync",
+    "stock": 50,
+    "subtitle": "AI-synchronized touchless air-pulse suction and clitoral vacuum pump",
+    "description": "Engineered with responsive AI-sync technology that adapts pulsation rhythms to natural arousal cues. Combines targeted touchless air-pulse clitoral resonance with gentle vacuum suction for deep, multi-layered orgasms.",
+    "sound": "< 28 dB (Whisper Silent)",
+    "material": "100% US FDA-Grade Liquid Silicone & Rose Gold ABS Alloy",
+    "battery": "120 min Runtime / Magnetic USB Fast Charge",
+    "waterproof": "IPX7 100% Submersible",
+    "modes": "10 Sensation Frequencies + Intelligent AI Sync Mode",
+    "specs": {
+      "sound": "< 28 dB (Whisper Silent)",
+      "material": "100% US FDA-Grade Liquid Silicone & Rose Gold ABS Alloy",
+      "battery": "120 min Runtime / Magnetic USB Fast Charge",
+      "waterproof": "IPX7 100% Submersible",
+      "modes": "10 Sensation Frequencies + Intelligent AI Sync Mode"
+    },
+    "colors": [
+      {
+        "name": "Velvet Rose",
+        "hex": "#B56571"
+      },
+      {
+        "name": "Obsidian Onyx",
+        "hex": "#1C1C1C"
+      },
+      {
+        "name": "Pearl Blush",
+        "hex": "#F0B8BE"
+      }
+    ],
+    "inTheBox": [
+      "Aoonice AI-Sync Clitoral Air-Pulse & Pussy Pump Vibrator Main Unit",
+      "Magnetic USB Fast Charger / User Guide",
+      "Velvet Travel Pouch",
+      "Confidential User Manual & Warranty Card"
+    ],
+    "images": [
+      "/product-images/Aoonice Sucking Vibrator AI Sync Sex Toys for Women, Clit Sucker Pussy Pump_0.jpg",
+      "/product-images/Aoonice Sucking Vibrator AI Sync Sex Toys for Women, Clit Sucker Pussy Pump_1.jpg",
+      "/product-images/Aoonice Sucking Vibrator AI Sync Sex Toys for Women, Clit Sucker Pussy Pump_2.jpg",
+      "/product-images/Aoonice Sucking Vibrator AI Sync Sex Toys for Women, Clit Sucker Pussy Pump_3.jpg",
+      "/product-images/Aoonice Sucking Vibrator AI Sync Sex Toys for Women, Clit Sucker Pussy Pump_4.jpg"
+    ],
+    "rating": 5,
+    "reviewsCount": 64
   }
 ];
 
