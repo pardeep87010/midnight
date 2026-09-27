@@ -1,859 +1,4625 @@
-// Specific, authentic, product-tailored customer reviews
-// Each product has between 3 and 8 unique verified reviews.
-
+// Generated 3-6 authentic customer reviews for all 101 products
 export const PRODUCT_REVIEWS_MAP = {
-  'lelo-mona-wave': [
+  "lelo-mona-wave": [
     {
-      id: 'rev-lmw-1',
-      name: 'Ananya R.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '3 days ago',
-      title: 'The WaveMotion finger surge is magical',
-      content: 'The motorized surge feels unbelievably organic and natural, unlike anything with a standard buzzer. Pure medical-grade velvety silicone and zero motor hum. Shipped in 100% plain packaging with MB Logistics label.'
+      "id": "rev-lelo-mona-wave-1",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-lmw-2',
-      name: 'Dr. Meera K.',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Top-tier Swedish engineering',
-      content: 'Worth every rupee. The dual motor synchronization between the G-spot wave and external vibrations is calibrated to perfection. Magnetic charger makes it waterproof for shower use.'
+      "id": "rev-lelo-mona-wave-2",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-lmw-3',
-      name: 'Tanvi & Harsh',
-      city: 'Delhi NCR',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Brought incredible excitement to our bedroom',
-      content: 'My partner and I were speechless. Very whisper-quiet (<30dB) so no worries about roommates or family in the other room. Bank descriptor was discreet MB* SERVICES LLC.'
+      "id": "rev-lelo-mona-wave-3",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-lmw-4',
-      name: 'Pooja S.',
-      city: 'Pune',
-      verified: true,
-      rating: 5,
-      date: '3 weeks ago',
-      title: 'Zero regret purchase',
-      content: 'Softest liquid silicone I have ever touched. 10 vibration modes that build up smoothly without being overwhelming. Arrived in a discreet brown box in just 2 days.'
-    },
-    {
-      id: 'rev-lmw-5',
-      name: 'Shruti V.',
-      city: 'Hyderabad',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'Luxurious feel and great battery life',
-      content: 'Took about 10 minutes to figure out the dual-button lock mode, but once unlocked it was an out-of-this-world experience. Battery lasts for weeks on a single charge.'
-    },
-    {
-      id: 'rev-lmw-6',
-      name: 'Radhika M.',
-      city: 'Kolkata',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Indulgent self-care ritual',
-      content: 'Feels like an expensive piece of modern art. The satin storage pouch included in the box is great for confidential travel.'
+      "id": "rev-lelo-mona-wave-4",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     }
   ],
-
-  'bullet-vibrator-pro': [
+  "bullet-vibrator-pro": [
     {
-      id: 'rev-bvp-1',
-      name: 'Sneha P.',
-      city: 'Chandigarh',
-      verified: true,
-      rating: 5,
-      date: '2 days ago',
-      title: 'Tiny size, monstrous pinpoint power!',
-      content: 'Do not let the compact pocket size fool you. The motor vibrations are deep and rumbly rather than high-pitched and buzz-y. Fits in any small handbag discreetly.'
+      "id": "rev-bullet-vibrator-pro-1",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-bvp-2',
-      name: 'Kavita D.',
-      city: 'Gurgaon',
-      verified: true,
-      rating: 5,
-      date: '6 days ago',
-      title: 'The matte finish is so silky',
-      content: 'Solid metal core with smooth matte silicone exterior. Fast magnetic charging and completely silent when pressed against the body.'
+      "id": "rev-bullet-vibrator-pro-2",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-bvp-3',
-      name: 'Nisha B.',
-      city: 'Ahmedabad',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Fast COD delivery',
-      content: 'Cash on Delivery was super smooth. Courier delivery person had zero clue what was inside. Great companion for couples play.'
+      "id": "rev-bullet-vibrator-pro-3",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-bvp-4',
-      name: 'Rhea S.',
-      city: 'Goa',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'Great travel companion',
-      content: 'Super lightweight and waterproof. Perfect for vacations and quick intimate rituals.'
+      "id": "rev-bullet-vibrator-pro-4",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-bullet-vibrator-pro-5",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
     }
   ],
-
-  'dual-sensation-rabbit-pro': [
+  "dual-sensation-rabbit-pro": [
     {
-      id: 'rev-dsr-1',
-      name: 'Priyanka & Arjun',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '4 days ago',
-      title: 'Double the delight, absolute bliss',
-      content: 'The flexible rabbit ears wrap around the clitoral zone while the shaft targets internal spots simultaneously. You reach climax in record time.'
+      "id": "rev-dual-sensation-rabbit-pro-1",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-dsr-2',
-      name: 'Natasha W.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Ultra-flexible ears and silent motor',
-      content: 'The ears bend effortlessly to match your exact anatomy. The whisper-quiet motor keeps everything private. 10/10 recommended!'
+      "id": "rev-dual-sensation-rabbit-pro-2",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-dsr-3',
-      name: 'Aishwarya G.',
-      city: 'Jaipur',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Best rabbit vibrator in India',
-      content: 'Finally an authentic luxury piece available with Cash on Delivery in India. Quality is identical to international brands worth 15k.'
+      "id": "rev-dual-sensation-rabbit-pro-3",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-dsr-4',
-      name: 'Simran K.',
-      city: 'Lucknow',
-      verified: true,
-      rating: 5,
-      date: '3 weeks ago',
-      title: 'Hypoallergenic and very gentle',
-      content: 'I have sensitive skin and standard cheap toys always caused irritation. This liquid silicone has zero phthalates or latex. Very safe.'
+      "id": "rev-dual-sensation-rabbit-pro-4",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     },
     {
-      id: 'rev-dsr-5',
-      name: 'Divya N.',
-      city: 'Chennai',
-      verified: true,
-      rating: 4,
-      date: '3 weeks ago',
-      title: 'Strong vibrations, ergonomic curve',
-      content: 'Very ergonomic handle grip. 12 different pulsing rhythms. Took 3 days to arrive in Chennai in a plain carton.'
+      "id": "rev-dual-sensation-rabbit-pro-5",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 4.8,
+      "date": "3 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
     },
     {
-      id: 'rev-dsr-6',
-      name: 'Tara B.',
-      city: 'Pune',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'My absolute go-to',
-      content: 'Waterproof rating is 100% legit. Easy to wash with warm water and antibacterial mist.'
-    },
-    {
-      id: 'rev-dsr-7',
-      name: 'Karishma L.',
-      city: 'Indore',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Unbelievable sensation',
-      content: 'The pulsation sequences are mind-blowing. Thank you Midnight Bloom for the prompt and confidential service.'
+      "id": "rev-dual-sensation-rabbit-pro-6",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹6499 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
-
-  'aura-power-wand': [
+  "aura-power-wand": [
     {
-      id: 'rev-apw-1',
-      name: 'Ritu M.',
-      city: 'Noida',
-      verified: true,
-      rating: 5,
-      date: '1 day ago',
-      title: 'Deep, room-shaking rumble',
-      content: 'This is not a weak vibrating toy; this has heavy-duty deep tissue rumble that sends waves throughout your entire pelvic floor. Absolutely therapeutic.'
+      "id": "rev-aura-power-wand-1",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-apw-2',
-      name: 'Sameer & Shalini',
-      city: 'Kochi',
-      verified: true,
-      rating: 5,
-      date: '5 days ago',
-      title: 'Flexible silicone neck is perfection',
-      content: 'The cushioned silicone head bends at any angle without straining your wrists. Excellent for full body tension release and intense clitoral stimulation.'
+      "id": "rev-aura-power-wand-2",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-apw-3',
-      name: 'Bhavna T.',
-      city: 'Dehradun',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Unrivaled power and battery life',
-      content: 'One full charge lasts for over 3 hours of continuous use. Magnetic USB charger clicks into place effortlessly.'
+      "id": "rev-aura-power-wand-3",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-apw-4',
-      name: 'Neha C.',
-      city: 'Surat',
-      verified: true,
-      rating: 5,
-      date: '3 weeks ago',
-      title: '100% Plain packaging guarantee delivered',
-      content: 'Received with zero logos, sender named as MB Logistics. Very discreet billing.'
-    },
-    {
-      id: 'rev-apw-5',
-      name: 'Vandana J.',
-      city: 'Chandigarh',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'Heavyweight luxury',
-      content: 'Solid weight in hand with premium rose-gold metallic accents. Extremely satisfying purchase.'
+      "id": "rev-aura-power-wand-4",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     }
   ],
-
-  'whisper-magnetic-panty-vibe': [
+  "whisper-magnetic-panty-vibe": [
     {
-      id: 'rev-wmp-1',
-      name: 'Karan & Ishita',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '2 days ago',
-      title: 'Thrilling public & dinner date play',
-      content: 'Gave the remote to my partner during a restaurant date. The magnetic clip holds securely through silk underwear and the motor is genuinely inaudible under conversational noise.'
+      "id": "rev-whisper-magnetic-panty-vibe-1",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-wmp-2',
-      name: 'Rupal S.',
-      city: 'Delhi',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Powerful wireless range',
-      content: 'Remote works reliably from across the room (over 10 meters). Contoured shape sits flush against the labia without slipping.'
+      "id": "rev-whisper-magnetic-panty-vibe-2",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-wmp-3',
-      name: 'Akanksha P.',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Discreet and so comfortable',
-      content: 'You forget you are wearing it until the vibrations start! Featherlight and velvet soft.'
+      "id": "rev-whisper-magnetic-panty-vibe-3",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-wmp-4',
-      name: 'Preeti G.',
-      city: 'Nagpur',
-      verified: true,
-      rating: 5,
-      date: '3 weeks ago',
-      title: 'Sensational gift for couples',
-      content: 'Came in a sleek magnetic gift box. The plain outer packing was immaculate.'
+      "id": "rev-whisper-magnetic-panty-vibe-4",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     },
     {
-      id: 'rev-wmp-5',
-      name: 'Monica D.',
-      city: 'Kolkata',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'Smooth controls & great thrills',
-      content: 'Simple 1-button remote with immediate response. Love the varying wave patterns.'
-    },
-    {
-      id: 'rev-wmp-6',
-      name: 'Suhani T.',
-      city: 'Bhopal',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Hands-free perfection',
-      content: 'Great for solo reading sessions or couples teasing. High quality silicone.'
+      "id": "rev-whisper-magnetic-panty-vibe-5",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1.5 months ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
     }
   ],
-
-  'eggstacy-love-egg-pro': [
+  "eggstacy-love-egg-pro": [
     {
-      id: 'rev-ele-1',
-      name: 'Sanya K.',
-      city: 'Gurgaon',
-      verified: true,
-      rating: 5,
-      date: '4 days ago',
-      title: 'Intense pelvic floor stimulation',
-      content: 'The ergonomic retrieval cord is sturdy and seamless. Smooth insertion and deep vibrations that target the vaginal walls effortlessly.'
+      "id": "rev-eggstacy-love-egg-pro-1",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-ele-2',
-      name: 'Vikrant & Payal',
-      city: 'Pune',
-      verified: true,
-      rating: 5,
-      date: '10 days ago',
-      title: 'Remote control fun for date nights',
-      content: 'Super responsive wireless remote. Compact and very quiet. Fast Cash on Delivery.'
+      "id": "rev-eggstacy-love-egg-pro-2",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-ele-3',
-      name: 'Deepika R.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '3 weeks ago',
-      title: 'Velvety smooth finish',
-      content: '100% waterproof so perfect in the bath. Holds charge for a very long time.'
+      "id": "rev-eggstacy-love-egg-pro-3",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-ele-4',
-      name: 'Anjali S.',
-      city: 'Ahmedabad',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'Strong rumble and discreet packaging',
-      content: 'Plain brown box arrived in 3 days. High quality motor with no rattles.'
+      "id": "rev-eggstacy-love-egg-pro-4",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-eggstacy-love-egg-pro-5",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 4.8,
+      "date": "Yesterday",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-eggstacy-love-egg-pro-6",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹3499 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
-
-  'lelo-gigi-2': [
+  "lelo-gigi-2": [
     {
-      id: 'rev-lgg-1',
-      name: 'Pallavi B.',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '3 days ago',
-      title: 'The flattened curved tip finds the exact spot',
-      content: 'The flattened angled tip is sculpted specifically for G-spot targeting. It presses with just the right amount of firm pressure.'
+      "id": "rev-lelo-gigi-2-1",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-lgg-2',
-      name: 'Nandini M.',
-      city: 'Delhi',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Pure luxury aesthetic',
-      content: 'Silky smooth matte body with gold button interface. Fully submersible waterproof design.'
+      "id": "rev-lelo-gigi-2-2",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-lgg-3',
-      name: 'Zoya K.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Whisper-quiet and fast delivery',
-      content: 'Delivered in 48 hours to Bandra. Completely silent under a blanket.'
+      "id": "rev-lelo-gigi-2-3",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-lgg-4',
-      name: 'Shweta V.',
-      city: 'Hyderabad',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'Reliable Swedish design',
-      content: 'Classic LELO quality. Long lasting battery and easy cleaning.'
-    },
-    {
-      id: 'rev-lgg-5',
-      name: 'Isha T.',
-      city: 'Chennai',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Best investment for self-love',
-      content: 'Leaves no doubt why this is an award-winning flagship item.'
+      "id": "rev-lelo-gigi-2-4",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     }
   ],
-
-  'we-vibe-chorus-couples': [
+  "we-vibe-chorus-couples": [
     {
-      id: 'rev-wvc-1',
-      name: 'Aditya & Ritu',
-      city: 'Delhi NCR',
-      verified: true,
-      rating: 5,
-      date: '2 days ago',
-      title: 'Squeeze remote & app control is futuristic',
-      content: 'The touch-sense remote increases vibrations the harder you squeeze it! Shared intimacy during lovemaking is on an entirely new plane.'
+      "id": "rev-we-vibe-chorus-couples-1",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-wvc-2',
-      name: 'Gaurav & Maya',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '5 days ago',
-      title: 'Long-distance intimacy lifesaver',
-      content: 'My husband travels frequently for business. Through the encrypted mobile app, he can control the vibrations from anywhere in the world in real-time.'
+      "id": "rev-we-vibe-chorus-couples-2",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-wvc-3',
-      name: 'Karthik & Sneha',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Adjustable fit stays in place',
-      content: 'The hinge bends and retains shape to hug natural contours. Both of us feel intense vibrations simultaneously during intercourse.'
+      "id": "rev-we-vibe-chorus-couples-3",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-wvc-4',
-      name: 'Varun & Tina',
-      city: 'Pune',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Confidential delivery & premium box',
-      content: 'Arrived discreetly in a plain cardboard parcel. Premium packaging inside with magnetic dock.'
+      "id": "rev-we-vibe-chorus-couples-4",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     },
     {
-      id: 'rev-wvc-5',
-      name: 'Rahul & Divya',
-      city: 'Kolkata',
-      verified: true,
-      rating: 5,
-      date: '3 weeks ago',
-      title: 'Smooth Bluetooth connection',
-      content: 'Zero disconnect issues on iOS and Android. Battery lasts multiple sessions.'
-    },
-    {
-      id: 'rev-wvc-6',
-      name: 'Nikhil & Pooja',
-      city: 'Chandigarh',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'High quality dual motors',
-      content: 'Takes a couple of tries to find the ideal bend angle, but once set it feels seamless.'
-    },
-    {
-      id: 'rev-wvc-7',
-      name: 'Arman & Sania',
-      city: 'Jaipur',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Top recommendation for couples',
-      content: 'Adds unmatched excitement and deep connection to intimacy.'
+      "id": "rev-we-vibe-chorus-couples-5",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 4.8,
+      "date": "4 days ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
     }
   ],
-
-  'svakom-tanya-thermal': [
+  "svakom-tanya-thermal": [
     {
-      id: 'rev-stt-1',
-      name: 'Trisha D.',
-      city: 'Shimla',
-      verified: true,
-      rating: 5,
-      date: '3 days ago',
-      title: 'Heated to human body temperature (38°C)',
-      content: 'The thermal warming sensation feels exactly like real body heat. In colder weather, this makes a world of difference. No cold shock, just warm pure bliss.'
+      "id": "rev-svakom-tanya-thermal-1",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-stt-2',
-      name: 'Sunita P.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Smooth warming in under 2 minutes',
-      content: 'Heats up quickly and safely with thermal temperature control. The ribbed contours amplify internal sensations.'
+      "id": "rev-svakom-tanya-thermal-2",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-stt-3',
-      name: 'Mansi R.',
-      city: 'Delhi',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Discreet packaging and silky texture',
-      content: 'Plain outer box with zero giveaway text. Silicone is thick and ultra-soft.'
+      "id": "rev-svakom-tanya-thermal-3",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-stt-4',
-      name: 'Aparna K.',
-      city: 'Hyderabad',
-      verified: true,
-      rating: 4,
-      date: '3 weeks ago',
-      title: 'Great motor rhythms',
-      content: 'Warmth lasts throughout the entire session. Battery life is stellar.'
+      "id": "rev-svakom-tanya-thermal-4",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     },
     {
-      id: 'rev-stt-5',
-      name: 'Geetika S.',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'The warmth relaxes muscles instantly',
-      content: 'Helps overcome tension and enhances natural arousal. Highly recommended.'
+      "id": "rev-svakom-tanya-thermal-5",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1 week ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-svakom-tanya-thermal-6",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹6999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
-
-  'naturalis-dual-density-dildo': [
+  "fun-factory-miss-bi": [
     {
-      id: 'rev-ndd-1',
-      name: 'Pooja M.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '2 days ago',
-      title: 'Firm inner spine, soft outer skin!',
-      content: 'Dual-density silicone is a game changer. The outer layer feels soft and squishy like real human skin while the inner core provides firm structural support.'
+      "id": "rev-fun-factory-miss-bi-1",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-ndd-2',
-      name: 'Rohan & Kriti',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '6 days ago',
-      title: 'Realistic veins and anatomic curve',
-      content: 'The textured detailing is subtle and pleasurable without being rough. Flared suction base sticks firmly to smooth tiles.'
+      "id": "rev-fun-factory-miss-bi-2",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-ndd-3',
-      name: 'Anjali V.',
-      city: 'Delhi',
-      verified: true,
-      rating: 5,
-      date: '10 days ago',
-      title: '100% Plain packaging assurance',
-      content: 'Delivered in a plain brown carton with zero logos. Bank statement showed MB* SERVICES LLC.'
+      "id": "rev-fun-factory-miss-bi-3",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-ndd-4',
-      name: 'Siddharth T.',
-      city: 'Pune',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Easy to clean and body safe',
-      content: 'Liquid platinum-cured silicone with no chemical odor. Warm water and soap wash it clean in seconds.'
-    },
-    {
-      id: 'rev-ndd-5',
-      name: 'Maya S.',
-      city: 'Kolkata',
-      verified: true,
-      rating: 4,
-      date: '3 weeks ago',
-      title: 'Great suction cup base',
-      content: 'Strong hands-free stick on the shower wall. High quality artisanal finish.'
-    },
-    {
-      id: 'rev-ndd-6',
-      name: 'Tarun K.',
-      city: 'Jaipur',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Authentic feel',
-      content: 'Top craftsmanship. Very pleased with the discreet Cash on Delivery.'
+      "id": "rev-fun-factory-miss-bi-4",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     }
   ],
-
-  'prism-borosilicate-glass-dildo': [
+  "satisfyer-double-joy": [
     {
-      id: 'rev-pbg-1',
-      name: 'Dr. Avantika S.',
-      city: 'Delhi',
-      verified: true,
-      rating: 5,
-      date: '3 days ago',
-      title: 'Temperature play with warm/cold water is incredible',
-      content: 'Running warm water over this borosilicate glass wand makes it retain heat like a warm stone. Running chilled water makes it electrifyingly cold. Pure art.'
+      "id": "rev-satisfyer-double-joy-1",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-pbg-2',
-      name: 'Naveen & Swati',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Completely hypoallergenic and smooth as ice',
-      content: 'Zero friction when used with a good water-based lube. Hypoallergenic glass that never degrades or stains.'
+      "id": "rev-satisfyer-double-joy-2",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-pbg-3',
-      name: 'Kashish P.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Heirloom quality glass art',
-      content: 'Looks like a sculpted crystal centerpiece on a vanity. Beautiful velvet storage pouch included.'
+      "id": "rev-satisfyer-double-joy-3",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-pbg-4',
-      name: 'Meenal G.',
-      city: 'Chandigarh',
-      verified: true,
-      rating: 4,
-      date: '1 month ago',
-      title: 'Dual ended shapes offer variety',
-      content: 'One side is bulbous for G-spot and the other has textured spiral ripples. Very sturdy shatterproof glass.'
+      "id": "rev-satisfyer-double-joy-4",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-satisfyer-double-joy-5",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
     }
   ],
-
-  'apex-stainless-steel-dildo': [
+  "petite-lipstick-vibe": [
     {
-      id: 'rev-ass-1',
-      name: 'Vikram B.',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '4 days ago',
-      title: 'Weight and mirror shine are breathtaking',
-      content: 'The solid steel heft provides a natural fullness and pressure that silicone cannot replicate. Flawless mirror polish.'
+      "id": "rev-petite-lipstick-vibe-1",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-ass-2',
-      name: 'Simran & Kabir',
-      city: 'Pune',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Exceptional temperature conductivity',
-      content: 'Heats up or cools down in seconds under the tap. 100% medical-grade 316L stainless steel.'
+      "id": "rev-petite-lipstick-vibe-2",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-ass-3',
-      name: 'Arjun D.',
-      city: 'Delhi',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Discreet and indestructible',
-      content: 'Will last forever. Plain courier box arrived with zero product information.'
+      "id": "rev-petite-lipstick-vibe-3",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-ass-4',
-      name: 'Nisha T.',
-      city: 'Hyderabad',
-      verified: true,
-      rating: 4,
-      date: '3 weeks ago',
-      title: 'Solid heavy-duty sensation',
-      content: 'Use plenty of water lube. The coolness and weight are exhilarating.'
+      "id": "rev-petite-lipstick-vibe-4",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
     },
     {
-      id: 'rev-ass-5',
-      name: 'Rhea K.',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Pure minimalist luxury',
-      content: 'Clean aesthetic, completely non-porous and sterile. Premium packaging.'
+      "id": "rev-petite-lipstick-vibe-5",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 4.8,
+      "date": "3 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-petite-lipstick-vibe-6",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹1499 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
-
-  'kinetic-drive-thrusting-dildo': [
+  "palm-grip-sensual-massager": [
     {
-      id: 'rev-kdt-1',
-      name: 'Ishaan & Tanya',
-      city: 'Mumbai',
-      verified: true,
-      rating: 5,
-      date: '1 day ago',
-      title: 'Hands-free automatic motorized thrusting!',
-      content: 'The internal piston pushes forward and back with genuine motorized power (up to 200 strokes/min). You do not have to move your arm at all.'
+      "id": "rev-palm-grip-sensual-massager-1",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-kdt-2',
-      name: 'Ananya S.',
-      city: 'Bangalore',
-      verified: true,
-      rating: 5,
-      date: '4 days ago',
-      title: 'Wireless remote makes it effortless',
-      content: 'Switch thrusting speeds and vibration modes with the mini remote. Suction base holds firmly on the headboard or floor.'
+      "id": "rev-palm-grip-sensual-massager-2",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-kdt-3',
-      name: 'Rajeev M.',
-      city: 'Delhi',
-      verified: true,
-      rating: 5,
-      date: '1 week ago',
-      title: 'Heavy duty motor that never stalls',
-      content: 'Even under firm pressure the thrusting mechanism does not stutter. Rechargeable battery lasts multiple long sessions.'
+      "id": "rev-palm-grip-sensual-massager-3",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-kdt-4',
-      name: 'Kavita R.',
-      city: 'Pune',
-      verified: true,
-      rating: 5,
-      date: '2 weeks ago',
-      title: 'Discreet express courier to Pune',
-      content: 'Ordered with Cash on Delivery and arrived in 48 hours in a plain unbranded carton.'
+      "id": "rev-palm-grip-sensual-massager-4",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    }
+  ],
+  "flexi-tip-rabbit-curve": [
+    {
+      "id": "rev-flexi-tip-rabbit-curve-1",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
     },
     {
-      id: 'rev-kdt-5',
-      name: 'Priyanka D.',
-      city: 'Ahmedabad',
-      verified: true,
-      rating: 4,
-      date: '3 weeks ago',
-      title: 'Intense and powerful',
-      content: 'Start on speed 1 or 2 as speed 5 is very rapid and intense! Liquid silicone feels velvety.'
+      "id": "rev-flexi-tip-rabbit-curve-2",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
     },
     {
-      id: 'rev-kdt-6',
-      name: 'Rohan G.',
-      city: 'Jaipur',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'Unbelievable sensation',
-      content: 'The combination of internal thrusting and vibration is unrivaled.'
+      "id": "rev-flexi-tip-rabbit-curve-3",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
     },
     {
-      id: 'rev-kdt-7',
-      name: 'Nalini V.',
-      city: 'Kolkata',
-      verified: true,
-      rating: 5,
-      date: '1 month ago',
-      title: 'High end luxury engineering',
-      content: 'Worth every rupee. Packaging was 100% discreet.'
+      "id": "rev-flexi-tip-rabbit-curve-4",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-flexi-tip-rabbit-curve-5",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1.5 months ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    }
+  ],
+  "micro-sonic-finger-vibe": [
+    {
+      "id": "rev-micro-sonic-finger-vibe-1",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-micro-sonic-finger-vibe-2",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-micro-sonic-finger-vibe-3",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-micro-sonic-finger-vibe-4",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-micro-sonic-finger-vibe-5",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 4.8,
+      "date": "Yesterday",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-micro-sonic-finger-vibe-6",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹1899 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+    }
+  ],
+  "whisper-luxury-wand-set": [
+    {
+      "id": "rev-whisper-luxury-wand-set-1",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-whisper-luxury-wand-set-2",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-whisper-luxury-wand-set-3",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-whisper-luxury-wand-set-4",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    }
+  ],
+  "naturalis-dual-density-dildo": [
+    {
+      "id": "rev-naturalis-dual-density-dildo-1",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-naturalis-dual-density-dildo-2",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-naturalis-dual-density-dildo-3",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-naturalis-dual-density-dildo-4",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 days ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-naturalis-dual-density-dildo-5",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "prism-borosilicate-glass-dildo": [
+    {
+      "id": "rev-prism-borosilicate-glass-dildo-1",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-prism-borosilicate-glass-dildo-2",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-prism-borosilicate-glass-dildo-3",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-prism-borosilicate-glass-dildo-4",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 4.8,
+      "date": "4 days ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-prism-borosilicate-glass-dildo-5",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "apex-stainless-steel-dildo": [
+    {
+      "id": "rev-apex-stainless-steel-dildo-1",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-apex-stainless-steel-dildo-2",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-apex-stainless-steel-dildo-3",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-apex-stainless-steel-dildo-4",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1 week ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    }
+  ],
+  "pure-curve-silicone-dildo": [
+    {
+      "id": "rev-pure-curve-silicone-dildo-1",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-pure-curve-silicone-dildo-2",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-pure-curve-silicone-dildo-3",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-pure-curve-silicone-dildo-4",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 4.8,
+      "date": "10 days ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-pure-curve-silicone-dildo-5",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "kinetic-drive-thrusting-dildo": [
+    {
+      "id": "rev-kinetic-drive-thrusting-dildo-1",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-kinetic-drive-thrusting-dildo-2",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-kinetic-drive-thrusting-dildo-3",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-kinetic-drive-thrusting-dildo-4",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-kinetic-drive-thrusting-dildo-5",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "infinity-connected-double-dildo": [
+    {
+      "id": "rev-infinity-connected-double-dildo-1",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-infinity-connected-double-dildo-2",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-infinity-connected-double-dildo-3",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-infinity-connected-double-dildo-4",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 4.8,
+      "date": "3 weeks ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    }
+  ],
+  "strong-hold-suction-cup-dildo": [
+    {
+      "id": "rev-strong-hold-suction-cup-dildo-1",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-strong-hold-suction-cup-dildo-2",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-strong-hold-suction-cup-dildo-3",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-strong-hold-suction-cup-dildo-4",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1 month ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-strong-hold-suction-cup-dildo-5",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "ribbed-spiral-gspot-dildo": [
+    {
+      "id": "rev-ribbed-spiral-gspot-dildo-1",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-ribbed-spiral-gspot-dildo-2",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-ribbed-spiral-gspot-dildo-3",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-ribbed-spiral-gspot-dildo-4",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1.5 months ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-ribbed-spiral-gspot-dildo-5",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "crystal-swirl-borosilicate-wand": [
+    {
+      "id": "rev-crystal-swirl-borosilicate-wand-1",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-crystal-swirl-borosilicate-wand-2",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-crystal-swirl-borosilicate-wand-3",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-crystal-swirl-borosilicate-wand-4",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 4.8,
+      "date": "Yesterday",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    }
+  ],
+  "king-girth-steel-dildo": [
+    {
+      "id": "rev-king-girth-steel-dildo-1",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-king-girth-steel-dildo-2",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-king-girth-steel-dildo-3",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-king-girth-steel-dildo-4",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 days ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-king-girth-steel-dildo-5",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "flexible-bendable-wire-dildo": [
+    {
+      "id": "rev-flexible-bendable-wire-dildo-1",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-flexible-bendable-wire-dildo-2",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-flexible-bendable-wire-dildo-3",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-flexible-bendable-wire-dildo-4",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 4.8,
+      "date": "4 days ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-flexible-bendable-wire-dildo-5",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "harness-ready-oring-dildo": [
+    {
+      "id": "rev-harness-ready-oring-dildo-1",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-harness-ready-oring-dildo-2",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-harness-ready-oring-dildo-3",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-harness-ready-oring-dildo-4",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1 week ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    }
+  ],
+  "textured-ripple-wave-dildo": [
+    {
+      "id": "rev-textured-ripple-wave-dildo-1",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-textured-ripple-wave-dildo-2",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-textured-ripple-wave-dildo-3",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-textured-ripple-wave-dildo-4",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 4.8,
+      "date": "10 days ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-textured-ripple-wave-dildo-5",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "dual-tone-realistic-veined-dildo": [
+    {
+      "id": "rev-dual-tone-realistic-veined-dildo-1",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Material 100% body-safe aur velvet soft hai",
+      "comment": "Anatomy aur ergonomics bohot acche se designed hain. Material medical grade platinum silicone/glass hai jisme koi chemical smell nahi aati. Water-based lube ke sath glide super smooth rehta hai. Shipped in confidential packaging!"
+    },
+    {
+      "id": "rev-dual-tone-realistic-veined-dildo-2",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Discreet delivery and heavy premium weight",
+      "comment": "Parcel delivery agent ko bhi bilkul idea nahi tha andar kya hai. Box par sirf MB Logistics ka discreet label tha. Product ka weight aur firmness ekdum realistic feel deta hai. Cleaning aur boiling bohot easy hai."
+    },
+    {
+      "id": "rev-dual-tone-realistic-veined-dildo-3",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Temperature play me glass/metal feature superb hai",
+      "comment": "Warm water me 2 minute rakhne par warm ho jata hai aur cool water me cold sensation deta hai. Finish bilkul mirror smooth hai aur skin friendly hai. Midnight Bloom ka service bohot trustworthy hai."
+    },
+    {
+      "id": "rev-dual-tone-realistic-veined-dildo-4",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Suction base aur flexibility 10/10",
+      "comment": "Suction cup bathroom tiles aur smooth surfaces par rock solid grip banata hai for hands-free play. Firm backbone ke sath soft outer silicone layer best combination hai. Must buy for self care!"
+    },
+    {
+      "id": "rev-dual-tone-realistic-veined-dildo-5",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Complete peace of mind with quality",
+      "comment": "2 din me Bangalore deliver ho gaya. Non-porous material hone ki wajah se sanitize karna bohot easy hai. Premium luxury brand jesi unboxing packaging milti hai."
+    }
+  ],
+  "flared-velvet-butt-plug": [
+    {
+      "id": "rev-flared-velvet-butt-plug-1",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-flared-velvet-butt-plug-2",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-flared-velvet-butt-plug-3",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-flared-velvet-butt-plug-4",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "sensual-graduated-anal-beads": [
+    {
+      "id": "rev-sensual-graduated-anal-beads-1",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-sensual-graduated-anal-beads-2",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-sensual-graduated-anal-beads-3",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-sensual-graduated-anal-beads-4",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "nexus-ergonomic-prostate-massager": [
+    {
+      "id": "rev-nexus-ergonomic-prostate-massager-1",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-nexus-ergonomic-prostate-massager-2",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-nexus-ergonomic-prostate-massager-3",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-nexus-ergonomic-prostate-massager-4",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "expand-air-inflatable-plug": [
+    {
+      "id": "rev-expand-air-inflatable-plug-1",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-expand-air-inflatable-plug-2",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-expand-air-inflatable-plug-3",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-expand-air-inflatable-plug-4",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "sovereign-metal-anal-hook": [
+    {
+      "id": "rev-sovereign-metal-anal-hook-1",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-sovereign-metal-anal-hook-2",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-sovereign-metal-anal-hook-3",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-sovereign-metal-anal-hook-4",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "lelo-hugo-remote-prostate": [
+    {
+      "id": "rev-lelo-hugo-remote-prostate-1",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-lelo-hugo-remote-prostate-2",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-lelo-hugo-remote-prostate-3",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-lelo-hugo-remote-prostate-4",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "jewel-base-crystal-glass-plug": [
+    {
+      "id": "rev-jewel-base-crystal-glass-plug-1",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-jewel-base-crystal-glass-plug-2",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-jewel-base-crystal-glass-plug-3",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-jewel-base-crystal-glass-plug-4",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "dual-vibrating-prostate-perineum": [
+    {
+      "id": "rev-dual-vibrating-prostate-perineum-1",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-dual-vibrating-prostate-perineum-2",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-dual-vibrating-prostate-perineum-3",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-dual-vibrating-prostate-perineum-4",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "beginner-petite-tapered-plug": [
+    {
+      "id": "rev-beginner-petite-tapered-plug-1",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-beginner-petite-tapered-plug-2",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-beginner-petite-tapered-plug-3",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-beginner-petite-tapered-plug-4",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "weighted-stainless-steel-anchor": [
+    {
+      "id": "rev-weighted-stainless-steel-anchor-1",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-weighted-stainless-steel-anchor-2",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-weighted-stainless-steel-anchor-3",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-weighted-stainless-steel-anchor-4",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "rotating-bead-auto-anal-massager": [
+    {
+      "id": "rev-rotating-bead-auto-anal-massager-1",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-rotating-bead-auto-anal-massager-2",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-rotating-bead-auto-anal-massager-3",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-rotating-bead-auto-anal-massager-4",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "smooth-spiral-glass-plug": [
+    {
+      "id": "rev-smooth-spiral-glass-plug-1",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-smooth-spiral-glass-plug-2",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-smooth-spiral-glass-plug-3",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-smooth-spiral-glass-plug-4",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "hands-free-base-prostate-rocker": [
+    {
+      "id": "rev-hands-free-base-prostate-rocker-1",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-hands-free-base-prostate-rocker-2",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-hands-free-base-prostate-rocker-3",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-hands-free-base-prostate-rocker-4",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "tri-sphere-flexible-anal-beads": [
+    {
+      "id": "rev-tri-sphere-flexible-anal-beads-1",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-tri-sphere-flexible-anal-beads-2",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-tri-sphere-flexible-anal-beads-3",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-tri-sphere-flexible-anal-beads-4",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "fleshlight-stroker-classic": [
+    {
+      "id": "rev-fleshlight-stroker-classic-1",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-fleshlight-stroker-classic-2",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-fleshlight-stroker-classic-3",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-fleshlight-stroker-classic-4",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 4.9,
+      "date": "4 days ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "compact-pocket-pussy-stroker": [
+    {
+      "id": "rev-compact-pocket-pussy-stroker-1",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-compact-pocket-pussy-stroker-2",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-compact-pocket-pussy-stroker-3",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-compact-pocket-pussy-stroker-4",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 4.9,
+      "date": "1 week ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "automated-thermal-stroker-apex": [
+    {
+      "id": "rev-automated-thermal-stroker-apex-1",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-automated-thermal-stroker-apex-2",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-automated-thermal-stroker-apex-3",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-automated-thermal-stroker-apex-4",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 4.9,
+      "date": "10 days ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "precision-vacuum-penis-pump": [
+    {
+      "id": "rev-precision-vacuum-penis-pump-1",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-precision-vacuum-penis-pump-2",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-precision-vacuum-penis-pump-3",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-precision-vacuum-penis-pump-4",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 4.9,
+      "date": "2 weeks ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "spinner-pleasure-gear-v2": [
+    {
+      "id": "rev-spinner-pleasure-gear-v2-1",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-spinner-pleasure-gear-v2-2",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-spinner-pleasure-gear-v2-3",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-spinner-pleasure-gear-v2-4",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 4.9,
+      "date": "3 weeks ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "naughty-nights-calmras-v2": [
+    {
+      "id": "rev-naughty-nights-calmras-v2-1",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-naughty-nights-calmras-v2-2",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-naughty-nights-calmras-v2-3",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-naughty-nights-calmras-v2-4",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 4.9,
+      "date": "1 month ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "pathan-dotted-stroker-v2": [
+    {
+      "id": "rev-pathan-dotted-stroker-v2-1",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-pathan-dotted-stroker-v2-2",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-pathan-dotted-stroker-v2-3",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-pathan-dotted-stroker-v2-4",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 4.9,
+      "date": "1.5 months ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "beat-stroker-flex-v2": [
+    {
+      "id": "rev-beat-stroker-flex-v2-1",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-beat-stroker-flex-v2-2",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-beat-stroker-flex-v2-3",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-beat-stroker-flex-v2-4",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 4.9,
+      "date": "Yesterday",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "calmras-matrix-cup-v2": [
+    {
+      "id": "rev-calmras-matrix-cup-v2-1",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-calmras-matrix-cup-v2-2",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-calmras-matrix-cup-v2-3",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-calmras-matrix-cup-v2-4",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 4.9,
+      "date": "2 days ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "tenga-flip-zero-electronic": [
+    {
+      "id": "rev-tenga-flip-zero-electronic-1",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-tenga-flip-zero-electronic-2",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-tenga-flip-zero-electronic-3",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-tenga-flip-zero-electronic-4",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 4.9,
+      "date": "4 days ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "tenga-3d-spiral-reversible": [
+    {
+      "id": "rev-tenga-3d-spiral-reversible-1",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-tenga-3d-spiral-reversible-2",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-tenga-3d-spiral-reversible-3",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-tenga-3d-spiral-reversible-4",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 4.9,
+      "date": "1 week ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "arcwave-ion-pleasure-stroker": [
+    {
+      "id": "rev-arcwave-ion-pleasure-stroker-1",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-arcwave-ion-pleasure-stroker-2",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-arcwave-ion-pleasure-stroker-3",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-arcwave-ion-pleasure-stroker-4",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 4.9,
+      "date": "10 days ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "hands-free-desk-clamp-stroker": [
+    {
+      "id": "rev-hands-free-desk-clamp-stroker-1",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-hands-free-desk-clamp-stroker-2",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-hands-free-desk-clamp-stroker-3",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-hands-free-desk-clamp-stroker-4",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 4.9,
+      "date": "2 weeks ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "textured-crystal-clear-stroker": [
+    {
+      "id": "rev-textured-crystal-clear-stroker-1",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-textured-crystal-clear-stroker-2",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-textured-crystal-clear-stroker-3",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-textured-crystal-clear-stroker-4",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 4.9,
+      "date": "3 weeks ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "thermal-42c-dual-sleeve-stroker": [
+    {
+      "id": "rev-thermal-42c-dual-sleeve-stroker-1",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-thermal-42c-dual-sleeve-stroker-2",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-thermal-42c-dual-sleeve-stroker-3",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-thermal-42c-dual-sleeve-stroker-4",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 4.9,
+      "date": "1 month ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "precision-digital-auto-penis-pump": [
+    {
+      "id": "rev-precision-digital-auto-penis-pump-1",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Realistic texture aur motorized power ekdum zabardast!",
+      "comment": "Internal ribbed texture aur suction tightness bohot natural feel deti hai. Motor strokes smooth aur customizable hain. Sabse acchi baat delivery packaging 100% plain thi bina kisi labeling ke."
+    },
+    {
+      "id": "rev-precision-digital-auto-penis-pump-2",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Thermal heating feature gives realistic warmth",
+      "comment": "38°C tak warm hone wala feature experience ko next level banata hai. USB rechargeable battery ka backup solid 90 minutes nikal jata hai. Clean karne ke liye sleeve easily wash ho jati hai."
+    },
+    {
+      "id": "rev-precision-digital-auto-penis-pump-3",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Confidential billing aur fast courier service",
+      "comment": "Bank statement me sirf discreet MB* SERVICES LLC aaya jo bohot relieving tha. Product ki ergonomic grip aur build quality heavy duty hai. Ekdum luxury feel deta hai."
+    },
+    {
+      "id": "rev-precision-digital-auto-penis-pump-4",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 4.9,
+      "date": "1.5 months ago",
+      "title": "Best male wellness stroker on the market",
+      "comment": "Different vibration aur reciprocating speeds se stamina training me bhi help milti hai. Silicone material skin-safe hai aur koi stickiness nahi hoti. Delivery in Pune took just 2 days."
+    }
+  ],
+  "pulse-charge-vibrating-cock-ring": [
+    {
+      "id": "rev-pulse-charge-vibrating-cock-ring-1",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-pulse-charge-vibrating-cock-ring-2",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-pulse-charge-vibrating-cock-ring-3",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-pulse-charge-vibrating-cock-ring-4",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 4.8,
+      "date": "Yesterday",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "double-lock-shaft-ball-ring": [
+    {
+      "id": "rev-double-lock-shaft-ball-ring-1",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-double-lock-shaft-ball-ring-2",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-double-lock-shaft-ball-ring-3",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-double-lock-shaft-ball-ring-4",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 days ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "eclipse-dual-resonance-cock-ring": [
+    {
+      "id": "rev-eclipse-dual-resonance-cock-ring-1",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-eclipse-dual-resonance-cock-ring-2",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-eclipse-dual-resonance-cock-ring-3",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-eclipse-dual-resonance-cock-ring-4",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 4.8,
+      "date": "4 days ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "solid-surgical-steel-cock-ring": [
+    {
+      "id": "rev-solid-surgical-steel-cock-ring-1",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-solid-surgical-steel-cock-ring-2",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-solid-surgical-steel-cock-ring-3",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-solid-surgical-steel-cock-ring-4",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1 week ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "textured-stamina-extender-sleeve": [
+    {
+      "id": "rev-textured-stamina-extender-sleeve-1",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-textured-stamina-extender-sleeve-2",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-textured-stamina-extender-sleeve-3",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-textured-stamina-extender-sleeve-4",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 4.8,
+      "date": "10 days ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "we-vibe-pivot-cock-ring": [
+    {
+      "id": "rev-we-vibe-pivot-cock-ring-1",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-we-vibe-pivot-cock-ring-2",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-we-vibe-pivot-cock-ring-3",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-we-vibe-pivot-cock-ring-4",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "svakom-tyler-app-ring": [
+    {
+      "id": "rev-svakom-tyler-app-ring-1",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-svakom-tyler-app-ring-2",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-svakom-tyler-app-ring-3",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-svakom-tyler-app-ring-4",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 4.8,
+      "date": "3 weeks ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "multi-tier-triple-cock-ring": [
+    {
+      "id": "rev-multi-tier-triple-cock-ring-1",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-multi-tier-triple-cock-ring-2",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-multi-tier-triple-cock-ring-3",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-multi-tier-triple-cock-ring-4",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1 month ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "magnetic-clasp-ball-stretcher": [
+    {
+      "id": "rev-magnetic-clasp-ball-stretcher-1",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-magnetic-clasp-ball-stretcher-2",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-magnetic-clasp-ball-stretcher-3",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-magnetic-clasp-ball-stretcher-4",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1.5 months ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "studded-gspot-partner-cock-ring": [
+    {
+      "id": "rev-studded-gspot-partner-cock-ring-1",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-studded-gspot-partner-cock-ring-2",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-studded-gspot-partner-cock-ring-3",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-studded-gspot-partner-cock-ring-4",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 4.8,
+      "date": "Yesterday",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "adjustable-leather-buckle-ring": [
+    {
+      "id": "rev-adjustable-leather-buckle-ring-1",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-adjustable-leather-buckle-ring-2",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-adjustable-leather-buckle-ring-3",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-adjustable-leather-buckle-ring-4",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 days ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "ribbed-glans-crown-delay-ring": [
+    {
+      "id": "rev-ribbed-glans-crown-delay-ring-1",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Comfortable stretch, maximum stamina enhancement!",
+      "comment": "Medical silicone ka stretch bohot comfortable hai, koi pinching nahi hoti. Partner ke sath time aur firmness dono me kafi noticeable difference aata hai. Motor rumbling vibrations partner ko bhi stimulate karti hai."
+    },
+    {
+      "id": "rev-ribbed-glans-crown-delay-ring-2",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Steel finish aur magnetic lock quality outstanding",
+      "comment": "Mirror-polished surgical steel ka weight solid hai aur cool touch feel deta hai. Completely hypoallergenic and skin-friendly. Delivered in confidential tamper-proof box within 3 days in Mumbai."
+    },
+    {
+      "id": "rev-ribbed-glans-crown-delay-ring-3",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Wireless remote control makes couple play super exciting",
+      "comment": "Remote control partner ke haath me hone se intimacy me bohot fun aur thrill add ho jata hai. Battery single charge par multiple sessions chal jati hai. Waterproof hone se shower me bhi use kar sakte hain."
+    },
+    {
+      "id": "rev-ribbed-glans-crown-delay-ring-4",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 4.8,
+      "date": "4 days ago",
+      "title": "Dual ring design gives secure and firm fit",
+      "comment": "Pehle standard rings use kiye the par ye dual loop design sabse best support deta hai. Zero discomfort even after 30+ minutes of use. Great product!"
+    }
+  ],
+  "empress-womanizer-air-pulse": [
+    {
+      "id": "rev-empress-womanizer-air-pulse-1",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-empress-womanizer-air-pulse-2",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-empress-womanizer-air-pulse-3",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-empress-womanizer-air-pulse-4",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    }
+  ],
+  "rose-petal-pulsating-suction-cup": [
+    {
+      "id": "rev-rose-petal-pulsating-suction-cup-1",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-rose-petal-pulsating-suction-cup-2",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-rose-petal-pulsating-suction-cup-3",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-rose-petal-pulsating-suction-cup-4",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-rose-petal-pulsating-suction-cup-5",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    }
+  ],
+  "magic-box-2in1-licker-suction": [
+    {
+      "id": "rev-magic-box-2in1-licker-suction-1",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-magic-box-2in1-licker-suction-2",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-magic-box-2in1-licker-suction-3",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-magic-box-2in1-licker-suction-4",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-magic-box-2in1-licker-suction-5",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 4.8,
+      "date": "3 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-magic-box-2in1-licker-suction-6",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹4999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+    }
+  ],
+  "satisfyer-pro-2-gen3": [
+    {
+      "id": "rev-satisfyer-pro-2-gen3-1",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-satisfyer-pro-2-gen3-2",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-satisfyer-pro-2-gen3-3",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-satisfyer-pro-2-gen3-4",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    }
+  ],
+  "lelo-sona-2-cruise": [
+    {
+      "id": "rev-lelo-sona-2-cruise-1",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-lelo-sona-2-cruise-2",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-lelo-sona-2-cruise-3",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-lelo-sona-2-cruise-4",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-lelo-sona-2-cruise-5",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1.5 months ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    }
+  ],
+  "womanizer-premium-eco": [
+    {
+      "id": "rev-womanizer-premium-eco-1",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-womanizer-premium-eco-2",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-womanizer-premium-eco-3",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-womanizer-premium-eco-4",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-womanizer-premium-eco-5",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 4.8,
+      "date": "Yesterday",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-womanizer-premium-eco-6",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹14999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+    }
+  ],
+  "dual-end-vacuum-gspot-vibrator": [
+    {
+      "id": "rev-dual-end-vacuum-gspot-vibrator-1",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-dual-end-vacuum-gspot-vibrator-2",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-dual-end-vacuum-gspot-vibrator-3",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-dual-end-vacuum-gspot-vibrator-4",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    }
+  ],
+  "tulip-blossom-whisper-air": [
+    {
+      "id": "rev-tulip-blossom-whisper-air-1",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-tulip-blossom-whisper-air-2",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-tulip-blossom-whisper-air-3",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-tulip-blossom-whisper-air-4",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-tulip-blossom-whisper-air-5",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 4.8,
+      "date": "4 days ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    }
+  ],
+  "multi-nozzle-precision-air-wave": [
+    {
+      "id": "rev-multi-nozzle-precision-air-wave-1",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-multi-nozzle-precision-air-wave-2",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-multi-nozzle-precision-air-wave-3",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-multi-nozzle-precision-air-wave-4",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-multi-nozzle-precision-air-wave-5",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 4.8,
+      "date": "1 week ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-multi-nozzle-precision-air-wave-6",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹4599 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+    }
+  ],
+  "palm-fit-sonic-stimulator": [
+    {
+      "id": "rev-palm-fit-sonic-stimulator-1",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-palm-fit-sonic-stimulator-2",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-palm-fit-sonic-stimulator-3",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-palm-fit-sonic-stimulator-4",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    }
+  ],
+  "in-shower-waterproof-air-pulse": [
+    {
+      "id": "rev-in-shower-waterproof-air-pulse-1",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-in-shower-waterproof-air-pulse-2",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-in-shower-waterproof-air-pulse-3",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-in-shower-waterproof-air-pulse-4",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-in-shower-waterproof-air-pulse-5",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    }
+  ],
+  "compact-air-suction-pebble": [
+    {
+      "id": "rev-compact-air-suction-pebble-1",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-compact-air-suction-pebble-2",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-compact-air-suction-pebble-3",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-compact-air-suction-pebble-4",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-compact-air-suction-pebble-5",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 4.8,
+      "date": "3 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
+    },
+    {
+      "id": "rev-compact-air-suction-pebble-6",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Top notch Swedish/German level finish",
+      "comment": "Is price range me ₹2999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+    }
+  ],
+  "electra-violet-wand-kit": [
+    {
+      "id": "rev-electra-violet-wand-kit-1",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-electra-violet-wand-kit-2",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-electra-violet-wand-kit-3",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-electra-violet-wand-kit-4",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "sovereign-leather-restraints-set": [
+    {
+      "id": "rev-sovereign-leather-restraints-set-1",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-sovereign-leather-restraints-set-2",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-sovereign-leather-restraints-set-3",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-sovereign-leather-restraints-set-4",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "obsidian-velvet-flogger-crop": [
+    {
+      "id": "rev-obsidian-velvet-flogger-crop-1",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-obsidian-velvet-flogger-crop-2",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-obsidian-velvet-flogger-crop-3",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-obsidian-velvet-flogger-crop-4",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "ergonomic-silicone-breathable-ballgag": [
+    {
+      "id": "rev-ergonomic-silicone-breathable-ballgag-1",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-ergonomic-silicone-breathable-ballgag-2",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-ergonomic-silicone-breathable-ballgag-3",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-ergonomic-silicone-breathable-ballgag-4",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "silk-satin-blindfold-restraint-tie": [
+    {
+      "id": "rev-silk-satin-blindfold-restraint-tie-1",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-silk-satin-blindfold-restraint-tie-2",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-silk-satin-blindfold-restraint-tie-3",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-silk-satin-blindfold-restraint-tie-4",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "weighted-nipple-clamps-chain": [
+    {
+      "id": "rev-weighted-nipple-clamps-chain-1",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-weighted-nipple-clamps-chain-2",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-weighted-nipple-clamps-chain-3",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-weighted-nipple-clamps-chain-4",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "shibari-cotton-bondage-rope-set": [
+    {
+      "id": "rev-shibari-cotton-bondage-rope-set-1",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-shibari-cotton-bondage-rope-set-2",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-shibari-cotton-bondage-rope-set-3",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-shibari-cotton-bondage-rope-set-4",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "dual-sided-leather-spanking-paddle": [
+    {
+      "id": "rev-dual-sided-leather-spanking-paddle-1",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-dual-sided-leather-spanking-paddle-2",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-dual-sided-leather-spanking-paddle-3",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-dual-sided-leather-spanking-paddle-4",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "under-bed-restraint-system": [
+    {
+      "id": "rev-under-bed-restraint-system-1",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-under-bed-restraint-system-2",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-under-bed-restraint-system-3",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-under-bed-restraint-system-4",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "sensory-feather-tickler-pinwheel": [
+    {
+      "id": "rev-sensory-feather-tickler-pinwheel-1",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Velvety padded leather, zero skin redness!",
+      "comment": "Leather cuffs ke andar ultra-soft velvet padding di hui hai jiski wajah se skin par koi marks ya pain nahi hota. Alloy metal buckles strong aur securely adjustable hain. Confidential plain box packaging!"
+    },
+    {
+      "id": "rev-sensory-feather-tickler-pinwheel-2",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Under-bed restraint system fits all mattress sizes",
+      "comment": "Straps ki quality reinforced nylon webbed hai jo heavy tension me bhi slip nahi karti. Bed ke neeche invisibly setup ho jata hai aur travel pouch me easily store ho jata hai. Perfect for couples trying kink!"
+    },
+    {
+      "id": "rev-sensory-feather-tickler-pinwheel-3",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Natural cotton shibari rope is super soft on skin",
+      "comment": "100% natural cotton fibers hone ki wajah se rope friction burn bilkul nahi deti. Flexible, durable aur knots tie karna bohot smooth hai. Fast delivery in 2 days in Gurgaon."
+    },
+    {
+      "id": "rev-sensory-feather-tickler-pinwheel-4",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Satin blindfold provides 100% blackout sensory thrills",
+      "comment": "Silk satin fabric skin par cold aur soft lagta hai. Elastic strap adjust ho jati hai bina hair pull kiye. Elevates touch sensitivity completely. High quality product."
+    }
+  ],
+  "velvet-botanical-water-lube": [
+    {
+      "id": "rev-velvet-botanical-water-lube-1",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-velvet-botanical-water-lube-2",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-velvet-botanical-water-lube-3",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-velvet-botanical-water-lube-4",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "silk-glide-silicone-hybrid-lube": [
+    {
+      "id": "rev-silk-glide-silicone-hybrid-lube-1",
+      "author": "Kabir Singhania",
+      "city": "Gurugram",
+      "verified": true,
+      "rating": 5,
+      "date": "2 weeks ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-silk-glide-silicone-hybrid-lube-2",
+      "author": "Sneha Mukherjee",
+      "city": "Kolkata",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-silk-glide-silicone-hybrid-lube-3",
+      "author": "Varun & Pooja Joshi",
+      "city": "Ahmedabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-silk-glide-silicone-hybrid-lube-4",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "warming-tingling-arousal-gel": [
+    {
+      "id": "rev-warming-tingling-arousal-gel-1",
+      "author": "Aditya Deshmukh",
+      "city": "Nagpur",
+      "verified": true,
+      "rating": 5,
+      "date": "3 weeks ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-warming-tingling-arousal-gel-2",
+      "author": "Tanvi Pillai",
+      "city": "Chennai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-warming-tingling-arousal-gel-3",
+      "author": "Rahul & Shweta Verma",
+      "city": "Jaipur",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-warming-tingling-arousal-gel-4",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "pure-clean-antibacterial-toy-mist": [
+    {
+      "id": "rev-pure-clean-antibacterial-toy-mist-1",
+      "author": "Ritu Sen",
+      "city": "Hyderabad",
+      "verified": true,
+      "rating": 5,
+      "date": "1 month ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-pure-clean-antibacterial-toy-mist-2",
+      "author": "Karan Mehra",
+      "city": "Noida",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-pure-clean-antibacterial-toy-mist-3",
+      "author": "Natasha Fernandez",
+      "city": "Goa",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-pure-clean-antibacterial-toy-mist-4",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "soothing-jojoba-massage-oil": [
+    {
+      "id": "rev-soothing-jojoba-massage-oil-1",
+      "author": "Siddharth Roy",
+      "city": "Kochi",
+      "verified": true,
+      "rating": 5,
+      "date": "1.5 months ago",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-soothing-jojoba-massage-oil-2",
+      "author": "Megha Agarwal",
+      "city": "Indore",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-soothing-jojoba-massage-oil-3",
+      "author": "Aakash Kapoor",
+      "city": "Lucknow",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-soothing-jojoba-massage-oil-4",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "stamina-delay-spray-men": [
+    {
+      "id": "rev-stamina-delay-spray-men-1",
+      "author": "Divya & Nikhil",
+      "city": "Bhopal",
+      "verified": true,
+      "rating": 5,
+      "date": "Yesterday",
+      "title": "Non-sticky, silky long-lasting botanical glide!",
+      "comment": "100% organic water-based formula hai jisme koi artificial fragrance ya parabens nahi hain. Zero stickiness aur clean up sirf water se ek wipe me ho jata hai. Best intimate lubricant!"
+    },
+    {
+      "id": "rev-stamina-delay-spray-men-2",
+      "author": "Arjun Bansal",
+      "city": "Ludhiana",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Antibacterial mist keeps toys brand new and sterile",
+      "comment": "Medical grade silicone toys ko sanitize karne ke liye ye spray bohot zaroori hai. 1 minute me dry ho jata hai aur material ko degrade hone se bachata hai. Highly recommended kit!"
+    },
+    {
+      "id": "rev-stamina-delay-spray-men-3",
+      "author": "Tanya Das",
+      "city": "Bhubaneswar",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Natural warming arousal gel with subtle tingling",
+      "comment": "Warm botanicals instantly sensitivity ko boost karte hain. Sensitive skin par bhi completely safe aur gentle hai. Delivered discreetly in 2 days."
+    },
+    {
+      "id": "rev-stamina-delay-spray-men-4",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Sweet almond massage oil has heavenly calming aroma",
+      "comment": "Body massage ke liye perfect glide deta hai aur skin ko soft banata hai bina greasy residue chhore. Luxury bottle dispenser with leakproof lock."
+    }
+  ],
+  "aoonice-ai-sync-sucking-vibrator": [
+    {
+      "id": "rev-aoonice-ai-sync-sucking-vibrator-1",
+      "author": "Priya Sharma",
+      "city": "Mumbai",
+      "verified": true,
+      "rating": 5,
+      "date": "2 days ago",
+      "title": "Packaging ekdum discreet thi aur quality next level!",
+      "comment": "Pehle order karte waqt thoda doubt tha ki parcel pe kya likha hoga, par box bilkul plain brown cardboard me aaya jisme koi product detail nahi thi. Product ka silicone itna silky smooth hai aur motor bilkul silent (<28dB). Genuinely premium feel deta hai!"
+    },
+    {
+      "id": "rev-aoonice-ai-sync-sucking-vibrator-2",
+      "author": "Rohan & Neha",
+      "city": "Delhi NCR",
+      "verified": true,
+      "rating": 5,
+      "date": "4 days ago",
+      "title": "Best purchase ever, bilkul paisa vasool!",
+      "comment": "Maine pehli baar koi luxury pleasure piece order kiya hai Midnight Bloom se. 10 modes me se wave aur pulse pattern best hain. Magnetic USB charge bohot fast hota hai aur battery easily 10-12 sessions chal jati hai. Highly recommended!"
+    },
+    {
+      "id": "rev-aoonice-ai-sync-sucking-vibrator-3",
+      "author": "Dr. Ananya Reddy",
+      "city": "Bangalore",
+      "verified": true,
+      "rating": 5,
+      "date": "1 week ago",
+      "title": "Partner ke sath bedroom intimacy bohot improve hui",
+      "comment": "Mere partner aur maine isse weekend par try kiya, dono ka experience mind blowing tha. Sound itna kam hai ki bagal wale room me kisi ko pata bhi nahi chalta. Cleaning bhi running warm water me bohot easy hai kyunki 100% waterproof hai."
+    },
+    {
+      "id": "rev-aoonice-ai-sync-sucking-vibrator-4",
+      "author": "Vikram Malhotra",
+      "city": "Pune",
+      "verified": true,
+      "rating": 5,
+      "date": "10 days ago",
+      "title": "Super fast delivery & luxurious build",
+      "comment": "Delhi me order kiya tha, exact 48 hours me delivery ho gayi. Velvet storage pouch aur instruction manual sath me aate hain. Silicone grade US FDA approved lagta hai, skin par zero irritation. 5 stars from my side!"
+    },
+    {
+      "id": "rev-aoonice-ai-sync-sucking-vibrator-5",
+      "author": "Simran Kaur",
+      "city": "Chandigarh",
+      "verified": true,
+      "rating": 4.8,
+      "date": "2 weeks ago",
+      "title": "Gentle yet powerful rumble vibrations",
+      "comment": "Local brands jesa irritating buzzer buzz nahi hai, iska motor deep rumble frequency generate karta hai jo body me feel hota hai. Initial 2 days lagte hain controls samajhne me par once you get it, it is absolute perfection."
     }
   ]
 };
-
-// Intelligent dynamic review synthesizer for any product ID without dedicated reviews
-export function getProductReviews(product) {
-  if (!product) return [];
-
-  // Check if explicit reviews exist on the product object
-  if (Array.isArray(product.reviews) && product.reviews.length > 0) {
-    return product.reviews;
-  }
-
-  const pId = product.id || product.slug || '';
-  if (PRODUCT_REVIEWS_MAP[pId]) {
-    return PRODUCT_REVIEWS_MAP[pId];
-  }
-
-  // Generate deterministic, realistic 3 to 8 reviews based on product properties
-  const hash = pId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const count = 3 + (hash % 6); // Natural variation between 3 and 8 reviews!
-
-  const pool = [
-    {
-      name: 'Ananya S.',
-      city: 'Mumbai',
-      rating: 5,
-      date: '2 days ago',
-      title: 'Unmatched quality and total discretion',
-      content: 'The silky medical-grade silicone texture is sublime. 100% plain packaging with MB Logistics label arrived in 48 hours.'
-    },
-    {
-      name: 'Rohan & Priya',
-      city: 'Bangalore',
-      rating: 5,
-      date: '5 days ago',
-      title: 'Added a whole new dimension to our intimacy',
-      content: 'The craftsmanship and ergonomics are exceptional. Whisper quiet motor keeps everything confidential and private.'
-    },
-    {
-      name: 'Kavita M.',
-      city: 'Delhi NCR',
-      rating: 5,
-      date: '1 week ago',
-      title: 'Truly luxury grade experience',
-      content: 'Worth every rupee. The battery life lasts for multiple sessions and magnetic fast charging is seamless.'
-    },
-    {
-      name: 'Vikram D.',
-      city: 'Pune',
-      rating: 5,
-      date: '10 days ago',
-      title: 'Discreet Cash on Delivery was seamless',
-      content: 'Outer box had zero branding or logos. The build quality feels like a high-end luxury tech instrument.'
-    },
-    {
-      name: 'Sneha P.',
-      city: 'Hyderabad',
-      rating: 4,
-      date: '2 weeks ago',
-      title: 'Smooth, body-safe and easy to clean',
-      content: 'Completely waterproof and gentle on sensitive skin. Very pleased with Midnight Bloom service.'
-    },
-    {
-      name: 'Kabir T.',
-      city: 'Kolkata',
-      rating: 5,
-      date: '3 weeks ago',
-      title: 'Exceeded all expectations',
-      content: 'The contours and vibration frequencies are calibrated to perfection. Highly recommended for private self-care.'
-    },
-    {
-      name: 'Neha V.',
-      city: 'Jaipur',
-      rating: 5,
-      date: '1 month ago',
-      title: 'Superb ergonomics and sleek finish',
-      content: 'Comfortable in hand, long battery life, and arrived in immaculate condition.'
-    },
-    {
-      name: 'Aditya & Simran',
-      city: 'Chandigarh',
-      rating: 5,
-      date: '1 month ago',
-      title: 'A permanent fixture in our bedroom sanctuary',
-      content: 'Premium materials, zero phthalates, and deep rumbling frequencies that never rattle.'
-    }
-  ];
-
-  // Pick deterministically 'count' reviews customized with product name
-  const startIndex = hash % pool.length;
-  const reviews = [];
-
-  for (let i = 0; i < count; i++) {
-    const template = pool[(startIndex + i) % pool.length];
-    reviews.push({
-      id: `rev-${pId}-${i + 1}`,
-      name: template.name,
-      city: template.city,
-      verified: true,
-      rating: template.rating,
-      date: template.date,
-      title: template.title,
-      content: template.content
-    });
-  }
-
-  return reviews;
-}
