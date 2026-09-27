@@ -2,6 +2,7 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { STITCH_PRODUCTS } from '../src/data/mockData.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -252,6 +253,58 @@ export function initDB() {
       VALUES (?, ?, ?, ?, '', 'email', 'Super Admin', 9999, 9999, 1)
     `).run('usr_admin_pardeep', 'Pardeep Kumar', '20092003pardeep@gmail.com', adminPassHash);
   }
+
+  // Auto-synchronize products table strictly with the 69 verified real products
+  const currentProds = db.prepare('SELECT id, name, images_json FROM products').all();
+  const hasDummy = currentProds.some(p => 
+    !p.images_json || 
+    p.images_json.includes('unsplash') || 
+    p.name.includes('Velvet Silicone Butt Plug') ||
+    p.name.includes('Graduated Anal Beads')
+  );
+
+  if (currentProds.length !== STITCH_PRODUCTS.length || hasDummy) {
+    console.log(`🔄 Auto-syncing products catalog: Database had ${currentProds.length} items (dummy detected: ${hasDummy}). Locking to strictly ${STITCH_PRODUCTS.length} verified real products...`);
+    db.prepare('DELETE FROM products').run();
+    const insertProd = db.prepare(`
+      INSERT INTO products (
+        id, name, slug, subtitle, description, price, original_price,
+        category, subcategory, badge, discount, rating, reviews_count,
+        stock, specs_json, colors_json, in_the_box_json, images_json, is_active
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+    `);
+    const insertAll = db.transaction((items) => {
+      for (const p of items) {
+        insertProd.run(
+          p.id,
+          p.name,
+          p.slug || p.id,
+          p.subtitle || '',
+          p.description || '',
+          p.price,
+          p.originalPrice || null,
+          p.category,
+          p.subcategory || '',
+          p.badge || null,
+          p.discount || null,
+          p.rating || 5.0,
+          p.reviewsCount || 1,
+          p.stock || 45,
+          JSON.stringify(p.specs || {}),
+          JSON.stringify(p.colors || []),
+          JSON.stringify(p.inTheBox || []),
+          JSON.stringify(p.images || [])
+        );
+      }
+    });
+    insertAll(STITCH_PRODUCTS);
+    console.log(`✅ Database synchronized: Exactly ${STITCH_PRODUCTS.length} verified real products are now live!`);
+  }
+
+  // Force checkpoint to flush WAL into the .db file on disk
+  try {
+    db.pragma('wal_checkpoint(TRUNCATE)');
+  } catch (e) {}
 
   const prodCount = db.prepare('SELECT COUNT(*) as count FROM products').get().count;
   const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get().count;

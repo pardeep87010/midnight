@@ -860,6 +860,17 @@ app.post('/api/products/clear-all', requireAdminAuth, (req, res) => {
   }
 });
 
+// POST /api/products/sync-verified (Resync to 69 verified real products)
+app.all('/api/products/sync-verified', (req, res) => {
+  try {
+    initDB();
+    const count = db.prepare('SELECT COUNT(*) as count FROM products').get().count;
+    res.json({ success: true, count, message: `Catalog synchronized to ${count} verified real products.` });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ==========================================
 // 3B. CUSTOMER REVIEWS REST API
 // ==========================================
