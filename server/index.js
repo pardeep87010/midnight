@@ -1638,95 +1638,255 @@ app.post('/api/config', requireAdminAuth, (req, res) => {
 // 8. PAY0 DUAL GATEWAY PAYMENT APIS (pay0.shop & pro.pay0.shop)
 // ==========================================
 
-// Create Outbound Pay0 Payment Order
+// In-memory mutex to prevent race conditions during payment link generation
+const inFlightPaymentLocks = new Map();
+
+// Helper to resolve product from SQLite database by ID, slug, or name
+function findDbProduct(item) {
+  const pId = String(item.id || item.slug || '').trim();
+  const pName = String(item.name || '').trim();
+  const normId = pId.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normName = pName.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  // 1. Direct match
+  let prod = db.prepare('SELECT * FROM products WHERE id = ? OR slug = ? OR name = ? LIMIT 1').get(pId, pId, pName);
+  if (prod) return prod;
+
+  // 2. Like match
+  if (pId.length >= 4) {
+    prod = db.prepare('SELECT * FROM products WHERE id LIKE ? OR slug LIKE ? LIMIT 1').get(`%${pId}%`, `%${pId}%`);
+    if (prod) return prod;
+  }
+
+  // 3. Normalized full scan
+  const all = db.prepare('SELECT * FROM products').all();
+  for (const p of all) {
+    const pNormId = p.id.replace(/[^a-z0-9]/g, '');
+    const pNormName = p.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (pNormId === normId || pNormId.includes(normId) || normId.includes(pNormId) ||
+        (normName && (pNormName === normName || pNormName.includes(normName) || normName.includes(pNormName)))) {
+      return p;
+    }
+  }
+
+  return null;
+}
+
+// Helper to calculate authoritative server-side order total from SQLite Database
+function calculateAuthoritativeOrderTotal(items, promoCode) {
+  const rawItems = Array.isArray(items) && items.length > 0 ? items : [];
+  if (rawItems.length === 0) {
+    throw new Error('Order must contain at least 1 valid item in cart');
+  }
+
+  let serverSubtotal = 0;
+  const verifiedItems = [];
+
+  for (const item of rawItems) {
+    const qty = Math.max(1, Math.min(99, parseInt(item.quantity, 10) || 1));
+    const dbProduct = findDbProduct(item);
+
+    if (!dbProduct || !dbProduct.price) {
+      throw new Error(`Invalid item in cart: "${item.name || item.id || item.slug}" is not available`);
+    }
+
+    const realPrice = Number(dbProduct.price);
+    let realName = dbProduct.name;
+    let realImage = '';
+
+    if (dbProduct.images_json) {
+      try {
+        const parsed = JSON.parse(dbProduct.images_json);
+        if (Array.isArray(parsed) && parsed.length > 0) realImage = parsed[0];
+      } catch (e) {}
+    }
+
+    const lineTotal = realPrice * qty;
+    serverSubtotal += lineTotal;
+
+    verifiedItems.push({
+      id: dbProduct.id,
+      name: realName,
+      quantity: qty,
+      price: realPrice,
+      lineTotal,
+      color: sanitizeInput(item.color || 'Standard'),
+      image: realImage || item.image || ''
+    });
+  }
+
+  // Authoritative shipping fee: Free delivery over ₹1,999, else ₹199
+  const shipping = serverSubtotal >= 1999 ? 0 : 199;
+
+  // Authoritative promo code verification
+  let serverDiscount = 0;
+  let appliedPromo = null;
+
+  if (promoCode && typeof promoCode === 'string') {
+    const cleanCode = sanitizeInput(promoCode).trim().toUpperCase();
+    const dbCoupon = db.prepare('SELECT * FROM coupons WHERE UPPER(code) = ? AND is_active = 1 LIMIT 1').get(cleanCode);
+
+    if (dbCoupon) {
+      const minAmount = Number(dbCoupon.min_order_amount) || 0;
+      if (serverSubtotal >= minAmount) {
+        if (dbCoupon.discount_percent) {
+          serverDiscount = Math.round((serverSubtotal * dbCoupon.discount_percent) / 100);
+        } else if (dbCoupon.discount_amount) {
+          serverDiscount = Math.min(serverSubtotal, Math.round(dbCoupon.discount_amount));
+        }
+        appliedPromo = cleanCode;
+      }
+    }
+  }
+
+  const finalAuthoritativeTotal = Math.max(1, Math.round(serverSubtotal + shipping - serverDiscount));
+
+  return {
+    subtotal: serverSubtotal,
+    shipping,
+    discount: serverDiscount,
+    appliedPromo,
+    authoritativeTotal: finalAuthoritativeTotal,
+    verifiedItems
+  };
+}
+
+// Create Outbound Pay0 Payment Order (Hardened Anti-Double Charge & Price Tamper Proof)
 app.post('/api/payment/create', orderLimiter, async (req, res) => {
   try {
     const o = req.body || {};
     const orderId = o.orderId || o.id || `MB-${Math.floor(100000 + Math.random() * 900000)}`;
     const idempotencyKey = req.headers['x-idempotency-key'] || o.idempotencyKey || `idemp_pay_${orderId}`;
 
-    const rawTotal = Number(o.amount || o.totalAmount || o.total || 0);
-    if (!rawTotal || rawTotal <= 0) {
-      return res.status(400).json({ error: 'Valid payment amount is required' });
-    }
+    // 🛡️ 1. SERVER-SIDE PRICE AUTHORITY (Calculated directly from Database, Zero Trust on Client Price)
+    const { subtotal, shipping, discount, appliedPromo, authoritativeTotal, verifiedItems } = 
+      calculateAuthoritativeOrderTotal(o.items, o.promoCode || o.couponCode);
 
     const fullShippingAddress = o.shippingAddress || o.address || `${o.addressLine1 || ''}, ${o.city || ''}, ${o.state || ''} - ${o.pincode || ''}`.trim();
     const customerName = sanitizeInput(o.customerName || o.name || 'Valued Client');
     const customerEmail = sanitizeInput(o.customerEmail || o.email || 'customer@example.com');
     const customerPhone = sanitizeInput(o.customerPhone || o.phone || '');
 
-    // Check if order already exists in database
-    let existing = db.prepare('SELECT * FROM orders WHERE id = ?').get(orderId);
-    let authoritativeTotal = rawTotal;
+    // 🔒 2. CHECK EXISTING ORDER STATUS (Prevent Duplicate Payment Link Generation)
+    const existing = db.prepare('SELECT * FROM orders WHERE id = ? OR idempotency_key = ?').get(orderId, idempotencyKey);
 
     if (existing) {
-      authoritativeTotal = Number(existing.total_amount) || rawTotal;
-      if (existing.status === 'Paid' || existing.status === 'Dispatched') {
+      const isAlreadyPaid = (
+        existing.status === 'Processing' || 
+        existing.status === 'Paid' || 
+        existing.status === 'Dispatched' || 
+        existing.status === 'Delivered'
+      );
+
+      if (isAlreadyPaid) {
+        console.log(`🔒 Order #${existing.id} is already PAID. Rejecting duplicate payment request.`);
         return res.json({
           success: true,
-          orderId,
+          orderId: existing.id,
           alreadyPaid: true,
-          message: 'Order is already marked as Paid'
+          message: 'This order has already been successfully paid.'
         });
       }
-    } else {
-      // Create Pending Order record in SQLite database
-      const insert = db.prepare(`
-        INSERT INTO orders (
-          id, customer_name, customer_email, customer_phone, customer_city, customer_state, customer_pincode,
-          shipping_address, total_amount, payment_mode, packaging, statement_descriptor, status, items_json, idempotency_key
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `);
 
-      insert.run(
+      // 🎯 SINGLETON PAYMENT LINK: If a payment link is already active for this pending order and amount matches, REUSE IT!
+      if (existing.payment_url && Math.abs(Number(existing.total_amount) - authoritativeTotal) < 1) {
+        console.log(`🔁 [Pay0 Reusing Existing Payment Link] Order #${existing.id} -> Returning existing payment URL (No duplicate link generated)`);
+        return res.json({
+          success: true,
+          orderId: existing.id,
+          amount: authoritativeTotal,
+          paymentUrl: existing.payment_url,
+          gateway: existing.payment_gateway || 'pay0_std',
+          reusedExistingLink: true
+        });
+      }
+    }
+
+    // 🔒 3. CONCURRENCY MUTEX LOCK (Prevents race conditions from rapid double-clicks)
+    if (inFlightPaymentLocks.has(orderId)) {
+      console.log(`⏳ Payment link generation in-flight for Order #${orderId}. Waiting for existing lock.`);
+      const activePromise = inFlightPaymentLocks.get(orderId);
+      const result = await activePromise;
+      return res.json(result);
+    }
+
+    // Wrap the payment creation in a promise stored in mutex
+    const creationPromise = (async () => {
+      // Upsert Pending Order record in SQLite database with Authoritative Total
+      if (existing) {
+        db.prepare(`
+          UPDATE orders 
+          SET total_amount = ?, items_json = ?, customer_phone = ?, shipping_address = ?
+          WHERE id = ?
+        `).run(authoritativeTotal, JSON.stringify(verifiedItems), customerPhone, sanitizeInput(fullShippingAddress), existing.id);
+      } else {
+        const insert = db.prepare(`
+          INSERT INTO orders (
+            id, customer_name, customer_email, customer_phone, customer_city, customer_state, customer_pincode,
+            shipping_address, total_amount, payment_mode, packaging, statement_descriptor, status, items_json, idempotency_key
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `);
+
+        insert.run(
+          orderId,
+          customerName,
+          customerEmail,
+          customerPhone,
+          sanitizeInput(o.customerCity || o.city || 'Mumbai'),
+          sanitizeInput(o.customerState || o.state || 'Maharashtra'),
+          sanitizeInput(o.customerPincode || o.pincode || ''),
+          sanitizeInput(fullShippingAddress),
+          authoritativeTotal,
+          'Online Payment (Pay0 UPI/QR)',
+          sanitizeInput(o.packaging || '100% Plain Unbranded Box'),
+          'MB* SERVICES LLC',
+          'Payment Pending',
+          JSON.stringify(verifiedItems),
+          idempotencyKey
+        );
+      }
+
+      // Call active Pay0 Gateway via pay0Service
+      const pay0Result = await createPay0Order({
         orderId,
+        amount: authoritativeTotal,
         customerName,
-        customerEmail,
         customerPhone,
-        sanitizeInput(o.customerCity || o.city || 'Mumbai'),
-        sanitizeInput(o.customerState || o.state || 'Maharashtra'),
-        sanitizeInput(o.customerPincode || o.pincode || ''),
-        sanitizeInput(fullShippingAddress),
-        authoritativeTotal,
-        'Online Payment (Pay0 UPI/QR)',
-        sanitizeInput(o.packaging || '100% Plain Unbranded Box'),
-        'MB* SERVICES LLC',
-        'Payment Pending',
-        JSON.stringify(o.items || []),
-        idempotencyKey
-      );
-    }
+        customerEmail,
+        reqHost: req.get('host'),
+        reqProtocol: req.protocol
+      });
 
-    // Call active Pay0 Gateway via pay0Service
-    const pay0Result = await createPay0Order({
-      orderId,
-      amount: authoritativeTotal,
-      customerName,
-      customerPhone,
-      customerEmail,
-      reqHost: req.get('host'),
-      reqProtocol: req.protocol
-    });
+      // Update order with dynamic payment URL and active gateway info
+      try {
+        db.prepare(`
+          UPDATE orders 
+          SET payment_url = ?, pay0_order_id = ?, payment_gateway = ? 
+          WHERE id = ?
+        `).run(pay0Result.paymentUrl, orderId, pay0Result.gateway, orderId);
+      } catch (e) {
+        console.warn('[DB Payment URL Update Warning]:', e.message);
+      }
 
-    // Update order with dynamic payment URL and active gateway info
+      return {
+        success: true,
+        orderId,
+        amount: authoritativeTotal,
+        paymentUrl: pay0Result.paymentUrl,
+        gateway: pay0Result.gateway,
+        gatewayName: pay0Result.gatewayName
+      };
+    })();
+
+    inFlightPaymentLocks.set(orderId, creationPromise);
+
     try {
-      db.prepare(`
-        UPDATE orders 
-        SET payment_url = ?, pay0_order_id = ?, payment_gateway = ? 
-        WHERE id = ?
-      `).run(pay0Result.paymentUrl, orderId, pay0Result.gateway, orderId);
-    } catch (e) {
-      console.warn('[DB Payment URL Update Warning]:', e.message);
+      const responseData = await creationPromise;
+      return res.json(responseData);
+    } finally {
+      inFlightPaymentLocks.delete(orderId);
     }
 
-    res.json({
-      success: true,
-      orderId,
-      amount: authoritativeTotal,
-      paymentUrl: pay0Result.paymentUrl,
-      gateway: pay0Result.gateway,
-      gatewayName: pay0Result.gatewayName
-    });
   } catch (error) {
     console.error('[Payment Create Error]:', error);
     res.status(500).json({ error: error.message || 'Payment initiation failed' });
