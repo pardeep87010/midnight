@@ -181,8 +181,8 @@ export function initDB() {
       VALUES (?, ?, ?, ?, 1, 1000, 0)
     `);
     insertCoupon.run('cpn-vip10', 'VIP10', 10, 0);
-    insertCoupon.run('cpn-midnight20', 'MIDNIGHT20', 20, 2999);
-    insertCoupon.run('cpn-first500', 'FIRST500', 15, 1999);
+    insertCoupon.run('cpn-midnight20', 'MIDNIGHT20', 20, 1499);
+    insertCoupon.run('cpn-first500', 'FIRST500', 15, 999);
   }
 
   // Ensure real database usage count (no hardcoded/fake mock counts)
@@ -255,16 +255,17 @@ export function initDB() {
   }
 
   // Auto-synchronize products table strictly with the 69 verified real products
-  const currentProds = db.prepare('SELECT id, name, images_json FROM products').all();
+  const currentProds = db.prepare('SELECT id, name, price, images_json FROM products').all();
   const hasDummy = currentProds.some(p => 
     !p.images_json || 
     p.images_json.includes('unsplash') || 
     p.name.includes('Velvet Silicone Butt Plug') ||
     p.name.includes('Graduated Anal Beads')
   );
+  const hasOldPrice = currentProds.some(p => p.price >= 1000);
 
-  if (currentProds.length !== STITCH_PRODUCTS.length || hasDummy) {
-    console.log(`🔄 Auto-syncing products catalog: Database had ${currentProds.length} items (dummy detected: ${hasDummy}). Locking to strictly ${STITCH_PRODUCTS.length} verified real products...`);
+  if (currentProds.length !== STITCH_PRODUCTS.length || hasDummy || hasOldPrice) {
+    console.log(`🔄 Auto-syncing products catalog: Database had ${currentProds.length} items (dummy: ${hasDummy}, old price >= 1000: ${hasOldPrice}). Locking to strictly ${STITCH_PRODUCTS.length} verified real products...`);
     db.prepare('DELETE FROM products').run();
     const insertProd = db.prepare(`
       INSERT INTO products (

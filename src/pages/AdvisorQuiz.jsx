@@ -179,7 +179,7 @@ export const AdvisorQuiz = () => {
                 </div>
 
                 <div className="pt-2 border-t border-velour-800 flex items-center justify-between">
-                  <span className="text-base font-serif font-bold text-gold-300">${product.price}</span>
+                  <span className="text-base font-serif font-bold text-gold-300">₹{product.price}</span>
                   <button
                     onClick={() => addToCart(product, 1)}
                     className="bg-gold-500 hover:bg-gold-400 text-velour-950 text-xs font-bold py-1.5 px-3 rounded-lg flex items-center space-x-1"

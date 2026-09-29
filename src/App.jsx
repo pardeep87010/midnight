@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useApp } from './context/AppContext';
 import { Header } from './components/Header';
 import { BottomNav } from './components/BottomNav';
@@ -36,6 +36,13 @@ const PageLoader = () => (
 export const App = () => {
   const { currentPage } = useApp();
   const [isQuizOpen, setIsQuizOpen] = useState(false);
+
+  // Meta Pixel dynamic PageView tracking on navigation
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'PageView');
+    }
+  }, [currentPage]);
 
   const renderPage = () => {
     switch (currentPage) {

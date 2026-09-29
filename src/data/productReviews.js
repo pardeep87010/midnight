@@ -153,7 +153,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "1 month ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹6499 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "aura-power-wand": [
@@ -309,7 +309,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "2 days ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹3499 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "lelo-gigi-2": [
@@ -465,7 +465,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "10 days ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹6999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "fun-factory-miss-bi": [
@@ -621,7 +621,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "1 month ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹1499 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "palm-grip-sensual-massager": [
@@ -777,7 +777,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "2 days ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹1899 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "whisper-luxury-wand-set": [
@@ -3427,7 +3427,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "1 month ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹4999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "satisfyer-pro-2-gen3": [
@@ -3583,7 +3583,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "2 days ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹14999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "dual-end-vacuum-gspot-vibrator": [
@@ -3739,7 +3739,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "10 days ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹4599 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "palm-fit-sonic-stimulator": [
@@ -3895,7 +3895,7 @@ export const PRODUCT_REVIEWS_MAP = {
       "rating": 5,
       "date": "1 month ago",
       "title": "Top notch Swedish/German level finish",
-      "comment": "Is price range me ₹2999 par aisi quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
+      "comment": "Is affordable price range me under ₹1000 par aisi luxury quality milna impossible hai kisi aur store pe. Finish flawless hai, magnetic click charging perfect kaam karti hai aur battery backup solid hai. Will definitely buy more items!"
     }
   ],
   "electra-violet-wand-kit": [
