@@ -37,10 +37,18 @@ export const App = () => {
   const { currentPage } = useApp();
   const [isQuizOpen, setIsQuizOpen] = useState(false);
 
-  // Meta Pixel dynamic PageView tracking on navigation
+  // Meta Pixel & Google Analytics dynamic PageView tracking on navigation
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'PageView');
+    if (typeof window !== 'undefined') {
+      if (window.fbq) {
+        window.fbq('track', 'PageView');
+      }
+      if (window.gtag) {
+        window.gtag('event', 'page_view', {
+          page_path: '/' + currentPage,
+          page_title: document.title
+        });
+      }
     }
   }, [currentPage]);
 
