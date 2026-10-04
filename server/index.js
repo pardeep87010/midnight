@@ -1726,9 +1726,12 @@ app.post('/api/config', requireAdminAuth, (req, res) => {
       upsert.run(
         sanitizeInput(key), 
         sanitizeInput(String(value)), 
-        key.includes('KEY') || key.includes('SECRET') || key.includes('PASSWORD') ? 1 : 0
+        key.includes('KEY') || key.includes('SECRET') || key.includes('PASSWORD') || key.includes('TOKEN') ? 1 : 0
       );
     }
+
+    // Immediately backup to JSON so keys survive server restarts
+    syncPersistentBackup();
 
     logSystemEvent('CONFIG_UPDATED', {
       updatedKeys: Object.keys(updates).map(k => k.includes('KEY') || k.includes('SECRET') ? `${k} (masked)` : k),

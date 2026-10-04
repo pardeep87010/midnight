@@ -22,7 +22,7 @@ if (!fs.existsSync(backupDir)) {
 const dbPath = process.env.DATABASE_PATH || path.join(dbDir, 'midnight_bloom.db');
 const db = new Database(dbPath);
 
-// Synchronize all orders and users to persistent JSON ledger
+// Synchronize all orders, users, and env configs to persistent JSON ledger
 export function syncPersistentBackup() {
   try {
     const allOrders = db.prepare('SELECT * FROM orders ORDER BY created_at ASC').all();
@@ -61,6 +61,14 @@ export function syncPersistentBackup() {
       updatedAt: u.updated_at
     }));
     fs.writeFileSync(path.join(backupDir, 'seed_users.json'), JSON.stringify(usersFormatted, null, 2), 'utf8');
+
+    // Backup all env_configs so API keys survive Render restarts
+    const allEnvConfigs = db.prepare('SELECT key, value, is_secret FROM env_configs').all();
+    const envConfigMap = {};
+    for (const row of allEnvConfigs) {
+      envConfigMap[row.key] = row.value;
+    }
+    fs.writeFileSync(path.join(backupDir, 'seed_env_configs.json'), JSON.stringify(envConfigMap, null, 2), 'utf8');
   } catch (err) {
     console.warn('⚠️ Backup sync notice:', err.message);
   }
@@ -240,40 +248,40 @@ export function initDB() {
     db.prepare("UPDATE coupons SET current_uses = 0 WHERE current_uses > 50 AND id LIKE 'cpn-%'").run();
   } catch (e) {}
 
-  // Auto-clean placeholder dummy or expired keys from database
+  // Restore env_configs from JSON backup FIRST (user-saved API keys survive cold restarts)
   try {
-    db.prepare("DELETE FROM env_configs WHERE value LIKE '%re_mb_live_sec%' OR value LIKE '%pay0pro_live_sk%' OR value = 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy'").run();
-  } catch (e) {}
+    const envBackupPath = path.join(backupDir, 'seed_env_configs.json');
+    if (fs.existsSync(envBackupPath)) {
+      const savedEnvConfigs = JSON.parse(fs.readFileSync(envBackupPath, 'utf8'));
+      const restoreEnv = db.prepare(`
+        INSERT OR IGNORE INTO env_configs (key, value, is_secret, updated_at)
+        VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+      `);
+      for (const [key, value] of Object.entries(savedEnvConfigs)) {
+        if (value !== null && value !== undefined && value !== '') {
+          const isSecret = key.includes('KEY') || key.includes('SECRET') || key.includes('PASSWORD') || key.includes('TOKEN') ? 1 : 0;
+          restoreEnv.run(key, String(value), isSecret);
+        }
+      }
+      console.log('✅ Restored', Object.keys(savedEnvConfigs).length, 'env config keys from backup ledger');
+    }
+  } catch (e) {
+    console.warn('⚠️ Env config restore notice:', e.message);
+  }
 
-  // Seed Default Domain configs if not set
+  // Seed Default Domain configs ONLY if not already set by admin (never overwrite user-saved values)
   try {
-    const upsertConfig = db.prepare(`
-      INSERT INTO env_configs (key, value, is_secret, updated_at)
+    // Use INSERT OR IGNORE so user-configured keys are NEVER overwritten on restart
+    const seedIfMissing = db.prepare(`
+      INSERT OR IGNORE INTO env_configs (key, value, is_secret, updated_at)
       VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-      ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP
     `);
-    const checkDomain = db.prepare("SELECT value FROM env_configs WHERE key = 'RESEND_DOMAIN'").get();
-    if (!checkDomain) {
-      upsertConfig.run('RESEND_DOMAIN', 'playnixclub.bet', 0);
-    }
-    const checkFromEmail = db.prepare("SELECT value FROM env_configs WHERE key = 'FROM_EMAIL'").get();
-    if (!checkFromEmail) {
-      upsertConfig.run('FROM_EMAIL', 'Midnight Bloom <orders@playnixclub.bet>', 0);
-    }
 
-    // Seed Pay0 Dual Gateway Defaults if not already set
-    const checkActiveGateway = db.prepare("SELECT value FROM env_configs WHERE key = 'ACTIVE_PAYMENT_GATEWAY'").get();
-    if (!checkActiveGateway) {
-      upsertConfig.run('ACTIVE_PAYMENT_GATEWAY', 'pay0_std', 0);
-    }
-    const checkStdToken = db.prepare("SELECT value FROM env_configs WHERE key = 'PAY0_STD_USER_TOKEN'").get();
-    if (!checkStdToken) {
-      upsertConfig.run('PAY0_STD_USER_TOKEN', 'e7d3b644cef8f32dec1b8ce4cd5802e3', 1);
-    }
-    const checkStdSecret = db.prepare("SELECT value FROM env_configs WHERE key = 'PAY0_STD_SECRET_KEY'").get();
-    if (!checkStdSecret) {
-      upsertConfig.run('PAY0_STD_SECRET_KEY', 'IAvFPh0w1N816336807', 1);
-    }
+    seedIfMissing.run('RESEND_DOMAIN', 'playnixclub.bet', 0);
+    seedIfMissing.run('FROM_EMAIL', 'Midnight Bloom <orders@playnixclub.bet>', 0);
+    seedIfMissing.run('ACTIVE_PAYMENT_GATEWAY', 'pay0_std', 0);
+    seedIfMissing.run('PAY0_STD_USER_TOKEN', 'e7d3b644cef8f32dec1b8ce4cd5802e3', 1);
+    seedIfMissing.run('PAY0_STD_SECRET_KEY', 'IAvFPh0w1N816336807', 1);
   } catch (e) {}
 
   // 8. Users & Authentication Table
