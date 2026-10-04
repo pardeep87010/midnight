@@ -562,7 +562,7 @@ app.get('/api/admin/users/:id', requireAdminAuth, (req, res) => {
 app.put('/api/admin/users/:id', requireAdminAuth, (req, res) => {
   try {
     const userId = req.params.id;
-    const { name, phone, tier, points, isAdmin } = req.body;
+    const { name, phone, tier, points, isAdmin, authProvider } = req.body;
 
     const user = db.prepare('SELECT * FROM users WHERE id = ?').get(userId);
     if (!user) {
@@ -577,6 +577,7 @@ app.put('/api/admin/users/:id', requireAdminAuth, (req, res) => {
         tier = COALESCE(?, tier),
         points = COALESCE(?, points),
         is_admin = COALESCE(?, is_admin),
+        auth_provider = COALESCE(?, auth_provider),
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
     `).run(
@@ -585,6 +586,7 @@ app.put('/api/admin/users/:id', requireAdminAuth, (req, res) => {
       tier ? sanitizeInput(tier) : null,
       points !== undefined ? Number(points) : null,
       isAdmin !== undefined ? (isAdmin ? 1 : 0) : null,
+      authProvider ? sanitizeInput(authProvider) : null,
       userId
     );
 

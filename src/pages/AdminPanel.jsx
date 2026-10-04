@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faBoxOpen, 
+  faBoxOpen,
+  faBox,
   faFileCsv, 
   faPlus, 
   faTrash, 
@@ -1558,14 +1559,49 @@ export const AdminPanel = () => {
                     </div>
                   </div>
 
-                  <div className="bg-[#FAF7F5] dark:bg-black/50 p-3 rounded-lg border border-[#B56571]/15 dark:border-neutral-800/80 text-xs font-mono flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div>
-                      <span className="text-[#7A696C] dark:text-neutral-400">Items: </span>
-                      <span className="text-[#181617] dark:text-white">{order.items?.map(i => `${i.product?.name} (x${i.quantity})`).join(', ') || '1x Sensual Item'}</span>
+                  {/* Items Detail Panel with product images */}
+                  <div className="bg-[#FAF7F5] dark:bg-black/50 p-3 rounded-lg border border-[#B56571]/15 dark:border-neutral-800/80 space-y-3">
+                    {/* Items List with thumbnails */}
+                    <div className="space-y-2">
+                      {order.items && order.items.length > 0 ? order.items.map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-3">
+                          {/* Product Thumbnail */}
+                          {item.image ? (
+                            <img
+                              src={item.image}
+                              alt={item.name || 'Product'}
+                              className="w-12 h-12 rounded-lg object-cover border border-[#B56571]/20 dark:border-neutral-700 shrink-0 bg-neutral-100 dark:bg-neutral-800"
+                              onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                          ) : (
+                            <div className="w-12 h-12 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-[#B56571]/20 dark:border-neutral-700 flex items-center justify-center shrink-0">
+                              <FontAwesomeIcon icon={faBox} className="text-[#B56571]/50 text-lg" />
+                            </div>
+                          )}
+                          {/* Item Details */}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-[#181617] dark:text-white truncate">{item.name || 'Luxury Item'}</p>
+                            <p className="text-[11px] text-[#7A696C] dark:text-neutral-400 font-mono">
+                              Qty: {item.quantity || 1}
+                              {item.color && item.color !== 'Standard' && <span> • {item.color}</span>}
+                              <span className="ml-2 text-[#A33F4D] dark:text-[#D98A92] font-bold">₹{(item.price * (item.quantity || 1)).toLocaleString('en-IN')}</span>
+                            </p>
+                          </div>
+                        </div>
+                      )) : (
+                        <p className="text-xs text-[#7A696C] dark:text-neutral-400 font-mono italic">Item details loading…</p>
+                      )}
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <span className="text-[#7A696C] dark:text-neutral-400">Payment: <strong className="text-[#181617] dark:text-white">{order.paymentMode || order.paymentMethod || order.payment_mode || 'Cash on Delivery (COD)'}</strong></span>
-                      <span className="text-[#181617] dark:text-white font-bold">Total: ₹{order.totalAmount?.toLocaleString('en-IN')}</span>
+                    {/* Order Footer: Address + Payment + Total */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-[#B56571]/15 dark:border-neutral-800/60 text-xs font-mono">
+                      <div className="text-[#7A696C] dark:text-neutral-400 truncate">
+                        <FontAwesomeIcon icon={faLocationDot} className="mr-1 text-[#A33F4D]/70" />
+                        {order.shippingAddress || `${order.customerCity}, ${order.customerState}`}
+                      </div>
+                      <div className="flex items-center space-x-4 shrink-0">
+                        <span className="text-[#7A696C] dark:text-neutral-400">Payment: <strong className="text-[#181617] dark:text-white">{order.paymentMode || order.paymentMethod || 'Cash on Delivery (COD)'}</strong></span>
+                        <span className="text-[#181617] dark:text-white font-bold text-sm">Total: ₹{order.totalAmount?.toLocaleString('en-IN')}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3059,7 +3095,12 @@ export const AdminPanel = () => {
                                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
                                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
                                 </svg>
-                                <span>Google Verified</span>
+                                <span>Google OAuth</span>
+                              </span>
+                            ) : u.authProvider === 'order_checkout' ? (
+                              <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/60">
+                                <FontAwesomeIcon icon={faBox} className="text-[10px]" />
+                                <span>Guest Checkout</span>
                               </span>
                             ) : (
                               <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/60">
