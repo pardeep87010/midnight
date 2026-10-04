@@ -1,4 +1,4 @@
-﻿# Dependencies
+# Dependencies
 node_modules/
 dist/
 build/
@@ -11,9 +11,13 @@ build/
 # SQLite DB Temp Files
 database/*.db-wal
 database/*.db-shm
+*.sqlite
+*.sqlite3
 
 # Binaries & Logs
 *.exe
 *.log
 .DS_Store
 Thumbs.db
+__pycache__/
+

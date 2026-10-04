@@ -7,14 +7,64 @@ import { STITCH_PRODUCTS } from '../src/data/mockData.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Ensure database directory exists
-const dbDir = path.resolve(__dirname, '../database');
+// Ensure database directory exists (Supports persistent volume mount via DATA_DIR)
+const dbDir = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.resolve(__dirname, '../database');
 if (!fs.existsSync(dbDir)) {
   fs.mkdirSync(dbDir, { recursive: true });
 }
 
-const dbPath = path.join(dbDir, 'midnight_bloom.db');
+// Backup Ledger directory for zero data loss protection across deployments
+const backupDir = path.resolve(__dirname, 'data_backup');
+if (!fs.existsSync(backupDir)) {
+  fs.mkdirSync(backupDir, { recursive: true });
+}
+
+const dbPath = process.env.DATABASE_PATH || path.join(dbDir, 'midnight_bloom.db');
 const db = new Database(dbPath);
+
+// Synchronize all orders and users to persistent JSON ledger
+export function syncPersistentBackup() {
+  try {
+    const allOrders = db.prepare('SELECT * FROM orders ORDER BY created_at ASC').all();
+    const ordersFormatted = allOrders.map(o => ({
+      id: o.id,
+      customerName: o.customer_name,
+      customerEmail: o.customer_email,
+      customerPhone: o.customer_phone || '',
+      customerCity: o.customer_city,
+      customerState: o.customer_state || '',
+      customerPincode: o.customer_pincode || '',
+      shippingAddress: o.shipping_address,
+      totalAmount: Number(o.total_amount),
+      paymentMode: o.payment_mode,
+      packaging: o.packaging,
+      statementDescriptor: o.statement_descriptor,
+      status: o.status,
+      items: o.items_json ? JSON.parse(o.items_json) : [],
+      idempotencyKey: o.idempotency_key,
+      createdAt: o.created_at
+    }));
+    fs.writeFileSync(path.join(backupDir, 'seed_orders.json'), JSON.stringify(ordersFormatted, null, 2), 'utf8');
+
+    const allUsers = db.prepare('SELECT id, name, email, phone, auth_provider, tier, points, max_points, is_admin, created_at, updated_at FROM users').all();
+    const usersFormatted = allUsers.map(u => ({
+      id: u.id,
+      name: u.name,
+      email: u.email,
+      phone: u.phone || '',
+      authProvider: u.auth_provider,
+      tier: u.tier,
+      points: u.points,
+      maxPoints: u.max_points,
+      isAdmin: u.is_admin,
+      createdAt: u.created_at,
+      updatedAt: u.updated_at
+    }));
+    fs.writeFileSync(path.join(backupDir, 'seed_users.json'), JSON.stringify(usersFormatted, null, 2), 'utf8');
+  } catch (err) {
+    console.warn('⚠️ Backup sync notice:', err.message);
+  }
+}
 
 // Enable WAL mode for ultra-fast concurrent read/write performance
 db.pragma('journal_mode = WAL');
@@ -306,6 +356,131 @@ export function initDB() {
     console.log(`✅ Database synchronized: Exactly ${STITCH_PRODUCTS.length} verified real products are now live!`);
   }
 
+  // 9. Auto-Restore Users from Persistent Ledger if missing
+  try {
+    const seedUsersFile = path.join(backupDir, 'seed_users.json');
+    if (fs.existsSync(seedUsersFile)) {
+      const usersData = JSON.parse(fs.readFileSync(seedUsersFile, 'utf8'));
+      if (Array.isArray(usersData)) {
+        for (const u of usersData) {
+          const exists = db.prepare('SELECT id FROM users WHERE LOWER(email) = LOWER(?)').get(u.email);
+          if (!exists) {
+            db.prepare(`
+              INSERT INTO users (id, name, email, phone, auth_provider, tier, points, max_points, is_admin, created_at, updated_at)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `).run(
+              u.id || `usr_${Date.now()}`,
+              u.name,
+              u.email.toLowerCase(),
+              u.phone || '',
+              u.authProvider || 'email',
+              u.tier || 'Silver Member',
+              u.points || 200,
+              u.maxPoints || 1000,
+              u.isAdmin ? 1 : 0,
+              u.createdAt || new Date().toISOString(),
+              u.updatedAt || u.createdAt || new Date().toISOString()
+            );
+            console.log(`🛡️ [LEDGER RECOVERY] Restored member ${u.email} (${u.name}) into database.`);
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('⚠️ User seed restore notice:', e.message);
+  }
+
+  // 10. Auto-Restore Orders from Persistent Ledger if missing
+  try {
+    const seedOrdersFile = path.join(backupDir, 'seed_orders.json');
+    if (fs.existsSync(seedOrdersFile)) {
+      const ordersData = JSON.parse(fs.readFileSync(seedOrdersFile, 'utf8'));
+      if (Array.isArray(ordersData)) {
+        for (const ord of ordersData) {
+          const exists = db.prepare('SELECT id FROM orders WHERE id = ?').get(ord.id);
+          if (!exists) {
+            db.prepare(`
+              INSERT INTO orders (
+                id, customer_name, customer_email, customer_phone, customer_city, customer_state, customer_pincode,
+                shipping_address, total_amount, payment_mode, packaging, statement_descriptor, status, items_json, idempotency_key, created_at
+              ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `).run(
+              ord.id,
+              ord.customerName,
+              ord.customerEmail,
+              ord.customerPhone || '',
+              ord.customerCity || '',
+              ord.customerState || '',
+              ord.customerPincode || '',
+              ord.shippingAddress || '',
+              ord.totalAmount,
+              ord.paymentMode || 'Cash on Delivery (COD)',
+              ord.packaging || '100% Plain Unbranded Box',
+              ord.statementDescriptor || 'MB* SERVICES LLC',
+              ord.status || 'Processing',
+              JSON.stringify(ord.items || []),
+              ord.idempotencyKey || `idemp_${Date.now()}`,
+              ord.createdAt || new Date().toISOString()
+            );
+            console.log(`🛡️ [LEDGER RECOVERY] Restored order #${ord.id} (${ord.customerEmail}) into database.`);
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('⚠️ Order seed restore notice:', e.message);
+  }
+
+  // 11. Self-Healing Customer Reconciliation:
+  // Every customer who placed an order MUST have a corresponding record in the `users` table
+  try {
+    const customerOrders = db.prepare(`
+      SELECT customer_name, customer_email, customer_phone, customer_city, customer_state, customer_pincode, shipping_address, created_at
+      FROM orders 
+      WHERE customer_email IS NOT NULL AND customer_email != ''
+      GROUP BY LOWER(customer_email)
+    `).all();
+
+    for (const cust of customerOrders) {
+      const cleanEmail = cust.customer_email.trim().toLowerCase();
+      const existing = db.prepare('SELECT id FROM users WHERE LOWER(email) = ?').get(cleanEmail);
+      if (!existing) {
+        const newId = `usr_ord_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+        db.prepare(`
+          INSERT INTO users (id, name, email, phone, auth_provider, tier, points, max_points, is_admin, created_at, updated_at)
+          VALUES (?, ?, ?, ?, 'order_checkout', 'Silver Member', 200, 1000, 0, ?, ?)
+        `).run(newId, cust.customer_name || 'Customer', cleanEmail, cust.customer_phone || '', cust.created_at, cust.created_at);
+        console.log(`🛡️ [SELF-HEALING] Reconciled and auto-created member account for buyer: ${cleanEmail}`);
+      }
+
+      // Also ensure address exists in addresses table
+      const addrCheck = db.prepare('SELECT id FROM addresses WHERE LOWER(user_email) = ?').get(cleanEmail);
+      if (!addrCheck && cust.shipping_address) {
+        db.prepare(`
+          INSERT INTO addresses (id, user_email, receiver_name, phone, address_line1, address_line2, city, state, pincode, label, is_default, created_at)
+          VALUES (?, ?, ?, ?, ?, '', ?, ?, ?, 'Home', 1, ?)
+        `).run(
+          `addr_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+          cleanEmail,
+          cust.customer_name || 'Customer',
+          cust.customer_phone || '',
+          cust.shipping_address,
+          cust.customer_city || '',
+          cust.customer_state || '',
+          cust.customer_pincode || '',
+          cust.created_at
+        );
+      }
+    }
+  } catch (e) {
+    console.warn('⚠️ Customer reconciliation notice:', e.message);
+  }
+
+  // Keep persistent backup synchronized
+  try {
+    syncPersistentBackup();
+  } catch (e) {}
+
   // Force checkpoint to flush WAL into the .db file on disk
   try {
     db.pragma('wal_checkpoint(TRUNCATE)');
@@ -313,7 +488,8 @@ export function initDB() {
 
   const prodCount = db.prepare('SELECT COUNT(*) as count FROM products').get().count;
   const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get().count;
-  console.log(`✅ Database Schema Initialized! Live Products: ${prodCount} | Users: ${userCount}`);
+  const orderCount = db.prepare('SELECT COUNT(*) as count FROM orders').get().count;
+  console.log(`✅ Database Schema Initialized! Live Products: ${prodCount} | Users: ${userCount} | Orders: ${orderCount}`);
 }
 
 import crypto from 'crypto';

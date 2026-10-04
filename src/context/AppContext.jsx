@@ -319,11 +319,21 @@ export const AppProvider = ({ children }) => {
 
   const fetchOrders = async (email = null) => {
     try {
-      const isSuperAdmin = Boolean(user?.isAdmin || user?.email === '20092003pardeep@gmail.com');
+      const storedAdminToken = (() => {
+        try { return localStorage.getItem('mb_admin_token') || adminToken; } catch (e) { return adminToken; }
+      })();
+      const isAdminContext = Boolean(
+        user?.isAdmin || 
+        user?.email === '20092003pardeep@gmail.com' || 
+        currentPage === 'admin' ||
+        (typeof window !== 'undefined' && (window.location.pathname.includes('admin') || window.location.hash.includes('admin'))) ||
+        storedAdminToken === 'mb_admin_live_token_2026_sec_bloom'
+      );
+
       let url = '/api/orders';
       if (email) {
         url = `/api/orders?email=${encodeURIComponent(email)}`;
-      } else if (!isSuperAdmin) {
+      } else if (!isAdminContext) {
         if (user?.email) {
           url = `/api/orders?email=${encodeURIComponent(user.email)}`;
         } else {
@@ -331,8 +341,13 @@ export const AppProvider = ({ children }) => {
           return [];
         }
       }
+
       const res = await fetch(url, {
-        headers: getAuthHeaders()
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${storedAdminToken || adminToken}`,
+          'x-admin-token': storedAdminToken || adminToken
+        }
       });
       if (res.ok) {
         const data = await res.json();

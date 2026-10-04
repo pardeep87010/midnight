@@ -8,7 +8,7 @@ import crypto from 'crypto';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import db, { initDB, hashPassword, verifyPassword } from './db.js';
+import db, { initDB, hashPassword, verifyPassword, syncPersistentBackup } from './db.js';
 import * as emailTemplates from './emailTemplates.js';
 import { getPay0Config, createPay0Order, verifyPay0OrderStatus } from './pay0Service.js';
 
@@ -1187,6 +1187,51 @@ app.post('/api/orders', orderLimiter, (req, res) => {
       JSON.stringify(verifiedItems), // Authoritative Item List & Prices
       idempotencyKey
     );
+
+    // 6B. AUTO-UPSERT CUSTOMER INTO USERS DIRECTORY (Zero Customer Loss Guarantee)
+    try {
+      const cleanCustomerEmail = sanitizeInput(o.customerEmail || o.email || '').trim().toLowerCase();
+      const cleanCustomerName = sanitizeInput(o.customerName || o.name || 'Valued Client');
+      const cleanCustomerPhone = sanitizeInput(o.customerPhone || o.phone || '');
+
+      if (cleanCustomerEmail && cleanCustomerEmail.includes('@')) {
+        const existingBuyer = db.prepare('SELECT id FROM users WHERE LOWER(email) = ?').get(cleanCustomerEmail);
+        if (!existingBuyer) {
+          const newUserId = `usr_${Date.now()}`;
+          db.prepare(`
+            INSERT INTO users (id, name, email, phone, auth_provider, tier, points, max_points, is_admin)
+            VALUES (?, ?, ?, ?, 'order_checkout', 'Silver Member', 200, 1000, 0)
+          `).run(newUserId, cleanCustomerName, cleanCustomerEmail, cleanCustomerPhone);
+          console.log(`🛡️ Auto-registered buyer ${cleanCustomerEmail} into users directory.`);
+        } else if (cleanCustomerPhone) {
+          db.prepare('UPDATE users SET phone = COALESCE(NULLIF(phone, ""), ?) WHERE LOWER(email) = ?')
+            .run(cleanCustomerPhone, cleanCustomerEmail);
+        }
+
+        // Auto-save shipping address into addresses table if not exists
+        const existingAddress = db.prepare('SELECT id FROM addresses WHERE LOWER(user_email) = ?').get(cleanCustomerEmail);
+        if (!existingAddress && fullShippingAddress) {
+          db.prepare(`
+            INSERT INTO addresses (id, user_email, receiver_name, phone, address_line1, address_line2, city, state, pincode, label, is_default)
+            VALUES (?, ?, ?, ?, ?, '', ?, ?, ?, 'Home', 1)
+          `).run(
+            `addr_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+            cleanCustomerEmail,
+            cleanCustomerName,
+            cleanCustomerPhone,
+            sanitizeInput(fullShippingAddress),
+            sanitizeInput(o.customerCity || o.city || ''),
+            sanitizeInput(o.customerState || o.state || ''),
+            sanitizeInput(o.customerPincode || o.pincode || '')
+          );
+        }
+      }
+
+      // Persist to JSON backup ledger immediately
+      syncPersistentBackup();
+    } catch (upsertErr) {
+      console.warn('⚠️ Order customer auto-registration notice:', upsertErr.message);
+    }
 
     // Record Exactly 1 Event in System Event Log
     logSystemEvent('ORDER_PLACED', { 
@@ -2628,6 +2673,7 @@ app.post('/api/auth/register', (req, res) => {
 
     // Audit log
     logSystemEvent('USER_REGISTERED', { userId, email: cleanEmail, name: formattedName }, 'DELIVERED');
+    try { syncPersistentBackup(); } catch (e) {}
 
     // ✉️ Dispatch Welcome VIP Email to new member (Asynchronous)
     sendEmailViaResend(
@@ -2939,6 +2985,7 @@ app.post('/api/auth/google', async (req, res) => {
       INSERT INTO event_logs (id, event_type, payload_json, status)
       VALUES (?, 'auth.google_login', ?, 'success')
     `).run(`evt_g_${Date.now()}`, JSON.stringify({ email: cleanEmail, name: userObj.name, isAdmin }));
+    try { syncPersistentBackup(); } catch (e) {}
 
     res.json({
       success: true,

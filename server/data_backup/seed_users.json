@@ -1,0 +1,28 @@
+[
+  {
+    "id": "usr_admin_pardeep",
+    "name": "Pardeep Kumar",
+    "email": "20092003pardeep@gmail.com",
+    "phone": "",
+    "authProvider": "email",
+    "tier": "Super Admin",
+    "points": 9999,
+    "maxPoints": 9999,
+    "isAdmin": 1,
+    "createdAt": "2026-09-05 11:40:00",
+    "updatedAt": "2026-09-05 11:40:00"
+  },
+  {
+    "id": "usr_g_1791111019564",
+    "name": "Umesh kumar",
+    "email": "umeshnimble13@gmail.com",
+    "phone": "+91 9518269095",
+    "authProvider": "google",
+    "tier": "Gold VIP Member",
+    "points": 200,
+    "maxPoints": 1000,
+    "isAdmin": 0,
+    "createdAt": "2026-10-04 10:50:19",
+    "updatedAt": "2026-10-04 10:50:39"
+  }
+]
