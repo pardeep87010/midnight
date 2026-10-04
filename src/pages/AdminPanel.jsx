@@ -45,7 +45,8 @@ import {
   faCoins,
   faClock,
   faLocationDot,
-  faFilter
+  faFilter,
+  faTriangleExclamation
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
 import { STITCH_CATEGORIES } from '../data/mockData';
@@ -220,6 +221,8 @@ export const AdminPanel = () => {
 
   // Event Bus & Notification Monitoring State
   const [eventLogs, setEventLogs] = useState([]);
+  const [eventFilter, setEventFilter] = useState('all'); // 'all' | 'errors' | 'email' | 'auth' | 'payments'
+  const [isRefreshingEvents, setIsRefreshingEvents] = useState(false);
   const [sentNotifications, setSentNotifications] = useState([]);
   const [previewEmail, setPreviewEmail] = useState(null);
 
@@ -768,12 +771,15 @@ export const AdminPanel = () => {
       fetchAdminCoupons();
     } else if (activeTab === 'users') {
       fetchAdminUsers(1, usersSearch, usersDateFilter, usersAuthProvider, usersTierFilter);
+    } else if (activeTab === 'events') {
+      refreshEventData();
     }
   }, [activeTab]);
 
   const refreshEventData = async () => {
+    setIsRefreshingEvents(true);
     try {
-      const res = await fetch('/api/events', {
+      const res = await fetch('/api/events?limit=250', {
         headers: {
           'Authorization': 'Bearer mb_admin_live_token_2026_sec_bloom',
           'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
@@ -781,34 +787,83 @@ export const AdminPanel = () => {
       });
       if (res.ok) {
         const serverEvents = await res.json();
-        if (Array.isArray(serverEvents) && serverEvents.length > 0) {
+        if (Array.isArray(serverEvents)) {
           const formatted = serverEvents.map(evt => {
             let parsedPayload = evt.payload_json;
             try {
               if (typeof evt.payload_json === 'string') parsedPayload = JSON.parse(evt.payload_json);
             } catch (e) {}
+
+            let summary = '';
+            if (parsedPayload) {
+              summary = parsedPayload.error || parsedPayload.reason || parsedPayload.message || parsedPayload.resendError || '';
+              if (!summary && parsedPayload.email) {
+                summary = `Email: ${parsedPayload.email}${parsedPayload.type ? ` (${parsedPayload.type})` : ''}`;
+              } else if (!summary && parsedPayload.to) {
+                summary = `To: ${parsedPayload.to}${parsedPayload.subject ? ` • ${parsedPayload.subject}` : ''}`;
+              } else if (!summary && parsedPayload.userId) {
+                summary = `User ID: ${parsedPayload.userId}${parsedPayload.name ? ` (${parsedPayload.name})` : ''}`;
+              } else if (!summary && parsedPayload.orderId) {
+                summary = `Order ID: ${parsedPayload.orderId}`;
+              }
+            }
+
             return {
               eventId: evt.id,
               eventType: evt.event_type,
               idempotencyKey: evt.idempotency_key,
               status: evt.status ? evt.status.toUpperCase() : 'DELIVERED',
               timestamp: evt.created_at || new Date().toISOString(),
+              summary: summary || '—',
               payload: parsedPayload
             };
           });
           setEventLogs(formatted);
           setSentNotifications(notificationService.getNotifications());
+          setIsRefreshingEvents(false);
           return;
         }
       }
     } catch (e) {}
     setEventLogs(eventBus.getLogs());
     setSentNotifications(notificationService.getNotifications());
+    setIsRefreshingEvents(false);
+  };
+
+  const handleClearLogs = () => {
+    setConfirmModal({
+      isOpen: true,
+      title: 'Clear Activity & Error Logs',
+      message: 'Are you sure you want to permanently clear all activity and error logs from the database? This cannot be undone.',
+      confirmText: 'Clear All Logs',
+      isDanger: true,
+      onConfirm: async () => {
+        try {
+          const res = await fetch('/api/events', {
+            method: 'DELETE',
+            headers: {
+              'Authorization': 'Bearer mb_admin_live_token_2026_sec_bloom',
+              'x-admin-token': 'mb_admin_live_token_2026_sec_bloom'
+            }
+          });
+          if (res.ok) {
+            showToast('All activity & error logs cleared successfully.', 'success');
+            refreshEventData();
+          } else {
+            showToast('Failed to clear logs.', 'error');
+          }
+        } catch (e) {
+          showToast('Failed to clear logs.', 'error');
+        } finally {
+          setConfirmModal(prev => ({ ...prev, isOpen: false }));
+        }
+      }
+    });
   };
 
   useEffect(() => {
     refreshEventData();
-    const interval = setInterval(refreshEventData, 3000);
+    const interval = setInterval(refreshEventData, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -1225,7 +1280,12 @@ export const AdminPanel = () => {
           }`}
         >
           <FontAwesomeIcon icon={faBolt} />
-          <span>Event Bus ({eventLogs.length})</span>
+          <span>Activity & Error Logs ({eventLogs.length})</span>
+          {eventLogs.filter(e => e.status === 'ERROR' || e.status === 'FAILED' || e.eventType?.includes('FAIL') || e.eventType?.includes('ERROR')).length > 0 && (
+            <span className="bg-red-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">
+              {eventLogs.filter(e => e.status === 'ERROR' || e.status === 'FAILED' || e.eventType?.includes('FAIL') || e.eventType?.includes('ERROR')).length}
+            </span>
+          )}
         </button>
 
         <button
@@ -1643,79 +1703,199 @@ export const AdminPanel = () => {
               <div>
                 <h3 className="text-lg font-bold text-[#181617] dark:text-white flex items-center space-x-2">
                   <FontAwesomeIcon icon={faBolt} className="text-[#A33F4D] dark:text-[#D98A92]" />
-                  <span>Real-Time Event Bus & Idempotency Pipeline</span>
+                  <span>Real-Time Activity, System & Error Logs</span>
                 </h3>
                 <p className="text-xs text-[#5C4F52] dark:text-neutral-400 mt-0.5 font-light">
-                  Live asynchronous pub/sub pipeline ensuring zero dropped orders, payment idempotency, and automated retries.
+                  Live audit trail tracking all user activities, OTP verification dispatches, transactional emails, and system errors in real time.
                 </p>
               </div>
 
-              <button
-                onClick={refreshEventData}
-                className="bg-white dark:bg-[#18181B] hover:bg-[#FAF3F0] dark:hover:bg-neutral-800 text-[#181617] dark:text-white p-2 rounded-lg text-xs cursor-pointer border border-[#B56571]/25 dark:border-neutral-700 shadow-xs"
-                title="Refresh Logs"
-              >
-                <FontAwesomeIcon icon={faRotateRight} />
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={handleClearLogs}
+                  disabled={eventLogs.length === 0}
+                  className="bg-white dark:bg-[#18181B] hover:bg-red-50 dark:hover:bg-red-950/30 text-red-600 dark:text-red-400 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer border border-red-500/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center space-x-1.5"
+                  title="Clear All Logs"
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                  <span>Clear Logs</span>
+                </button>
+
+                <button
+                  onClick={refreshEventData}
+                  disabled={isRefreshingEvents}
+                  className="bg-white dark:bg-[#18181B] hover:bg-[#FAF3F0] dark:hover:bg-neutral-800 text-[#181617] dark:text-white px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer border border-[#B56571]/25 dark:border-neutral-700 shadow-xs transition-all flex items-center space-x-1.5"
+                  title="Refresh Logs"
+                >
+                  <FontAwesomeIcon icon={faRotateRight} className={isRefreshingEvents ? 'animate-spin' : ''} />
+                  <span>Refresh</span>
+                </button>
+              </div>
             </div>
 
-            <div className="overflow-x-auto border border-[#B56571]/20 dark:border-neutral-800 rounded-lg">
-              <table className="w-full text-left text-xs text-[#2A2426] dark:text-neutral-300 font-mono">
-                <thead className="bg-[#FAF3F0] dark:bg-[#141418] text-[#181617] dark:text-white uppercase tracking-wider text-[11px] border-b border-[#B56571]/20 dark:border-neutral-800">
-                  <tr>
-                    <th className="p-3">Event ID</th>
-                    <th className="p-3">Topic / Type</th>
-                    <th className="p-3">Idempotency Key</th>
-                    <th className="p-3">Status</th>
-                    <th className="p-3">Timestamp</th>
-                    <th className="p-3 text-right">Payload</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#B56571]/15 dark:divide-neutral-800 bg-white dark:bg-black text-[11px]">
-                  {eventLogs.length === 0 ? (
-                    <tr>
-                      <td colSpan={6} className="p-8 text-center text-[#7A696C] dark:text-neutral-500 font-sans">
-                        No events fired yet. Complete a checkout in Cart to test!
-                      </td>
-                    </tr>
-                  ) : (
-                    eventLogs.map((evt, idx) => (
-                      <tr key={idx} className="hover:bg-[#FAF3F0] dark:hover:bg-white/[0.04] transition-colors">
-                        <td className="p-3 text-[#7A696C] dark:text-neutral-400">{evt.eventId}</td>
-                        <td className="p-3 font-bold text-[#181617] dark:text-white">
-                          <span className="bg-[#FAF3F0] dark:bg-neutral-800 px-2 py-0.5 rounded border border-[#B56571]/20 dark:border-neutral-700 text-[#A33F4D] dark:text-[#D98A92]">
-                            {evt.eventType}
-                          </span>
-                        </td>
-                        <td className="p-3 text-[#7A696C] dark:text-neutral-400">{evt.idempotencyKey || '—'}</td>
-                        <td className="p-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                            evt.status === 'DELIVERED' ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30' :
-                            evt.status === 'DUPLICATE_IGNORED' ? 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/30' :
-                            'bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/30'
-                          }`}>
-                            {evt.status}
-                          </span>
-                        </td>
-                        <td className="p-3 text-[#7A696C] dark:text-neutral-500">{new Date(evt.timestamp).toLocaleTimeString()}</td>
-                        <td className="p-3 text-right">
-                          <button
-                            onClick={() => setInspectPayloadModal({
-                              isOpen: true,
-                              title: `Event Payload: ${evt.eventType || 'Event Data'}`,
-                              payload: evt.payload
-                            })}
-                            className="text-[#A33F4D] dark:text-[#D98A92] hover:underline font-bold text-xs cursor-pointer"
-                          >
-                            Inspect
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+            {/* Filter Pills */}
+            {(() => {
+              const errCount = eventLogs.filter(e => e.status === 'ERROR' || e.status === 'FAILED' || e.eventType?.includes('FAIL') || e.eventType?.includes('ERROR')).length;
+              const emCount = eventLogs.filter(e => e.eventType?.includes('EMAIL') || e.eventType?.includes('OTP')).length;
+              const auCount = eventLogs.filter(e => e.eventType?.includes('AUTH') || e.eventType?.includes('USER') || e.eventType?.includes('LOGIN')).length;
+              const payCount = eventLogs.filter(e => e.eventType?.includes('PAY') || e.eventType?.includes('ORDER')).length;
+
+              const filtered = eventLogs.filter(evt => {
+                if (eventFilter === 'errors') {
+                  return evt.status === 'ERROR' || evt.status === 'FAILED' || evt.eventType?.includes('FAIL') || evt.eventType?.includes('ERROR');
+                }
+                if (eventFilter === 'email') {
+                  return evt.eventType?.includes('EMAIL') || evt.eventType?.includes('OTP');
+                }
+                if (eventFilter === 'auth') {
+                  return evt.eventType?.includes('AUTH') || evt.eventType?.includes('USER') || evt.eventType?.includes('LOGIN');
+                }
+                if (eventFilter === 'payments') {
+                  return evt.eventType?.includes('PAY') || evt.eventType?.includes('ORDER');
+                }
+                return true;
+              });
+
+              return (
+                <>
+                  <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+                    <span className="text-[#7A696C] dark:text-neutral-400 font-mono text-[11px] flex items-center gap-1 mr-1">
+                      <FontAwesomeIcon icon={faFilter} className="text-[10px]" /> Filter:
+                    </span>
+                    <button
+                      onClick={() => setEventFilter('all')}
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
+                        eventFilter === 'all' 
+                          ? 'bg-[#181617] text-white dark:bg-white dark:text-black font-bold' 
+                          : 'bg-[#FAF3F0] dark:bg-neutral-800 text-[#5C4F52] dark:text-neutral-300 hover:text-[#181617]'
+                      }`}
+                    >
+                      All ({eventLogs.length})
+                    </button>
+                    <button
+                      onClick={() => setEventFilter('errors')}
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                        eventFilter === 'errors' 
+                          ? 'bg-red-600 text-white font-bold' 
+                          : 'bg-red-500/10 text-red-700 dark:text-red-400 hover:bg-red-500/20'
+                      }`}
+                    >
+                      <FontAwesomeIcon icon={faTriangleExclamation} className="text-[10px]" />
+                      <span>Errors & Failures ({errCount})</span>
+                    </button>
+                    <button
+                      onClick={() => setEventFilter('email')}
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
+                        eventFilter === 'email' 
+                          ? 'bg-[#A33F4D] text-white font-bold' 
+                          : 'bg-[#FAF3F0] dark:bg-neutral-800 text-[#5C4F52] dark:text-neutral-300 hover:text-[#181617]'
+                      }`}
+                    >
+                      ✉️ Email & OTP ({emCount})
+                    </button>
+                    <button
+                      onClick={() => setEventFilter('auth')}
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
+                        eventFilter === 'auth' 
+                          ? 'bg-[#A33F4D] text-white font-bold' 
+                          : 'bg-[#FAF3F0] dark:bg-neutral-800 text-[#5C4F52] dark:text-neutral-300 hover:text-[#181617]'
+                      }`}
+                    >
+                      👤 Auth & Users ({auCount})
+                    </button>
+                    <button
+                      onClick={() => setEventFilter('payments')}
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
+                        eventFilter === 'payments' 
+                          ? 'bg-[#A33F4D] text-white font-bold' 
+                          : 'bg-[#FAF3F0] dark:bg-neutral-800 text-[#5C4F52] dark:text-neutral-300 hover:text-[#181617]'
+                      }`}
+                    >
+                      💳 Payments ({payCount})
+                    </button>
+                  </div>
+
+                  <div className="overflow-x-auto border border-[#B56571]/20 dark:border-neutral-800 rounded-lg">
+                    <table className="w-full text-left text-xs text-[#2A2426] dark:text-neutral-300 font-mono">
+                      <thead className="bg-[#FAF3F0] dark:bg-[#141418] text-[#181617] dark:text-white uppercase tracking-wider text-[11px] border-b border-[#B56571]/20 dark:border-neutral-800">
+                        <tr>
+                          <th className="p-3">Event ID</th>
+                          <th className="p-3">Topic / Type</th>
+                          <th className="p-3">Status</th>
+                          <th className="p-3">Summary / Message</th>
+                          <th className="p-3">Timestamp</th>
+                          <th className="p-3 text-right">Payload</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#B56571]/15 dark:divide-neutral-800 bg-white dark:bg-black text-[11px]">
+                        {filtered.length === 0 ? (
+                          <tr>
+                            <td colSpan={6} className="p-8 text-center text-[#7A696C] dark:text-neutral-500 font-sans">
+                              {eventFilter === 'errors' 
+                                ? '🎉 No errors recorded! Everything is running smoothly.' 
+                                : 'No events matching filter. User activities, email dispatches, and system events will appear here in real time.'}
+                            </td>
+                          </tr>
+                        ) : (
+                          filtered.map((evt, idx) => {
+                            const isError = evt.status === 'ERROR' || evt.status === 'FAILED' || evt.eventType?.includes('FAIL') || evt.eventType?.includes('ERROR');
+                            return (
+                              <tr key={idx} className={`transition-colors ${isError ? 'bg-red-500/5 hover:bg-red-500/10' : 'hover:bg-[#FAF3F0] dark:hover:bg-white/[0.04]'}`}>
+                                <td className="p-3 text-[#7A696C] dark:text-neutral-400 font-mono text-[10px]">{evt.eventId}</td>
+                                <td className="p-3 font-bold text-[#181617] dark:text-white">
+                                  <span className={`px-2 py-0.5 rounded border text-[10px] ${
+                                    isError 
+                                      ? 'bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/30 font-bold' 
+                                      : 'bg-[#FAF3F0] dark:bg-neutral-800 border-[#B56571]/20 dark:border-neutral-700 text-[#A33F4D] dark:text-[#D98A92]'
+                                  }`}>
+                                    {evt.eventType}
+                                  </span>
+                                </td>
+                                <td className="p-3">
+                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                    isError ? 'bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/30' :
+                                    evt.status === 'DELIVERED' || evt.status === 'SUCCESS' ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30' :
+                                    evt.status === 'DUPLICATE_IGNORED' ? 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/30' :
+                                    'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30'
+                                  }`}>
+                                    {evt.status}
+                                  </span>
+                                </td>
+                                <td className="p-3 text-[11px] max-w-sm truncate" title={evt.summary}>
+                                  {isError ? (
+                                    <span className="text-red-600 dark:text-red-400 font-semibold flex items-center gap-1.5 truncate">
+                                      <FontAwesomeIcon icon={faTriangleExclamation} className="text-xs shrink-0" />
+                                      <span className="truncate">{evt.summary}</span>
+                                    </span>
+                                  ) : (
+                                    <span className="text-[#5C4F52] dark:text-neutral-300 truncate">{evt.summary}</span>
+                                  )}
+                                </td>
+                                <td className="p-3 text-[#7A696C] dark:text-neutral-500 whitespace-nowrap">
+                                  {new Date(evt.timestamp).toLocaleTimeString()}
+                                </td>
+                                <td className="p-3 text-right">
+                                  <button
+                                    onClick={() => setInspectPayloadModal({
+                                      isOpen: true,
+                                      title: `Event Payload: ${evt.eventType || 'Event Data'}`,
+                                      payload: evt.payload
+                                    })}
+                                    className="text-[#A33F4D] dark:text-[#D98A92] hover:underline font-bold text-xs cursor-pointer"
+                                  >
+                                    Inspect
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              );
+            })()}
           </div>
 
           <div className="bg-white dark:bg-[#0D0D11] border border-[#B56571]/20 dark:border-neutral-800 rounded-xl p-6 space-y-4 shadow-xs">

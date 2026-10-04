@@ -25,6 +25,30 @@ const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || 'pay0pro_webhook_secret_202
 // Initialize DB Tables
 initDB();
 
+// Universal System, Activity & Error Event Logger
+export function logSystemEvent(eventType, payload = {}, status = 'PROCESSED', idempotencyKey = null) {
+  try {
+    const id = `evt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const payloadJson = typeof payload === 'string' ? payload : JSON.stringify(payload);
+    const ik = idempotencyKey || (['ERROR', 'FAILED'].includes(String(status).toUpperCase()) 
+      ? `err_${Date.now()}_${Math.random().toString(36).substring(2, 7)}` 
+      : null);
+    
+    db.prepare(`
+      INSERT INTO event_logs (id, event_type, payload_json, idempotency_key, status, created_at)
+      VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+    `).run(id, eventType, payloadJson, ik, String(status).toUpperCase());
+    
+    if (['ERROR', 'FAILED'].includes(String(status).toUpperCase())) {
+      console.error(`🚨 [SYSTEM EVENT LOGGED: ${eventType}]:`, payloadJson);
+    } else {
+      console.log(`📋 [SYSTEM EVENT LOGGED: ${eventType}]`);
+    }
+  } catch (err) {
+    console.error('Failed to write event log:', err.message);
+  }
+}
+
 // ==========================================
 // 🛡️ SECURITY LAYER 1: HELMET HEADERS
 // ==========================================
@@ -1588,8 +1612,19 @@ app.delete('/api/admin/coupons/:code', requireAdminAuth, (req, res) => {
 // ==========================================
 app.get('/api/events', requireAdminAuth, (req, res) => {
   try {
-    const events = db.prepare('SELECT * FROM event_logs ORDER BY created_at DESC LIMIT 100').all();
+    const limit = Math.min(Number(req.query.limit) || 250, 500);
+    const events = db.prepare('SELECT * FROM event_logs ORDER BY created_at DESC LIMIT ?').all(limit);
     res.json(events);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/api/events', requireAdminAuth, (req, res) => {
+  try {
+    const deleted = db.prepare('DELETE FROM event_logs').run();
+    logSystemEvent('LOGS_CLEARED', { clearedBy: 'Super Admin', recordsCleared: deleted.changes }, 'DELIVERED');
+    res.json({ success: true, message: 'All event and error logs cleared successfully.' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -1628,8 +1663,14 @@ app.post('/api/config', requireAdminAuth, (req, res) => {
       );
     }
 
+    logSystemEvent('CONFIG_UPDATED', {
+      updatedKeys: Object.keys(updates).map(k => k.includes('KEY') || k.includes('SECRET') ? `${k} (masked)` : k),
+      updatedAt: new Date().toISOString()
+    }, 'DELIVERED');
+
     res.json({ success: true, message: 'Configuration and API Keys saved securely in database' });
   } catch (error) {
+    logSystemEvent('CONFIG_UPDATE_ERROR', { error: error.message }, 'ERROR');
     res.status(500).json({ error: error.message });
   }
 });
@@ -2049,6 +2090,11 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
 
     if (!apiKey) {
       console.error('❌ [RESEND API KEY MISSING]: No valid Resend API key configured in env_configs or process.env.');
+      logSystemEvent('EMAIL_FAILED', {
+        to: toEmail,
+        subject,
+        error: 'No valid Resend API key configured in database or environment.'
+      }, 'FAILED');
       return {
         success: false,
         error: 'Email verification service is temporarily unavailable. Please enter a valid RESEND_API_KEY in Admin Panel or Render.'
@@ -2097,6 +2143,12 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
     const data = await res.json();
     if (res.ok) {
       console.log(`✉️ [RESEND SUCCESS] Email dispatched to ${toEmail} (ID: ${data.id}) via sender ${fromEmail}`);
+      logSystemEvent('EMAIL_DISPATCHED', {
+        to: toEmail,
+        from: fromEmail,
+        subject,
+        resendMessageId: data.id
+      }, 'DELIVERED');
       return { success: true, id: data.id };
     } else {
       console.error('❌ [RESEND API ERROR]:', JSON.stringify(data));
@@ -2104,6 +2156,13 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
       if (data.message === 'API key is invalid') {
         userFacingError = 'Email service API key is invalid or expired. Please update RESEND_API_KEY in the Admin Panel.';
       }
+      logSystemEvent('EMAIL_FAILED', {
+        to: toEmail,
+        from: fromEmail,
+        subject,
+        statusCode: res.status,
+        error: data.message || JSON.stringify(data)
+      }, 'FAILED');
       return { 
         success: false, 
         error: userFacingError 
@@ -2111,6 +2170,11 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
     }
   } catch (err) {
     console.error('❌ [EMAIL DISPATCH EXCEPTION]:', err.message);
+    logSystemEvent('EMAIL_FAILED', {
+      to: toEmail,
+      subject,
+      error: err.message
+    }, 'FAILED');
     return { success: false, error: err.message };
   }
 }
@@ -2419,17 +2483,29 @@ app.post('/api/auth/send-otp', async (req, res) => {
     const dispatchResult = await sendEmailViaResend(cleanEmail, emailSubject, emailHtml, emailText);
 
     if (!dispatchResult.success) {
+      logSystemEvent('AUTH_OTP_FAILED', {
+        email: cleanEmail,
+        type,
+        error: dispatchResult.error || 'Failed to dispatch verification email.'
+      }, 'FAILED');
       return res.status(400).json({
         success: false,
         error: dispatchResult.error || 'Failed to dispatch verification email.'
       });
     }
 
+    logSystemEvent('AUTH_OTP_SENT', {
+      email: cleanEmail,
+      type,
+      message: `A 6-digit verification code has been dispatched to ${cleanEmail}.`
+    }, 'DELIVERED');
+
     res.json({
       success: true,
       message: `A 6-digit verification code has been dispatched to ${cleanEmail}.`
     });
   } catch (error) {
+    logSystemEvent('AUTH_OTP_ERROR', { email: req.body?.email, error: error.message }, 'ERROR');
     res.status(500).json({ error: error.message });
   }
 });
@@ -2460,13 +2536,16 @@ app.post('/api/auth/register', (req, res) => {
     // Check OTP Record
     const record = otpStore.get(cleanEmail);
     if (!record) {
+      logSystemEvent('AUTH_REGISTER_FAILED', { email: cleanEmail, error: 'No active verification code found' }, 'FAILED');
       return res.status(400).json({ error: 'No active verification code found. Please request a new code.' });
     }
     if (Date.now() > record.expiresAt) {
       otpStore.delete(cleanEmail);
+      logSystemEvent('AUTH_REGISTER_FAILED', { email: cleanEmail, error: 'Verification code expired' }, 'FAILED');
       return res.status(400).json({ error: 'Verification code has expired. Please request a new code.' });
     }
     if (record.otp !== String(otp).trim()) {
+      logSystemEvent('AUTH_REGISTER_FAILED', { email: cleanEmail, error: 'Invalid verification code entered' }, 'FAILED');
       return res.status(400).json({ error: 'Invalid verification code. Please check your email.' });
     }
 
@@ -2476,6 +2555,7 @@ app.post('/api/auth/register', (req, res) => {
     // Check if user already exists
     const existing = db.prepare('SELECT * FROM users WHERE email = ?').get(cleanEmail);
     if (existing) {
+      logSystemEvent('AUTH_REGISTER_FAILED', { email: cleanEmail, error: 'Account already exists' }, 'FAILED');
       if (existing.auth_provider === 'google') {
         return res.status(400).json({ error: 'This email is already registered using Google Sign-In. Please click "Continue with Google" to access your account.' });
       }
@@ -2501,10 +2581,7 @@ app.post('/api/auth/register', (req, res) => {
     );
 
     // Audit log
-    db.prepare(`
-      INSERT INTO event_logs (id, event_type, payload_json, status)
-      VALUES (?, 'auth.registered', ?, 'success')
-    `).run(`evt_reg_${Date.now()}`, JSON.stringify({ userId, email: cleanEmail, name: formattedName }));
+    logSystemEvent('USER_REGISTERED', { userId, email: cleanEmail, name: formattedName }, 'DELIVERED');
 
     // ✉️ Dispatch Welcome VIP Email to new member (Asynchronous)
     sendEmailViaResend(
@@ -2533,6 +2610,7 @@ app.post('/api/auth/register', (req, res) => {
       user: userObj
     });
   } catch (error) {
+    logSystemEvent('AUTH_REGISTER_ERROR', { email: req.body?.email, error: error.message }, 'ERROR');
     res.status(500).json({ error: error.message });
   }
 });
@@ -2572,6 +2650,7 @@ app.post('/api/auth/login', (req, res) => {
         });
       }
 
+      logSystemEvent('AUTH_LOGIN_FAILED', { email: cleanEmail, error: 'No account found with this email' }, 'FAILED');
       return res.status(401).json({
         success: false,
         error: 'No account found with this email. Please create an account first.'
@@ -2580,6 +2659,7 @@ app.post('/api/auth/login', (req, res) => {
 
     // Check if account was registered via Google Sign-In
     if (user.auth_provider === 'google' && cleanEmail !== '20092003pardeep@gmail.com') {
+      logSystemEvent('AUTH_LOGIN_FAILED', { email: cleanEmail, error: 'Account registered with Google Sign-In' }, 'FAILED');
       return res.status(400).json({
         success: false,
         error: 'This account was registered using Google Sign-In. Please click "Continue with Google" to access your account.'
@@ -2598,6 +2678,7 @@ app.post('/api/auth/login', (req, res) => {
     }
 
     if (!isPasswordValid) {
+      logSystemEvent('AUTH_LOGIN_FAILED', { email: cleanEmail, error: 'Incorrect password entered' }, 'FAILED');
       return res.status(401).json({
         success: false,
         error: 'Incorrect password. Please verify your password or use "Forgot Password".'
@@ -2618,10 +2699,7 @@ app.post('/api/auth/login', (req, res) => {
     };
 
     // Audit log
-    db.prepare(`
-      INSERT INTO event_logs (id, event_type, payload_json, status)
-      VALUES (?, 'auth.login_password', ?, 'success')
-    `).run(`evt_login_${Date.now()}`, JSON.stringify({ email: cleanEmail, name: user.name }));
+    logSystemEvent('USER_LOGIN', { userId: user.id, email: cleanEmail, name: user.name }, 'DELIVERED');
 
     res.json({
       success: true,
@@ -2629,6 +2707,7 @@ app.post('/api/auth/login', (req, res) => {
       user: userObj
     });
   } catch (error) {
+    logSystemEvent('AUTH_LOGIN_ERROR', { email: req.body?.email, error: error.message }, 'ERROR');
     res.status(500).json({ error: error.message });
   }
 });
@@ -2648,13 +2727,16 @@ app.post('/api/auth/reset-password', (req, res) => {
 
     const record = otpStore.get(cleanEmail);
     if (!record) {
+      logSystemEvent('AUTH_RESET_PASSWORD_FAILED', { email: cleanEmail, error: 'No active reset code found' }, 'FAILED');
       return res.status(400).json({ error: 'No active reset code found. Please request a new code.' });
     }
     if (Date.now() > record.expiresAt) {
       otpStore.delete(cleanEmail);
+      logSystemEvent('AUTH_RESET_PASSWORD_FAILED', { email: cleanEmail, error: 'Reset code expired' }, 'FAILED');
       return res.status(400).json({ error: 'Reset code expired. Please request a new verification code.' });
     }
     if (record.otp !== String(otp).trim()) {
+      logSystemEvent('AUTH_RESET_PASSWORD_FAILED', { email: cleanEmail, error: 'Invalid verification code entered' }, 'FAILED');
       return res.status(400).json({ error: 'Invalid verification code. Please check your email.' });
     }
 
@@ -2664,11 +2746,14 @@ app.post('/api/auth/reset-password', (req, res) => {
     db.prepare('UPDATE users SET password_hash = ?, auth_provider = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?')
       .run(newHash, 'email', cleanEmail);
 
+    logSystemEvent('AUTH_RESET_PASSWORD_SUCCESS', { email: cleanEmail }, 'DELIVERED');
+
     res.json({
       success: true,
       message: 'Password updated successfully! You can now sign in with your new password.'
     });
   } catch (error) {
+    logSystemEvent('AUTH_RESET_PASSWORD_ERROR', { email: req.body?.email, error: error.message }, 'ERROR');
     res.status(500).json({ error: error.message });
   }
 });
@@ -2920,6 +3005,22 @@ if (fs.existsSync(distPath)) {
     next();
   });
 }
+
+// Global API Error Handler Middleware (Logs all uncaught errors to event_logs)
+app.use((err, req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    logSystemEvent('SYSTEM_API_ERROR', {
+      method: req.method,
+      path: req.originalUrl || req.url,
+      ip: req.headers['x-forwarded-for'] || req.socket?.remoteAddress,
+      error: err.message || 'Internal Server Error'
+    }, 'ERROR');
+    return res.status(err.status || 500).json({
+      error: err.message || 'Internal server error occurred.'
+    });
+  }
+  next(err);
+});
 
 // Start Express Server
 app.listen(PORT, '0.0.0.0', () => {
