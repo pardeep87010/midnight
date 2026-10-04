@@ -737,9 +737,11 @@ export const Profile = () => {
                         <p className="text-xs text-[#7A696C] dark:text-neutral-400 font-mono">
                           {addr.city}, {addr.state} - <strong className="text-[#181617] dark:text-white">{addr.pincode}</strong>
                         </p>
-                        <p className="text-[11px] text-[#A33F4D] dark:text-[#D98A92] font-mono">
-                          📱 {addr.phone}
-                        </p>
+                        {addr.phone && (
+                          <p className="text-[11px] font-mono mt-1 text-[#7A696C] dark:text-neutral-400">
+                            <span className="text-[#A33F4D] dark:text-[#D98A92] font-semibold">Phone:</span> {addr.phone}
+                          </p>
+                        )}
                       </div>
 
                       <div className="flex items-center space-x-1 shrink-0">

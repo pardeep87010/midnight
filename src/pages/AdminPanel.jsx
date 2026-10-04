@@ -3916,7 +3916,7 @@ export const AdminPanel = () => {
                         <div key={addr.id || aIdx} className="bg-white dark:bg-[#16171D] border border-[#B56571]/25 dark:border-neutral-800 rounded-2xl p-4 space-y-2 relative shadow-xs">
                           <div className="flex items-center justify-between">
                             <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-[#A33F4D]/10 dark:bg-[#D98A92]/15 text-[#A33F4D] dark:text-[#D98A92]">
-                              🏷️ {addr.addressTag || 'Home'}
+                              🏷️ {addr.label || addr.addressTag || 'Home'}
                             </span>
                             {addr.isDefault && (
                               <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
@@ -3926,14 +3926,16 @@ export const AdminPanel = () => {
                           </div>
 
                           <div className="text-xs space-y-1">
-                            <h5 className="font-bold text-[#181617] dark:text-white">{addr.recipientName}</h5>
-                            <p className="text-[#5C4F52] dark:text-neutral-300 font-mono">{addr.phone}</p>
+                            <h5 className="font-bold text-[#181617] dark:text-white">{addr.receiverName || addr.recipientName || 'Recipient'}</h5>
+                            <p className="text-[#5C4F52] dark:text-neutral-300 font-mono text-[11px]">
+                              <span className="text-[#7A696C] dark:text-neutral-500">Phone:</span> {addr.phone || 'Unspecified'}
+                            </p>
                             <p className="text-[#7A696C] dark:text-neutral-400 font-sans leading-relaxed">
                               {addr.addressLine1}
                               {addr.addressLine2 && `, ${addr.addressLine2}`}
                               {addr.landmark && ` (Near ${addr.landmark})`}
                               <br />
-                              {addr.city}, {addr.state} - <strong>{addr.postalCode}</strong>
+                              {addr.city}, {addr.state} - <strong>{addr.pincode || addr.postalCode}</strong>
                             </p>
                           </div>
                         </div>

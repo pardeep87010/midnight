@@ -1382,13 +1382,56 @@ app.get('/api/addresses', (req, res) => {
   }
 });
 
-// POST /api/addresses (Create Saved Address)
+// POST /api/addresses (Create Saved Address with Deduplication)
 app.post('/api/addresses', (req, res) => {
   try {
     const a = req.body;
     const id = a.id || `addr_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
     const isDefault = a.isDefault ? 1 : 0;
     const userEmail = sanitizeInput(a.userEmail || a.email || 'customer@midnightbloom.in').toLowerCase();
+    const cleanAddr1 = sanitizeInput(a.addressLine1 || a.address || '').trim();
+    const cleanCity = sanitizeInput(a.city || '').trim();
+    const cleanPincode = sanitizeInput(a.pincode || '').trim();
+    const cleanPhone = sanitizeInput(a.phone || '').trim();
+    const cleanName = sanitizeInput(a.receiverName || a.name || 'Recipient').trim();
+
+    // Check if identical address already exists for this customer
+    const existing = db.prepare(`
+      SELECT * FROM addresses 
+      WHERE LOWER(user_email) = ? 
+        AND (
+          (LOWER(TRIM(address_line1)) = LOWER(?) AND TRIM(pincode) = ?)
+          OR (LOWER(TRIM(address_line1)) = LOWER(?) AND LOWER(TRIM(city)) = LOWER(?))
+        )
+      LIMIT 1
+    `).get(userEmail, cleanAddr1, cleanPincode, cleanAddr1, cleanCity);
+
+    if (existing) {
+      if (cleanPhone || cleanName) {
+        db.prepare(`
+          UPDATE addresses 
+          SET receiver_name = COALESCE(NULLIF(?, ''), receiver_name),
+              phone = COALESCE(NULLIF(?, ''), phone),
+              is_default = CASE WHEN ? = 1 THEN 1 ELSE is_default END,
+              updated_at = CURRENT_TIMESTAMP
+          WHERE id = ?
+        `).run(cleanName, cleanPhone, isDefault, existing.id);
+      }
+      const updated = db.prepare('SELECT * FROM addresses WHERE id = ?').get(existing.id);
+      return res.status(200).json({
+        id: updated.id,
+        userEmail: updated.user_email,
+        receiverName: updated.receiver_name,
+        phone: updated.phone,
+        addressLine1: updated.address_line1,
+        addressLine2: updated.address_line2 || '',
+        city: updated.city,
+        state: updated.state,
+        pincode: updated.pincode,
+        label: updated.label || 'Home',
+        isDefault: Boolean(updated.is_default)
+      });
+    }
 
     if (isDefault) {
       // Clear default on other addresses for this user
@@ -1404,13 +1447,13 @@ app.post('/api/addresses', (req, res) => {
     insert.run(
       id,
       userEmail,
-      sanitizeInput(a.receiverName || a.name || 'Recipient'),
-      sanitizeInput(a.phone || ''),
-      sanitizeInput(a.addressLine1 || a.address || ''),
+      cleanName,
+      cleanPhone,
+      cleanAddr1,
       sanitizeInput(a.addressLine2 || ''),
-      sanitizeInput(a.city || ''),
+      cleanCity,
       sanitizeInput(a.state || ''),
-      sanitizeInput(a.pincode || ''),
+      cleanPincode,
       sanitizeInput(a.label || 'Home'),
       isDefault
     );

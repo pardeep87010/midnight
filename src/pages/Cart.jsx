@@ -564,9 +564,11 @@ export const Cart = () => {
                         <p className="text-[11px] text-neutral-400 font-mono mt-1">
                           {addr.city}, {addr.state} - <strong>{addr.pincode}</strong>
                         </p>
-                        <p className="text-[11px] text-[#D98A92] font-mono mt-0.5">
-                          📱 {addr.phone}
-                        </p>
+                        {addr.phone && (
+                          <p className="text-[11px] font-mono mt-1 text-neutral-300">
+                            <span className="text-[#D98A92] font-semibold">Phone:</span> {addr.phone}
+                          </p>
+                        )}
                       </div>
                     );
                   })}
