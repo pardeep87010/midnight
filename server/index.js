@@ -25,11 +25,32 @@ const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || 'pay0pro_webhook_secret_202
 // Initialize DB Tables
 initDB();
 
-// Universal System, Activity & Error Event Logger
+// Universal System, Activity & Error Event Logger with In-Memory Deduplication
+const recentEventsCache = new Map();
+
 export function logSystemEvent(eventType, payload = {}, status = 'PROCESSED', idempotencyKey = null) {
   try {
-    const id = `evt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const payloadJson = typeof payload === 'string' ? payload : JSON.stringify(payload);
+    const now = Date.now();
+
+    // 🛡️ Deduplication Guard: Ignore identical event within 2.5 seconds
+    const dedupKey = idempotencyKey || `${eventType}:${payloadJson}`;
+    const lastTimestamp = recentEventsCache.get(dedupKey);
+
+    if (lastTimestamp && (now - lastTimestamp) < 2500) {
+      console.log(`🛡️ [DEDUP: SKIPPED DUPLICATE EVENT]: ${eventType}`);
+      return;
+    }
+    recentEventsCache.set(dedupKey, now);
+
+    // Garbage-collect old keys
+    if (recentEventsCache.size > 200) {
+      for (const [k, time] of recentEventsCache.entries()) {
+        if (now - time > 10000) recentEventsCache.delete(k);
+      }
+    }
+
+    const id = `evt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const ik = idempotencyKey || (['ERROR', 'FAILED'].includes(String(status).toUpperCase()) 
       ? `err_${Date.now()}_${Math.random().toString(36).substring(2, 7)}` 
       : null);
@@ -1167,24 +1188,16 @@ app.post('/api/orders', orderLimiter, (req, res) => {
       idempotencyKey
     );
 
-    // Record in Event Bus Audit Log
-    db.prepare(`
-      INSERT INTO event_logs (id, event_type, payload_json, idempotency_key, status)
-      VALUES (?, ?, ?, ?, 'processed')
-    `).run(
-      `evt_${Date.now()}`,
-      'order.placed',
-      JSON.stringify({ 
-        orderId, 
-        totalAmount: authoritativeTotal, 
-        subtotal: serverSubtotal,
-        discount: serverDiscount,
-        shipping: serverShipping,
-        customerEmail: o.customerEmail, 
-        shippingAddress: fullShippingAddress 
-      }),
-      idempotencyKey
-    );
+    // Record Exactly 1 Event in System Event Log
+    logSystemEvent('ORDER_PLACED', { 
+      orderId, 
+      totalAmount: authoritativeTotal, 
+      subtotal: serverSubtotal,
+      discount: serverDiscount,
+      shipping: serverShipping,
+      customerEmail: o.customerEmail, 
+      shippingAddress: fullShippingAddress 
+    }, 'DELIVERED', idempotencyKey);
 
     // ✉️ 7. AUTOMATED DISPATCH: Order Confirmation to Customer & Instant Alert to Admin
     const orderEmailPayload = {
@@ -1260,6 +1273,13 @@ app.put('/api/orders/:id/status', requireAdminAuth, async (req, res) => {
         )
       ).catch(e => console.warn('Shipping email notice:', e.message));
     }
+
+    logSystemEvent('ORDER_STATUS_UPDATED', {
+      orderId: req.params.id,
+      newStatus: status,
+      trackingNumber: trackingNumber || null,
+      courierName: courierName || null
+    }, 'DELIVERED');
 
     res.json({ success: true, message: `Order #${req.params.id} updated to ${status}` });
   } catch (error) {
@@ -2067,7 +2087,10 @@ function formatSenderEmail(rawInput, defaultDomain = 'playnixclub.bet') {
 }
 
 // Helper to dispatch email via Resend API
-async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '') {
+// options.shouldLog = false by default so internal business actions (OTP, register, orders)
+// do NOT create multiple conflicting logs for one action.
+async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '', options = {}) {
+  const shouldLog = options.shouldLog === true;
   try {
     // 1. Check database env_configs first (Admin Panel live settings), excluding dummy/expired keys
     let apiKey = '';
@@ -2090,11 +2113,13 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
 
     if (!apiKey) {
       console.error('❌ [RESEND API KEY MISSING]: No valid Resend API key configured in env_configs or process.env.');
-      logSystemEvent('EMAIL_FAILED', {
-        to: toEmail,
-        subject,
-        error: 'No valid Resend API key configured in database or environment.'
-      }, 'FAILED');
+      if (shouldLog) {
+        logSystemEvent('EMAIL_FAILED', {
+          to: toEmail,
+          subject,
+          error: 'No valid Resend API key configured in database or environment.'
+        }, 'FAILED');
+      }
       return {
         success: false,
         error: 'Email verification service is temporarily unavailable. Please enter a valid RESEND_API_KEY in Admin Panel or Render.'
@@ -2143,12 +2168,14 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
     const data = await res.json();
     if (res.ok) {
       console.log(`✉️ [RESEND SUCCESS] Email dispatched to ${toEmail} (ID: ${data.id}) via sender ${fromEmail}`);
-      logSystemEvent('EMAIL_DISPATCHED', {
-        to: toEmail,
-        from: fromEmail,
-        subject,
-        resendMessageId: data.id
-      }, 'DELIVERED');
+      if (shouldLog) {
+        logSystemEvent('EMAIL_DISPATCHED', {
+          to: toEmail,
+          from: fromEmail,
+          subject,
+          resendMessageId: data.id
+        }, 'DELIVERED');
+      }
       return { success: true, id: data.id };
     } else {
       console.error('❌ [RESEND API ERROR]:', JSON.stringify(data));
@@ -2156,13 +2183,15 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
       if (data.message === 'API key is invalid') {
         userFacingError = 'Email service API key is invalid or expired. Please update RESEND_API_KEY in the Admin Panel.';
       }
-      logSystemEvent('EMAIL_FAILED', {
-        to: toEmail,
-        from: fromEmail,
-        subject,
-        statusCode: res.status,
-        error: data.message || JSON.stringify(data)
-      }, 'FAILED');
+      if (shouldLog) {
+        logSystemEvent('EMAIL_FAILED', {
+          to: toEmail,
+          from: fromEmail,
+          subject,
+          statusCode: res.status,
+          error: data.message || JSON.stringify(data)
+        }, 'FAILED');
+      }
       return { 
         success: false, 
         error: userFacingError 
@@ -2170,11 +2199,13 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
     }
   } catch (err) {
     console.error('❌ [EMAIL DISPATCH EXCEPTION]:', err.message);
-    logSystemEvent('EMAIL_FAILED', {
-      to: toEmail,
-      subject,
-      error: err.message
-    }, 'FAILED');
+    if (shouldLog) {
+      logSystemEvent('EMAIL_FAILED', {
+        to: toEmail,
+        subject,
+        error: err.message
+      }, 'FAILED');
+    }
     return { success: false, error: err.message };
   }
 }
@@ -2201,7 +2232,8 @@ app.post('/api/admin/send-test-email', requireAdminAuth, async (req, res) => {
       </div>
     `;
 
-    const result = await sendEmailViaResend(toEmail.trim(), 'Midnight Bloom - Live Email Verification Test', testHtml);
+    // Manual test from Admin Panel: exactly 1 log
+    const result = await sendEmailViaResend(toEmail.trim(), 'Midnight Bloom - Live Email Verification Test', testHtml, '', { shouldLog: true });
     if (!result.success) {
       return res.status(400).json({ error: result.error });
     }
@@ -2372,6 +2404,12 @@ app.post('/api/admin/send-template-email', requireAdminAuth, async (req, res) =>
       return res.status(400).json({ error: result.error });
     }
 
+    logSystemEvent('ADMIN_EMAIL_SENT', {
+      recipient: recipientEmail.trim(),
+      templateType,
+      resendMessageId: result.id
+    }, 'DELIVERED');
+
     res.json({ success: true, message: `Sample template (${templateType}) dispatched to ${recipientEmail}!`, id: result.id });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -2413,6 +2451,13 @@ app.post('/api/admin/broadcast-marketing-email', requireAdminAuth, async (req, r
       if (dispatch.success) successCount++;
       else failCount++;
     }
+
+    logSystemEvent('BROADCAST_CAMPAIGN_DISPATCHED', {
+      campaignType,
+      targetAudience,
+      dispatchedCount: successCount,
+      failedCount: failCount
+    }, 'DELIVERED');
 
     res.json({
       success: true,
@@ -2497,6 +2542,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
     logSystemEvent('AUTH_OTP_SENT', {
       email: cleanEmail,
       type,
+      resendMessageId: dispatchResult.id || null,
       message: `A 6-digit verification code has been dispatched to ${cleanEmail}.`
     }, 'DELIVERED');
 
