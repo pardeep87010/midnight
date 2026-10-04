@@ -300,13 +300,23 @@ export const AuthModal = () => {
       if (res.ok && data.success && data.user) {
         handleAuthSuccess(data.user, data.message || `Account verified! Welcome, ${data.user.name}. 200 VIP Points added!`, true);
       } else {
-        const errorMsg = data.error || 'Invalid OTP. Please check the 6-digit code and try again.';
-        setFormErrors({ general: errorMsg, regOtp: errorMsg });
+        let errorMsg = data.error || 'Invalid OTP. Please check the 6-digit code and try again.';
+        // Normalize any technical error message into clear, user-friendly text
+        if (errorMsg.toLowerCase().includes('no active verification') || errorMsg.toLowerCase().includes('active verification code')) {
+          errorMsg = 'Invalid OTP. Please check your email or request a new code.';
+        }
+        
+        // If it's an OTP error, display directly on the OTP field only (no double banner)
+        if (errorMsg.toLowerCase().includes('otp') || errorMsg.toLowerCase().includes('code')) {
+          setFormErrors({ regOtp: errorMsg });
+        } else {
+          setFormErrors({ general: errorMsg });
+        }
         showToast(errorMsg, 'error');
       }
     } catch (err) {
       const errMsg = 'Error verifying registration. Please try again.';
-      setFormErrors({ general: errMsg });
+      setFormErrors({ regOtp: errMsg });
       showToast(errMsg, 'error');
     } finally {
       setIsLoading(false);
@@ -387,13 +397,20 @@ export const AuthModal = () => {
         setIsForgotPassword(false);
         setActiveTab('login');
       } else {
-        const errorMsg = data.error || 'Invalid reset code or password update failed.';
-        setFormErrors({ general: errorMsg });
+        let errorMsg = data.error || 'Invalid reset code or password update failed.';
+        if (errorMsg.toLowerCase().includes('no active') || errorMsg.toLowerCase().includes('verification code')) {
+          errorMsg = 'Invalid OTP. Please check your email or request a new code.';
+        }
+        if (errorMsg.toLowerCase().includes('otp') || errorMsg.toLowerCase().includes('code')) {
+          setFormErrors({ resetOtp: errorMsg });
+        } else {
+          setFormErrors({ general: errorMsg });
+        }
         showToast(errorMsg, 'error');
       }
     } catch (err) {
       const errMsg = 'Error resetting password. Please try again.';
-      setFormErrors({ general: errMsg });
+      setFormErrors({ resetOtp: errMsg });
       showToast(errMsg, 'error');
     } finally {
       setIsLoading(false);
@@ -708,7 +725,7 @@ export const AuthModal = () => {
                       </p>
                     </div>
 
-                    {formErrors.general && (
+                    {!formErrors.resetOtp && formErrors.general && (
                       <div className="p-3.5 bg-red-500/15 border border-red-500/40 rounded-2xl flex items-start space-x-3 text-red-200 text-xs animate-shake">
                         <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-400 mt-0.5 shrink-0 text-sm" />
                         <p className="font-semibold text-red-200 leading-snug">{formErrors.general}</p>
@@ -988,7 +1005,7 @@ export const AuthModal = () => {
                       </p>
                     </div>
 
-                    {formErrors.general && (
+                    {!formErrors.regOtp && formErrors.general && (
                       <div className="p-3.5 bg-red-500/15 border border-red-500/40 rounded-2xl flex items-start space-x-3 text-red-200 text-xs animate-shake">
                         <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-400 mt-0.5 shrink-0 text-sm" />
                         <p className="font-semibold text-red-200 leading-snug">{formErrors.general}</p>
