@@ -7,6 +7,7 @@ import {
   faShareNodes
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
+import { handleImageError } from '../utils/cdnCache';
 
 export const ArticleModal = ({ article, isOpen, onClose }) => {
   const { navigateTo, showToast } = useApp();
@@ -149,6 +150,7 @@ export const ArticleModal = ({ article, isOpen, onClose }) => {
             src={article.image}
             alt={article.title}
             className="w-full h-full object-cover"
+            onError={handleImageError}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F5] dark:from-[#16171C] via-transparent to-black/40" />
 

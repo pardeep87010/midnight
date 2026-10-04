@@ -13,6 +13,7 @@ import {
   Gift
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const CartDrawer = () => {
   const { 
@@ -94,9 +95,10 @@ export const CartDrawer = () => {
                   className="p-3.5 bg-velour-850 border border-velour-800 rounded-xl flex space-x-3.5"
                 >
                   <img
-                    src={item.product.images[0]}
+                    src={CDN_CONFIG.getOptimizedImageUrl(item.product.images && item.product.images[0] ? item.product.images[0] : item.product.image)}
                     alt={item.product.name}
                     className="w-20 h-20 rounded-lg object-cover bg-velour-950 border border-velour-800 shrink-0"
+                    onError={handleImageError}
                   />
 
                   <div className="flex-1 min-w-0 flex flex-col justify-between">

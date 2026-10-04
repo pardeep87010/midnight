@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCartPlus, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const TopWomenSection = () => {
   const { navigateTo, addToCart, showToast, productsList } = useApp();
@@ -72,12 +73,13 @@ export const TopWomenSection = () => {
                 )}
 
                 <img
-                  src={item.images && item.images[0] ? item.images[0] : item.image}
+                  src={CDN_CONFIG.getOptimizedImageUrl(item.images && item.images[0] ? item.images[0] : item.image)}
                   alt={item.name}
                   loading="lazy"
                   decoding="async"
                   onClick={() => navigateTo('product-detail', item.id)}
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 cursor-pointer"
+                  onError={handleImageError}
                 />
               </div>
 

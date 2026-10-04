@@ -11,6 +11,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const QuickViewModal = () => {
   const { 
@@ -47,9 +48,10 @@ export const QuickViewModal = () => {
           {/* Image Showcase */}
           <div className="relative rounded-2xl overflow-hidden bg-[#FAF7F5] dark:bg-[#121316] aspect-square border border-[#B56571]/20 dark:border-white/10 shadow-xs">
             <img
-              src={quickViewProduct.images[0]}
+              src={CDN_CONFIG.getOptimizedImageUrl(quickViewProduct.images && quickViewProduct.images[0] ? quickViewProduct.images[0] : quickViewProduct.image)}
               alt={quickViewProduct.name}
               className="w-full h-full object-cover"
+              onError={handleImageError}
             />
             {quickViewProduct.badge && (
               <div className="absolute top-3 left-3 z-10 flex items-center space-x-1.5 bg-black/65 backdrop-blur-md border border-[#B56571]/35 dark:border-white/15 px-3 py-1 rounded-full shadow-lg">

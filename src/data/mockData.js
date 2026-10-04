@@ -526,10 +526,10 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_0.webp",
-      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_1.webp",
-      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_2.webp",
-      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker + Air Suction_3.webp"
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker and Air Suction_0.webp",
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker and Air Suction_1.webp",
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker and Air Suction_2.webp",
+      "/product-images/Magic Box 2-in-1 Silicone Tongue Licker and Air Suction_3.webp"
     ],
     "rating": 5,
     "reviewsCount": 55
@@ -1035,12 +1035,12 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_0.jpg",
-      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_1.jpg",
-      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_2.jpg",
-      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_3.jpg",
-      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_4.jpg",
-      "/product-images/The Crown-Lock Glans & Shaft Delay Ring_5.jpg"
+      "/product-images/The Crown-Lock Glans and Shaft Delay Ring_0.jpg",
+      "/product-images/The Crown-Lock Glans and Shaft Delay Ring_1.jpg",
+      "/product-images/The Crown-Lock Glans and Shaft Delay Ring_2.jpg",
+      "/product-images/The Crown-Lock Glans and Shaft Delay Ring_3.jpg",
+      "/product-images/The Crown-Lock Glans and Shaft Delay Ring_4.jpg",
+      "/product-images/The Crown-Lock Glans and Shaft Delay Ring_5.jpg"
     ],
     "rating": 5,
     "reviewsCount": 65
@@ -1189,10 +1189,10 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_0.webp",
-      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_1.webp",
-      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_2.webp",
-      "/product-images/The Double-Lock Shaft & Ball Stretchy Cock Ring_3.webp"
+      "/product-images/The Double-Lock Shaft and Ball Stretchy Cock Ring_0.webp",
+      "/product-images/The Double-Lock Shaft and Ball Stretchy Cock Ring_1.webp",
+      "/product-images/The Double-Lock Shaft and Ball Stretchy Cock Ring_2.webp",
+      "/product-images/The Double-Lock Shaft and Ball Stretchy Cock Ring_3.webp"
     ],
     "rating": 5,
     "reviewsCount": 45
@@ -1239,11 +1239,11 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_0.webp",
-      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_1.webp",
-      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_2.webp",
-      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_3.webp",
-      "/product-images/The Dual-End Vacuum Air Suction + G-Spot Wand_4.webp"
+      "/product-images/The Dual-End Vacuum Air Suction and G-Spot Wand_0.webp",
+      "/product-images/The Dual-End Vacuum Air Suction and G-Spot Wand_1.webp",
+      "/product-images/The Dual-End Vacuum Air Suction and G-Spot Wand_2.webp",
+      "/product-images/The Dual-End Vacuum Air Suction and G-Spot Wand_3.webp",
+      "/product-images/The Dual-End Vacuum Air Suction and G-Spot Wand_4.webp"
     ],
     "rating": 5,
     "reviewsCount": 53
@@ -2090,10 +2090,10 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_0.webp",
-      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_1.webp",
-      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_2.webp",
-      "/product-images/The Obsidian Velvet Leather Flogger & Multi-Tassel Crop_3.webp"
+      "/product-images/The Obsidian Velvet Leather Flogger and Multi-Tassel Crop_0.webp",
+      "/product-images/The Obsidian Velvet Leather Flogger and Multi-Tassel Crop_1.webp",
+      "/product-images/The Obsidian Velvet Leather Flogger and Multi-Tassel Crop_2.webp",
+      "/product-images/The Obsidian Velvet Leather Flogger and Multi-Tassel Crop_3.webp"
     ],
     "rating": 5,
     "reviewsCount": 123
@@ -2393,9 +2393,9 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Premium Shibari 100% Natural Cotton Rope Set (3x10m)_0.jpg",
-      "/product-images/The Premium Shibari 100% Natural Cotton Rope Set (3x10m)_1.jpg",
-      "/product-images/The Premium Shibari 100% Natural Cotton Rope Set (3x10m)_2.jpg"
+      "/product-images/The Premium Shibari 100-Percent Natural Cotton Rope Set 3x10m_0.jpg",
+      "/product-images/The Premium Shibari 100-Percent Natural Cotton Rope Set 3x10m_1.jpg",
+      "/product-images/The Premium Shibari 100-Percent Natural Cotton Rope Set 3x10m_2.jpg"
     ],
     "rating": 5,
     "reviewsCount": 67
@@ -2639,7 +2639,7 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Sensory Feather Tickler & Wartenberg Neuro-Pinwheel Kit_0.jpg"
+      "/product-images/The Sensory Feather Tickler and Wartenberg Neuro-Pinwheel Kit_0.jpg"
     ],
     "rating": 5,
     "reviewsCount": 78
@@ -2686,12 +2686,12 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_0.jpg",
-      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_1.jpg",
-      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_2.jpg",
-      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_3.jpg",
-      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_4.jpg",
-      "/product-images/The Silk Satin Blindfold & Sensory Restraint Tie_5.webp"
+      "/product-images/The Silk Satin Blindfold and Sensory Restraint Tie_0.jpg",
+      "/product-images/The Silk Satin Blindfold and Sensory Restraint Tie_1.jpg",
+      "/product-images/The Silk Satin Blindfold and Sensory Restraint Tie_2.jpg",
+      "/product-images/The Silk Satin Blindfold and Sensory Restraint Tie_3.jpg",
+      "/product-images/The Silk Satin Blindfold and Sensory Restraint Tie_4.jpg",
+      "/product-images/The Silk Satin Blindfold and Sensory Restraint Tie_5.webp"
     ],
     "rating": 5,
     "reviewsCount": 118
@@ -3237,11 +3237,11 @@ export const STITCH_PRODUCTS = [
       "Confidential User Manual & Warranty Card"
     ],
     "images": [
-      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_0.jpg",
-      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_1.jpg",
-      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_2.jpg",
-      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_3.jpg",
-      "/product-images/The Velvet Botanical 100% Organic Water-Based Lubricant (150ml)_4.jpg"
+      "/product-images/The Velvet Botanical 100-Percent Organic Water-Based Lubricant 150ml_0.jpg",
+      "/product-images/The Velvet Botanical 100-Percent Organic Water-Based Lubricant 150ml_1.jpg",
+      "/product-images/The Velvet Botanical 100-Percent Organic Water-Based Lubricant 150ml_2.jpg",
+      "/product-images/The Velvet Botanical 100-Percent Organic Water-Based Lubricant 150ml_3.jpg",
+      "/product-images/The Velvet Botanical 100-Percent Organic Water-Based Lubricant 150ml_4.jpg"
     ],
     "rating": 5,
     "reviewsCount": 42

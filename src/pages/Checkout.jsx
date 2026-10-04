@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useApp } from '../context/AppContext';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const Checkout = () => {
   const { 
@@ -522,9 +523,10 @@ const OrderSummaryBox = ({ cart, subtotal, shipping, packaging, total }) => {
         {cart.map((item, idx) => (
           <div key={idx} className="flex items-center space-x-3 text-xs">
             <img 
-              src={item.product.images[0]} 
-              alt="" 
+              src={CDN_CONFIG.getOptimizedImageUrl(item.product.images && item.product.images[0] ? item.product.images[0] : item.product.image)} 
+              alt={item.product?.name || ''} 
               className="w-10 h-10 rounded-lg object-cover bg-velour-950 shrink-0" 
+              onError={handleImageError}
             />
             <div className="flex-1 min-w-0">
               <div className="text-velour-200 font-medium truncate">{item.product.name}</div>

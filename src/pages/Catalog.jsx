@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
 import { STITCH_CATEGORIES, STITCH_PRODUCTS } from '../data/mockData';
-import { CDN_CONFIG } from '../utils/cdnCache';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const Catalog = ({ onOpenQuiz }) => {
   const { 
@@ -287,6 +287,7 @@ export const Catalog = ({ onOpenQuiz }) => {
                     onClick={() => navigateTo('product-detail', prod.id)}
                     className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 cursor-pointer"
                     src={CDN_CONFIG.getOptimizedImageUrl(imageUrl)}
+                    onError={handleImageError}
                   />
                   
                   <button

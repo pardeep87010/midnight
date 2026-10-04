@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import { STITCH_CATEGORIES } from '../data/mockData';
+import { handleImageError } from '../utils/cdnCache';
 
 export const CategoryIconBar = () => {
   const { navigateTo } = useApp();
@@ -53,6 +54,7 @@ export const CategoryIconBar = () => {
                   alt={item.name}
                   loading="lazy"
                   className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
+                  onError={handleImageError}
                 />
               </div>
 

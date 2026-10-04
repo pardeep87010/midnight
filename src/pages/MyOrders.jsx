@@ -25,6 +25,7 @@ import {
   faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const MyOrders = () => {
   const {
@@ -639,7 +640,7 @@ export const MyOrders = () => {
                             const itemPrice = item.price || item.product?.price || 0;
                             const itemQty = item.quantity || 1;
                             const itemName = item.name || item.title || item.product?.name || 'Artisanal Pleasure Piece';
-                            const itemImg = item.image || item.product?.image || '/images/default-toy.jpg';
+                            const itemImg = CDN_CONFIG.getOptimizedImageUrl(item.image || item.product?.images?.[0] || item.product?.image || '/placeholder-product.svg');
                             const itemCat = item.category || item.product?.category || 'Wellness';
 
                             return (
@@ -653,10 +654,7 @@ export const MyOrders = () => {
                                       src={itemImg}
                                       alt={itemName}
                                       className="w-full h-full object-cover"
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=300';
-                                      }}
+                                      onError={handleImageError}
                                     />
                                   </div>
                                   <div className="space-y-1">

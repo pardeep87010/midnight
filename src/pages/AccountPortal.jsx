@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PRODUCTS } from '../data/mockData';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const AccountPortal = () => {
   const { 
@@ -137,7 +138,12 @@ export const AccountPortal = () => {
                 >
                   <div className="space-y-3">
                     <div className="aspect-square rounded-xl overflow-hidden bg-velour-950 relative">
-                      <img src={product.images[0]} alt="" className="w-full h-full object-cover" />
+                      <img 
+                        src={CDN_CONFIG.getOptimizedImageUrl(product.images && product.images[0] ? product.images[0] : product.image)} 
+                        alt={product.name || ''} 
+                        className="w-full h-full object-cover" 
+                        onError={handleImageError}
+                      />
                       <button
                         onClick={() => toggleWishlist(product.id)}
                         className="absolute top-2.5 right-2.5 p-1.5 rounded-full bg-black/60 text-rose-400 hover:text-rose-300"

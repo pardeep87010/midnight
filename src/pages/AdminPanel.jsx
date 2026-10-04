@@ -50,6 +50,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
 import { STITCH_CATEGORIES } from '../data/mockData';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 import { eventBus } from '../services/eventBus';
 import { notificationService } from '../services/notificationService';
 import { 
@@ -1415,9 +1416,10 @@ export const AdminPanel = () => {
                     <tr key={prod.id} className="hover:bg-[#FAF3F0] dark:hover:bg-white/[0.04] transition-colors">
                       <td className="p-3.5">
                         <img 
-                          src={prod.images && prod.images[0] ? prod.images[0] : ''} 
+                          src={CDN_CONFIG.getOptimizedImageUrl(prod.images && prod.images[0] ? prod.images[0] : '/placeholder-product.svg')} 
                           alt="thumb" 
                           className="w-11 h-11 rounded-lg object-cover border border-[#B56571]/20 dark:border-neutral-800 bg-[#FAF3F0] dark:bg-black"
+                          onError={handleImageError}
                         />
                       </td>
                       <td className="p-3.5">

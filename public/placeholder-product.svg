@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A181B"/>
+      <stop offset="50%" stop-color="#121316"/>
+      <stop offset="100%" stop-color="#0B0B0D"/>
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0B8BE"/>
+      <stop offset="50%" stop-color="#D98A92"/>
+      <stop offset="100%" stop-color="#B56571"/>
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B56571" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#B56571" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#bgGrad)"/>
+  <circle cx="400" cy="380" r="260" fill="url(#glowGrad)"/>
+  <rect x="40" y="40" width="720" height="720" rx="16" fill="none" stroke="#B56571" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="6 6"/>
+
+  <g transform="translate(400, 350) scale(1.6)" text-anchor="middle">
+    <path d="M0 -45 C15 -20 28 -5 0 25 C-28 -5 -15 -20 0 -45 Z" fill="url(#roseGrad)" opacity="0.95"/>
+    <path d="M0 25 C18 10 38 0 45 -22 C32 -18 12 -5 0 25 Z" fill="url(#roseGrad)" opacity="0.75"/>
+    <path d="M0 25 C-18 10 -38 0 -45 -22 C-32 -18 -12 -5 0 25 Z" fill="url(#roseGrad)" opacity="0.75"/>
+    <path d="M0 25 C25 22 48 18 55 2 C40 2 20 12 0 25 Z" fill="url(#roseGrad)" opacity="0.5"/>
+    <path d="M0 25 C-25 22 -48 18 -55 2 C-40 2 -20 12 0 25 Z" fill="url(#roseGrad)" opacity="0.5"/>
+    <circle cx="0" cy="22" r="3.5" fill="#FFF" opacity="0.9"/>
+  </g>
+
+  <text x="400" y="480" font-family="'Cinzel', 'Playfair Display', serif, system-ui" font-size="24" font-weight="600" letter-spacing="6" fill="#F0B8BE" text-anchor="middle">
+    MIDNIGHT BLOOM
+  </text>
+  <text x="400" y="515" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" letter-spacing="4" fill="#B56571" opacity="0.8" text-anchor="middle">
+    LUXURY INTIMATE WELLNESS
+  </text>
+  <line x1="360" y1="540" x2="440" y2="540" stroke="url(#roseGrad)" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

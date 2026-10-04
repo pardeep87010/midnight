@@ -11,6 +11,7 @@ import {
   faBagShopping
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const SensoryQuizModal = ({ isOpen, onClose }) => {
   const { navigateTo, addToCart, productsList } = useApp();
@@ -211,9 +212,10 @@ export const SensoryQuizModal = ({ isOpen, onClose }) => {
 
                 <div className="p-4 bg-black/60 rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 text-left shadow-lg">
                   <img
-                    src={recommendedProduct.images && recommendedProduct.images[0] ? recommendedProduct.images[0] : '/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_0.webp'}
+                    src={CDN_CONFIG.getOptimizedImageUrl(recommendedProduct.images && recommendedProduct.images[0] ? recommendedProduct.images[0] : '/placeholder-product.svg')}
                     alt={recommendedProduct.name}
                     className="w-16 h-16 rounded-xl object-cover border border-white/10 bg-black shrink-0"
+                    onError={handleImageError}
                   />
                   <div className="flex-1 min-w-0">
                     <span className="text-[10px] text-[#D98A92] font-mono block font-bold truncate">{recommendedProduct.subcategory}</span>

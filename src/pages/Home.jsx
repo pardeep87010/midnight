@@ -22,6 +22,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
 import { STITCH_CATEGORIES, STITCH_PRODUCTS, VERIFIED_REVIEWS, WELLNESS_GUIDES, FAQS } from '../data/mockData';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 import { CategoryIconBar } from '../components/CategoryIconBar';
 import { TopMenSection } from '../components/TopMenSection';
 import { TopWomenSection } from '../components/TopWomenSection';
@@ -289,6 +290,7 @@ export const Home = ({ onOpenQuiz }) => {
                   alt={cat.name}
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-1000 ease-out"
                   src={cat.image}
+                  onError={handleImageError}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#121316]/95 via-[#121316]/40 to-transparent group-hover:via-[#121316]/60 transition-colors duration-500"></div>
                 
@@ -382,7 +384,8 @@ export const Home = ({ onOpenQuiz }) => {
                         decoding="async"
                         onClick={() => navigateTo('product-detail', prod.id)}
                         className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 cursor-pointer"
-                        src={prod.images && prod.images[0] ? prod.images[0] : '/product-images/LELO%20Mona%20Wave%20Dual-Motor%20G-Spot%20Wand_0.webp'}
+                        src={CDN_CONFIG.getOptimizedImageUrl(prod.images && prod.images[0] ? prod.images[0] : '/placeholder-product.svg')}
+                        onError={handleImageError}
                       />
 
                       <button
@@ -573,6 +576,7 @@ export const Home = ({ onOpenQuiz }) => {
                     src={guide.image}
                     alt={guide.title}
                     className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                    onError={handleImageError}
                   />
                 </div>
 

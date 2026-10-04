@@ -39,9 +39,46 @@ export const CDN_CONFIG = {
     }
   },
 
-  // Helper to optimize image URL through CDN
+  // Helper to optimize image URL through CDN and ensure safe encoding
   getOptimizedImageUrl: (originalUrl, { width = 800, quality = 80 } = {}) => {
-    if (!originalUrl) return '';
-    return originalUrl;
+    if (!originalUrl || typeof originalUrl !== 'string') {
+      return '/placeholder-product.svg';
+    }
+
+    let cleanUrl = originalUrl.trim();
+
+    // Map any legacy or raw unencoded special characters
+    if (cleanUrl.includes('%') || cleanUrl.includes('+') || cleanUrl.includes('&') || cleanUrl.includes('(')) {
+      cleanUrl = cleanUrl
+        .replace(/100%/g, '100-Percent')
+        .replace(/%/g, 'Percent')
+        .replace(/\+/g, 'and')
+        .replace(/&/g, 'and')
+        .replace(/[()]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    // Absolute URLs from external CDNs/Cloudinary
+    if (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://')) {
+      return cleanUrl;
+    }
+
+    // Relative asset paths: ensure each path segment is cleanly encoded
+    try {
+      const parts = cleanUrl.split('/');
+      return parts.map(part => (part ? encodeURIComponent(part) : '')).join('/');
+    } catch (e) {
+      return cleanUrl;
+    }
+  }
+};
+
+export const DEFAULT_PRODUCT_PLACEHOLDER = '/placeholder-product.svg';
+
+export const handleImageError = (e, fallback = DEFAULT_PRODUCT_PLACEHOLDER) => {
+  if (e && e.currentTarget) {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = fallback;
   }
 };

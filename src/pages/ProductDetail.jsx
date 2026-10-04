@@ -21,6 +21,7 @@ import {
 import { useApp } from '../context/AppContext';
 import { STITCH_PRODUCTS } from '../data/mockData';
 import { getProductReviews } from '../data/productReviews';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const ProductDetail = () => {
   const { selectedProductId, addToCart, navigateTo, showToast, productsList, user } = useApp();
@@ -150,9 +151,10 @@ export const ProductDetail = () => {
         <div className="md:col-span-6 space-y-4">
           <div className="relative w-full h-[450px] sm:h-[530px] rounded-3xl overflow-hidden bg-white dark:bg-[#16171C] border border-[#B56571]/20 dark:border-white/[0.08] shadow-2xl">
             <img
-              src={productImages[activeImageIndex] || productImages[0]}
+              src={CDN_CONFIG.getOptimizedImageUrl(productImages[activeImageIndex] || productImages[0])}
               alt={product?.name || 'Product Image'}
               className="w-full h-full object-cover transition-all duration-700"
+              onError={handleImageError}
             />
             {/* Gallery Pagination Dots */}
             {productImages.length > 1 && (
@@ -181,7 +183,12 @@ export const ProductDetail = () => {
                     activeImageIndex === idx ? 'border-[#A33F4D] dark:border-[#D98A92] scale-105 shadow-lg' : 'border-black/10 dark:border-white/10 opacity-70 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt="thumb" className="w-full h-full object-cover bg-white dark:bg-black" />
+                  <img 
+                    src={CDN_CONFIG.getOptimizedImageUrl(img)} 
+                    alt="thumb" 
+                    className="w-full h-full object-cover bg-white dark:bg-black" 
+                    onError={handleImageError}
+                  />
                 </button>
               ))}
             </div>

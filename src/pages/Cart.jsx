@@ -23,6 +23,7 @@ import {
   faCircleInfo
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from '../context/AppContext';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 import { eventBus } from '../services/eventBus';
 import { 
   validateEmail, 
@@ -443,9 +444,10 @@ export const Cart = () => {
                   className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-black/40 shrink-0 cursor-pointer border border-white/5"
                 >
                   <img 
-                    src={item.product?.image || '/departments/vibrators.webp'} 
+                    src={CDN_CONFIG.getOptimizedImageUrl(item.product?.images?.[0] || item.product?.image || '/departments/vibrators.webp')} 
                     alt={item.product?.name} 
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    onError={handleImageError}
                   />
                 </div>
 

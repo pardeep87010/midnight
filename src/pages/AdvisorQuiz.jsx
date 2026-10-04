@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { QUIZ_QUESTIONS, PRODUCTS } from '../data/mockData';
+import { CDN_CONFIG, handleImageError } from '../utils/cdnCache';
 
 export const AdvisorQuiz = () => {
   const { navigateTo, addToCart } = useApp();
@@ -164,7 +165,12 @@ export const AdvisorQuiz = () => {
               >
                 <div className="space-y-3">
                   <div className="aspect-square rounded-xl overflow-hidden bg-velour-950">
-                    <img src={product.images[0]} alt="" className="w-full h-full object-cover" />
+                    <img 
+                      src={CDN_CONFIG.getOptimizedImageUrl(product.images && product.images[0] ? product.images[0] : product.image)} 
+                      alt={product.name || ''} 
+                      className="w-full h-full object-cover" 
+                      onError={handleImageError}
+                    />
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-mono text-gold-400 font-semibold">{product.brand}</span>
