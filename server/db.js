@@ -178,6 +178,17 @@ export function initDB() {
     );
   `);
 
+  // 5b. OTP Verifications Table (persisted in DB, not in-memory, survives restarts)
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS otp_verifications (
+      email TEXT PRIMARY KEY,
+      otp TEXT NOT NULL,
+      type TEXT DEFAULT 'register',
+      expires_at INTEGER NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
+
   // 6. Customer Reviews Table
   db.exec(`
     CREATE TABLE IF NOT EXISTS reviews (

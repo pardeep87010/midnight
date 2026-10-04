@@ -2562,7 +2562,15 @@ app.post('/api/auth/send-otp', async (req, res) => {
 
     // Generate secure 6-digit cryptographically random OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = Date.now() + 5 * 60 * 1000; // 5 mins validity
+    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 mins validity (extended for mobile users)
+
+    // Persist OTP to SQLite DB (survives server restarts unlike in-memory Map)
+    db.prepare(`
+      INSERT OR REPLACE INTO otp_verifications (email, otp, type, expires_at)
+      VALUES (?, ?, ?, ?)
+    `).run(cleanEmail, otp, type, expiresAt);
+
+    // Keep in-memory map in sync for same-session fast lookups
     otpStore.set(cleanEmail, { otp, expiresAt, type });
 
     console.log(`🔑 [SECURE OTP GENERATED] For ${cleanEmail}: ${otp} (Purpose: ${type})`);
@@ -2629,24 +2637,37 @@ app.post('/api/auth/register', (req, res) => {
       return res.status(400).json({ error: 'Passwords do not match. Please re-enter identical passwords.' });
     }
 
-    // Check OTP Record
-    const record = otpStore.get(cleanEmail);
+    // Check OTP - first in-memory (fast), then DB fallback (survives restarts)
+    let record = otpStore.get(cleanEmail);
+
+    if (!record) {
+      // Fallback: try to load from SQLite DB (handles server restart case)
+      const dbRecord = db.prepare('SELECT * FROM otp_verifications WHERE email = ?').get(cleanEmail);
+      if (dbRecord) {
+        record = { otp: dbRecord.otp, expiresAt: dbRecord.expires_at, type: dbRecord.type };
+        // Restore to in-memory map
+        otpStore.set(cleanEmail, record);
+      }
+    }
+
     if (!record) {
       logSystemEvent('AUTH_REGISTER_FAILED', { email: cleanEmail, error: 'No active verification code found' }, 'FAILED');
-      return res.status(400).json({ error: 'No active verification code found. Please request a new code.' });
+      return res.status(400).json({ error: 'OTP invalid or expired. Please request a new code.' });
     }
     if (Date.now() > record.expiresAt) {
       otpStore.delete(cleanEmail);
+      db.prepare('DELETE FROM otp_verifications WHERE email = ?').run(cleanEmail);
       logSystemEvent('AUTH_REGISTER_FAILED', { email: cleanEmail, error: 'Verification code expired' }, 'FAILED');
-      return res.status(400).json({ error: 'Verification code has expired. Please request a new code.' });
+      return res.status(400).json({ error: 'OTP expired. Please request a new code.' });
     }
     if (record.otp !== String(otp).trim()) {
       logSystemEvent('AUTH_REGISTER_FAILED', { email: cleanEmail, error: 'Invalid verification code entered' }, 'FAILED');
-      return res.status(400).json({ error: 'Invalid verification code. Please check your email.' });
+      return res.status(400).json({ error: 'Invalid OTP. Please check your email and try again.' });
     }
 
-    // OTP Verified - Remove from store
+    // OTP Verified - Remove from both store and DB
     otpStore.delete(cleanEmail);
+    db.prepare('DELETE FROM otp_verifications WHERE email = ?').run(cleanEmail);
 
     // Check if user already exists
     const existing = db.prepare('SELECT * FROM users WHERE email = ?').get(cleanEmail);
@@ -2822,22 +2843,33 @@ app.post('/api/auth/reset-password', (req, res) => {
       return res.status(400).json({ error: 'New password must contain at least 6 characters.' });
     }
 
-    const record = otpStore.get(cleanEmail);
+    // Check OTP - in-memory first, then DB fallback
+    let record = otpStore.get(cleanEmail);
+    if (!record) {
+      const dbRecord = db.prepare('SELECT * FROM otp_verifications WHERE email = ?').get(cleanEmail);
+      if (dbRecord) {
+        record = { otp: dbRecord.otp, expiresAt: dbRecord.expires_at, type: dbRecord.type };
+        otpStore.set(cleanEmail, record);
+      }
+    }
+
     if (!record) {
       logSystemEvent('AUTH_RESET_PASSWORD_FAILED', { email: cleanEmail, error: 'No active reset code found' }, 'FAILED');
-      return res.status(400).json({ error: 'No active reset code found. Please request a new code.' });
+      return res.status(400).json({ error: 'OTP invalid or expired. Please request a new code.' });
     }
     if (Date.now() > record.expiresAt) {
       otpStore.delete(cleanEmail);
+      db.prepare('DELETE FROM otp_verifications WHERE email = ?').run(cleanEmail);
       logSystemEvent('AUTH_RESET_PASSWORD_FAILED', { email: cleanEmail, error: 'Reset code expired' }, 'FAILED');
-      return res.status(400).json({ error: 'Reset code expired. Please request a new verification code.' });
+      return res.status(400).json({ error: 'OTP expired. Please request a new code.' });
     }
     if (record.otp !== String(otp).trim()) {
       logSystemEvent('AUTH_RESET_PASSWORD_FAILED', { email: cleanEmail, error: 'Invalid verification code entered' }, 'FAILED');
-      return res.status(400).json({ error: 'Invalid verification code. Please check your email.' });
+      return res.status(400).json({ error: 'Invalid OTP. Please check your email and try again.' });
     }
 
     otpStore.delete(cleanEmail);
+    db.prepare('DELETE FROM otp_verifications WHERE email = ?').run(cleanEmail);
 
     const newHash = hashPassword(cleanPass);
     db.prepare('UPDATE users SET password_hash = ?, auth_provider = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?')
