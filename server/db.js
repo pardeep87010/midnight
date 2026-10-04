@@ -190,22 +190,26 @@ export function initDB() {
     db.prepare("UPDATE coupons SET current_uses = 0 WHERE current_uses > 50 AND id LIKE 'cpn-%'").run();
   } catch (e) {}
 
-  // Auto-clean placeholder dummy keys from database
+  // Auto-clean placeholder dummy or expired keys from database
   try {
-    db.prepare("DELETE FROM env_configs WHERE value LIKE '%re_mb_live_sec%' OR value LIKE '%pay0pro_live_sk%'").run();
+    db.prepare("DELETE FROM env_configs WHERE value LIKE '%re_mb_live_sec%' OR value LIKE '%pay0pro_live_sk%' OR value = 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy'").run();
   } catch (e) {}
 
-  // Seed / Update Official Resend Credentials & Domain
+  // Seed Default Domain configs if not set
   try {
     const upsertConfig = db.prepare(`
       INSERT INTO env_configs (key, value, is_secret, updated_at)
       VALUES (?, ?, ?, CURRENT_TIMESTAMP)
       ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP
     `);
-    upsertConfig.run('RESEND_API_KEY', 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy', 1);
-    upsertConfig.run('RESEND_EMAIL_API_KEY', 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy', 1);
-    upsertConfig.run('RESEND_DOMAIN', 'playnixclub.bet', 0);
-    upsertConfig.run('FROM_EMAIL', 'Midnight Bloom <orders@playnixclub.bet>', 0);
+    const checkDomain = db.prepare("SELECT value FROM env_configs WHERE key = 'RESEND_DOMAIN'").get();
+    if (!checkDomain) {
+      upsertConfig.run('RESEND_DOMAIN', 'playnixclub.bet', 0);
+    }
+    const checkFromEmail = db.prepare("SELECT value FROM env_configs WHERE key = 'FROM_EMAIL'").get();
+    if (!checkFromEmail) {
+      upsertConfig.run('FROM_EMAIL', 'Midnight Bloom <orders@playnixclub.bet>', 0);
+    }
 
     // Seed Pay0 Dual Gateway Defaults if not already set
     const checkActiveGateway = db.prepare("SELECT value FROM env_configs WHERE key = 'ACTIVE_PAYMENT_GATEWAY'").get();

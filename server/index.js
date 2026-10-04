@@ -2002,20 +2002,31 @@ function stripHtml(html) {
 // Helper to dispatch email via Resend API
 async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '') {
   try {
-    // 1. Prioritize process.env (Render Environment Variables / .env file)
-    let apiKey = (process.env.RESEND_API_KEY || process.env.RESEND_EMAIL_API_KEY || '').trim();
-
-    // 2. If not in process.env, check database env_configs (excluding dummy placeholders)
-    if (!apiKey || apiKey.includes('re_mb_live_sec') || apiKey.includes('xxxx')) {
-      const configRow = db.prepare("SELECT value FROM env_configs WHERE (key = 'RESEND_API_KEY' OR key = 'RESEND_EMAIL_API_KEY') AND value NOT LIKE '%re_mb_live_sec%' AND value NOT LIKE '%xxxx%'").get();
+    // 1. Check database env_configs first (Admin Panel live settings), excluding dummy/expired keys
+    let apiKey = '';
+    try {
+      const configRow = db.prepare("SELECT value FROM env_configs WHERE (key = 'RESEND_API_KEY' OR key = 'RESEND_EMAIL_API_KEY') AND value NOT LIKE '%re_mb_live_sec%' AND value NOT LIKE '%xxxx%' AND value != 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy'").get();
       if (configRow?.value) {
         apiKey = configRow.value.trim();
       }
+    } catch (e) {}
+
+    // 2. If not in db, fall back to process.env (Render Environment Variables / .env file)
+    if (!apiKey) {
+      apiKey = (process.env.RESEND_API_KEY || process.env.RESEND_EMAIL_API_KEY || '').trim();
     }
 
-    // Default to verified production Resend API Key
-    if (!apiKey || apiKey.includes('re_mb_live_sec') || apiKey.includes('xxxx') || !apiKey.startsWith('re_')) {
-      apiKey = 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy';
+    // Ignore known expired / dummy keys
+    if (apiKey === 're_gY8nmMMg_5PEg23HkG6MMEahdqeHmQ4Sy' || apiKey.includes('re_mb_live_sec') || apiKey.includes('xxxx') || !apiKey.startsWith('re_')) {
+      apiKey = '';
+    }
+
+    if (!apiKey) {
+      console.error('❌ [RESEND API KEY MISSING]: No valid Resend API key configured in env_configs or process.env.');
+      return {
+        success: false,
+        error: 'Email verification service is temporarily unavailable. Please enter a valid RESEND_API_KEY in Admin Panel or Render.'
+      };
     }
 
     // Determine FROM sender address (Default verified domain: playnixclub.bet)
@@ -2064,9 +2075,13 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
       return { success: true, id: data.id };
     } else {
       console.error('❌ [RESEND API ERROR]:', JSON.stringify(data));
+      let userFacingError = data.message || 'Failed to dispatch verification email.';
+      if (data.message === 'API key is invalid') {
+        userFacingError = 'Email service API key is invalid or expired. Please update RESEND_API_KEY in the Admin Panel.';
+      }
       return { 
         success: false, 
-        error: data.message || `Resend Error: ${JSON.stringify(data)}` 
+        error: userFacingError 
       };
     }
   } catch (err) {
