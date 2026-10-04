@@ -265,8 +265,9 @@ export function initDB() {
     if (fs.existsSync(envBackupPath)) {
       const savedEnvConfigs = JSON.parse(fs.readFileSync(envBackupPath, 'utf8'));
       const restoreEnv = db.prepare(`
-        INSERT OR IGNORE INTO env_configs (key, value, is_secret, updated_at)
+        INSERT INTO env_configs (key, value, is_secret, updated_at)
         VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+        ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP
       `);
       for (const [key, value] of Object.entries(savedEnvConfigs)) {
         if (value !== null && value !== undefined && value !== '') {
