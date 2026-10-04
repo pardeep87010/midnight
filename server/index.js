@@ -1999,6 +1999,32 @@ function stripHtml(html) {
     .trim();
 }
 
+// Helper to strictly format FROM sender email into RFC-compliant "Name <email@domain.com>" format
+function formatSenderEmail(rawInput, defaultDomain = 'playnixclub.bet') {
+  if (!rawInput || typeof rawInput !== 'string') {
+    return `Midnight Bloom <orders@${defaultDomain}>`;
+  }
+  let str = rawInput.trim();
+
+  // If string contains an email address (e.g., "Midnight Bloom orders@playnixclub.bet" or "orders@playnixclub.bet")
+  const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/;
+  const match = str.match(emailRegex);
+  if (match) {
+    const email = match[1].trim();
+    let name = str.replace(email, '').replace(/[<>"']/g, '').trim();
+    if (!name) name = 'Midnight Bloom';
+    return `${name} <${email}>`;
+  }
+
+  // If only a domain or plain text was provided
+  const cleanDom = str.replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/[^a-zA-Z0-9.-]/g, '');
+  if (cleanDom.includes('.') && cleanDom.length > 3) {
+    return `Midnight Bloom <orders@${cleanDom}>`;
+  }
+
+  return `Midnight Bloom <orders@${defaultDomain}>`;
+}
+
 // Helper to dispatch email via Resend API
 async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '') {
   try {
@@ -2030,19 +2056,18 @@ async function sendEmailViaResend(toEmail, subject, htmlContent, textContent = '
     }
 
     // Determine FROM sender address (Default verified domain: playnixclub.bet)
-    const fromRow = db.prepare("SELECT value FROM env_configs WHERE key = 'FROM_EMAIL'").get();
-    let fromEmail = (process.env.FROM_EMAIL || fromRow?.value || '').trim();
+    let fromEmailRaw = '';
+    try {
+      const fromRow = db.prepare("SELECT value FROM env_configs WHERE key = 'FROM_EMAIL'").get();
+      if (fromRow?.value) fromEmailRaw = fromRow.value.trim();
+    } catch (e) {}
 
-    if (!fromEmail || fromEmail.includes('onboarding@resend.dev') || fromEmail.includes('@midnightbloom.com')) {
-      const customDomain = (process.env.RESEND_DOMAIN || process.env.DOMAIN || 'playnixclub.bet').trim();
-      const cleanDom = customDomain.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
-      fromEmail = `Midnight Bloom <orders@${cleanDom}>`;
-    } else if (!fromEmail.includes('@')) {
-      const cleanDom = fromEmail.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
-      fromEmail = `Midnight Bloom <orders@${cleanDom}>`;
-    } else if (!fromEmail.includes('<') && fromEmail.includes('@')) {
-      fromEmail = `Midnight Bloom <${fromEmail}>`;
+    if (!fromEmailRaw) {
+      fromEmailRaw = (process.env.FROM_EMAIL || '').trim();
     }
+
+    const defaultDom = (process.env.RESEND_DOMAIN || process.env.DOMAIN || 'playnixclub.bet').trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+    const fromEmail = formatSenderEmail(fromEmailRaw, defaultDom);
 
     const plainText = textContent || stripHtml(htmlContent);
 
